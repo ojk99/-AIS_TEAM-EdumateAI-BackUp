@@ -1,0 +1,44 @@
+# [2022년도 개정 교육과정 초등영어] 단원 목차 및 핵심 어휘 데이터
+
+[3~4학년군 - 새싹반 (기초 생활 어휘)]
+- 1단원: 동물 친구들 (Animals)
+  핵심 어휘: dog(개), cat(고양이), rabbit(토끼), bear(곰), bird(새), duck(오리), pig(돼지), lion(사자), tiger(호랑이), monkey(원숭이), elephant(코끼리), frog(개구리), horse(말), cow(소), sheep(양), fish(물고기)
+  핵심 표현: What is this? It's a (동물). I like (동물).
+
+- 2단원: 알록달록 색깔 (Colors)
+  핵심 어휘: red(빨간색), blue(파란색), yellow(노란색), green(초록색), pink(분홍색), black(검은색), white(하얀색), orange(주황색), purple(보라색), brown(갈색)
+  핵심 표현: What color is it? It's (색깔).
+
+- 3단원: 맛있는 음식과 과일 (Food & Fruits)
+  핵심 어휘: apple(사과), banana(바나나), milk(우유), bread(빵), water(물), egg(달걀), cheese(치즈), juice(주스), cookie(쿠키), pizza(피자)
+  핵심 표현: Do you like (음식)? Yes, I do. / I want some (음식).
+
+- 4단원: 우리 학교와 교실 (School & Classroom)
+  핵심 어휘: book(책), pencil(연필), desk(책상), chair(의자), bag(가방), ruler(자), eraser(지우개), clock(시계), door(문), window(창문)
+  핵심 표현: Open the (물건). Where is my (물건)?
+
+- 5단원: 사랑하는 우리 가족 (My Family)
+  핵심 어휘: mom(엄마), dad(아빠), sister(여자형제), brother(남자형제)
+  핵심 표현: This is my (가족). He/She is nice.
+
+- 6단원: 자연과 날씨 (Nature & Weather)
+  핵심 어휘: sun(해), rain(비), snow(눈), star(별), happy(행복한), smile(미소)
+  핵심 표현: How is the weather? It's sunny/rainy.
+
+
+[5~6학년군 - 열매반 (실전 응용 및 문맥 어휘)]
+- 1단원: 우리 동네와 공공장소 (Public Places)
+  핵심 어휘: library(도서관), hospital(병원), museum(박물관), station(역), airport(공항), market(시장), restaurant(식당), bank(은행), park(공원), cinema(영화관)
+  핵심 표현: Where is the (장소)? Go straight and turn right.
+
+- 2단원: 꿈과 다양한 직업 (Jobs & Occupations)
+  핵심 어휘: doctor(의사), teacher(선생님), pilot(조종사), cook(요리사), scientist(과학자), artist(화가), singer(가수), police(경찰관), firefighter(소방관), farmer(농부)
+  핵심 표현: What do you want to be? I want to be a (직업).
+
+- 3단원: 지구와 자연환경 (Earth & Nature)
+  핵심 어휘: weather(날씨), season(계절), planet(행성), forest(숲), ocean(바다)
+  핵심 표현: We should protect the (환경).
+
+- 4단원: 편리한 교통과 여행 (Traffic & Journey)
+  핵심 어휘: bridge(다리), traffic(교통), subway(지하철), bicycle(자전거), journey(여행)
+  핵심 표현: How do you get there? I go by (교통수단).

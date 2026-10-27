@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMate AI | 전과목 통합 포털 로비</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- 상단 헤더 (좌측 EduMate AI 통합 로고 클릭 시 포털 로비 복귀) -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-2xs">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <a href="/" onclick="resetLobbyView(event)" title="포털 로비 첫 화면으로 이동"
+                class="flex items-center gap-3 cursor-pointer hover:opacity-85 transition-opacity select-none">
+                <img src="/static/edumate_logo.svg" alt="EduMate AI" class="h-11 w-auto object-contain">
+                <span class="hidden sm:inline-block text-xs text-slate-500 border-l border-slate-200 pl-3">초등 맞춤형 AI 전과목 튜터 포털</span>
+            </a>
+
+            <!-- 우측 로그인 상태 표시: [이모지 슬롯] [초등 N학년] [Lv. N] [이름] [개인정보 버튼] [로그아웃 버튼] -->
+            <div id="headerUserBar" class="hidden items-center gap-2">
+                <div class="px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs font-bold text-slate-700 flex items-center gap-1.5">
+                    <!-- 포켓몬 등급 이미지 슬롯 -->
+                    <span id="headerPokemonEmojiSlot"
+                        class="inline-flex items-center justify-center min-w-[26px] h-[22px] px-1 rounded bg-white border border-slate-200 text-[11px] font-bold text-slate-500 select-none"
+                        title="포켓몬 등급 이모지 슬롯">[ ]</span>
+                    <span id="headerUserGrade" class="text-blue-700 font-bold px-1">초등 4학년</span>
+                    <span id="headerUserLevel" class="font-extrabold text-amber-700 px-1">Lv. 1</span>
+                    <input type="text" id="headerUserName" value="김에듀" readonly tabindex="-1"
+                        class="w-16 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200 font-bold text-slate-800 text-center focus:outline-none cursor-default select-none"
+                        title="학생 이름 (고정)">
+                </div>
+                <!-- 상단 헤더 [개인정보] 바로가기 버튼 (독립된 공통 마이페이지로 즉시 이동) -->
+                <button type="button" id="btnHeaderHistory" onclick="handleMypageNavClick()"
+                    class="px-2.5 py-1.5 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs flex items-center gap-1 shadow-2xs transition-all cursor-pointer"
+                    title="내 개인정보 및 문제풀이 로그 조회">
+                    <i class="fa-solid fa-id-card text-blue-600"></i>
+                    <span>개인정보</span>
+                </button>
+                <button type="button" onclick="handleLogout()"
+                    class="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold transition-all cursor-pointer">
+                    로그아웃
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-10 flex flex-col justify-center">
+
+        <!-- [화면 1] 비로그인 상태: 로그인 / 회원가입 박스 -->
+        <section id="loginSection" class="max-w-md w-full mx-auto bg-white rounded-2xl border border-slate-200 shadow-sm p-7 space-y-5">
+            <div class="text-center space-y-2">
+                <img src="/static/edumate_logo.svg" alt="EduMate AI" class="h-12 w-auto mx-auto object-contain">
+                <p class="text-xs text-slate-500 pt-1">학생 아이디로 로그인하거나 간편 회원가입 후 시작하세요.</p>
+            </div>
+
+            <!-- 로그인 / 회원가입 탭 전환 버튼 -->
+            <div class="flex items-center bg-slate-100 p-1 rounded-xl">
+                <button type="button" id="tabLoginBtn" onclick="switchAuthTab('login')"
+                    class="flex-1 py-2 text-xs font-extrabold rounded-lg transition-all bg-white text-blue-600 shadow-2xs cursor-pointer">
+                    로그인
+                </button>
+                <button type="button" id="tabRegisterBtn" onclick="switchAuthTab('register')"
+                    class="flex-1 py-2 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-800 cursor-pointer">
+                    회원가입
+                </button>
+            </div>
+
+            <!-- [1] 로그인 폼 -->
+            <div id="authLoginForm" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">아이디</label>
+                    <input type="text" id="loginIdInput" placeholder="아이디를 입력하세요"
+                        onkeydown="if(event.key==='Enter') handleLogin();"
+                        class="w-full text-sm p-3 bg-slate-50 border border-slate-300 rounded-xl focus:border-blue-600 focus:bg-white focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">비밀번호</label>
+                    <input type="password" id="loginPwInput" placeholder="비밀번호를 입력하세요"
+                        onkeydown="if(event.key==='Enter') handleLogin();"
+                        class="w-full text-sm p-3 bg-slate-50 border border-slate-300 rounded-xl focus:border-blue-600 focus:bg-white focus:outline-none">
+                </div>
+                <div id="loginErrorMsg" class="hidden text-xs font-bold text-rose-600 bg-rose-50 border border-rose-200 px-3 py-2 rounded-xl"></div>
+
+                <button type="button" onclick="handleLogin()"
+                    class="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-sm shadow-xs transition-all cursor-pointer">
+                    로그인
+                </button>
+            </div>
+
+            <!-- [2] 회원가입 폼 -->
+            <div id="authRegisterForm" class="hidden space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">아이디</label>
+                    <input type="text" id="regIdInput" placeholder="사용할 아이디 (2자 이상)"
+                        class="w-full text-sm p-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:border-blue-600 focus:bg-white focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">비밀번호</label>
+                    <input type="password" id="regPwInput" placeholder="비밀번호 (4자 이상)"
+                        class="w-full text-sm p-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:border-blue-600 focus:bg-white focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">비밀번호 확인</label>
+                    <input type="password" id="regPwConfirmInput" placeholder="비밀번호 재입력"
+                        class="w-full text-sm p-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:border-blue-600 focus:bg-white focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">학생 이름</label>
+                    <input type="text" id="regNameInput" placeholder="이름 (예: 홍길동)"
+                        class="w-full text-sm p-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:border-blue-600 focus:bg-white focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">학년</label>
+                    <select id="regGradeSelect"
+                        class="w-full text-sm p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold text-slate-700 focus:border-blue-600 focus:outline-none">
+                        <option value="1">1학년</option>
+                        <option value="2">2학년</option>
+                        <option value="3">3학년</option>
+                        <option value="4" selected>4학년</option>
+                        <option value="5">5학년</option>
+                        <option value="6">6학년</option>
+                    </select>
+                </div>
+                <div id="regErrorMsg" class="hidden text-xs font-bold text-rose-600 bg-rose-50 border border-rose-200 px-3 py-2 rounded-xl"></div>
+
+                <button type="button" onclick="handleRegister()"
+                    class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm shadow-xs transition-all cursor-pointer">
+                    회원가입 완료
+                </button>
+            </div>
+
+            <!-- 빠른 학생 시작 (비회원 체험 모드) -->
+            <div class="pt-4 border-t border-slate-100 space-y-2">
+                <div class="text-xs font-bold text-slate-500 text-center">또는 이름과 학년으로 바로 시작하기 (체험 모드)</div>
+                <div class="flex items-center gap-2">
+                    <input type="text" id="quickNameInput" placeholder="학생 이름 (예: 김에듀)"
+                        class="flex-1 text-xs p-2.5 bg-slate-50 border border-slate-300 rounded-xl focus:border-blue-600 focus:outline-none">
+                    <select id="quickGradeSelect"
+                        class="text-xs p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold text-slate-700 focus:border-blue-600 focus:outline-none">
+                        <option value="1">1학년</option>
+                        <option value="2">2학년</option>
+                        <option value="3">3학년</option>
+                        <option value="4" selected>4학년</option>
+                        <option value="5">5학년</option>
+                        <option value="6">6학년</option>
+                    </select>
+                    <button type="button" onclick="handleQuickStart()"
+                        class="px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs shrink-0 transition-all cursor-pointer">
+                        체험 입장
+                    </button>
+                </div>
+                <p class="text-[11px] text-amber-700 bg-amber-50 border border-amber-200/60 rounded-xl p-2 text-center font-medium leading-relaxed">
+                    <i class="fa-solid fa-triangle-exclamation mr-1 text-amber-600"></i>
+                    <strong>비회원 체험 모드</strong>는 문제 풀이 기록과 랭킹 점수가 DB에 저장되지 않습니다. 기록을 남기려면 <strong>회원가입</strong> 후 이용해 주세요.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- [화면 2] 로그인 완료 후 메인 로비: 6개 과목 버튼 (DB 조회/임시아이디 버튼은 개인정보 화면 내부로 일원화) -->
+        <section id="lobbySection" class="hidden space-y-8">
+            <!-- 상단 환영 인사 카드 (중복 DB 조회 및 임시아이디 버튼 제거, 개인정보에서 조회하도록 안내) -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-2xs p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div class="space-y-1">
+                    <div class="text-xs font-bold text-blue-600">EduMate AI 통합 학습 로비</div>
+                    <h2 class="text-xl font-extrabold text-slate-900">
+                        반가워요, <span id="lobbyWelcomeName" class="text-blue-600">김에듀</span>님! 공부할 과목을 선택하세요.
+                    </h2>
+                    <p class="text-xs text-slate-600 font-semibold">
+                        전과목 획득 점수 : <strong id="lobbyTotalScore" class="text-blue-600 font-black text-sm">0점</strong>
+                    </p>
+                </div>
+            </div>
+
+            <!-- 6개 과목 선택 그리드 (국어 / 수학 / 영어 / 사회 / 과학 / 한자) -->
+            <div id="subjectButtonsGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <a href="/korean/" class="group bg-white hover:bg-rose-50/60 border-2 border-slate-200 hover:border-rose-400 rounded-2xl p-6 text-center shadow-2xs transition-all flex flex-col items-center justify-center gap-2">
+                    <span class="text-xs font-bold text-rose-600 bg-rose-50 px-2.5 py-0.5 rounded-md">과목 01</span>
+                    <span class="text-2xl font-extrabold text-slate-900 group-hover:text-rose-700">국어</span>
+                    <span class="text-xs text-slate-400">어휘 · 독해 · 맞춤법</span>
+                </a>
+
+                <a href="/math/" class="group bg-white hover:bg-blue-50/60 border-2 border-slate-200 hover:border-blue-400 rounded-2xl p-6 text-center shadow-2xs transition-all flex flex-col items-center justify-center gap-2">
+                    <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-md">과목 02</span>
+                    <span class="text-2xl font-extrabold text-slate-900 group-hover:text-blue-700">수학</span>
+                    <span class="text-xs text-slate-400">단원별 개념 · 맞춤 문제</span>
+                </a>
+
+                <a href="/english/" class="group bg-white hover:bg-purple-50/60 border-2 border-slate-200 hover:border-purple-400 rounded-2xl p-6 text-center shadow-2xs transition-all flex flex-col items-center justify-center gap-2">
+                    <span class="text-xs font-bold text-purple-600 bg-purple-50 px-2.5 py-0.5 rounded-md">과목 03</span>
+                    <span class="text-2xl font-extrabold text-slate-900 group-hover:text-purple-700">영어</span>
+                    <span class="text-xs text-slate-400">파닉스 · 기초 회화 · 단어</span>
+                </a>
+
+                <a href="/social/" class="group bg-white hover:bg-amber-50/60 border-2 border-slate-200 hover:border-amber-400 rounded-2xl p-6 text-center shadow-2xs transition-all flex flex-col items-center justify-center gap-2">
+                    <span class="text-xs font-bold text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded-md">과목 04</span>
+                    <span class="text-2xl font-extrabold text-slate-900 group-hover:text-amber-700">사회</span>
+                    <span class="text-xs text-slate-400">우리 고장 · 역사 · 문화</span>
+                </a>
+
+                <a href="/science/" class="group bg-white hover:bg-emerald-50/60 border-2 border-slate-200 hover:border-emerald-400 rounded-2xl p-6 text-center shadow-2xs transition-all flex flex-col items-center justify-center gap-2">
+                    <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-md">과목 05</span>
+                    <span class="text-2xl font-extrabold text-slate-900 group-hover:text-emerald-700">과학</span>
+                    <span class="text-xs text-slate-400">자연 탐구 · 실험 · 원리</span>
+                </a>
+
+                <a href="/hanja/" class="group bg-white hover:bg-stone-100 border-2 border-slate-200 hover:border-stone-400 rounded-2xl p-6 text-center shadow-2xs transition-all flex flex-col items-center justify-center gap-2">
+                    <span class="text-xs font-bold text-stone-700 bg-stone-100 px-2.5 py-0.5 rounded-md">과목 06</span>
+                    <span class="text-2xl font-extrabold text-slate-900 group-hover:text-stone-800">한자</span>
+                    <span class="text-xs text-slate-400">초등 기초 한자 · 사자성어</span>
+                </a>
+            </div>
+
+            <!-- [3. 하단 랭킹 시스템: 1~10위 명예의 전당] -->
+            <div class="max-w-2xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-base">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-extrabold text-slate-900">명예의 전당</h3>
+                            <p class="text-xs text-slate-500">문제를 풀고 획득한 전과목 누적 총점으로 매겨지는 실시간 명예의 전당입니다.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-1.5 text-xs text-slate-400 font-semibold">
+                        <i class="fa-solid fa-clock-rotate-left text-slate-400"></i>
+                        <span id="rankingUpdateTimeDisplay">00:00 갱신</span>
+                    </div>
+                </div>
+
+                <!-- 랭킹 리스트 컨테이너 -->
+                <div class="overflow-x-auto rounded-xl border border-slate-200">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-slate-600 font-extrabold">
+                                <th class="py-3 px-3 text-center w-20 sm:w-24 whitespace-nowrap">순위</th>
+                                <th class="py-3 px-4">아이디</th>
+                                <th class="py-3 px-4">레벨</th>
+                                <th class="py-3 px-4 text-right w-24">누적 총점</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lobbyRankingTableBody" class="divide-y divide-slate-100 bg-white">
+                            <tr>
+                                <td colspan="4" class="py-8 text-center text-slate-400">
+                                    <i class="fa-solid fa-spinner fa-spin text-blue-600 mr-1.5"></i> 랭킹 데이터를 불러오고 있습니다...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="bg-white border-t border-slate-200 py-4 px-6 text-center text-xs text-slate-400">
+        EduMate AI Integrated Hub · <span class="font-bold text-slate-500">2.1 test ver.</span>
+    </footer>
+
+    <script>
+        const CURRENT_USER_STORAGE_KEY = "edumate_current_account";
+
+        // 6대 포켓몬 타입 설정 (풀/불/물/전기/에스퍼 + 히든 드래곤)
+        const POKEMON_TYPE_CONFIG_JS = {
+            grass: {
+                label: "풀",
+                colorHex: "#22c55e",
+                color_hex: "#22c55e",
+                stages: ["알", "이상해씨", "이상해풀", "이상해꽃", "메가이상해꽃", "비리디온", "세레비", "레쿠쟈", "메가레쿠쟈"],
+                displayStages: ["알", "이상해씨", "이상해풀", "이상해꽃", "메가이상해꽃", "비리디온", "세레비", "레쿠쟈", "메가레쿠쟈"],
+                emojis: ["", "", "", "", "", "", "", "", ""],
+                btnActiveCls: "px-3 py-1.5 rounded-lg text-xs font-extrabold border-2 border-emerald-400 bg-emerald-500/30 text-emerald-300 shadow-xs cursor-pointer",
+                btnInactiveCls: "px-3 py-1.5 rounded-lg text-xs font-extrabold border border-slate-700 bg-slate-900 text-emerald-400/80 hover:bg-slate-800 cursor-pointer"
+            },
+            fire: {
+                label: "불",
+                colorHex: "#ef4444",
+                color_hex: "#ef4444",
+                stages: ["알", "파이리", "리자드", "리자몽", "메가리자몽X", "파이어", "비크티니", "그란돈", "원시그란돈"],
+                displayStages: ["알", "파이리", "리자드", "리자몽", "메가리자몽X", "파이어", "비크티니", "그란돈", "원시그란돈"],
+                emojis: ["", "", "", "", "", "", "", "", ""],
+                btnActiveCls: "px-3 py-1.5 rounded-lg text-xs font-extrabold border-2 border-red-400 bg-red-500/30 text-red-300 shadow-xs cursor-pointer",
+                btnInactiveCls: "px-3 py-1.5 rounded-lg text-xs font-extrabold border border-slate-700 bg-slate-900 text-red-400/80 hover:bg-slate-800 cursor-pointer"
+            },
+            water: {
+                label: "물",
+                colorHex: "#3b82f6",
+                color_hex: "#3b82f6",
+                stages: ["알", "꼬부기", "어니부기", "거북왕", "메가거북왕", "스이쿤", "마나피", "가이오가", "원시가이오가"],
+                displayStages: ["알", "꼬부기", "어니부기", "거북왕", "메가거북왕", "스이쿤", "마나피", "가이오가", "원시가이오가"],
+                emojis: ["", "", "", "", "", "", "", "", ""],
+                btnActiveCls: "px-3 py-1.5 rounded-lg text-xs font-extrabold border-2 border-sky-400 bg-blue-500/30 text-sky-300 shadow-xs cursor-pointer",
+                btnInactiveCls: "px-3 py-1.5 rounded-lg text-xs font-extrabold border border-slate-700 bg-slate-900 text-sky-400/80 hover:bg-slate-800 cursor-pointer"
+            },
+            electric: {
+                label: "전기",
+                colorHex: "#eab308",
+                color_hex: "#eab308",
+                stages: ["알", "피츄", "피카츄", "라이츄", "메가라이츄X", "레지에레키", "제라오라", "제크로무", "블랙큐레무"],
+                displayStages: ["알", "피츄", "피카츄", "라이츄", "메가라이츄X", "레지에레키", "제라오라", "제크로무", "블랙큐레무"],
+                emojis: ["", "", "", "", "", "", "", "", ""],
+                btnActiveCls: "px-3 py-1.5 rounded-lg text-xs font-extrabold border-2 border-yellow-300 bg-yellow-500/30 text-yellow-200 shadow-xs cursor-pointer",
+                btnInactiveCls: "px-3 py-1.5 rounded-lg text-xs font-extrabold border border-slate-700 bg-slate-900 text-yellow-300/80 hover:bg-slate-800 cursor-pointer"
+            },
+            psychic: {
+                label: "에스퍼",
+                colorHex: "#ec4899",
+                color_hex: "#ec4899",
+                stages: ["알", "캐이시", "윤겔라", "후딘", "메가후딘", "크레세리아", "뮤", "뮤츠", "메가뮤츠Y"],
+                displayStages: ["알", "캐이시", "윤겔라", "후딘", "메가후딘", "크레세리아", "뮤", "뮤츠", "메가뮤츠Y"],
+                emojis: ["", "", "", "", "", "", "", "", ""],
+                btnActiveCls: "px-3 py-1.5 rounded-lg text-xs font-extrabold border-2 border-pink-400 bg-pink-500/30 text-pink-300 shadow-xs cursor-pointer",
+                btnInactiveCls: "px-3 py-1.5 rounded-lg text-xs font-extrabold border border-slate-700 bg-slate-900 text-pink-400/80 hover:bg-slate-800 cursor-pointer"
+            },
+            dragon: {
+                label: "드래곤",
+                colorHex: "#8b5cf6",
+                color_hex: "#8b5cf6",
+                stages: ["알", "미뇽", "신뇽", "망나뇽", "메가망나뇽", "메가한카리아스Z", "디아루가", "흑쿠쟈", "메가흑쿠쟈"],
+                displayStages: ["알", "미뇽", "신뇽", "망나뇽", "메가망나뇽", "메가한카리아스Z", "디아루가", "레쿠쟈", "메가레쿠쟈"],
+                emojis: ["", "", "", "", "", "", "", "", ""],
+                btnActiveCls: "px-3 py-1.5 rounded-lg text-xs font-extrabold border-2 border-purple-400 bg-purple-500/30 text-purple-300 shadow-xs cursor-pointer",
+                btnInactiveCls: "px-3 py-1.5 rounded-lg text-xs font-extrabold border border-slate-700 bg-slate-900 text-purple-400/80 hover:bg-slate-800 cursor-pointer"
+            }
+        };
+
+        // 포켓몬 이름별 고유 속성 글자색 매핑 딕셔너리
+        const POKEMON_NAME_TO_COLOR = {
+            "알": "#64748b",
+            // 풀
+            "이상해씨": "#22c55e", "이상해풀": "#22c55e", "이상해꽃": "#22c55e", "메가이상해꽃": "#22c55e", "비리디온": "#22c55e", "세레비": "#22c55e",
+            // 불
+            "파이리": "#ef4444", "리자드": "#ef4444", "리자몽": "#ef4444", "메가리자몽X": "#ef4444", "파이어": "#ef4444", "비크티니": "#ef4444", "그란돈": "#ef4444", "원시그란돈": "#ef4444",
+            // 물
+            "꼬부기": "#3b82f6", "어니부기": "#3b82f6", "거북왕": "#3b82f6", "메가거북왕": "#3b82f6", "스이쿤": "#3b82f6", "마나피": "#3b82f6", "가이오가": "#3b82f6", "원시가이오가": "#3b82f6",
+            // 전기
+            "피츄": "#eab308", "피카츄": "#eab308", "라이츄": "#eab308", "메가라이츄X": "#eab308", "레지에레키": "#eab308", "제라오라": "#eab308", "제크로무": "#eab308", "블랙큐레무": "#eab308",
+            // 에스퍼
+            "캐이시": "#ec4899", "윤겔라": "#ec4899", "후딘": "#ec4899", "메가후딘": "#ec4899", "크레세리아": "#ec4899", "뮤": "#ec4899", "뮤츠": "#ec4899", "메가뮤츠Y": "#ec4899",
+            // 드래곤
+            "미뇽": "#8b5cf6", "신뇽": "#8b5cf6", "망나뇽": "#8b5cf6", "메가망나뇽": "#8b5cf6", "메가한카리아스Z": "#8b5cf6", "디아루가": "#8b5cf6", "흑쿠쟈": "#8b5cf6", "메가흑쿠쟈": "#8b5cf6",
+            // 레쿠쟈 계열 기본 드래곤 색상 매핑
+            "레쿠쟈": "#8b5cf6", "메가레쿠쟈": "#8b5cf6"
+        };
+
+        const STAGE_TIER_EXP_TABLE_JS = [
+            [10, 10, 10, 10, 10],       // 1단계: 알 (총 50점 달성 시 2단계 부화)
+            [15, 15, 15, 15, 15],       // 2단계
+            [25, 25, 25, 25, 25],       // 3단계
+            [40, 40, 40, 40, 40],       // 4단계
+            [60, 60, 60, 60, 180],      // 5단계 (1티어부터 대폭 증가)
+            [250, 250, 250, 250, 250],  // 6단계
+            [350, 350, 350, 350, 350],  // 7단계
+            [500, 500, 500, 500, 500],  // 8단계
+            [800, 800, 800, 800, 800]   // 9단계
+        ];
+
+        let currentPokemonType = localStorage.getItem("edumate_pokemon_type") || "grass";
+        let currentTotalScore = 0;
+
+        function calculateLevelTierJS(totalScore, pokeType) {
+            const score = Math.max(0, parseInt(totalScore || 0, 10));
+            const pType = POKEMON_TYPE_CONFIG_JS[pokeType] ? pokeType : "grass";
+            const typeConf = POKEMON_TYPE_CONFIG_JS[pType];
+            const stages = typeConf.stages;
+            const displayStages = typeConf.displayStages || stages;
+            const emojis = typeConf.emojis || ["", "", "", "", "", "", "", "", ""];
+            let remaining = score;
+            let levelNum = 1;
+
+            for (let sIdx = 0; sIdx < stages.length; sIdx++) {
+                const pokemonName = stages[sIdx];
+                const displayName = displayStages[sIdx] || pokemonName;
+                const pokeEmoji = emojis[sIdx] || "";
+                const tierExps = STAGE_TIER_EXP_TABLE_JS[sIdx];
+                const isEggStage = (sIdx === 0);
+                const effectiveColor = isEggStage ? "#64748b" : typeConf.colorHex;
+
+                for (let tIdx = 0; tIdx < 5; tIdx++) {
+                    const tierNum = 5 - tIdx;
+                    const expNeeded = tierExps[tIdx];
+                    const isMaxTier = (sIdx === stages.length - 1 && tierNum === 1);
+                    if (remaining < expNeeded || isMaxTier) {
+                        const curExp = isMaxTier ? Math.min(remaining, expNeeded) : remaining;
+                        const progressPercent = (isMaxTier && remaining >= expNeeded) ? 100 : Math.min(100, Math.round((curExp / expNeeded) * 100));
+                        const nextRemain = (isMaxTier && remaining >= expNeeded) ? 0 : Math.max(0, expNeeded - remaining);
+                        let nextLabel = "최고 등급 달성 (MAX)";
+                        if (!isMaxTier) {
+                            nextLabel = (tierNum > 1) ? `${displayName} ${tierNum - 1}티어` : `${displayStages[sIdx + 1]} 5티어`;
+                        }
+                        return {
+                            pokemon_type: pType,
+                            pokemon_type_label: isEggStage ? "알" : typeConf.label,
+                            color_hex: effectiveColor,
+                            can_select_type: !isEggStage,
+                            stage_index: sIdx + 1,
+                            level_num: levelNum,
+                            pokemon_name: pokemonName,
+                            display_pokemon_name: displayName,
+                            pokemon_emoji: pokeEmoji,
+                            tier: tierNum,
+                            full_title: `${displayName} ${tierNum}티어`,
+                            current_tier_exp: curExp,
+                            tier_exp_needed: expNeeded,
+                            progress_percent: progressPercent,
+                            next_tier_remain: nextRemain,
+                            next_tier_label: nextLabel
+                        };
+                    }
+                    remaining -= expNeeded;
+                    levelNum += 1;
+                }
+            }
+            const lastName = stages[stages.length - 1];
+            const lastDisplayName = displayStages[stages.length - 1] || lastName;
+            return {
+                pokemon_type: pType,
+                pokemon_type_label: typeConf.label,
+                color_hex: typeConf.colorHex,
+                can_select_type: true,
+                stage_index: 9,
+                level_num: 45,
+                pokemon_name: lastName,
+                display_pokemon_name: lastDisplayName,
+                pokemon_emoji: emojis[8] || "",
+                tier: 1,
+                full_title: `${lastDisplayName} 1티어`,
+                current_tier_exp: 800,
+                tier_exp_needed: 800,
+                progress_percent: 100,
+                next_tier_remain: 0,
+                next_tier_label: "최고 등급 달성 (MAX)"
+            };
+        }
+
+        function sanitizeUserName(name) {
+            if (!name) return "김에듀";
+            let str = String(name).trim();
+            if (str.startsWith("{") && str.endsWith("}")) {
+                try {
+                    const parsed = JSON.parse(str);
+                    if (parsed && (parsed.name || parsed.user_name)) {
+                        return String(parsed.name || parsed.user_name).trim();
+                    }
+                } catch (e) {}
+            }
+            return str || "김에듀";
+        }
+
+        function getCurrentAccount() {
+            try {
+                const raw = localStorage.getItem(CURRENT_USER_STORAGE_KEY);
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (parsed && typeof parsed === "object") {
+                        parsed.name = sanitizeUserName(parsed.name);
+                        return parsed;
+                    }
+                }
+                const savedId = localStorage.getItem("edumate_math_user_id");
+                const savedName = sanitizeUserName(localStorage.getItem("edumate_math_user_name"));
+                const savedRole = localStorage.getItem("edumate_math_user_role");
+                if (savedId && savedId !== "guest" && savedName) {
+                    return { id: savedId, name: savedName, grade: 4, role: savedRole || "student" };
+                }
+                return null;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        async function handleLogin() {
+            const idVal = document.getElementById("loginIdInput").value.trim();
+            const pwVal = document.getElementById("loginPwInput").value.trim();
+            const errEl = document.getElementById("loginErrorMsg");
+            if (!idVal || !pwVal) {
+                errEl.innerText = "아이디와 비밀번호를 모두 입력해 주세요.";
+                errEl.classList.remove("hidden");
+                return;
+            }
+            try {
+                const res = await fetch("/math/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ user_id: idVal, password: pwVal })
+                });
+                const data = await res.json();
+                if (res.ok && data.status === "success" && data.user) {
+                    errEl.classList.add("hidden");
+                    const cleanName = sanitizeUserName(data.user.user_name);
+                    const acc = {
+                        id: data.user.user_id,
+                        name: cleanName,
+                        grade: data.user.grade || 4,
+                        role: data.user.role || "student",
+                        managed_subjects: data.user.managed_subjects || [],
+                        managed_subjects_kr: data.user.managed_subjects_kr || [],
+                        role_display: data.user.role_display || ""
+                    };
+                    saveAccountSession(acc);
+
+                    // 로그인 성공 시 서버 DB에 등록된 회원의 고유 속성과 스킨을 즉시 브라우저에 동기화
+                    if (data.user.pokemon_type && POKEMON_TYPE_CONFIG_JS[data.user.pokemon_type]) {
+                        currentPokemonType = data.user.pokemon_type;
+                        localStorage.setItem("edumate_pokemon_type", currentPokemonType);
+                    }
+                    if (data.user.custom_skin_stage !== undefined) {
+                        if (data.user.custom_skin_stage > 0) {
+                            localStorage.setItem("edumate_custom_skin_stage", String(data.user.custom_skin_stage));
+                        } else {
+                            localStorage.removeItem("edumate_custom_skin_stage");
+                        }
+                    }
+
+                    enterLobby(acc);
+                } else {
+                    errEl.innerText = data.detail || "아이디 또는 비밀번호가 일치하지 않습니다.";
+                    errEl.classList.remove("hidden");
+                }
+            } catch (e) {
+                errEl.innerText = "서버 통신 오류가 발생했습니다.";
+                errEl.classList.remove("hidden");
+            }
+        }
+
+        function switchAuthTab(tab) {
+            const loginForm = document.getElementById("authLoginForm");
+            const regForm = document.getElementById("authRegisterForm");
+            const loginBtn = document.getElementById("tabLoginBtn");
+            const regBtn = document.getElementById("tabRegisterBtn");
+            const loginErr = document.getElementById("loginErrorMsg");
+            const regErr = document.getElementById("regErrorMsg");
+
+            if (loginErr) loginErr.classList.add("hidden");
+            if (regErr) regErr.classList.add("hidden");
+
+            if (tab === "register") {
+                loginForm.classList.add("hidden");
+                regForm.classList.remove("hidden");
+                regBtn.className = "flex-1 py-2 text-xs font-extrabold rounded-lg transition-all bg-white text-emerald-600 shadow-2xs cursor-pointer";
+                loginBtn.className = "flex-1 py-2 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-800 cursor-pointer";
+            } else {
+                regForm.classList.add("hidden");
+                loginForm.classList.remove("hidden");
+                loginBtn.className = "flex-1 py-2 text-xs font-extrabold rounded-lg transition-all bg-white text-blue-600 shadow-2xs cursor-pointer";
+                regBtn.className = "flex-1 py-2 text-xs font-bold rounded-lg transition-all text-slate-500 hover:text-slate-800 cursor-pointer";
+            }
+        }
+
+        async function handleRegister() {
+            const idVal = document.getElementById("regIdInput").value.trim();
+            const pwVal = document.getElementById("regPwInput").value.trim();
+            const pwConfVal = document.getElementById("regPwConfirmInput").value.trim();
+            const nameVal = sanitizeUserName(document.getElementById("regNameInput").value.trim());
+            const gradeVal = parseInt(document.getElementById("regGradeSelect").value || "4", 10);
+            const errEl = document.getElementById("regErrorMsg");
+
+            if (!idVal || !pwVal || !pwConfVal || !nameVal) {
+                errEl.innerText = "아이디, 비밀번호, 이름, 학년을 모두 입력해 주세요.";
+                errEl.classList.remove("hidden");
+                return;
+            }
+            if (idVal.length < 2) {
+                errEl.innerText = "아이디는 2자 이상이어야 합니다.";
+                errEl.classList.remove("hidden");
+                return;
+            }
+            if (pwVal.length < 4) {
+                errEl.innerText = "비밀번호는 4자 이상이어야 합니다.";
+                errEl.classList.remove("hidden");
+                return;
+            }
+            if (pwVal !== pwConfVal) {
+                errEl.innerText = "비밀번호와 비밀번호 확인이 일치하지 않습니다.";
+                errEl.classList.remove("hidden");
+                return;
+            }
+
+            const guestSessionId = localStorage.getItem("edumate_guest_session_id") || localStorage.getItem("edumate_math_user_id");
+            const guestIdToSend = (guestSessionId && (guestSessionId.startsWith("guest_") || guestSessionId === "guest")) ? guestSessionId : null;
+
+            try {
+                const res = await fetch("/api/register", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        user_id: idVal,
+                        password: pwVal,
+                        password_confirm: pwConfVal,
+                        user_name: nameVal,
+                        grade: gradeVal,
+                        guest_id: guestIdToSend
+                    })
+                });
+                const data = await res.json();
+                if (res.ok && data.status === "success" && data.user) {
+                    errEl.classList.add("hidden");
+                    localStorage.removeItem("edumate_guest_session_id");
+                    alert("🎉 회원가입이 완료되었습니다! 가입하신 계정으로 바로 입장하며, 체험 기록이 안전하게 이관되었습니다.");
+                    const acc = {
+                        id: data.user.user_id,
+                        name: sanitizeUserName(data.user.user_name),
+                        grade: data.user.grade || gradeVal,
+                        role: "student",
+                        managed_subjects: [],
+                        managed_subjects_kr: [],
+                        role_display: `초등 ${data.user.grade || gradeVal}학년`
+                    };
+                    saveAccountSession(acc);
+                    enterLobby(acc);
+                } else {
+                    errEl.innerText = data.detail || "회원가입에 실패했습니다.";
+                    errEl.classList.remove("hidden");
+                }
+            } catch (e) {
+                errEl.innerText = "서버 통신 오류가 발생했습니다.";
+                errEl.classList.remove("hidden");
+            }
+        }
+
+        function handleQuickStart() {
+            const rawName = document.getElementById("quickNameInput").value.trim();
+            const nameVal = sanitizeUserName(rawName || "게스트");
+            const gradeVal = parseInt(document.getElementById("quickGradeSelect").value || "4", 10);
+            const guestId = "guest_" + Math.random().toString(36).substring(2, 10);
+            localStorage.setItem("edumate_guest_session_id", guestId);
+            const acc = { id: guestId, name: nameVal, grade: gradeVal, role: "guest", is_guest: true, managed_subjects: [], managed_subjects_kr: [], role_display: "비회원 체험" };
+            saveAccountSession(acc);
+            enterLobby(acc);
+        }
+
+        function handleMypageNavClick() {
+            const acc = getCurrentAccount();
+            const userId = (acc && (acc.id || acc.user_id)) || localStorage.getItem("edumate_math_user_id") || "";
+            const isGuest = (acc && (acc.is_guest || acc.role === "guest")) || (userId === "guest") || (userId.startsWith("guest_")) || (!userId);
+
+            if (isGuest) {
+                if (confirm("마이페이지(개인정보 및 학습 기록)는 정식 회원 전용 서비스입니다.\n\n지금 회원가입을 하시면 비회원 체험 동안 풀이하신 문제와 점수가 새 계정으로 안전하게 모두 이관됩니다!\n\n회원가입을 진행하시겠습니까?")) {
+                    document.getElementById("lobbySection").classList.add("hidden");
+                    document.getElementById("loginSection").classList.remove("hidden");
+                    switchAuthTab("register");
+                    if (acc && acc.name && acc.name !== "게스트") {
+                        const nameInp = document.getElementById("regNameInput");
+                        if (nameInp) nameInp.value = acc.name;
+                    }
+                    if (acc && acc.grade) {
+                        const gradeSel = document.getElementById("regGradeSelect");
+                        if (gradeSel) gradeSel.value = String(acc.grade);
+                    }
+                }
+                return;
+            }
+            location.href = '/mypage';
+        }
+
+        function saveAccountSession(acc) {
+            acc.name = sanitizeUserName(acc.name);
+            localStorage.setItem(CURRENT_USER_STORAGE_KEY, JSON.stringify(acc));
+            localStorage.setItem("edumate_math_user_name", acc.name);
+            localStorage.setItem("edumate_math_user_id", acc.id || "guest");
+            localStorage.setItem("edumate_math_user_role", acc.role || "student");
+        }
+
+        async function handleLogout() {
+            const guestSessionId = localStorage.getItem("edumate_guest_session_id") || localStorage.getItem("edumate_math_user_id");
+            if (guestSessionId && (guestSessionId.startsWith("guest_") || guestSessionId === "guest")) {
+                try {
+                    await fetch("/api/guest/clear", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ guest_id: guestSessionId })
+                    });
+                } catch(e) {}
+            }
+            localStorage.removeItem(CURRENT_USER_STORAGE_KEY);
+            localStorage.removeItem("edumate_guest_session_id");
+            localStorage.removeItem("edumate_math_user_id");
+            localStorage.removeItem("edumate_math_user_name");
+            localStorage.removeItem("edumate_math_user_role");
+            localStorage.removeItem("edumate_pokemon_type");
+            localStorage.removeItem("edumate_custom_skin_stage");
+            window.location.href = "/";
+        }
+
+        function resetLobbyView(event) {
+            // 로비 로고 클릭 시 첫 화면으로 유지
+        }
+
+        async function enterLobby(acc) {
+            document.getElementById("loginSection").classList.add("hidden");
+            document.getElementById("lobbySection").classList.remove("hidden");
+            const headerBar = document.getElementById("headerUserBar");
+            headerBar.classList.remove("hidden");
+            headerBar.classList.add("flex");
+
+            document.getElementById("headerUserName").value = acc.name;
+            const initBadge = acc.role === "admin" ? "총 관리자" : (acc.role_display || `초등 ${acc.grade}학년`);
+            document.getElementById("headerUserGrade").innerText = initBadge;
+            // 환영 문구에서 괄호 학년 표기 제거 ('마스터' 등 학생 이름만 표기)
+            document.getElementById("lobbyWelcomeName").innerText = acc.name;
+
+            try {
+                // 모바일/타 기기 접속 시 로컬 기본값으로 DB 속성을 덮어쓰지 않도록 동기화된 타입 또는 null 전송
+                const savedType = localStorage.getItem("edumate_pokemon_type");
+                const res = await fetch("/math/user", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        user_id: acc.id || "guest",
+                        user_name: acc.name,
+                        grade: acc.grade,
+                        pokemon_type: savedType || null
+                    })
+                });
+                const data = await res.json();
+                if (data.status === "success" && data.user) {
+                    currentTotalScore = data.user.total_score ?? 0;
+                    if (data.user.user_name) {
+                        acc.name = sanitizeUserName(data.user.user_name);
+                        const hdrName = document.getElementById("headerUserName");
+                        if (hdrName) hdrName.value = acc.name;
+                        const welName = document.getElementById("lobbyWelcomeName");
+                        if (welName) welName.innerText = acc.name;
+                        localStorage.setItem("edumate_math_user_name", acc.name);
+                    }
+                    if (data.user.grade) {
+                        acc.grade = data.user.grade;
+                    }
+                    if (data.user.role) acc.role = data.user.role;
+                    if (data.user.managed_subjects) acc.managed_subjects = data.user.managed_subjects;
+                    if (data.user.managed_subjects_kr) acc.managed_subjects_kr = data.user.managed_subjects_kr;
+                    if (data.user.role_display) acc.role_display = data.user.role_display;
+                    saveAccountSession(acc);
+
+                    const badgeText = acc.role === "admin" ? "총 관리자" : (acc.role_display || `초등 ${acc.grade}학년`);
+                    document.getElementById("headerUserGrade").innerText = badgeText;
+                    if (data.user.pokemon_type && POKEMON_TYPE_CONFIG_JS[data.user.pokemon_type]) {
+                        currentPokemonType = data.user.pokemon_type;
+                        localStorage.setItem("edumate_pokemon_type", currentPokemonType);
+                    }
+                    if (data.user.custom_skin_stage !== undefined) {
+                        if (data.user.custom_skin_stage > 0) {
+                            localStorage.setItem("edumate_custom_skin_stage", String(data.user.custom_skin_stage));
+                        } else {
+                            localStorage.removeItem("edumate_custom_skin_stage");
+                        }
+                    }
+                    updatePokemonUI(currentTotalScore);
+                }
+            } catch (e) {
+                updatePokemonUI(0);
+            }
+
+            // 실시간 랭킹 목록 갱신
+            loadLobbyRanking();
+        }
+
+        function updatePokemonUI(totalScore) {
+            const lv = calculateLevelTierJS(totalScore, currentPokemonType);
+            let colorHex = lv.color_hex;
+
+            // 스킨(이전 달성 단계 외형 변환) 확인
+            const savedSkinStage = parseInt(localStorage.getItem("edumate_custom_skin_stage"), 10);
+            const typeConf = POKEMON_TYPE_CONFIG_JS[currentPokemonType] || POKEMON_TYPE_CONFIG_JS.grass;
+            const stages = typeConf.stages;
+            const displayStages = typeConf.displayStages || stages;
+
+            let activeImageName = lv.pokemon_name;
+            let activeDisplayName = lv.display_pokemon_name || lv.pokemon_name;
+
+            if (savedSkinStage && savedSkinStage >= 1 && savedSkinStage <= lv.stage_index) {
+                activeImageName = stages[savedSkinStage - 1] || lv.pokemon_name;
+                activeDisplayName = (displayStages[savedSkinStage - 1]) || activeImageName;
+                colorHex = (savedSkinStage === 1) ? "#64748b" : (typeConf.colorHex || typeConf.color_hex || "#64748b");
+            }
+
+            if (activeDisplayName === "알") {
+                colorHex = "#64748b";
+            } else if (POKEMON_NAME_TO_COLOR[activeDisplayName]) {
+                colorHex = POKEMON_NAME_TO_COLOR[activeDisplayName];
+            } else if (POKEMON_NAME_TO_COLOR[activeImageName]) {
+                colorHex = POKEMON_NAME_TO_COLOR[activeImageName];
+            }
+
+            const scoreEl = document.getElementById("lobbyTotalScore");
+            if (scoreEl) scoreEl.innerText = `${totalScore}점`;
+            
+            const lobbyNamePart = document.getElementById("lobbyPokemonNamePart");
+            const lobbyTierPart = document.getElementById("lobbyPokemonTierPart");
+            if (lobbyNamePart) {
+                lobbyNamePart.innerText = activeDisplayName;
+                lobbyNamePart.style.color = colorHex;
+            }
+            if (lobbyTierPart) {
+                lobbyTierPart.innerText = `${lv.tier}티어`;
+                lobbyTierPart.style.color = colorHex;
+            }
+
+            const headerSlot = document.getElementById("headerPokemonEmojiSlot");
+            if (headerSlot) {
+                headerSlot.innerHTML = `<img src="/static/${activeImageName}.webp" alt="${activeDisplayName}" class="w-5 h-5 object-contain inline-block align-middle filter drop-shadow-2xs" onerror="this.onerror=null; this.src='/static/알.webp';">`;
+            }
+
+            const headerLv = document.getElementById("headerUserLevel");
+            if (headerLv) {
+                headerLv.innerText = `Lv. ${lv.level_num}`;
+            }
+        }
+
+        // 로비 포탈 하단 실시간 랭킹 시스템 (1~10위) 로드 및 렌더링
+        async function loadLobbyRanking() {
+            const tbody = document.getElementById("lobbyRankingTableBody");
+            if (!tbody) return;
+            try {
+                let res = await fetch("/api/ranking?limit=10");
+                if (!res.ok) res = await fetch("/math/ranking?limit=10");
+                const data = await res.json();
+                if (data.status === "success" && Array.isArray(data.ranking) && data.ranking.length > 0) {
+                    // 한글 '마스터' 등 비정상 중복 관리자 행 제거 및 순위 번호 재보정
+                    const cleanRanking = data.ranking.filter(it => it.user_id !== "마스터" && !(it.user_name === "마스터" && it.user_id !== "master"));
+                    cleanRanking.forEach((it, idx) => { it.rank = idx + 1; });
+                    tbody.innerHTML = cleanRanking.map((item) => {
+                        let rankBadge = `<span class="inline-flex items-center justify-center px-2 py-0.5 rounded-full text-xs font-extrabold bg-slate-100 text-slate-700 whitespace-nowrap">${item.rank}위</span>`;
+                        if (item.rank === 1) {
+                            rankBadge = `<span class="inline-flex items-center justify-center gap-1 px-2.5 py-1 rounded-full text-xs font-black bg-amber-100 text-amber-900 border border-amber-300 shadow-2xs whitespace-nowrap">🥇 1위</span>`;
+                        } else if (item.rank === 2) {
+                            rankBadge = `<span class="inline-flex items-center justify-center gap-1 px-2.5 py-1 rounded-full text-xs font-black bg-slate-200 text-slate-800 border border-slate-300 whitespace-nowrap">🥈 2위</span>`;
+                        } else if (item.rank === 3) {
+                            rankBadge = `<span class="inline-flex items-center justify-center gap-1 px-2.5 py-1 rounded-full text-xs font-black bg-amber-50 text-amber-800 border border-amber-200 whitespace-nowrap">🥉 3위</span>`;
+                        }
+
+                        let colorHex = item.color_hex || item.colorHex || "#64748b";
+                        let imgFile = item.image_filename || `${item.pokemon_name}.webp`;
+                        let dispName = item.display_pokemon_name || item.pokemon_name;
+
+                        // 현재 접속 중인 내 계정의 랭킹 행인 경우 로컬스토리지 스킨 우선 즉시 반영
+                        const currentAcc = getCurrentAccount();
+                        const isCurrentUserRow = currentAcc && (item.user_id === currentAcc.id || item.user_name === currentAcc.name);
+                        const localSkin = parseInt(localStorage.getItem("edumate_custom_skin_stage"), 10);
+                        if (isCurrentUserRow && localSkin > 0) {
+                            const ptype = currentPokemonType || item.pokemon_type || "grass";
+                            const tcfg = POKEMON_TYPE_CONFIG_JS[ptype] || POKEMON_TYPE_CONFIG_JS.grass;
+                            if (localSkin <= tcfg.stages.length) {
+                                const skinPoke = tcfg.stages[localSkin - 1];
+                                const skinDisp = (tcfg.displayStages && tcfg.displayStages[localSkin - 1]) || skinPoke;
+                                imgFile = `${skinPoke}.webp`;
+                                dispName = skinDisp;
+                                colorHex = (localSkin === 1) ? "#64748b" : (tcfg.colorHex || tcfg.color_hex || "#64748b");
+                            }
+                        }
+
+                        // 현재 선택/표시 중인 포켓몬 아이콘에 맞춘 고유 속성 글자색 100% 보장
+                        if (dispName === "알" || (imgFile && imgFile.includes("알"))) {
+                            colorHex = "#64748b";
+                        } else if (POKEMON_NAME_TO_COLOR[dispName]) {
+                            colorHex = POKEMON_NAME_TO_COLOR[dispName];
+                        } else if (POKEMON_NAME_TO_COLOR[item.pokemon_name]) {
+                            colorHex = POKEMON_NAME_TO_COLOR[item.pokemon_name];
+                        } else if (item.pokemon_type && POKEMON_TYPE_CONFIG_JS[item.pokemon_type]) {
+                            colorHex = POKEMON_TYPE_CONFIG_JS[item.pokemon_type].colorHex || POKEMON_TYPE_CONFIG_JS[item.pokemon_type].color_hex || colorHex;
+                        }
+
+                        return `
+                            <tr class="hover:bg-slate-50/80 transition-colors">
+                                <td class="py-3 px-3 text-center font-bold whitespace-nowrap">${rankBadge}</td>
+                                <td class="py-3 px-4 font-mono font-extrabold text-sm" style="color: ${colorHex};">
+                                    ${item.user_id}
+                                </td>
+                                <td class="py-3 px-4">
+                                    <div class="inline-flex items-center gap-2">
+                                        <img src="/static/${imgFile}" alt="${dispName}"
+                                            class="w-6 h-6 object-contain inline-block align-middle filter drop-shadow-sm"
+                                            onerror="this.onerror=null; this.src='/static/알.webp';">
+                                        <span class="font-extrabold text-sm" style="color: ${colorHex};">
+                                            Lv.${item.level_num} ${dispName}
+                                        </span>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4 text-right font-black text-slate-900 text-sm">
+                                    ${item.total_score}점
+                                </td>
+                            </tr>
+                        `;
+                    }).join("");
+                    updateRankingClock();
+                } else {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="4" class="py-8 text-center text-slate-400">
+                                아직 등록된 랭킹 데이터가 없습니다. 문제를 풀고 첫 번째 랭커가 되어보세요!
+                            </td>
+                        </tr>
+                    `;
+                    updateRankingClock();
+                }
+            } catch (err) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="py-8 text-center text-rose-500 font-semibold">
+                            랭킹 데이터를 불러오지 못했습니다 (${err.message})
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        function updateRankingClock() {
+            const now = new Date();
+            const hh = String(now.getHours()).padStart(2, '0');
+            const mm = String(now.getMinutes()).padStart(2, '0');
+            const clockEl = document.getElementById("rankingUpdateTimeDisplay");
+            if (clockEl) {
+                clockEl.innerText = `${hh}:${mm} 갱신`;
+            }
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const tabParam = urlParams.get("tab");
+
+            const acc = getCurrentAccount();
+            if (acc && tabParam !== "register") {
+                enterLobby(acc);
+            } else if (tabParam === "register") {
+                document.getElementById("lobbySection").classList.add("hidden");
+                document.getElementById("loginSection").classList.remove("hidden");
+                switchAuthTab("register");
+                if (acc && acc.name && acc.name !== "게스트") {
+                    const nameInp = document.getElementById("regNameInput");
+                    if (nameInp) nameInp.value = acc.name;
+                }
+                if (acc && acc.grade) {
+                    const gradeSel = document.getElementById("regGradeSelect");
+                    if (gradeSel) gradeSel.value = String(acc.grade);
+                }
+            }
+            loadLobbyRanking();
+            // 5분(300,000ms)마다 랭킹 자동 갱신
+            setInterval(loadLobbyRanking, 5 * 60 * 1000);
+        });
+    </script>
+</body>
+</html>

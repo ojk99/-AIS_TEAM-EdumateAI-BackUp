@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMate AI - 2022 개정 초등국어 학습관</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <style>
+        * { font-family: 'Pretendard', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen p-4 md:p-8 flex items-center justify-center">
+
+    <div class="max-w-3xl w-full bg-slate-800/90 border border-slate-700 backdrop-blur-xl rounded-3xl p-6 md:p-8 shadow-2xl">
+        
+        <!-- 팀 공통 헤더: 공통 로고 + 메인 로비 링크 + 학생 포켓몬 진화 등급 -->
+        <header class="flex justify-between items-center pb-6 border-b border-slate-700 gap-3">
+            <a href="/" class="flex items-center gap-3.5 group hover:opacity-90 transition" title="통합 메인 로비로 이동">
+                <img src="/korean/logo.svg" alt="EduMate AI 공식 로고" class="h-10 w-auto object-contain drop-shadow">
+                <div>
+                    <span class="inline-block bg-indigo-500/20 text-indigo-300 text-[11px] font-bold px-2.5 py-0.5 rounded-full mb-1 group-hover:bg-indigo-500/30 transition">
+                        🏠 EduMate AI 메인 로비
+                    </span>
+                    <h1 class="text-xl md:text-2xl font-black text-white flex items-center gap-2">
+                        <span>✏️</span> 초등국어 학습관
+                    </h1>
+                </div>
+            </a>
+            
+            <!-- 포켓몬 진화 등급 & 전과목 누적 총점 뱃지 -->
+            <div id="user-profile-badge" class="text-right bg-slate-900/80 px-4 py-2.5 rounded-2xl border border-slate-700/80 shadow-inner">
+                <div class="flex items-center gap-2 justify-end">
+                    <span id="user-display-name" class="font-bold text-white text-xs md:text-sm">김에듀</span>
+                    <span id="pokemon-tier-badge" class="text-[11px] font-black px-2.5 py-0.5 rounded-full bg-slate-700 text-slate-200 border border-slate-600">
+                        알 5티어
+                    </span>
+                </div>
+                <div class="text-[11px] text-slate-400 mt-1 flex items-center justify-end gap-1.5">
+                    <span>전과목 누적: <strong id="user-total-score" class="text-amber-400 font-black">0</strong>점</span>
+                </div>
+                <!-- EXP 프로그레스 바 -->
+                <div class="w-32 bg-slate-950 h-1.5 rounded-full overflow-hidden mt-1.5 border border-slate-800 ml-auto">
+                    <div id="user-exp-bar" class="h-full bg-gradient-to-r from-emerald-400 to-indigo-500 transition-all duration-500" style="width: 0%"></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 1단계: 단원 및 문제 유형 선택 패널 -->
+        <section id="setup-panel" class="mt-6 space-y-5">
+            <div>
+                <label class="block text-sm font-bold text-slate-300 mb-2">1. 학년 및 학기 선택</label>
+                <select id="grade-select" onchange="updateUnitOptions()" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3.5 text-white focus:outline-none focus:border-indigo-500 transition">
+                    <option value="1학년 1학기">초등 1학년 1학기</option>
+                    <option value="1학년 2학기">초등 1학년 2학기</option>
+                    <option value="2학년 1학기">초등 2학년 1학기</option>
+                    <option value="2학년 2학기">초등 2학년 2학기</option>
+                    <option value="3학년 1학기">초등 3학년 1학기</option>
+                    <option value="3학년 2학기">초등 3학년 2학기</option>
+                    <option value="4학년 1학기">초등 4학년 1학기</option>
+                    <option value="4학년 2학기">초등 4학년 2학기</option>
+                    <option value="5학년 1학기" selected>초등 5학년 1학기</option>
+                    <option value="5학년 2학기">초등 5학년 2학기</option>
+                    <option value="6학년 1학기">초등 6학년 1학기</option>
+                    <option value="6학년 2학기">초등 6학년 2학기</option>
+                </select>
+            </div>
+
+            <!-- 2. 단원 선택 드롭다운 (학년/학기 변경 시 동적 연동) -->
+            <div>
+                <div class="flex items-center justify-between mb-2">
+                    <label class="block text-sm font-bold text-slate-300">2. 학습 단원 선택</label>
+                    <span id="unit-lock-hint" class="hidden text-xs text-indigo-400 font-bold bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20">
+                        🔒 AI 오답 분석 자동 출제 중
+                    </span>
+                </div>
+                <select id="unit-select" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3.5 text-white focus:outline-none focus:border-indigo-500 transition">
+                    <option value="전체">전체 단원 (골고루 5문항 출제)</option>
+                </select>
+            </div>
+
+            <!-- 취약 단원 맞춤 출제 옵션 -->
+            <div class="bg-indigo-950/40 border border-indigo-500/30 rounded-xl p-3.5 flex items-center justify-between">
+                <div>
+                    <span class="text-sm font-bold text-indigo-300">🎯 취약 단원 집중 복습 모드</span>
+                    <p class="text-xs text-slate-400 mt-0.5">과거 오답 데이터를 분석하여 틀린 단원 중심의 맞춤 문제를 출제합니다.</p>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="weakest-toggle" onchange="handleWeakestToggle()" class="sr-only peer">
+                    <div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+                </label>
+            </div>
+
+            <div>
+                <label class="block text-sm font-bold text-slate-300 mb-2">3. 출제 문제 유형 선택</label>
+                <div class="grid grid-cols-4 gap-2.5">
+                    <button type="button" class="type-btn py-3 rounded-xl border border-indigo-500 bg-indigo-600/30 text-indigo-300 font-bold text-sm transition" data-type="객관식">객관식 (4지)</button>
+                    <button type="button" class="type-btn py-3 rounded-xl border border-slate-700 bg-slate-900 text-slate-400 font-bold text-sm transition hover:border-slate-500" data-type="OX">OX 퀴즈</button>
+                    <button type="button" class="type-btn py-3 rounded-xl border border-slate-700 bg-slate-900 text-slate-400 font-bold text-sm transition hover:border-slate-500" data-type="단답형">단답형</button>
+                    <button type="button" class="type-btn py-3 rounded-xl border border-slate-700 bg-slate-900 text-slate-400 font-bold text-sm transition hover:border-slate-500" data-type="서술형">서술형</button>
+                </div>
+            </div>
+
+            <button id="generate-btn" onclick="requestQuiz()" class="w-full mt-4 bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold py-4 rounded-2xl shadow-lg shadow-indigo-600/30 transition duration-200 flex items-center justify-center gap-2">
+                <span>📚</span> 5문항 다단원 모의고사 출제하기
+            </button>
+        </section>
+
+        <!-- 로딩 인디케이터 -->
+        <div id="loading-box" class="hidden my-12 text-center">
+            <div class="w-12 h-12 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p id="loading-text" class="text-indigo-400 font-bold">2022 개정 국어 교육과정 단원을 탐색하여 5문항을 생성 중입니다...</p>
+        </div>
+
+        <!-- 2단계: 5문항 시험지 패널 -->
+        <section id="quiz-panel" class="hidden mt-6 space-y-6">
+            <div class="flex items-center justify-between bg-slate-900/60 p-4 rounded-2xl border border-slate-700/60">
+                <div>
+                    <span id="quiz-grade-title" class="text-lg font-black text-white"></span>
+                    <span class="text-xs text-indigo-400 block mt-0.5">※ 교육과정 단원 무작위 출제 5문항 평가</span>
+                </div>
+                <span class="bg-indigo-500/20 text-indigo-300 font-bold text-sm px-3 py-1.5 rounded-xl border border-indigo-500/30">총 25점 만점 (문항당 5점)</span>
+            </div>
+
+            <!-- 5개 문제 카드 목록 -->
+            <div id="questions-list" class="space-y-6"></div>
+
+            <button id="submit-all-btn" onclick="submitAllAnswers()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-4 rounded-2xl shadow-lg shadow-emerald-600/30 transition flex items-center justify-center gap-2 text-lg">
+                <span>📝</span> 5문항 전체 답안 제출 및 종합 채점받기
+            </button>
+        </section>
+
+        <!-- 3단계: 채점 결과 & 종합 성적표 패널 -->
+        <section id="result-panel" class="hidden mt-6 space-y-6">
+            <div id="result-card" class="p-6 rounded-2xl border bg-slate-900/90 text-center space-y-3">
+                <div id="result-icon" class="text-5xl">🎉</div>
+                <h3 id="result-status" class="text-2xl font-black">모의평가 채점 완료!</h3>
+                <div class="text-4xl font-black text-indigo-400" id="result-total-score">25점 / 25점</div>
+                <p id="result-summary-text" class="text-slate-300 text-sm font-medium"></p>
+                <div id="result-level-upgrade-notify" class="text-xs text-amber-300 font-bold bg-amber-500/10 py-1.5 px-3 rounded-lg border border-amber-500/20 inline-block"></div>
+            </div>
+
+            <!-- 문항별 상세 채점 결과 목록 (즐겨찾기 및 AI 추가 질문하기 내장) -->
+            <div id="result-items-container" class="space-y-5"></div>
+
+            <button onclick="resetToSetup()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-indigo-600/30">
+                🔄 다른 학년 또는 새로운 5문제 풀러 가기
+            </button>
+        </section>
+
+    </div>
+
+    <script>
+        let selectedType = "객관식";
+        let quizSet = null;
+        let userAnswers = {};
+        let currentResultsMap = {};
+
+        // 계정 및 포켓몬 타입 동기화 (조장 통합 포털 localStorage 연동)
+        function getUserAccount() {
+            return localStorage.getItem("edumate_current_account") || "김에듀";
+        }
+        function getPokemonType() {
+            return localStorage.getItem("edumate_pokemon_type") || "grass";
+        }
+
+        // 초기 학생 상태 및 포켓몬 진화 정보 조회 & 헤더 렌더링
+        async function fetchAndRenderUserStatus() {
+            const userName = getUserAccount();
+            const pType = getPokemonType();
+            try {
+                const res = await fetch('/korean/user-status', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_name: userName, grade: 4, pokemon_type: pType })
+                });
+                if (!res.ok) return;
+                const data = await res.json();
+                updateProfileHeader(data);
+            } catch (e) {
+                console.warn("유저 정보 로드 실패:", e);
+            }
+        }
+
+        function updateProfileHeader(status) {
+            if (!status) return;
+            document.getElementById('user-display-name').innerText = status.user_name || "김에듀";
+            document.getElementById('user-total-score').innerText = status.total_score || 0;
+
+            if (status.level_info) {
+                const info = status.level_info;
+                const badge = document.getElementById('pokemon-tier-badge');
+                badge.innerText = info.badge_text || info.full_title || "알 5티어";
+                badge.style.color = info.color_hex || '#e2e8f0';
+                badge.style.borderColor = info.color_hex || '#475569';
+
+                const expBar = document.getElementById('user-exp-bar');
+                const pct = info.progress_pct || 0;
+                expBar.style.width = pct + '%';
+            }
+        }
+
+        // 2022 개정 초등국어 학년/학기별 공식 단원 데이터 맵
+        const UNITS_BY_GRADE = {
+            "1학년 1학기": ["1단원: 바른 자세로 읽고 쓰기", "2단원: 재미있는 낱말 놀이", "3단원: 글자를 만들어요", "4단원: 기분을 말해요", "5단원: 생각을 전해요"],
+            "1학년 2학기": ["1단원: 다정하게 인사해요", "2단원: 띄어 읽어요", "3단원: 받침이 있는 글자", "4단원: 고운 말을 써요", "5단원: 겪은 일을 글로 써요"],
+            "2학년 1학기": ["1단원: 생각을 나타내요", "2단원: 자신 있게 말해요", "3단원: 마음을 짐작해요", "4단원: 말놀이를 해요", "5단원: 낱말의 뜻을 짐작해요"],
+            "2학년 2학기": ["1단원: 인상 깊었던 일", "2단원: 자세하게 소개해요", "3단원: 바르게 띄어 써요", "4단원: 칭찬하고 배려해요", "5단원: 이야기를 즐겨요"],
+            "3학년 1학기": ["1단원: 재미가 톡톡톡", "2단원: 문단의 짜임", "3단원: 알맞은 높임 표현", "4단원: 내 생각은 어때?", "5단원: 내용을 간추려요"],
+            "3학년 2학기": ["1단원: 작품을 보고 느낌을 나누어요", "2단원: 중심 생각을 찾아요", "3단원: 낱말의 관계를 알아요", "4단원: 마음을 담아 편지를 써요", "5단원: 원인과 결과를 생각해요"],
+            "4학년 1학기": ["1단원: 생각과 느낌을 나누어요", "2단원: 내용을 짐작해요", "3단원: 느낌을 살려 말해요", "4단원: 사실과 의견을 구별해요", "5단원: 국어사전과 친해져요"],
+            "4학년 2학기": ["1단원: 이어질 장면을 생각해요", "2단원: 의견이 드러나는 글을 써요", "3단원: 문장의 짜임을 알아요", "4단원: 회의를 해요", "5단원: 생각을 나누는 글을 읽어요"],
+            "5학년 1학기": ["1단원: 대화와 공감", "2단원: 작품을 감상해요", "3단원: 글의 구조를 살펴요", "4단원: 낱말의 구조와 쓰임", "5단원: 주장과 근거를 판단해요"],
+            "5학년 2학기": ["1단원: 토의를 통해 문제를 해결해요", "2단원: 겪은 일을 생생하게 표현해요", "3단원: 낱말의 의미 관계와 맞춤법", "4단원: 효과적인 관용 표현", "5단원: 매체 자료를 활용해요"],
+            "6학년 1학기": ["1단원: 비유하는 표현", "2단원: 이야기를 간추리고 나누어요", "3단원: 타당한 근거와 논설문", "4단원: 우리말의 올바른 사용과 한글", "5단원: 빛깔 있는 우리말"],
+            "6학년 2학기": ["1단원: 작품 속 인물과 나", "2단원: 타당성과 신뢰성을 평가해요", "3단원: 토론을 해요", "4단원: 문장의 구조와 올바른 표현", "5단원: 책과 함께 나누는 지혜"]
+        };
+
+        // 취약 단원 모드 토글 시 2번 단원 선택 잠금 & "전체" 고정
+        function handleWeakestToggle() {
+            const isWeakest = document.getElementById('weakest-toggle').checked;
+            const unitSelect = document.getElementById('unit-select');
+            const lockHint = document.getElementById('unit-lock-hint');
+
+            if (isWeakest) {
+                unitSelect.value = "전체";
+                unitSelect.disabled = true;
+                unitSelect.classList.add("opacity-50", "cursor-not-allowed");
+                lockHint.classList.remove("hidden");
+            } else {
+                unitSelect.disabled = false;
+                unitSelect.classList.remove("opacity-50", "cursor-not-allowed");
+                lockHint.classList.add("hidden");
+            }
+        }
+
+        // 학년/학기 변경 시 2번 단원 선택 드롭다운 동적 갱신
+        function updateUnitOptions() {
+            const grade = document.getElementById('grade-select').value;
+            const unitSelect = document.getElementById('unit-select');
+            const units = UNITS_BY_GRADE[grade] || [];
+            
+            unitSelect.innerHTML = `<option value="전체">전체 단원 (골고루 5문항 출제)</option>`;
+            units.forEach(u => {
+                unitSelect.innerHTML += `<option value="${u}">${u}</option>`;
+            });
+
+            // 취약 단원 모드가 켜져 있으면 잠금 상태 유지
+            handleWeakestToggle();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            fetchAndRenderUserStatus();
+            updateUnitOptions();
+        });
+
+        // 문제 유형 버튼 토글
+        document.querySelectorAll('.type-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.type-btn').forEach(b => {
+                    b.className = "type-btn py-3 rounded-xl border border-slate-700 bg-slate-900 text-slate-400 font-bold text-sm transition hover:border-slate-500";
+                });
+                btn.className = "type-btn py-3 rounded-xl border border-indigo-500 bg-indigo-600/30 text-indigo-300 font-bold text-sm transition";
+                selectedType = btn.dataset.type;
+            });
+        });
+
+        // 5문항 퀴즈 요청
+        async function requestQuiz() {
+            const grade = document.getElementById('grade-select').value;
+            const unit = document.getElementById('unit-select').value;
+            const useWeakest = document.getElementById('weakest-toggle').checked;
+            const userName = getUserAccount();
+            userAnswers = {};
+
+            document.getElementById('setup-panel').classList.add('hidden');
+            document.getElementById('loading-box').classList.remove('hidden');
+
+            let loadMsg = `'${grade}' 5문항을 AI가 출제 중입니다...`;
+            if (unit && unit !== "전체") {
+                loadMsg = `'${grade}' [${unit}] 집중 5문항을 AI가 출제 중입니다...`;
+            } else if (useWeakest) {
+                loadMsg = `'${grade}' 취약 단원을 우선 분석하여 맞춤 5문항을 AI가 출제 중입니다...`;
+            }
+            document.getElementById('loading-text').innerText = loadMsg;
+
+            try {
+                const res = await fetch('/korean/quiz', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        grade: grade,
+                        unit: (unit === "전체" ? null : unit),
+                        question_type: selectedType,
+                        user_name: userName,
+                        use_weakest: useWeakest
+                    })
+                });
+
+                if (!res.ok) throw new Error((await res.json()).detail || "출제 오류");
+                quizSet = await res.json();
+
+                renderQuizSet();
+            } catch (err) {
+                alert("출제 오류 발생: " + err.message);
+                document.getElementById('loading-box').classList.add('hidden');
+                document.getElementById('setup-panel').classList.remove('hidden');
+            }
+        }
+
+        // 5문항 렌더링
+        function renderQuizSet() {
+            document.getElementById('loading-box').classList.add('hidden');
+            document.getElementById('quiz-panel').classList.remove('hidden');
+            document.getElementById('quiz-grade-title').innerText = `${quizSet.grade} [${selectedType}] 5문항 평가`;
+
+            const container = document.getElementById('questions-list');
+            container.innerHTML = '';
+
+            quizSet.questions.forEach((q, idx) => {
+                const card = document.createElement('div');
+                card.className = "bg-slate-900/80 p-5 rounded-2xl border border-slate-700 space-y-4";
+
+                const header = `
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-indigo-600 text-white font-black text-xs px-2.5 py-1 rounded-lg">문제 ${q.id}</span>
+                            <span class="bg-purple-500/20 text-purple-300 font-bold text-xs px-2.5 py-1 rounded-lg border border-purple-500/30">📖 ${q.unit}</span>
+                        </div>
+                        <span class="text-xs text-amber-400 font-bold">${q.base_score}점</span>
+                    </div>
+                `;
+
+                const body = `
+                    <p class="text-base font-semibold text-white leading-relaxed whitespace-pre-line">${q.question}</p>
+                `;
+
+                let inputArea = '';
+                if (q.question_type === "OX") {
+                    inputArea = `
+                        <div class="grid grid-cols-2 gap-3.5 mt-4" id="opts-group-${q.id}">
+                            <button type="button" onclick="selectChoice(${q.id}, 'O', this)" 
+                                class="q-opt-${q.id} py-5 rounded-2xl border-2 border-slate-700 bg-slate-900/90 text-emerald-400 font-black text-xl hover:border-emerald-500 transition flex items-center justify-center gap-2 shadow-sm">
+                                <span>⭕</span> <span>O (그렇다)</span>
+                            </button>
+                            <button type="button" onclick="selectChoice(${q.id}, 'X', this)" 
+                                class="q-opt-${q.id} py-5 rounded-2xl border-2 border-slate-700 bg-slate-900/90 text-rose-400 font-black text-xl hover:border-rose-500 transition flex items-center justify-center gap-2 shadow-sm">
+                                <span>❌</span> <span>X (아니다)</span>
+                            </button>
+                        </div>
+                    `;
+                } else if (q.question_type === "객관식") {
+                    inputArea = `<div class="space-y-2.5 mt-3" id="opts-group-${q.id}">`;
+                    q.options.forEach((opt, oIdx) => {
+                        const cleanOpt = opt.replace(/^([①-④]|\d+[\.\)]|\[\d+\])\s*/, '');
+                        inputArea += `
+                            <button type="button" onclick="selectChoice(${q.id}, '${cleanOpt.replace(/'/g, "\\'")}', this)" 
+                                class="q-opt-${q.id} w-full text-left p-4 rounded-xl border border-slate-700 bg-slate-900/90 text-slate-200 text-sm font-medium hover:border-indigo-500 transition flex items-center justify-between">
+                                <span><strong class="text-indigo-400 font-bold mr-1.5">${oIdx + 1}.</strong> ${cleanOpt}</span>
+                            </button>
+                        `;
+                    });
+                    inputArea += `</div>`;
+                } else {
+                    const placeholder = q.question_type === "단답형" 
+                        ? "정답 낱말이나 핵심 단어를 입력하세요..." 
+                        : "풀이 과정이나 까닭을 문장으로 서술하세요...";
+                    inputArea = `
+                        <div class="mt-3">
+                            <textarea id="input-q-${q.id}" oninput="userAnswers[${q.id}] = this.value.trim()" rows="2" 
+                                class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3.5 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 transition" 
+                                placeholder="${placeholder}"></textarea>
+                        </div>
+                    `;
+                }
+
+                card.innerHTML = header + body + inputArea;
+                container.appendChild(card);
+            });
+        }
+
+        // 객관식/OX 답안 선택
+        function selectChoice(qId, val, btnEl) {
+            userAnswers[qId] = val;
+            const isOX = (val === 'O' || val === 'X');
+
+            document.querySelectorAll(`.q-opt-${qId}`).forEach(b => {
+                if (isOX) {
+                    const isO = b.innerText.includes('O');
+                    b.className = `q-opt-${qId} py-5 rounded-2xl border-2 border-slate-700 bg-slate-900/90 ${isO ? 'text-emerald-400' : 'text-rose-400'} font-black text-xl transition flex items-center justify-center gap-2`;
+                } else {
+                    b.className = `q-opt-${qId} w-full text-left p-4 rounded-xl border border-slate-700 bg-slate-900/90 text-slate-200 text-sm font-medium transition flex items-center justify-between`;
+                }
+            });
+
+            if (isOX) {
+                const isO = (val === 'O');
+                btnEl.className = `q-opt-${qId} py-5 rounded-2xl border-2 ${isO ? 'border-emerald-400 bg-emerald-500/20 text-emerald-300' : 'border-rose-400 bg-rose-500/20 text-rose-300'} font-black text-xl transition flex items-center justify-center gap-2 shadow-lg`;
+            } else {
+                btnEl.className = `q-opt-${qId} w-full text-left p-4 rounded-xl border-2 border-indigo-500 bg-indigo-600/25 text-indigo-200 font-bold text-sm transition flex items-center justify-between shadow-md`;
+            }
+        }
+
+        // 5문항 전체 제출 및 일괄 채점
+        async function submitAllAnswers() {
+            for (let q of quizSet.questions) {
+                if (!userAnswers[q.id] || userAnswers[q.id].trim() === "") {
+                    alert(`문제 ${q.id}번의 답안을 작성하지 않았습니다! 모든 문제를 풀어주세요.`);
+                    return;
+                }
+            }
+
+            document.getElementById('quiz-panel').classList.add('hidden');
+            document.getElementById('loading-box').classList.remove('hidden');
+            document.getElementById('loading-text').innerText = "AI가 5개 문항을 채점하고 중앙 DB에 기록 중입니다...";
+
+            const payloadItems = quizSet.questions.map(q => ({
+                id: q.id,
+                quiz_id: q.quiz_id,
+                unit: q.unit,
+                question_type: q.question_type,
+                question: q.question,
+                model_answer: q.answer,
+                user_answer: userAnswers[q.id] || "",
+                base_score: q.base_score,
+                explanation: q.explanation
+            }));
+
+            try {
+                const res = await fetch('/korean/grade-set', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        user_name: getUserAccount(),
+                        grade: quizSet.grade,
+                        pokemon_type: getPokemonType(),
+                        items: payloadItems
+                    })
+                });
+
+                if (!res.ok) throw new Error((await res.json()).detail || "채점 오류");
+                const gradeSetResult = await res.json();
+
+                // 상단 프로필 실시간 업데이트
+                if (gradeSetResult.user_status) {
+                    updateProfileHeader(gradeSetResult.user_status);
+                }
+
+                renderGradeSetResult(gradeSetResult);
+            } catch (err) {
+                alert("채점 처리 오류: " + err.message);
+                document.getElementById('loading-box').classList.add('hidden');
+                document.getElementById('quiz-panel').classList.remove('hidden');
+            }
+        }
+
+        // 종합 성적표 렌더링
+        function renderGradeSetResult(result) {
+            document.getElementById('loading-box').classList.add('hidden');
+            document.getElementById('result-panel').classList.remove('hidden');
+
+            const scoreEl = document.getElementById('result-total-score');
+            const summaryEl = document.getElementById('result-summary-text');
+            const iconEl = document.getElementById('result-icon');
+            const notifyEl = document.getElementById('result-level-upgrade-notify');
+
+            scoreEl.innerText = `${result.total_score}점 / ${result.max_total_score}점`;
+            summaryEl.innerText = `총 5문항 중 ${result.correct_count}문항 정답 (정답률 ${(result.correct_count / 5 * 100).toFixed(0)}%)`;
+
+            if (result.user_status && result.user_status.level_info) {
+                const lv = result.user_status.level_info;
+                notifyEl.innerText = `⚡ ${result.user_status.user_name}님의 전과목 누적 총점: ${result.user_status.total_score}점 | ${lv.badge_text}`;
+            }
+
+            const pct = (result.total_score / result.max_total_score) * 100;
+            if (pct >= 90) iconEl.innerText = "🏆";
+            else if (pct >= 60) iconEl.innerText = "👏";
+            else iconEl.innerText = "💡";
+
+            const container = document.getElementById('result-items-container');
+            container.innerHTML = '';
+
+            result.results.forEach(item => {
+                const origQ = quizSet.questions.find(q => q.id === item.id) || {};
+                const card = document.createElement('div');
+                const isPass = item.is_correct;
+                card.className = `p-5 rounded-2xl border ${isPass ? 'border-emerald-500/40 bg-slate-900/90' : 'border-rose-500/40 bg-slate-900/90'} space-y-3.5`;
+
+                card.innerHTML = `
+                    <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-sm ${isPass ? 'text-emerald-400' : 'text-rose-400'}">${isPass ? '⭕ 정답' : '❌ 오답'} (문제 ${item.id}번)</span>
+                            <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-0.5 rounded-full border border-slate-700">${origQ.unit || ''}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-sm font-bold ${isPass ? 'text-emerald-400' : 'text-rose-400'}">${item.score} / ${item.max_score}점</span>
+                            <button type="button" onclick="toggleFavorite(${item.log_id}, this)" 
+                                class="favorite-btn bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs px-2.5 py-1 rounded-lg border border-slate-700 transition flex items-center gap-1"
+                                title="나중에 다시 볼 문제로 즐겨찾기">
+                                <span>⭐</span> <span>즐겨찾기</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="text-sm text-slate-200 font-medium whitespace-pre-line leading-relaxed">${origQ.question || ''}</div>
+                    
+                    <div class="bg-slate-800/80 p-3.5 rounded-xl text-xs space-y-1.5 border border-slate-700">
+                        <div><span class="text-slate-400">내 답안:</span> <span class="font-bold text-white">${item.user_answer}</span></div>
+                        <div><span class="text-slate-400">모범 정답:</span> <span class="font-bold text-emerald-400">${item.model_answer}</span></div>
+                        <div><span class="text-slate-400">해설:</span> <span class="text-slate-300">${origQ.explanation || ''}</span></div>
+                    </div>
+
+                    <div class="text-xs text-indigo-300 bg-indigo-950/40 border border-indigo-500/30 p-3 rounded-xl flex items-start gap-2">
+                        <span class="text-sm">💡</span>
+                        <div><strong>AI 피드백:</strong> ${item.feedback}</div>
+                    </div>
+
+                    <!-- 이어서 질문하기 버튼 및 채팅창 아코디언 -->
+                    <div class="pt-2 border-t border-slate-800">
+                        <button type="button" onclick="toggleChatPanel(${item.log_id})" 
+                            class="text-xs text-indigo-400 hover:text-indigo-300 font-bold flex items-center gap-1.5 transition">
+                            <span>💬</span> 이 문제에 대해 AI 선생님께 이어서 질문하기
+                        </button>
+
+                        <div id="chat-box-${item.log_id}" class="hidden mt-3 bg-slate-950/60 p-3.5 rounded-xl border border-slate-800 space-y-2.5">
+                            <div id="chat-history-${item.log_id}" class="space-y-2 max-h-48 overflow-y-auto text-xs">
+                                <div class="text-slate-400 italic">선생님께 무엇이든 더 물어보세요!</div>
+                            </div>
+                            <div class="flex gap-2">
+                                <input type="text" id="chat-input-${item.log_id}" 
+                                    placeholder="선생님, 이 보기의 뜻이 잘 이해가 안 돼요..." 
+                                    onkeydown="if(event.key === 'Enter') sendAskMore(${item.log_id}, '${escapeQuote(origQ.question)}', '${escapeQuote(item.model_answer)}')"
+                                    class="flex-1 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white text-xs focus:outline-none focus:border-indigo-500">
+                                <button type="button" onclick="sendAskMore(${item.log_id}, '${escapeQuote(origQ.question)}', '${escapeQuote(item.model_answer)}')"
+                                    class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold px-3 py-2 rounded-lg transition">
+                                    질문
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function escapeQuote(str) {
+            return (str || "").replace(/'/g, "\\'").replace(/"/g, '&quot;').replace(/\n/g, ' ');
+        }
+
+        // 즐겨찾기 토글
+        async function toggleFavorite(logId, btn) {
+            if (!logId) return;
+            try {
+                const res = await fetch(`/korean/favorite/${logId}`, { method: 'POST' });
+                if (!res.ok) throw new Error("즐겨찾기 변경 실패");
+                const data = await res.json();
+                if (data.is_favorite === 1) {
+                    btn.className = "favorite-btn bg-amber-500/20 text-amber-300 text-xs px-2.5 py-1 rounded-lg border border-amber-500/40 transition flex items-center gap-1 font-bold";
+                    btn.innerHTML = "<span>⭐</span> <span>즐겨찾기됨</span>";
+                } else {
+                    btn.className = "favorite-btn bg-slate-800 hover:bg-slate-700 text-slate-400 text-xs px-2.5 py-1 rounded-lg border border-slate-700 transition flex items-center gap-1";
+                    btn.innerHTML = "<span>☆</span> <span>즐겨찾기</span>";
+                }
+            } catch (err) {
+                alert(err.message);
+            }
+        }
+
+        // 추가 질문 아코디언 토글
+        function toggleChatPanel(logId) {
+            const el = document.getElementById(`chat-box-${logId}`);
+            if (el) el.classList.toggle('hidden');
+        }
+
+        // AI 선생님께 추가 질문 전송
+        async function sendAskMore(logId, contextQ, modelA) {
+            const input = document.getElementById(`chat-input-${logId}`);
+            const text = (input.value || "").trim();
+            if (!text) return;
+
+            const historyEl = document.getElementById(`chat-history-${logId}`);
+            historyEl.innerHTML += `
+                <div class="text-right">
+                    <span class="inline-block bg-indigo-600 text-white px-2.5 py-1.5 rounded-lg rounded-tr-none text-xs">${text}</span>
+                </div>
+            `;
+            input.value = "";
+
+            const loadingBubble = document.createElement('div');
+            loadingBubble.className = "text-left text-slate-400 italic text-xs";
+            loadingBubble.innerText = "선생님이 답변을 작성하고 계세요...";
+            historyEl.appendChild(loadingBubble);
+            historyEl.scrollTop = historyEl.scrollHeight;
+
+            try {
+                const res = await fetch('/korean/ask-more', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        log_id: logId,
+                        student_question: text,
+                        context_question: contextQ,
+                        model_answer: modelA
+                    })
+                });
+                if (!res.ok) throw new Error("답변 생성 실패");
+                const data = await res.json();
+                loadingBubble.remove();
+
+                historyEl.innerHTML += `
+                    <div class="text-left">
+                        <span class="inline-block bg-slate-800 text-emerald-300 border border-slate-700 px-3 py-2 rounded-lg rounded-tl-none text-xs leading-relaxed">
+                            🧑‍🏫 <strong>선생님:</strong> ${data.ai_reply}
+                        </span>
+                    </div>
+                `;
+                historyEl.scrollTop = historyEl.scrollHeight;
+            } catch (err) {
+                loadingBubble.innerText = "답변 오류: " + err.message;
+            }
+        }
+
+        function resetToSetup() {
+            document.getElementById('result-panel').classList.add('hidden');
+            document.getElementById('setup-panel').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

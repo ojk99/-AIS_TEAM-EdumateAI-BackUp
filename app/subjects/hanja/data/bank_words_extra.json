@@ -1,0 +1,1766 @@
+[
+  {
+    "character": "入口",
+    "normalized": "入口",
+    "grade": 8,
+    "reading": "입구",
+    "meaning": "들어가는 곳",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "入",
+        "grade": 8
+      },
+      {
+        "character": "口",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "出口",
+    "normalized": "出口",
+    "grade": 7,
+    "reading": "출구",
+    "meaning": "나가는 곳",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "出",
+        "grade": 7
+      },
+      {
+        "character": "口",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "山林",
+    "normalized": "山林",
+    "grade": 7,
+    "reading": "산림",
+    "meaning": "산과 숲",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "山",
+        "grade": 9
+      },
+      {
+        "character": "林",
+        "grade": 7
+      }
+    ]
+  },
+  {
+    "character": "火山",
+    "normalized": "火山",
+    "grade": 9,
+    "reading": "화산",
+    "meaning": "땅속의 뜨거운 물질이 밖으로 나오는 산",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "火",
+        "grade": 9
+      },
+      {
+        "character": "山",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "水田",
+    "normalized": "水田",
+    "grade": 9,
+    "reading": "수전",
+    "meaning": "물을 대어 벼를 기르는 논",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "水",
+        "grade": 9
+      },
+      {
+        "character": "田",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "田土",
+    "normalized": "田土",
+    "grade": 9,
+    "reading": "전토",
+    "meaning": "논과 밭",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "田",
+        "grade": 9
+      },
+      {
+        "character": "土",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "人力",
+    "normalized": "人力",
+    "grade": 9,
+    "reading": "인력",
+    "meaning": "사람의 힘",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "人",
+        "grade": 9
+      },
+      {
+        "character": "力",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "國民",
+    "normalized": "國民",
+    "grade": 7,
+    "reading": "국민",
+    "meaning": "한 나라에 속한 사람들",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "國",
+        "grade": 7
+      },
+      {
+        "character": "民",
+        "grade": 8
+      }
+    ]
+  },
+  {
+    "character": "國土",
+    "normalized": "國土",
+    "grade": 7,
+    "reading": "국토",
+    "meaning": "한 나라의 땅",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "國",
+        "grade": 7
+      },
+      {
+        "character": "土",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "王子",
+    "normalized": "王子",
+    "grade": 9,
+    "reading": "왕자",
+    "meaning": "임금의 아들",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "王",
+        "grade": 9
+      },
+      {
+        "character": "子",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "女子",
+    "normalized": "女子",
+    "grade": 9,
+    "reading": "여자",
+    "meaning": "여성인 사람",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "女",
+        "grade": 9
+      },
+      {
+        "character": "子",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "男子",
+    "normalized": "男子",
+    "grade": 8,
+    "reading": "남자",
+    "meaning": "남성인 사람",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "男",
+        "grade": 8
+      },
+      {
+        "character": "子",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "少年",
+    "normalized": "少年",
+    "grade": 8,
+    "reading": "소년",
+    "meaning": "어린 남자아이",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "少",
+        "grade": 8
+      },
+      {
+        "character": "年",
+        "grade": 8
+      }
+    ]
+  },
+  {
+    "character": "少女",
+    "normalized": "少女",
+    "grade": 8,
+    "reading": "소녀",
+    "meaning": "어린 여자아이",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "少",
+        "grade": 8
+      },
+      {
+        "character": "女",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "老人",
+    "normalized": "老人",
+    "grade": 9,
+    "reading": "노인",
+    "meaning": "나이가 많은 사람",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "老",
+        "grade": 9
+      },
+      {
+        "character": "人",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "父子",
+    "normalized": "父子",
+    "grade": 9,
+    "reading": "부자",
+    "meaning": "아버지와 아들",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "父",
+        "grade": 9
+      },
+      {
+        "character": "子",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "母子",
+    "normalized": "母子",
+    "grade": 9,
+    "reading": "모자",
+    "meaning": "어머니와 아들",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "母",
+        "grade": 9
+      },
+      {
+        "character": "子",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "兄弟",
+    "normalized": "兄弟",
+    "grade": 8,
+    "reading": "형제",
+    "meaning": "형과 아우",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "兄",
+        "grade": 8
+      },
+      {
+        "character": "弟",
+        "grade": 8
+      }
+    ]
+  },
+  {
+    "character": "姉妹",
+    "normalized": "姉妹",
+    "grade": 2,
+    "reading": "자매",
+    "meaning": "언니와 여동생",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "姉",
+        "grade": 2
+      },
+      {
+        "character": "妹",
+        "grade": 4
+      }
+    ]
+  },
+  {
+    "character": "上下",
+    "normalized": "上下",
+    "grade": 8,
+    "reading": "상하",
+    "meaning": "위와 아래",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "上",
+        "grade": 8
+      },
+      {
+        "character": "下",
+        "grade": 8
+      }
+    ]
+  },
+  {
+    "character": "左右",
+    "normalized": "左右",
+    "grade": 6,
+    "reading": "좌우",
+    "meaning": "왼쪽과 오른쪽",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "左",
+        "grade": 6
+      },
+      {
+        "character": "右",
+        "grade": 6
+      }
+    ]
+  },
+  {
+    "character": "前後",
+    "normalized": "前後",
+    "grade": 7,
+    "reading": "전후",
+    "meaning": "앞과 뒤",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "前",
+        "grade": 7
+      },
+      {
+        "character": "後",
+        "grade": 7
+      }
+    ]
+  },
+  {
+    "character": "內外",
+    "normalized": "內外",
+    "grade": 8,
+    "reading": "내외",
+    "meaning": "안과 밖",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "內",
+        "grade": 8
+      },
+      {
+        "character": "外",
+        "grade": 8
+      }
+    ]
+  },
+  {
+    "character": "長短",
+    "normalized": "長短",
+    "grade": 5,
+    "reading": "장단",
+    "meaning": "긴 것과 짧은 것",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "長",
+        "grade": 9
+      },
+      {
+        "character": "短",
+        "grade": 5
+      }
+    ]
+  },
+  {
+    "character": "高低",
+    "normalized": "高低",
+    "grade": 4,
+    "reading": "고저",
+    "meaning": "높은 것과 낮은 것",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "高",
+        "grade": 9
+      },
+      {
+        "character": "低",
+        "grade": 4
+      }
+    ]
+  },
+  {
+    "character": "多少",
+    "normalized": "多少",
+    "grade": 7,
+    "reading": "다소",
+    "meaning": "많음과 적음",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "多",
+        "grade": 7
+      },
+      {
+        "character": "少",
+        "grade": 8
+      }
+    ]
+  },
+  {
+    "character": "出入",
+    "normalized": "出入",
+    "grade": 7,
+    "reading": "출입",
+    "meaning": "나가고 들어오는 일",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "出",
+        "grade": 7
+      },
+      {
+        "character": "入",
+        "grade": 8
+      }
+    ]
+  },
+  {
+    "character": "每日",
+    "normalized": "每日",
+    "grade": 7,
+    "reading": "매일",
+    "meaning": "날마다",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "每",
+        "grade": 7
+      },
+      {
+        "character": "日",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "今年",
+    "normalized": "今年",
+    "grade": 8,
+    "reading": "금년",
+    "meaning": "올해",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "今",
+        "grade": 8
+      },
+      {
+        "character": "年",
+        "grade": 8
+      }
+    ]
+  },
+  {
+    "character": "明日",
+    "normalized": "明日",
+    "grade": 7,
+    "reading": "명일",
+    "meaning": "내일",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "明",
+        "grade": 7
+      },
+      {
+        "character": "日",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "休日",
+    "normalized": "休日",
+    "grade": 6,
+    "reading": "휴일",
+    "meaning": "일을 쉬는 날",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "休",
+        "grade": 6
+      },
+      {
+        "character": "日",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "午前",
+    "normalized": "午前",
+    "grade": 7,
+    "reading": "오전",
+    "meaning": "자정부터 낮 열두 시까지",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "午",
+        "grade": 8
+      },
+      {
+        "character": "前",
+        "grade": 7
+      }
+    ]
+  },
+  {
+    "character": "午後",
+    "normalized": "午後",
+    "grade": 7,
+    "reading": "오후",
+    "meaning": "낮 열두 시부터 자정까지",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "午",
+        "grade": 8
+      },
+      {
+        "character": "後",
+        "grade": 7
+      }
+    ]
+  },
+  {
+    "character": "春夏",
+    "normalized": "春夏",
+    "grade": 5,
+    "reading": "춘하",
+    "meaning": "봄과 여름",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "春",
+        "grade": 5
+      },
+      {
+        "character": "夏",
+        "grade": 7
+      }
+    ]
+  },
+  {
+    "character": "秋冬",
+    "normalized": "秋冬",
+    "grade": 7,
+    "reading": "추동",
+    "meaning": "가을과 겨울",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "秋",
+        "grade": 7
+      },
+      {
+        "character": "冬",
+        "grade": 7
+      }
+    ]
+  },
+  {
+    "character": "四季",
+    "normalized": "四季",
+    "grade": 8,
+    "reading": "사계",
+    "meaning": "봄 여름 가을 겨울의 네 계절",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "四",
+        "grade": 8
+      },
+      {
+        "character": "季",
+        "grade": 8
+      }
+    ]
+  },
+  {
+    "character": "白米",
+    "normalized": "白米",
+    "grade": 5,
+    "reading": "백미",
+    "meaning": "껍질을 벗겨 희게 만든 쌀",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "白",
+        "grade": 8
+      },
+      {
+        "character": "米",
+        "grade": 5
+      }
+    ]
+  },
+  {
+    "character": "食水",
+    "normalized": "食水",
+    "grade": 8,
+    "reading": "식수",
+    "meaning": "마실 수 있는 물",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "食",
+        "grade": 8
+      },
+      {
+        "character": "水",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "食事",
+    "normalized": "食事",
+    "grade": 8,
+    "reading": "식사",
+    "meaning": "음식을 먹는 일",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "食",
+        "grade": 8
+      },
+      {
+        "character": "事",
+        "grade": 8
+      }
+    ]
+  },
+  {
+    "character": "朝食",
+    "normalized": "朝食",
+    "grade": 7,
+    "reading": "조식",
+    "meaning": "아침에 먹는 식사",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "朝",
+        "grade": 7
+      },
+      {
+        "character": "食",
+        "grade": 8
+      }
+    ]
+  },
+  {
+    "character": "夕食",
+    "normalized": "夕食",
+    "grade": 8,
+    "reading": "석식",
+    "meaning": "저녁에 먹는 식사",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "夕",
+        "grade": 9
+      },
+      {
+        "character": "食",
+        "grade": 8
+      }
+    ]
+  },
+  {
+    "character": "學生",
+    "normalized": "學生",
+    "grade": 7,
+    "reading": "학생",
+    "meaning": "학교에서 배우는 사람",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "學",
+        "grade": 7
+      },
+      {
+        "character": "生",
+        "grade": 8
+      }
+    ]
+  },
+  {
+    "character": "先生",
+    "normalized": "先生",
+    "grade": 7,
+    "reading": "선생",
+    "meaning": "가르치는 사람을 높여 부르는 말",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "先",
+        "grade": 7
+      },
+      {
+        "character": "生",
+        "grade": 8
+      }
+    ]
+  },
+  {
+    "character": "敎室",
+    "normalized": "敎室",
+    "grade": 6,
+    "reading": "교실",
+    "meaning": "학교에서 수업하는 방",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "敎",
+        "grade": 6
+      },
+      {
+        "character": "室",
+        "grade": 7
+      }
+    ]
+  },
+  {
+    "character": "校門",
+    "normalized": "校門",
+    "grade": 7,
+    "reading": "교문",
+    "meaning": "학교의 문",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "校",
+        "grade": 7
+      },
+      {
+        "character": "門",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "校長",
+    "normalized": "校長",
+    "grade": 7,
+    "reading": "교장",
+    "meaning": "학교의 일을 책임지는 사람",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "校",
+        "grade": 7
+      },
+      {
+        "character": "長",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "入學",
+    "normalized": "入學",
+    "grade": 7,
+    "reading": "입학",
+    "meaning": "학교에 들어가 학생이 되는 일",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "入",
+        "grade": 8
+      },
+      {
+        "character": "學",
+        "grade": 7
+      }
+    ]
+  },
+  {
+    "character": "卒業",
+    "normalized": "卒業",
+    "grade": 5,
+    "reading": "졸업",
+    "meaning": "학교의 정해진 공부를 마치는 일",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "卒",
+        "grade": 5
+      },
+      {
+        "character": "業",
+        "grade": 8
+      }
+    ]
+  },
+  {
+    "character": "學習",
+    "normalized": "學習",
+    "grade": 7,
+    "reading": "학습",
+    "meaning": "배우고 익히는 일",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "學",
+        "grade": 7
+      },
+      {
+        "character": "習",
+        "grade": 7
+      }
+    ]
+  },
+  {
+    "character": "問答",
+    "normalized": "問答",
+    "grade": 6,
+    "reading": "문답",
+    "meaning": "묻고 대답하는 일",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "問",
+        "grade": 6
+      },
+      {
+        "character": "答",
+        "grade": 7
+      }
+    ]
+  },
+  {
+    "character": "作文",
+    "normalized": "作文",
+    "grade": 7,
+    "reading": "작문",
+    "meaning": "글을 짓는 일",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "作",
+        "grade": 7
+      },
+      {
+        "character": "文",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "日記",
+    "normalized": "日記",
+    "grade": 7,
+    "reading": "일기",
+    "meaning": "날마다 있었던 일을 적은 글",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "日",
+        "grade": 9
+      },
+      {
+        "character": "記",
+        "grade": 7
+      }
+    ]
+  },
+  {
+    "character": "書店",
+    "normalized": "書店",
+    "grade": 5,
+    "reading": "서점",
+    "meaning": "책을 파는 가게",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "書",
+        "grade": 8
+      },
+      {
+        "character": "店",
+        "grade": 5
+      }
+    ]
+  },
+  {
+    "character": "讀者",
+    "normalized": "讀者",
+    "grade": 5,
+    "reading": "독자",
+    "meaning": "글이나 책을 읽는 사람",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "讀",
+        "grade": 5
+      },
+      {
+        "character": "者",
+        "grade": 8
+      }
+    ]
+  },
+  {
+    "character": "作家",
+    "normalized": "作家",
+    "grade": 7,
+    "reading": "작가",
+    "meaning": "문학이나 예술 작품을 만드는 사람",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "作",
+        "grade": 7
+      },
+      {
+        "character": "家",
+        "grade": 8
+      }
+    ]
+  },
+  {
+    "character": "名作",
+    "normalized": "名作",
+    "grade": 7,
+    "reading": "명작",
+    "meaning": "뛰어나고 이름난 작품",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "名",
+        "grade": 8
+      },
+      {
+        "character": "作",
+        "grade": 7
+      }
+    ]
+  },
+  {
+    "character": "音樂",
+    "normalized": "音樂",
+    "grade": 8,
+    "reading": "음악",
+    "meaning": "소리로 느낌을 나타내는 예술",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "音",
+        "grade": 8
+      },
+      {
+        "character": "樂",
+        "grade": 8
+      }
+    ]
+  },
+  {
+    "character": "美術",
+    "normalized": "美術",
+    "grade": 3,
+    "reading": "미술",
+    "meaning": "그림이나 조각으로 아름다움을 표현하는 예술",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "美",
+        "grade": 7
+      },
+      {
+        "character": "術",
+        "grade": 3
+      }
+    ]
+  },
+  {
+    "character": "舞臺",
+    "normalized": "舞臺",
+    "grade": 3,
+    "reading": "무대",
+    "meaning": "공연을 하는 자리",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "舞",
+        "grade": 5
+      },
+      {
+        "character": "臺",
+        "grade": 3
+      }
+    ]
+  },
+  {
+    "character": "公園",
+    "normalized": "公園",
+    "grade": 6,
+    "reading": "공원",
+    "meaning": "사람들이 쉬거나 산책하도록 만든 곳",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "公",
+        "grade": 7
+      },
+      {
+        "character": "園",
+        "grade": 6
+      }
+    ]
+  },
+  {
+    "character": "道路",
+    "normalized": "道路",
+    "grade": 6,
+    "reading": "도로",
+    "meaning": "사람이나 차가 다니는 길",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "道",
+        "grade": 7
+      },
+      {
+        "character": "路",
+        "grade": 6
+      }
+    ]
+  },
+  {
+    "character": "交通",
+    "normalized": "交通",
+    "grade": 6,
+    "reading": "교통",
+    "meaning": "사람이나 물건이 오가는 일",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "交",
+        "grade": 9
+      },
+      {
+        "character": "通",
+        "grade": 6
+      }
+    ]
+  },
+  {
+    "character": "安全",
+    "normalized": "安全",
+    "grade": 7,
+    "reading": "안전",
+    "meaning": "위험이 없는 상태",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "安",
+        "grade": 7
+      },
+      {
+        "character": "全",
+        "grade": 8
+      }
+    ]
+  },
+  {
+    "character": "注意",
+    "normalized": "注意",
+    "grade": 7,
+    "reading": "주의",
+    "meaning": "조심하고 마음을 기울이는 일",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "注",
+        "grade": 7
+      },
+      {
+        "character": "意",
+        "grade": 7
+      }
+    ]
+  },
+  {
+    "character": "信號",
+    "normalized": "信號",
+    "grade": 6,
+    "reading": "신호",
+    "meaning": "뜻을 전하기 위해 정한 표시",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "信",
+        "grade": 7
+      },
+      {
+        "character": "號",
+        "grade": 6
+      }
+    ]
+  },
+  {
+    "character": "速度",
+    "normalized": "速度",
+    "grade": 5,
+    "reading": "속도",
+    "meaning": "움직이거나 진행하는 빠르기",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "速",
+        "grade": 5
+      },
+      {
+        "character": "度",
+        "grade": 7
+      }
+    ]
+  },
+  {
+    "character": "旅行",
+    "normalized": "旅行",
+    "grade": 6,
+    "reading": "여행",
+    "meaning": "다른 고장이나 나라로 다니는 일",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "旅",
+        "grade": 6
+      },
+      {
+        "character": "行",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "地圖",
+    "normalized": "地圖",
+    "grade": 7,
+    "reading": "지도",
+    "meaning": "땅의 모습을 줄여 그린 그림",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "地",
+        "grade": 7
+      },
+      {
+        "character": "圖",
+        "grade": 7
+      }
+    ]
+  },
+  {
+    "character": "海岸",
+    "normalized": "海岸",
+    "grade": 3,
+    "reading": "해안",
+    "meaning": "바다와 땅이 맞닿은 곳",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "海",
+        "grade": 7
+      },
+      {
+        "character": "岸",
+        "grade": 3
+      }
+    ]
+  },
+  {
+    "character": "河川",
+    "normalized": "河川",
+    "grade": 5,
+    "reading": "하천",
+    "meaning": "강과 시내",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "河",
+        "grade": 5
+      },
+      {
+        "character": "川",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "森林",
+    "normalized": "森林",
+    "grade": 2,
+    "reading": "삼림",
+    "meaning": "나무가 많이 모여 있는 숲",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "森",
+        "grade": 2
+      },
+      {
+        "character": "林",
+        "grade": 7
+      }
+    ]
+  },
+  {
+    "character": "植物",
+    "normalized": "植物",
+    "grade": 6,
+    "reading": "식물",
+    "meaning": "나무나 풀처럼 뿌리를 내리고 자라는 생물",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "植",
+        "grade": 6
+      },
+      {
+        "character": "物",
+        "grade": 7
+      }
+    ]
+  },
+  {
+    "character": "動物",
+    "normalized": "動物",
+    "grade": 6,
+    "reading": "동물",
+    "meaning": "먹이를 먹고 살아가는 사람이나 짐승 등의 생물",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "動",
+        "grade": 6
+      },
+      {
+        "character": "物",
+        "grade": 7
+      }
+    ]
+  },
+  {
+    "character": "生命",
+    "normalized": "生命",
+    "grade": 7,
+    "reading": "생명",
+    "meaning": "살아 있는 힘이나 목숨",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "生",
+        "grade": 8
+      },
+      {
+        "character": "命",
+        "grade": 7
+      }
+    ]
+  },
+  {
+    "character": "成長",
+    "normalized": "成長",
+    "grade": 8,
+    "reading": "성장",
+    "meaning": "자라서 커지는 일",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "成",
+        "grade": 8
+      },
+      {
+        "character": "長",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "季節",
+    "normalized": "季節",
+    "grade": 6,
+    "reading": "계절",
+    "meaning": "한 해를 날씨에 따라 나눈 시기",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "季",
+        "grade": 8
+      },
+      {
+        "character": "節",
+        "grade": 6
+      }
+    ]
+  },
+  {
+    "character": "氣溫",
+    "normalized": "氣溫",
+    "grade": 5,
+    "reading": "기온",
+    "meaning": "공기의 온도",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "氣",
+        "grade": 7
+      },
+      {
+        "character": "溫",
+        "grade": 5
+      }
+    ]
+  },
+  {
+    "character": "雨量",
+    "normalized": "雨量",
+    "grade": 5,
+    "reading": "우량",
+    "meaning": "비가 내린 양",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "雨",
+        "grade": 9
+      },
+      {
+        "character": "量",
+        "grade": 5
+      }
+    ]
+  },
+  {
+    "character": "健康",
+    "normalized": "健康",
+    "grade": 3,
+    "reading": "건강",
+    "meaning": "몸과 마음이 튼튼한 상태",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "健",
+        "grade": 3
+      },
+      {
+        "character": "康",
+        "grade": 3
+      }
+    ]
+  },
+  {
+    "character": "病院",
+    "normalized": "病院",
+    "grade": 3,
+    "reading": "병원",
+    "meaning": "병을 진찰하고 치료하는 곳",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "病",
+        "grade": 7
+      },
+      {
+        "character": "院",
+        "grade": 3
+      }
+    ]
+  },
+  {
+    "character": "治療",
+    "normalized": "治療",
+    "grade": 2,
+    "reading": "치료",
+    "meaning": "병이나 다친 곳을 낫게 하는 일",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "治",
+        "grade": 6
+      },
+      {
+        "character": "療",
+        "grade": 2
+      }
+    ]
+  },
+  {
+    "character": "藥品",
+    "normalized": "藥品",
+    "grade": 7,
+    "reading": "약품",
+    "meaning": "병을 치료하거나 예방하는 데 쓰는 물질",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "藥",
+        "grade": 7
+      },
+      {
+        "character": "品",
+        "grade": 7
+      }
+    ]
+  },
+  {
+    "character": "約束",
+    "normalized": "約束",
+    "grade": 3,
+    "reading": "약속",
+    "meaning": "앞으로 할 일을 서로 정하는 일",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "約",
+        "grade": 7
+      },
+      {
+        "character": "束",
+        "grade": 3
+      }
+    ]
+  },
+  {
+    "character": "協力",
+    "normalized": "協力",
+    "grade": 5,
+    "reading": "협력",
+    "meaning": "힘을 합하여 서로 돕는 일",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "協",
+        "grade": 5
+      },
+      {
+        "character": "力",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "努力",
+    "normalized": "努力",
+    "grade": 3,
+    "reading": "노력",
+    "meaning": "목적을 이루려고 힘쓰는 일",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "努",
+        "grade": 3
+      },
+      {
+        "character": "力",
+        "grade": 9
+      }
+    ]
+  },
+  {
+    "character": "成功",
+    "normalized": "成功",
+    "grade": 6,
+    "reading": "성공",
+    "meaning": "바라던 일을 이루는 것",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "成",
+        "grade": 8
+      },
+      {
+        "character": "功",
+        "grade": 6
+      }
+    ]
+  },
+  {
+    "character": "失敗",
+    "normalized": "失敗",
+    "grade": 5,
+    "reading": "실패",
+    "meaning": "바라던 일을 이루지 못하는 것",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "失",
+        "grade": 8
+      },
+      {
+        "character": "敗",
+        "grade": 5
+      }
+    ]
+  },
+  {
+    "character": "責任",
+    "normalized": "責任",
+    "grade": 3,
+    "reading": "책임",
+    "meaning": "맡아서 해야 할 의무",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "責",
+        "grade": 5
+      },
+      {
+        "character": "任",
+        "grade": 3
+      }
+    ]
+  },
+  {
+    "character": "尊重",
+    "normalized": "尊重",
+    "grade": 4,
+    "reading": "존중",
+    "meaning": "소중하게 여기고 높이 대하는 것",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "尊",
+        "grade": 4
+      },
+      {
+        "character": "重",
+        "grade": 6
+      }
+    ]
+  },
+  {
+    "character": "感謝",
+    "normalized": "感謝",
+    "grade": 4,
+    "reading": "감사",
+    "meaning": "고맙게 여기는 마음",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "感",
+        "grade": 6
+      },
+      {
+        "character": "謝",
+        "grade": 4
+      }
+    ]
+  },
+  {
+    "character": "勇氣",
+    "normalized": "勇氣",
+    "grade": 5,
+    "reading": "용기",
+    "meaning": "어려움이나 두려움에 맞서는 힘",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "勇",
+        "grade": 5
+      },
+      {
+        "character": "氣",
+        "grade": 7
+      }
+    ]
+  },
+  {
+    "character": "創造",
+    "normalized": "創造",
+    "grade": 3,
+    "reading": "창조",
+    "meaning": "새로운 것을 만드는 일",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "創",
+        "grade": 3
+      },
+      {
+        "character": "造",
+        "grade": 5
+      }
+    ]
+  },
+  {
+    "character": "發明",
+    "normalized": "發明",
+    "grade": 6,
+    "reading": "발명",
+    "meaning": "전에 없던 기술이나 물건을 새롭게 만드는 일",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "發",
+        "grade": 6
+      },
+      {
+        "character": "明",
+        "grade": 7
+      }
+    ]
+  },
+  {
+    "character": "發見",
+    "normalized": "發見",
+    "grade": 6,
+    "reading": "발견",
+    "meaning": "미처 알지 못하던 것을 찾아내는 일",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "發",
+        "grade": 6
+      },
+      {
+        "character": "見",
+        "grade": 8
+      }
+    ]
+  },
+  {
+    "character": "觀察",
+    "normalized": "觀察",
+    "grade": 6,
+    "reading": "관찰",
+    "meaning": "사물이나 현상을 자세히 살펴보는 일",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "觀",
+        "grade": 6
+      },
+      {
+        "character": "察",
+        "grade": 6
+      }
+    ]
+  },
+  {
+    "character": "實驗",
+    "normalized": "實驗",
+    "grade": 3,
+    "reading": "실험",
+    "meaning": "생각이 맞는지 직접 해 보며 확인하는 일",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "實",
+        "grade": 7
+      },
+      {
+        "character": "驗",
+        "grade": 3
+      }
+    ]
+  },
+  {
+    "character": "環境",
+    "normalized": "環境",
+    "grade": 3,
+    "reading": "환경",
+    "meaning": "사람이나 생물을 둘러싼 주변 조건",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "環",
+        "grade": 3
+      },
+      {
+        "character": "境",
+        "grade": 3
+      }
+    ]
+  },
+  {
+    "character": "保護",
+    "normalized": "保護",
+    "grade": 3,
+    "reading": "보호",
+    "meaning": "위험하지 않도록 지키고 돌보는 일",
+    "kind": "word",
+    "character_grades": [
+      {
+        "character": "保",
+        "grade": 7
+      },
+      {
+        "character": "護",
+        "grade": 3
+      }
+    ]
+  }
+]

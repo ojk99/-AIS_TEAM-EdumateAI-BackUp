@@ -1,0 +1,17 @@
+# 깃 및 가상환경 캐시 제외
+.git
+.gitignore
+__pycache__
+*.py[cod]
+.venv
+venv
+env
+
+# 로컬 설정 및 개인 보안 파일 제외
+.env
+*.env
+.idea
+.vscode
+*.log
+.cloudflared*
+practice

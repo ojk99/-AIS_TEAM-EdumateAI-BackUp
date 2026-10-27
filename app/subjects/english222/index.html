@@ -1,0 +1,2903 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduMate AI 베이비 프렌즈 영어 퀴즈 (통합 믹스 에디션)</title>
+  <!-- 맑고 부드러운 폰트 세팅 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Gowun Dodum', 'Jua', 'Nunito', sans-serif;
+      font-weight: normal;
+      letter-spacing: 0.2px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* 뽀얗고 포근한 파스텔 배경 */
+    body {
+      background: radial-gradient(circle at 20% 20%, #ffe4e6 0%, #ffd1dc 40%, #e0e7ff 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+    
+    /* 각진 느낌이 0%인 몽글몽글 구름 카드 (780px 와이드형) */
+    .app-card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 780px;
+      border-radius: 54px;
+      padding: 44px 40px 38px;
+      box-shadow: 0 24px 60px rgba(251, 113, 133, 0.2), 0 4px 20px rgba(224, 231, 255, 0.5);
+      border: 4px solid #fed7aa;
+      text-align: center;
+      position: relative;
+    }
+
+    /* 몽실몽실 메인 아기토끼 마스코트 */
+    .mascot-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: -110px;
+      margin-bottom: 12px;
+    }
+    .mascot-stage {
+      width: 145px;
+      height: 135px;
+      position: relative;
+      user-select: none;
+      animation: babyFloat 3s ease-in-out infinite;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes babyFloat {
+      0%, 100% { transform: translateY(0px) rotate(-1.5deg); }
+      50% { transform: translateY(-10px) rotate(1.5deg); }
+    }
+    .mascot-stage.bounce {
+      animation: none;
+      transform: scale(1.22) rotate(6deg);
+    }
+    .mascot-svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 12px 18px rgba(251, 113, 133, 0.3));
+    }
+
+    /* 상단 유틸리티 바 (API 키 상태 및 설정 버튼) */
+    .top-utility-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding: 0 6px;
+    }
+    .key-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 13px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .key-status-pill.saved {
+      background: #ecfdf5;
+      color: #047857;
+      border-color: #a7f3d0;
+    }
+    .key-status-pill.empty {
+      background: #fff7ed;
+      color: #c2410c;
+      border-color: #ffedd5;
+    }
+    .key-status-pill:hover {
+      transform: translateY(-2px);
+    }
+
+    /* ========================================================
+       [화면 1] 둥글둥글 첫 인트로 화면
+       ======================================================== */
+    #intro-screen {
+      display: block;
+    }
+    .intro-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #fef08a, #fde047);
+      color: #854d0e;
+      padding: 7px 24px;
+      border-radius: 50px;
+      font-size: 15px;
+      box-shadow: 0 4px 14px rgba(254, 240, 138, 0.6);
+      margin-bottom: 12px;
+      border: 2px solid #facc15;
+      font-family: 'Jua', sans-serif;
+    }
+    .intro-title {
+      font-size: 32px;
+      color: #be123c;
+      margin-bottom: 6px;
+      line-height: 1.3;
+      font-family: 'Jua', sans-serif;
+    }
+    .intro-sub {
+      font-size: 17px;
+      color: #64748b;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    /* 학년 선택 알약 탭 */
+    .section-label {
+      font-size: 16px;
+      color: #475569;
+      margin-bottom: 10px;
+      text-align: left;
+      padding-left: 6px;
+      font-weight: bold;
+    }
+    .grade-selector-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .grade-pill-btn {
+      background: #ffffff;
+      border: 3px solid #fed7aa;
+      border-radius: 36px;
+      padding: 16px 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      text-align: left;
+    }
+    .grade-pill-btn:hover {
+      border-color: #fb923c;
+      transform: translateY(-2px);
+    }
+    .grade-pill-btn.active {
+      background: linear-gradient(145deg, #fff7ed, #ffedd5);
+      border-color: #ea580c;
+      box-shadow: 0 8px 20px rgba(234, 88, 12, 0.2);
+    }
+    .grade-pill-icon {
+      font-size: 28px;
+    }
+    .grade-pill-title {
+      font-size: 20px;
+      color: #1e293b;
+      font-family: 'Jua', sans-serif;
+    }
+    .grade-pill-desc {
+      font-size: 13px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    /* 3대 문제 유형 카드 그리드 */
+    .type-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 26px;
+    }
+    .type-card {
+      background: #ffffff;
+      border: 3px solid #e2e8f0;
+      border-radius: 32px;
+      padding: 20px 14px;
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    .type-card:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    }
+    .type-card.active {
+      border-color: #fb7185;
+      background: linear-gradient(180deg, #ffffff 0%, #fff1f2 100%);
+      box-shadow: 0 12px 28px rgba(251, 113, 133, 0.25);
+    }
+    .type-badge {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 50px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+    .badge-bank {
+      background: #dbeafe;
+      color: #1e40af;
+      border: 1px solid #bfdbfe;
+    }
+    .badge-short {
+      background: #fef08a;
+      color: #854d0e;
+      border: 1px solid #facc15;
+    }
+    .badge-desc {
+      background: #f3e8ff;
+      color: #7e22ce;
+      border: 1px solid #e9d5ff;
+    }
+    .type-icon {
+      font-size: 34px;
+      margin-bottom: 8px;
+    }
+    .type-title {
+      font-size: 18px;
+      color: #1e293b;
+      font-family: 'Jua', sans-serif;
+      margin-bottom: 4px;
+    }
+    .type-summary {
+      font-size: 12px;
+      color: #64748b;
+      line-height: 1.4;
+      word-break: keep-all;
+    }
+
+    /* 게임 시작 큰 버튼 */
+    .start-game-btn {
+      background: linear-gradient(135deg, #fb7185, #f43f5e);
+      color: white;
+      border: none;
+      box-shadow: 0 10px 24px rgba(244, 63, 94, 0.35);
+      border-radius: 50px;
+      padding: 18px 40px;
+      font-size: 23px;
+      font-family: 'Jua', sans-serif;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .start-game-btn:hover {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 14px 32px rgba(244, 63, 94, 0.45);
+    }
+    .start-game-btn:active {
+      transform: translateY(2px) scale(0.99);
+    }
+
+    /* ========================================================
+       [화면 2] 퀴즈 플레이 화면
+       ======================================================== */
+    #quiz-screen {
+      display: none;
+    }
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      white-space: nowrap;
+      gap: 8px;
+    }
+    .current-tag {
+      background: #fef08a;
+      border: 2px solid #facc15;
+      color: #854d0e;
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .current-tag:hover {
+      background: #fde047;
+      transform: scale(1.03);
+    }
+    .progress-badge {
+      background: #e0e7ff;
+      border: 2px solid #c7d2fe;
+      color: #4338ca;
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 15px;
+    }
+    .score-badge {
+      background: #ffedd5;
+      border: 2px solid #fed7aa;
+      color: #c2410c;
+      padding: 6px 18px;
+      border-radius: 50px;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .progress-bar-wrap {
+      background: #f1f5f9;
+      border-radius: 50px;
+      height: 12px;
+      width: 100%;
+      overflow: hidden;
+      margin-bottom: 18px;
+      border: 2px solid #e2e8f0;
+    }
+    .progress-bar-fill {
+      background: linear-gradient(90deg, #fb7185, #f43f5e);
+      height: 100%;
+      width: 10%;
+      border-radius: 50px;
+      transition: width 0.3s ease;
+    }
+
+    .category-tag {
+      background: #ede9fe;
+      border: 2px solid #ddd6fe;
+      color: #5b21b6;
+      display: inline-block;
+      padding: 6px 20px;
+      border-radius: 50px;
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+
+    .question-box {
+      font-size: 23px;
+      color: #1e293b;
+      margin-bottom: 22px;
+      line-height: 1.55;
+      word-break: keep-all;
+      min-height: 56px;
+      display: block;
+      text-align: center;
+      width: 100%;
+    }
+
+    /* 객관식 (4지선다) 보기 그리드 */
+    .options-grid {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .option-btn {
+      background: #ffffff;
+      border: 3px solid #fed7aa;
+      box-shadow: 0 6px 18px rgba(254, 215, 170, 0.3);
+      border-radius: 36px;
+      padding: 16px 22px;
+      font-size: 22px;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .option-btn:hover:not(.disabled) {
+      background: #fff5f5;
+      border-color: #fbcfe8;
+      box-shadow: 0 10px 24px rgba(251, 113, 133, 0.25);
+      transform: translateY(-2px);
+    }
+    .option-text-wrap {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .phonetic-tag {
+      font-size: 15px;
+      color: #94a3b8;
+      font-family: 'Nunito', Arial, sans-serif;
+      font-weight: 700;
+    }
+    .option-btn.correct {
+      background: #dcfce7 !important;
+      border-color: #86efac !important;
+      color: #14532d !important;
+    }
+    .option-btn.wrong {
+      background: #fee2e2 !important;
+      border-color: #fca5a5 !important;
+      color: #7f1d1d !important;
+    }
+    .sound-btn {
+      background: linear-gradient(135deg, #fef08a, #fde047);
+      border: 2px solid #facc15;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.15s;
+    }
+    .sound-btn:hover {
+      transform: scale(1.12);
+    }
+    .sound-btn svg {
+      width: 22px;
+      height: 22px;
+      stroke: #854d0e;
+    }
+
+    /* 주관식 (첫·끝글자 힌트 슬롯 및 입력창) */
+    .short-container {
+      display: none;
+      background: #fdf4ff;
+      border: 3px solid #f5d0fe;
+      border-radius: 36px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 24px rgba(245, 208, 254, 0.35);
+    }
+    .short-clue-card {
+      background: #ffffff;
+      border: 2px solid #f0abfc;
+      border-radius: 26px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+    }
+    .short-clue-text {
+      font-size: 21px;
+      color: #86198f;
+      line-height: 1.4;
+      font-weight: bold;
+    }
+    .short-meaning-pill {
+      display: inline-block;
+      background: #fae8ff;
+      color: #a21caf;
+      padding: 5px 16px;
+      border-radius: 50px;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+    .letter-info-line {
+      font-size: 15px;
+      color: #701a75;
+      margin-bottom: 12px;
+      text-align: center;
+      line-height: 1.5;
+    }
+    .letter-slots-wrap {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+    .letter-slot-box {
+      width: 48px;
+      height: 54px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+    .letter-slot-box.revealed {
+      background: #fdf2f8;
+      border: 2.5px solid #f472b6;
+      color: #db2777;
+    }
+    .letter-slot-box.hidden {
+      background: #ffffff;
+      border: 2.5px dashed #cbd5e1;
+      color: #94a3b8;
+    }
+    .input-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      max-width: 630px;
+      margin: 0 auto;
+    }
+    .quiz-input-text {
+      flex: 1;
+      min-width: 0;
+      padding: 15px 20px;
+      border-radius: 50px;
+      border: 3.5px solid #f0abfc;
+      font-size: 22px;
+      outline: none;
+      font-family: 'Nunito', 'Jua', sans-serif;
+      text-align: center;
+      font-weight: 700;
+      text-transform: lowercase;
+      box-shadow: 0 4px 14px rgba(240, 171, 252, 0.2);
+    }
+    .quiz-input-text::placeholder {
+      font-family: 'Gowun Dodum', 'Malgun Gothic', sans-serif;
+      font-size: 19px;
+      font-weight: normal;
+      color: #7c3aed;
+      opacity: 0.9;
+      letter-spacing: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+    .quiz-input-text:focus {
+      border-color: #d946ef;
+      box-shadow: 0 0 0 4px rgba(217, 70, 239, 0.2);
+    }
+    .submit-pill-btn {
+      flex-shrink: 0;
+      white-space: nowrap;
+      background: linear-gradient(135deg, #c026d3, #9333ea);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 15px 28px;
+      font-size: 19px;
+      font-family: 'Jua', sans-serif;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(192, 38, 211, 0.35);
+      transition: all 0.2s;
+    }
+    .submit-pill-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* 서술형 (문장 표현 미션 카드) */
+    .desc-container {
+      display: none;
+      background: #f0fdf4;
+      border: 3px solid #bbf7d0;
+      border-radius: 36px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 24px rgba(187, 247, 208, 0.35);
+    }
+    .desc-mission-card {
+      background: #ffffff;
+      border: 2px solid #86efac;
+      border-radius: 26px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+    }
+    .desc-target-pill {
+      display: inline-block;
+      background: #dcfce7;
+      color: #15803d;
+      padding: 7px 20px;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .desc-pattern-hint {
+      font-size: 15px;
+      color: #166534;
+      line-height: 1.5;
+    }
+    .pattern-card-btn {
+      background: #ffffff;
+      border: 2px solid #86efac;
+      border-radius: 18px;
+      padding: 12px 16px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      box-shadow: 0 2px 8px rgba(134, 239, 172, 0.25);
+    }
+    .pattern-card-btn:hover {
+      background: #f0fdf4;
+      border-color: #22c55e;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(34, 197, 94, 0.25);
+    }
+    .pattern-badge-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: #15803d;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .pattern-text-en {
+      font-size: 17px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: 0.2px;
+    }
+    .pattern-text-ko {
+      font-size: 13px;
+      color: #64748b;
+      font-weight: 500;
+    }
+    .desc-textarea {
+      width: 100%;
+      height: 90px;
+      border-radius: 22px;
+      border: 3px solid #86efac;
+      padding: 14px 18px;
+      font-size: 19px;
+      outline: none;
+      font-family: 'Nunito', sans-serif;
+      resize: none;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    .desc-textarea:focus {
+      border-color: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
+    }
+    .desc-submit-btn {
+      background: linear-gradient(135deg, #16a34a, #15803d);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 34px;
+      font-size: 19px;
+      font-family: 'Jua', sans-serif;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(22, 163, 74, 0.35);
+      transition: all 0.2s;
+    }
+    .desc-submit-btn:hover {
+      transform: translateY(-2px);
+    }
+    .desc-retry-btn {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 13px 28px;
+      font-size: 18px;
+      font-family: 'Jua', sans-serif;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+      transition: all 0.2s;
+    }
+    .desc-retry-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.45);
+    }
+    .desc-apply-btn {
+      background: linear-gradient(135deg, #059669, #047857);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 13px 28px;
+      font-size: 18px;
+      font-family: 'Jua', sans-serif;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(5, 150, 105, 0.35);
+      transition: all 0.2s;
+    }
+    .desc-apply-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(5, 150, 105, 0.5);
+    }
+
+    /* 결과 및 해설 박스 */
+    .result-box {
+      display: none;
+      background: #faf5ff;
+      border: 3px solid #f3e8ff;
+      border-radius: 36px;
+      padding: 24px 26px;
+      margin-bottom: 24px;
+      text-align: left;
+      box-shadow: 0 8px 20px rgba(216, 180, 254, 0.2);
+    }
+    .result-title {
+      font-size: 22px;
+      margin-bottom: 8px;
+      font-family: 'Jua', sans-serif;
+    }
+    .result-desc {
+      color: #581c87;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+    .accent-section {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 2px dashed #e9d5ff;
+    }
+    .accent-title {
+      font-size: 15px;
+      color: #7e22ce;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .accent-btns {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .accent-btn {
+      background: white;
+      border: 2px solid #d8b4fe;
+      color: #7e22ce;
+      border-radius: 50px;
+      padding: 8px 16px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .accent-btn:hover {
+      background: #f3e8ff;
+      transform: translateY(-2px);
+    }
+
+    .next-btn {
+      background: linear-gradient(135deg, #fb7185, #f43f5e);
+      color: white;
+      border: none;
+      box-shadow: 0 10px 24px rgba(244, 63, 94, 0.35);
+      border-radius: 50px;
+      padding: 17px 36px;
+      font-size: 22px;
+      font-family: 'Jua', sans-serif;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s;
+    }
+    .next-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* 로딩 인디케이터 */
+    .loading-spinner-box {
+      display: none;
+      padding: 24px;
+      font-size: 17px;
+      color: #7c3aed;
+      font-family: 'Jua', sans-serif;
+    }
+
+    /* ========================================================
+       [화면 3] 최종 미션 완료 화면
+       ======================================================== */
+    #finish-screen {
+      display: none;
+    }
+    .finish-badge {
+      display: inline-block;
+      background: #fef08a;
+      color: #854d0e;
+      padding: 7px 24px;
+      border-radius: 50px;
+      font-size: 16px;
+      margin-bottom: 12px;
+      font-family: 'Jua', sans-serif;
+    }
+    .finish-title {
+      font-size: 32px;
+      color: #be123c;
+      margin-bottom: 8px;
+      font-family: 'Jua', sans-serif;
+    }
+    .finish-sub {
+      font-size: 17px;
+      color: #64748b;
+      margin-bottom: 24px;
+    }
+    .finish-card {
+      background: #fff7ed;
+      border: 3px solid #fed7aa;
+      border-radius: 36px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .finish-score-big {
+      font-size: 48px;
+      color: #ea580c;
+      font-family: 'Jua', sans-serif;
+      margin-bottom: 6px;
+    }
+    .finish-score-desc {
+      font-size: 17px;
+      color: #9a3412;
+    }
+    .finish-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .finish-retry-btn {
+      background: linear-gradient(135deg, #fb7185, #f43f5e);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 16px;
+      font-size: 20px;
+      font-family: 'Jua', sans-serif;
+      cursor: pointer;
+    }
+    .finish-home-btn {
+      background: white;
+      border: 2.5px solid #cbd5e1;
+      color: #475569;
+      border-radius: 50px;
+      padding: 14px;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    /* ========================================================
+       [모달] API 키 설정 팝업 (localStorage 보관 & 실시간 키 감지)
+       ======================================================== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.55);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .modal-card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 520px;
+      border-radius: 40px;
+      padding: 34px 28px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      border: 3.5px solid #fed7aa;
+      text-align: left;
+      position: relative;
+    }
+    .modal-title {
+      font-size: 24px;
+      color: #be123c;
+      font-family: 'Jua', sans-serif;
+      margin-bottom: 8px;
+    }
+    .modal-desc {
+      font-size: 14px;
+      color: #64748b;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+    .key-input-box {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 20px;
+      border: 2px solid #cbd5e1;
+      font-size: 15px;
+      outline: none;
+      font-family: monospace;
+      margin-bottom: 10px;
+    }
+    .key-input-box:focus {
+      border-color: #f43f5e;
+    }
+    .key-detector-pill {
+      display: block;
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 13px;
+      line-height: 1.4;
+      margin-bottom: 18px;
+      transition: all 0.2s;
+    }
+    .key-detector-pill.google {
+      background: #ecfdf5;
+      color: #047857;
+      border: 1.5px solid #a7f3d0;
+    }
+    .key-detector-pill.openai {
+      background: #fef2f2;
+      color: #b91c1c;
+      border: 1.5px solid #fecaca;
+    }
+    .key-detector-pill.notice {
+      background: #f8fafc;
+      color: #64748b;
+      border: 1.5px solid #e2e8f0;
+    }
+    .modal-btns {
+      display: flex;
+      gap: 10px;
+    }
+    .modal-save-btn {
+      flex: 1;
+      background: linear-gradient(135deg, #fb7185, #f43f5e);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 13px;
+      font-size: 17px;
+      font-family: 'Jua', sans-serif;
+      cursor: pointer;
+    }
+    .modal-close-btn {
+      background: #f1f5f9;
+      border: 1.5px solid #cbd5e1;
+      color: #475569;
+      border-radius: 50px;
+      padding: 13px 22px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    .modal-delete-btn {
+      background: #fee2e2;
+      border: 1.5px solid #fca5a5;
+      color: #b91c1c;
+      border-radius: 50px;
+      padding: 13px 18px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-card">
+    
+    <!-- 몽실몽실 메인 아기토끼 마스코트 -->
+    <div class="mascot-wrap">
+      <div class="mascot-stage" id="main-mascot">
+        <svg class="mascot-svg" viewBox="0 0 100 100" fill="none">
+          <ellipse cx="33" cy="24" rx="9" ry="21" fill="#ffffff" stroke="#fed7aa" stroke-width="2.5"/>
+          <ellipse cx="33" cy="24" rx="5" ry="15" fill="#fecdd3"/>
+          <ellipse cx="67" cy="24" rx="9" ry="21" fill="#ffffff" stroke="#fed7aa" stroke-width="2.5"/>
+          <ellipse cx="67" cy="24" rx="5" ry="15" fill="#fecdd3"/>
+          <ellipse cx="50" cy="62" rx="36" ry="30" fill="#ffffff" stroke="#fed7aa" stroke-width="3"/>
+          <ellipse cx="50" cy="67" rx="14" ry="10" fill="#fff7ed"/>
+          <circle cx="36" cy="56" r="4" fill="#334155" id="mascot-eye-l"/>
+          <circle cx="64" cy="56" r="4" fill="#334155" id="mascot-eye-r"/>
+          <polygon points="50,64 46,60 54,60" fill="#f43f5e"/>
+          <ellipse cx="26" cy="66" rx="6" ry="4" fill="#fda4af" opacity="0.8"/>
+          <ellipse cx="74" cy="66" rx="6" ry="4" fill="#fda4af" opacity="0.8"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- 상단 네비게이션: 공통 로고(메인 로비 이동) & 포켓몬 진화 등급(EXP) & API 키 -->
+    <div class="top-utility-bar" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding: 0 4px; flex-wrap: wrap; gap: 8px;">
+      <a href="/" title="메인 로비로 이동" style="display: flex; align-items: center; text-decoration: none;">
+        <img src="/english/logo.svg" onerror="this.onerror=null; this.src='edumate_logo.svg';" alt="EduMate AI" style="height: 38px; width: auto; object-fit: contain;">
+      </a>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <div id="user-pokemon-badge" style="display: inline-flex; align-items: center; gap: 6px; background: #f0fdf4; border: 1.5px solid #86efac; color: #15803d; padding: 4px 12px; border-radius: 50px; font-size: 13px; font-weight: bold; cursor: pointer;" onclick="refreshUserLevelInfo()" title="클릭 시 포켓몬 등급 실시간 새로고침">
+          <span id="badge-pokemon-emoji">🌿</span>
+          <span id="badge-user-name">김에듀</span>
+          <span style="color: #cbd5e1; font-size: 11px;">|</span>
+          <span id="badge-tier-title" style="color: #2563eb;">알 5티어</span>
+          <span id="badge-total-score" style="background: #dbeafe; color: #1e40af; padding: 2px 8px; border-radius: 12px; font-size: 11px;">0점</span>
+        </div>
+        <div class="key-status-pill empty" id="top-key-status" onclick="openKeyModal()">
+          <span>🔑 API 키</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         [화면 1] 메인 인트로 (학년 및 3대 유형 선택)
+         ======================================================== -->
+    <div id="intro-screen">
+      <div class="intro-badge">✨ EduMate AI 초등영어 믹스 에디션 ✨</div>
+      <h1 class="intro-title">신나는 베이비 프렌즈 영어 퀴즈!</h1>
+      <p class="intro-sub">객관식은 초고속 문제은행으로, 주관식과 서술형은 AI 맞춤 피드백으로 즐겨요 💕</p>
+
+      <!-- 1. 학년 선택 -->
+      <div class="section-label">1. 학년을 선택해 주세요:</div>
+      <div class="grade-selector-grid">
+        <div class="grade-pill-btn active" id="grade-btn-34" onclick="selectGrade('34')">
+          <div class="grade-pill-icon">🐥</div>
+          <div>
+            <div class="grade-pill-title">3~4학년 새싹반</div>
+            <div class="grade-pill-desc">동물, 과일, 색깔 등 기초 영단어</div>
+          </div>
+        </div>
+        <div class="grade-pill-btn" id="grade-btn-56" onclick="selectGrade('56')">
+          <div class="grade-pill-icon">🦁</div>
+          <div>
+            <div class="grade-pill-title">5~6학년 열매반</div>
+            <div class="grade-pill-desc">장소, 직업, 문맥 심화 영단어</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. 퀴즈 유형 선택 -->
+      <div class="section-label">2. 문제 유형을 골라보세요:</div>
+      <div class="type-cards-grid">
+        <!-- 1번: 객관식 (문제은행 방식) -->
+        <div class="type-card active" id="type-card-choice" onclick="selectType('choice')">
+          <div class="type-badge badge-bank">⚡ 1번 문제은행 (키 불필요)</div>
+          <div class="type-icon">🎈</div>
+          <div class="type-title">4지선다 객관식</div>
+          <div class="type-summary">전체 보기 발음기호 제공, 0.001초 즉시 출제 & 할루시네이션 0%</div>
+        </div>
+
+        <!-- 2번: 주관식 (철자 쓰기) -->
+        <div class="type-card" id="type-card-short" onclick="selectType('short')">
+          <div class="type-badge badge-short">🔤 첫·끝글자 힌트</div>
+          <div class="type-icon">✏️</div>
+          <div class="type-title">주관식 철자 쓰기</div>
+          <div class="type-summary">모찌 슬롯 힌트 블록과 발음 단서로 영어 철자 완성</div>
+        </div>
+
+        <!-- 3번: 서술형 (문장 표현 AI) -->
+        <div class="type-card" id="type-card-desc" onclick="selectType('descriptive')">
+          <div class="type-badge badge-desc">🤖 2번 실시간 AI 채점</div>
+          <div class="type-icon">📝</div>
+          <div class="type-title">서술형 문장 표현</div>
+          <div class="type-summary">단어를 넣어 문장 쓰기! Gemini AI가 1~5점 정밀 문맥 채점</div>
+        </div>
+      </div>
+
+      <!-- 시작 버튼 -->
+      <button class="start-game-btn" onclick="startQuizSession()">
+        👉 퀴즈 풀러 출발하기! 🚀
+      </button>
+    </div>
+
+    <!-- ========================================================
+         [화면 2] 퀴즈 플레이 화면
+         ======================================================== */ -->
+    <div id="quiz-screen">
+      <div class="header-bar">
+        <button class="current-tag" onclick="backToIntro()" title="처음으로">
+          <span id="header-grade-type-text">🐥 3~4학년 · 🎈 객관식</span> <span>🔄</span>
+        </button>
+        <div class="progress-badge" id="progress-text">🎯 1 / 10 문제</div>
+        <div class="score-badge" id="score-text">⭐ 0점</div>
+      </div>
+
+      <!-- 프로그레스 바 -->
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progress-bar-fill"></div>
+      </div>
+
+      <div class="category-tag" id="category-tag">단원: 어휘 탐구</div>
+      <div class="question-box" id="question-text">문제를 준비하는 중...</div>
+
+      <!-- 1. 객관식 4지선다 영역 (문제은행 방식) -->
+      <div class="options-grid" id="options-container"></div>
+
+      <!-- 2. 주관식 영역 (첫·끝글자 슬롯 스캐폴딩) -->
+      <div class="short-container" id="short-answer-container">
+        <div class="short-clue-card">
+          <div class="short-clue-text" id="short-clue-text">"멍멍 짖는 귀여운 동물"</div>
+          <div class="short-meaning-pill" id="short-meaning-text">개, 강아지</div>
+        </div>
+        <div class="letter-info-line" id="letter-count-info">총 3글자 (첫 글자 'D' / 끝 글자 'G')</div>
+        <div class="letter-slots-wrap" id="letter-slots-container"></div>
+        <div class="input-row">
+          <input type="text" class="quiz-input-text" id="short-input" placeholder="힌트를 포함한 전체 글자 (예: dog)" autocomplete="off" spellcheck="false" onkeydown="if(event.key==='Enter') submitShortAnswer()">
+          <button class="submit-pill-btn" onclick="submitShortAnswer()">정답 확인 ✨</button>
+        </div>
+      </div>
+
+      <!-- 3. 서술형 영역 (문장 표현 미션 & AI 문맥 채점) -->
+      <div class="desc-container" id="desc-answer-container">
+        <div class="desc-mission-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+            <div class="desc-target-pill" id="desc-target-word">미션 단어: dog (개, 강아지)</div>
+            <span style="font-size: 13px; color: #15803d; font-weight: bold; background: #dcfce7; border: 1.5px solid #86efac; padding: 4px 14px; border-radius: 50px;">
+              💡 공식을 누르면 문장 틀이 채워지고, 단어는 직접 쏙 입력해요!
+            </span>
+          </div>
+          <div style="font-size: 14px; font-weight: bold; color: #166534; margin-bottom: 8px;">
+            🌟 5점 만점 도전 추천 공식 (위·아래 중 마음에 드는 틀을 골라 단어를 채워보세요):
+          </div>
+          <div id="desc-patterns-grid" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px;"></div>
+        </div>
+        <textarea class="desc-textarea" id="desc-input" placeholder="위 추천 공식을 콕 눌러 뼈대 문장을 채운 뒤, 미션 단어를 직접 넣어 완성해 보세요! ✨" onkeydown="if(event.key==='Enter' && !event.shiftKey){ event.preventDefault(); submitDescriptiveAnswer(); }"></textarea>
+        <button class="desc-submit-btn" id="desc-submit-btn" onclick="submitDescriptiveAnswer()">🤖 AI 선생님께 채점받기 ✨</button>
+      </div>
+
+      <!-- AI 채점 로딩 안내 -->
+      <div class="loading-spinner-box" id="loading-spinner-box">
+        ⏳ AI 선생님이 문맥과 표현을 정밀하게 읽어보는 중이에요... 💕
+      </div>
+
+      <!-- 해설 및 3개국 발음 비교 박스 -->
+      <div class="result-box" id="result-box">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
+          <p class="result-title" id="result-title" style="margin-bottom: 0;"></p>
+          <button id="favorite-btn" onclick="toggleCurrentFavorite()" style="background: #ffffff; border: 1.5px solid #facc15; border-radius: 50px; padding: 5px 14px; font-size: 13px; font-weight: bold; color: #854d0e; cursor: pointer; transition: all 0.2s;">
+            <span id="fav-star-icon">☆</span> 즐겨찾기
+          </button>
+        </div>
+        <p class="result-desc" id="result-desc"></p>
+        
+        <div class="accent-section">
+          <span class="accent-title">🎧 3개국 원어민 발음 비교해보기:</span>
+          <div class="accent-btns">
+            <button class="accent-btn" onclick="speakAccent('en-US')">🇺🇸 미국식</button>
+            <button class="accent-btn" onclick="speakAccent('en-GB')">🇬🇧 영국식</button>
+            <button class="accent-btn" onclick="speakAccent('en-AU')">🇦🇺 호주식</button>
+          </div>
+        </div>
+
+        <!-- 💬 AI 선생님께 이어서 질문하기 -->
+        <div id="chat-section" style="margin-top: 14px; border-top: 1.5px dashed #fed7aa; padding-top: 12px; text-align: left;">
+          <div style="font-size: 13px; font-weight: bold; color: #9a3412; margin-bottom: 6px; display: flex; align-items: center; gap: 4px;">
+            <span>💬 AI 선생님께 더 질문하기:</span>
+          </div>
+          <div id="chat-messages-container" style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; max-height: 140px; overflow-y: auto;"></div>
+          <div style="display: flex; gap: 6px;">
+            <input type="text" id="chat-question-input" placeholder="이 단어로 다른 문장도 만들어 주세요! 등 자유롭게 물어보세요" style="flex: 1; padding: 9px 14px; border-radius: 20px; border: 1.5px solid #fed7aa; font-size: 13px; outline: none; font-family: 'Gowun Dodum', sans-serif;" onkeydown="if(event.key==='Enter') askTutorMore()">
+            <button onclick="askTutorMore()" style="background: linear-gradient(135deg, #fb7185, #f43f5e); color: white; border: none; border-radius: 20px; padding: 9px 16px; font-size: 13px; font-family: 'Jua', sans-serif; cursor: pointer; white-space: nowrap;">질문 ✨</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="next-btn" id="next-btn" onclick="handleNextClick()">👉 다음 문제 풀기 🎈</button>
+    </div>
+
+    <!-- ========================================================
+         [화면 3] 최종 미션 완료 화면
+         ======================================================== -->
+    <div id="finish-screen">
+      <div class="finish-badge">🎊 10문제 완주 성공! 🎊</div>
+      <h2 class="finish-title">정말 대단해요! 최고예요!</h2>
+      <p class="finish-sub">오늘의 영어 퀴즈 10문제를 멋지게 끝마쳤어요 💕</p>
+      
+      <div class="finish-card">
+        <div class="finish-score-big" id="finish-score-display">100점</div>
+        <div class="finish-score-desc" id="finish-detail-display">총 10문제 중 10개 정답</div>
+      </div>
+      
+      <div class="finish-btns">
+        <button class="finish-retry-btn" onclick="startQuizSession()">🔄 새로운 10문제 도전하기 🎈</button>
+        <button class="finish-home-btn" onclick="backToIntro()">🏠 첫 화면(유형 선택)으로 돌아가기</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ========================================================
+       [모달] API 키 설정 모달 (localStorage 방식 & 구글/오픈AI 감지)
+       ======================================================== -->
+  <div class="modal-overlay" id="key-modal-overlay">
+    <div class="modal-card">
+      <h3 class="modal-title">🔑 개인 Gemini API 키 설정</h3>
+      <p class="modal-desc">
+        서술형 AI 채점 및 고급 AI 기능에 사용됩니다.<br>
+        키는 서버로 전송되지 않고 <b>내 브라우저(localStorage)에만 안전하게 보관</b>됩니다. (단톡방 공유 시에도 본인 키 노출 위험 0%)
+      </p>
+
+      <input type="password" class="key-input-box" id="modal-key-input" placeholder="AIzaSy... 형태의 Google Gemini 키를 붙여넣으세요" oninput="handleKeyInputChange()">
+
+      <!-- 실시간 키 종류 감지기 -->
+      <div class="key-detector-pill notice" id="key-detector-status">
+        💡 키를 입력하시면 Google 키인지 OpenAI 키인지 자동으로 식별합니다.
+      </div>
+
+      <div class="modal-btns">
+        <button class="modal-save-btn" onclick="saveApiKey()">💾 안전하게 저장</button>
+        <button class="modal-delete-btn" onclick="deleteApiKey()">🗑️ 삭제</button>
+        <button class="modal-close-btn" onclick="closeKeyModal()">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ========================================================
+       2022 개정 초등영어 표준 어휘 & 정밀 IPA 발음기호 DB
+       (1번 문제은행 방식: 할루시네이션 0%, 중복 0%, 초고속 출제)
+       ======================================================== */
+    const DB_GRADE_34 = [
+      { word: "dog", ipa: "/dɔːɡ/", meaning: "개, 강아지", category: "동물", hint: "멍멍 짖는 귀여운 동물" },
+      { word: "cat", ipa: "/kæt/", meaning: "고양이", category: "동물", hint: "야옹 소리를 내는 동물" },
+      { word: "rabbit", ipa: "/ˈræb.ɪt/", meaning: "토끼", category: "동물", hint: "귀가 길고 깡충깡충 뛰는 동물" },
+      { word: "bear", ipa: "/ber/", meaning: "곰", category: "동물", hint: "겨울잠을 자고 꿀을 좋아하는 동물" },
+      { word: "bird", ipa: "/bɜːrd/", meaning: "새", category: "동물", hint: "날개가 있어 하늘을 나는 동물" },
+      { word: "duck", ipa: "/dʌk/", meaning: "오리", category: "동물", hint: "꽥꽥 소리를 내며 헤엄치는 새" },
+      { word: "pig", ipa: "/pɪɡ/", meaning: "돼지", category: "동물", hint: "꿀꿀 소리를 내는 분홍빛 동물" },
+      { word: "lion", ipa: "/ˈlaɪ.ən/", meaning: "사자", category: "동물", hint: "멋진 갈기를 가진 동물의 왕" },
+      { word: "tiger", ipa: "/ˈtaɪ.ɡɚ/", meaning: "호랑이", category: "동물", hint: "용맹한 줄무늬를 가진 동물" },
+      { word: "monkey", ipa: "/ˈmʌŋ.ki/", meaning: "원숭이", category: "동물", hint: "나무를 잘 타고 바나나를 좋아하는 동물" },
+      { word: "elephant", ipa: "/ˈel.ə.fənt/", meaning: "코끼리", category: "동물", hint: "코가 길고 몸집이 아주 커다란 동물" },
+      { word: "frog", ipa: "/frɑːɡ/", meaning: "개구리", category: "동물", hint: "개골개골 울며 연못에 사는 동물" },
+      { word: "horse", ipa: "/hɔːrs/", meaning: "말", category: "동물", hint: "다그닥다그닥 빠르게 달리는 동물" },
+      { word: "cow", ipa: "/kaʊ/", meaning: "소", category: "동물", hint: "음매 소리를 내며 풀을 먹는 동물" },
+      { word: "sheep", ipa: "/ʃiːp/", meaning: "양", category: "동물", hint: "복슬복슬 하얀 털을 가진 온순한 동물" },
+      { word: "fish", ipa: "/fɪʃ/", meaning: "물고기", category: "동물", hint: "물속에서 헤엄치며 아가미로 숨쉬는 동물" },
+
+      { word: "red", ipa: "/red/", meaning: "빨간색", category: "색깔", hint: "잘 익은 사과와 딸기의 색깔" },
+      { word: "blue", ipa: "/bluː/", meaning: "파란색", category: "색깔", hint: "맑은 가을 하늘과 깊은 바다의 색" },
+      { word: "yellow", ipa: "/ˈjel.oʊ/", meaning: "노란색", category: "색깔", hint: "달콤한 바나나와 개나리의 색" },
+      { word: "green", ipa: "/ɡriːn/", meaning: "초록색", category: "색깔", hint: "싱그러운 나뭇잎과 잔디의 색" },
+      { word: "pink", ipa: "/pɪŋk/", meaning: "분홍색", category: "색깔", hint: "화사한 벚꽃과 솜사탕의 색" },
+      { word: "black", ipa: "/blæk/", meaning: "검은색", category: "색깔", hint: "깜깜한 밤하늘의 색" },
+      { word: "white", ipa: "/waɪt/", meaning: "하얀색", category: "색깔", hint: "소복소복 내린 깨끗한 눈의 색" },
+      { word: "orange", ipa: "/ˈɔːr.ɪndʒ/", meaning: "주황색", category: "색깔", hint: "상큼한 귤과 당근의 색" },
+      { word: "purple", ipa: "/ˈpɜːr.pəl/", meaning: "보라색", category: "색깔", hint: "달콤한 포도와 제비꽃의 색" },
+      { word: "brown", ipa: "/braʊn/", meaning: "갈색", category: "색깔", hint: "달콤한 초콜릿과 나무 기둥의 색" },
+
+      { word: "apple", ipa: "/ˈæp.əl/", meaning: "사과", category: "음식 & 과일", hint: "빨갛고 아삭아삭 맛있는 과일" },
+      { word: "banana", ipa: "/bəˈnæn.ə/", meaning: "바나나", category: "음식 & 과일", hint: "껍질을 까먹는 길쭉한 노란 과일" },
+      { word: "milk", ipa: "/mɪlk/", meaning: "우유", category: "음식 & 과일", hint: "매일 아침 마시는 고소한 하얀 음료" },
+      { word: "bread", ipa: "/bred/", meaning: "빵", category: "음식 & 과일", hint: "밀가루를 오븐에 구워 만든 음식" },
+      { word: "water", ipa: "/ˈwɔː.tər/", meaning: "물", category: "음식 & 과일", hint: "목마를 때 마시는 시원하고 투명한 음료" },
+      { word: "egg", ipa: "/eɡ/", meaning: "달걀", category: "음식 & 과일", hint: "둥글고 영양이 풍부한 닭의 알" },
+      { word: "cheese", ipa: "/tʃiːz/", meaning: "치즈", category: "음식 & 과일", hint: "피자에 얹어 먹는 짭짤하고 고소한 유제품" },
+      { word: "juice", ipa: "/dʒuːs/", meaning: "주스", category: "음식 & 과일", hint: "과일을 짜서 만든 달콤한 음료" },
+      { word: "cookie", ipa: "/ˈkʊk.i/", meaning: "쿠키, 과자", category: "음식 & 과일", hint: "바삭바삭 구운 달콤한 간식" },
+      { word: "pizza", ipa: "/ˈpiːt.sə/", meaning: "피자", category: "음식 & 과일", hint: "치즈와 토핑을 얹어 구운 둥근 이탈리아 요리" },
+
+      { word: "book", ipa: "/bʊk/", meaning: "책", category: "학교 & 학용품", hint: "이야기와 그림이 담긴 읽을거리" },
+      { word: "pencil", ipa: "/ˈpen.səl/", meaning: "연필", category: "학교 & 학용품", hint: "공책에 사각사각 글씨를 쓰는 필기도구" },
+      { word: "desk", ipa: "/desk/", meaning: "책상", category: "학교 & 학용품", hint: "공부할 때 책을 펴놓는 가구" },
+      { word: "chair", ipa: "/tʃer/", meaning: "의자", category: "학교 & 학용품", hint: "다리가 4개 있고 편하게 앉는 가구" },
+      { word: "bag", ipa: "/bæɡ/", meaning: "가방", category: "학교 & 학용품", hint: "교과서와 필통을 넣어 메는 가방" },
+      { word: "ruler", ipa: "/ˈruː.lɚ/", meaning: "자", category: "학교 & 학용품", hint: "길이를 재거나 반듯하게 줄을 긋는 도구" },
+      { word: "eraser", ipa: "/ɪˈreɪ.sɚ/", meaning: "지우개", category: "학교 & 학용품", hint: "틀린 연필 글씨를 쓱쓱 지우는 도구" },
+      { word: "clock", ipa: "/klɑːk/", meaning: "시계", category: "학교 & 집", hint: "지금이 몇 시 몇 분인지 알려주는 물건" },
+      { word: "door", ipa: "/dɔːr/", meaning: "문", category: "학교 & 집", hint: "열고 닫으며 방으로 들어가는 입구" },
+      { word: "window", ipa: "/ˈwɪn.doʊ/", meaning: "창문", category: "학교 & 집", hint: "햇빛과 시원한 바람이 들어오는 유리문" },
+
+      { word: "mom", ipa: "/mɑːm/", meaning: "엄마", category: "가족", hint: "나를 사랑으로 안아주시는 어머니" },
+      { word: "dad", ipa: "/dæd/", meaning: "아빠", category: "가족", hint: "나를 든든하게 지켜주시는 아버지" },
+      { word: "sun", ipa: "/sʌn/", meaning: "해, 태양", category: "자연 & 날씨", hint: "낮 하늘에 환하게 떠서 온 세상을 비추는 빛" },
+      { word: "star", ipa: "/stɑːr/", meaning: "별", category: "자연 & 날씨", hint: "깜깜한 밤하늘에 반짝반짝 빛나는 보석 같은 빛" }
+    ];
+
+    const DB_GRADE_56 = [
+      { word: "library", ipa: "/ˈlaɪ.brer.i/", meaning: "도서관", category: "공공장소", hint: "조용히 책을 읽고 빌리는 지혜의 공간" },
+      { word: "hospital", ipa: "/ˈhɑː.spɪ.t̬əl/", meaning: "병원", category: "공공장소", hint: "의사 선생님이 아픈 환자를 치료하는 곳" },
+      { word: "museum", ipa: "/mjuːˈziː.əm/", meaning: "박물관", category: "공공장소", hint: "역사 유물이나 예술품을 관람하는 장소" },
+      { word: "station", ipa: "/ˈsteɪ.ʃən/", meaning: "기차역, 역", category: "공공장소", hint: "기차나 지하철을 타기 위해 모이는 곳" },
+      { word: "airport", ipa: "/ˈer.pɔːrt/", meaning: "공항", category: "공공장소", hint: "비행기가 힘차게 이착륙하는 여행의 관문" },
+      { word: "market", ipa: "/ˈmɑːr.kɪt/", meaning: "시장", category: "공공장소", hint: "과일, 채소 등 신선한 물건을 사고파는 활기찬 곳" },
+      { word: "restaurant", ipa: "/ˈres.tə.rɑːnt/", meaning: "식당", category: "공공장소", hint: "맛있는 음식을 주문해서 먹는 곳" },
+      { word: "bank", ipa: "/bæŋk/", meaning: "은행", category: "공공장소", hint: "용돈을 저축하고 금융 업무를 보는 곳" },
+      { word: "park", ipa: "/pɑːrk/", meaning: "공원", category: "공공장소", hint: "푸른 나무 그늘 아래서 산책하고 뛰노는 휴식처" },
+      { word: "cinema", ipa: "/ˈsɪn.ə.mə/", meaning: "영화관", category: "공공장소", hint: "팝콘을 먹으며 큰 스크린으로 영화를 보는 곳" },
+
+      { word: "doctor", ipa: "/ˈdɑːk.tɚ/", meaning: "의사", category: "직업", hint: "청진기로 진찰하고 아픈 곳을 고쳐주는 분" },
+      { word: "teacher", ipa: "/ˈtiː.tʃɚ/", meaning: "선생님", category: "직업", hint: "학교에서 새로운 지식과 바른 마음을 가르쳐주시는 분" },
+      { word: "pilot", ipa: "/ˈpaɪ.lət/", meaning: "비행기 조종사", category: "직업", hint: "하늘 높이 멋진 비행기를 조종하는 전문가" },
+      { word: "cook", ipa: "/kʊk/", meaning: "요리사", category: "직업", hint: "정성을 다해 맛있는 음식을 만드는 요리의 달인" },
+      { word: "scientist", ipa: "/ˈsaɪ.ən.tɪst/", meaning: "과학자", category: "직업", hint: "새로운 원리를 발견하고 신비한 실험을 하는 분" },
+      { word: "artist", ipa: "/ˈɑːr.tɪst/", meaning: "예술가, 화가", category: "직업", hint: "도화지에 아름다운 그림을 그리고 작품을 창작하는 분" },
+      { word: "singer", ipa: "/ˈsɪŋ.ɚ/", meaning: "가수", category: "직업", hint: "무대 위에서 아름다운 목소리로 노래하는 분" },
+      { word: "police", ipa: "/pəˈliːs/", meaning: "경찰관", category: "직업", hint: "시민의 안전을 지키고 질서를 유지하는 든든한 분" },
+      { word: "firefighter", ipa: "/ˈfaɪrˌfaɪ.t̬ɚ/", meaning: "소방관", category: "직업", hint: "화재를 진압하고 위험에 빠진 사람을 구하는 영웅" },
+      { word: "farmer", ipa: "/ˈfɑːr.mɚ/", meaning: "농부", category: "직업", hint: "땅을 일구어 벼와 곡식, 채소를 정성스레 기르는 분" },
+
+      { word: "weather", ipa: "/ˈweð.ɚ/", meaning: "날씨", category: "자연 & 환경", hint: "비, 눈, 맑음 등 매일매일 변화하는 하늘의 상태" },
+      { word: "season", ipa: "/ˈsiː.zən/", meaning: "계절", category: "자연 & 환경", hint: "봄, 여름, 가을, 겨울의 아름다운 순환" },
+      { word: "planet", ipa: "/ˈplæn.ɪt/", meaning: "행성", category: "자연 & 우주", hint: "태양 주위를 공전하는 지구, 화성 같은 천체" },
+      { word: "forest", ipa: "/ˈfɔːr.ɪst/", meaning: "숲", category: "자연 & 환경", hint: "많은 나무들이 울창하게 모여 있어 공기가 맑은 곳" },
+      { word: "ocean", ipa: "/ˈoʊ.ʃən/", meaning: "대양, 바다", category: "자연 & 환경", hint: "지구의 대부분을 덮고 있는 넓고 푸른 깊은 바다" },
+
+      { word: "bridge", ipa: "/brɪdʒ/", meaning: "다리", category: "교통 & 도시", hint: "강이나 바다를 건널 수 있도록 건설된 구조물" },
+      { word: "traffic", ipa: "/ˈtræf.ɪk/", meaning: "교통", category: "교통 & 도시", hint: "도로 위를 오가는 많은 자동차와 버스의 흐름" },
+      { word: "subway", ipa: "/ˈsʌb.weɪ/", meaning: "지하철", category: "교통 & 도시", hint: "땅속 터널을 빠르게 달리는 편리한 전철" },
+      { word: "bicycle", ipa: "/ˈbaɪ.sə.kəl/", meaning: "자전거", category: "교통 & 도시", hint: "두 페달을 밟아 바퀴를 굴리며 타는 탈것" },
+      { word: "journey", ipa: "/ˈdʒɜːr.ni/", meaning: "여행, 여정", category: "활동 & 여가", hint: "새로운 곳을 향해 떠나는 설레는 발걸음" }
+    ];
+
+    /* ========================================================
+       전역 상태 변수 관리
+       ======================================================== */
+    let currentGrade = '34';
+    let currentQuizType = 'choice';
+    let sessionQuestions = [];
+    let currentQuestionIndex = 0;
+    let totalSessionQuestions = 10;
+    let score = 0;
+    let correctCount = 0;
+    let isAnswered = false;
+    let currentQuiz = null;
+    let hasGradedCurrentQuestion = false;
+    let currentQuestionFirstScore = null;
+    let isRetrySubmission = false;
+    let currentSuggestedSentence = null;
+
+    // EduMate 통합 포털 계정 & 포켓몬 5대 진화 체계 & DB log_id 연동
+    let currentLogId = null;
+    function getResolvedUserName() {
+      const raw = localStorage.getItem("edumate_current_account");
+      if (!raw) return "김에듀";
+      try {
+        const parsed = JSON.parse(raw);
+        if (typeof parsed === 'object' && parsed !== null) {
+          return parsed.user_name || parsed.username || parsed.name || parsed.user_id || "김에듀";
+        }
+        return String(parsed).trim() || "김에듀";
+      } catch (e) {
+        return String(raw).trim() || "김에듀";
+      }
+    }
+    let currentUser = getResolvedUserName();
+    let currentPokemonType = localStorage.getItem("edumate_pokemon_type") || "grass";
+    let currentUserTotalScore = 0;
+    let isCurrentFavorite = false;
+
+    // Web Audio API
+    let audioCtx = null;
+    function initAudio() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    // 초기 로딩 시 localStorage에서 API 키 및 통합 사용자 정보 로드
+    window.addEventListener('DOMContentLoaded', () => {
+      updateKeyStatusUI();
+      refreshUserLevelInfo();
+    });
+
+    /* ========================================================
+       통합 포털 계정 & 포켓몬 5대 타입 진화 등급 실시간 동기화
+       ======================================================== */
+    async function refreshUserLevelInfo() {
+      currentUser = getResolvedUserName();
+      currentPokemonType = localStorage.getItem("edumate_pokemon_type") || "grass";
+      const gradeNum = (currentGrade === '34') ? 4 : 6;
+      try {
+        const res = await fetch(`/english/api/user?user_name=${encodeURIComponent(currentUser)}&grade=${gradeNum}&pokemon_type=${currentPokemonType}`);
+        if (res.ok) {
+          const data = await res.json();
+          const lvl = data.level_info || {};
+          const userNameEl = document.getElementById('badge-user-name');
+          const tierTitleEl = document.getElementById('badge-tier-title');
+          const totalScoreEl = document.getElementById('badge-total-score');
+          const emojiEl = document.getElementById('badge-pokemon-emoji');
+
+          if (userNameEl) userNameEl.innerText = data.user_name || currentUser;
+          if (tierTitleEl) {
+            tierTitleEl.innerText = lvl.full_title || '알 5티어';
+            if (lvl.color_hex) tierTitleEl.style.color = lvl.color_hex;
+          }
+          if (totalScoreEl) totalScoreEl.innerText = `${data.total_score || 0}점`;
+          if (emojiEl) {
+            const fallbackEmojis = { grass: '🌿', fire: '🔥', water: '💧', electric: '⚡', psychic: '🔮' };
+            emojiEl.innerText = lvl.pokemon_emoji || fallbackEmojis[currentPokemonType] || '🌿';
+          }
+          currentUserTotalScore = data.total_score || 0;
+        }
+      } catch (err) {
+        console.log("통합 사용자 정보 로드 실패 (단독 실행 모드)");
+      }
+    }
+
+    /* ========================================================
+       [EduMate AI 통합 DB(quiz_logs) 및 AI 튜터 대화/즐겨찾기 연동]
+       ======================================================== */
+    async function saveQuizResultToDb(earnedScore, isCorrect, userAns, qType, questionText, solText, diffText = null, isSolutionRevealed = false) {
+      currentLogId = null;
+      isCurrentFavorite = false;
+      updateFavoriteBtnUI(false);
+      resetChatUI();
+
+      currentUser = getResolvedUserName();
+      const gradeNum = (currentGrade === '34') ? 4 : 6;
+      const unitVal = currentQuiz?.category || "어휘 탐구";
+      const quizIdVal = `english_${qType}_${currentQuiz?.word || 'quiz'}_${Date.now()}`;
+
+      // 표준 상/중/하 난이도 책정
+      let standardDifficulty = diffText;
+      if (!standardDifficulty) {
+        if (qType === '객관식') {
+          standardDifficulty = (currentGrade === '34') ? '하' : '중';
+        } else if (qType === '주관식') {
+          standardDifficulty = (currentGrade === '34') ? '중' : '상';
+        } else if (qType === '서술형') {
+          standardDifficulty = (currentGrade === '34') ? '중' : '상';
+        } else {
+          standardDifficulty = (currentGrade === '34') ? '중' : '상';
+        }
+      }
+
+      try {
+        const payload = {
+          user_name: currentUser,
+          quiz_id: quizIdVal,
+          grade: gradeNum,
+          unit: unitVal,
+          topic: currentQuiz?.category || null,
+          difficulty: standardDifficulty,
+          question_type: qType,
+          question: questionText || (currentQuiz ? `${currentQuiz.meaning} (${currentQuiz.word})` : ""),
+          user_answer: userAns || null,
+          correct_answer: currentQuiz ? currentQuiz.word : null,
+          solution: solText || currentQuiz?.explanation || null,
+          earned_score: earnedScore,
+          is_correct: isCorrect,
+          is_solution_revealed: isSolutionRevealed
+        };
+
+        const res = await fetch('/english/api/save-quiz', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          currentLogId = data.log_id;
+          const favBtn = document.getElementById('favorite-btn');
+          if (favBtn) favBtn.style.display = 'inline-flex';
+          refreshUserLevelInfo();
+          return data;
+        }
+      } catch (err) {
+        console.log("DB 풀이 기록 저장 실패 (단독 프론트엔드 모드)");
+      }
+      return null;
+    }
+
+    async function toggleCurrentFavorite() {
+      if (!currentLogId) return;
+      try {
+        const res = await fetch('/english/api/favorite', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ log_id: currentLogId })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          isCurrentFavorite = (data.is_favorite === 1);
+          updateFavoriteBtnUI(isCurrentFavorite);
+        }
+      } catch (err) {
+        console.log("즐겨찾기 토글 실패:", err);
+      }
+    }
+
+    function updateFavoriteBtnUI(isFav) {
+      const favBtn = document.getElementById('favorite-btn');
+      const starIcon = document.getElementById('fav-star-icon');
+      if (!favBtn || !starIcon) return;
+      if (isFav) {
+        starIcon.innerText = '★';
+        favBtn.style.background = '#fef08a';
+        favBtn.style.color = '#854d0e';
+        favBtn.style.borderColor = '#eab308';
+        favBtn.title = '즐겨찾기에서 제거하기';
+      } else {
+        starIcon.innerText = '☆';
+        favBtn.style.background = '#ffffff';
+        favBtn.style.color = '#854d0e';
+        favBtn.style.borderColor = '#facc15';
+        favBtn.title = '즐겨찾기에 저장하기';
+      }
+    }
+
+    async function askTutorMore() {
+      if (!currentLogId) {
+        alert("문제 채점 후 추가 질문을 하실 수 있어요!");
+        return;
+      }
+      const input = document.getElementById('chat-question-input');
+      const q = input.value.trim();
+      if (!q) return;
+      input.value = '';
+
+      const container = document.getElementById('chat-messages-container');
+      const userBubble = document.createElement('div');
+      userBubble.style.cssText = "align-self: flex-end; background: #fee2e2; color: #991b1b; padding: 7px 14px; border-radius: 16px; font-size: 13px; max-width: 82%; line-height: 1.4;";
+      userBubble.innerText = `🙋‍♂️ ${q}`;
+      container.appendChild(userBubble);
+
+      const loadingBubble = document.createElement('div');
+      loadingBubble.style.cssText = "align-self: flex-start; background: #f1f5f9; color: #475569; padding: 7px 14px; border-radius: 16px; font-size: 13px;";
+      loadingBubble.innerText = "💭 AI 선생님이 답변을 생각하는 중이에요...";
+      container.appendChild(loadingBubble);
+      container.scrollTop = container.scrollHeight;
+
+      try {
+        const res = await fetch('/english/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            log_id: currentLogId,
+            user_name: currentUser,
+            student_question: q,
+            quiz_context: currentQuiz ? `${currentQuiz.word} (${currentQuiz.meaning})` : "초등영어"
+          })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          loadingBubble.remove();
+          const aiBubble = document.createElement('div');
+          aiBubble.style.cssText = "align-self: flex-start; background: #ecfdf5; color: #065f46; padding: 8px 14px; border-radius: 16px; font-size: 13px; max-width: 88%; border: 1.5px solid #a7f3d0; line-height: 1.5;";
+          aiBubble.innerText = `🤖 ${data.reply}`;
+          container.appendChild(aiBubble);
+          container.scrollTop = container.scrollHeight;
+        } else {
+          loadingBubble.innerText = "🤖 일시적으로 AI 선생님 연결이 원활하지 않아요.";
+        }
+      } catch (err) {
+        loadingBubble.innerText = "🤖 일시적으로 AI 선생님 연결이 원활하지 않아요.";
+      }
+    }
+
+    function resetChatUI() {
+      const container = document.getElementById('chat-messages-container');
+      if (container) container.innerHTML = '';
+      const input = document.getElementById('chat-question-input');
+      if (input) input.value = '';
+      const favBtn = document.getElementById('favorite-btn');
+      if (favBtn) favBtn.style.display = 'none';
+    }
+
+    /* ========================================================
+       API 키 관리 & 실시간 식별 로직 (보안 2번 방식)
+       ======================================================== */
+    function openKeyModal() {
+      const savedKey = localStorage.getItem("GEMINI_API_KEY") || "";
+      document.getElementById('modal-key-input').value = savedKey;
+      handleKeyInputChange();
+      document.getElementById('key-modal-overlay').style.display = 'flex';
+    }
+
+    function closeKeyModal() {
+      document.getElementById('key-modal-overlay').style.display = 'none';
+    }
+
+    function handleKeyInputChange() {
+      const input = document.getElementById('modal-key-input').value.trim();
+      const statusEl = document.getElementById('key-detector-status');
+
+      if (!input) {
+        statusEl.className = 'key-detector-pill notice';
+        statusEl.innerHTML = '💡 키를 입력하시면 Google 키인지 OpenAI 키인지 자동으로 식별합니다.';
+        return;
+      }
+
+      if (input.startsWith('AIzaSy') || input.startsWith('AIza')) {
+        statusEl.className = 'key-detector-pill google';
+        statusEl.innerHTML = '✨ <b>Google Gemini API 키</b>가 확인되었습니다! (본 퀴즈에 완벽 호환)';
+      } else if (input.startsWith('sk-') || input.startsWith('sk-proj-')) {
+        statusEl.className = 'key-detector-pill openai';
+        statusEl.innerHTML = '⚠️ <b>OpenAI 키(sk-...)</b>가 감지되었습니다. 본 퀴즈는 Google Gemini 기반이므로 Google AI Studio(aistudio.google.com) 키를 사용해 주세요!';
+      } else if (input.length >= 30) {
+        statusEl.className = 'key-detector-pill google';
+        statusEl.innerHTML = '💡 키 형식이 입력되었습니다. (Google Gemini API 키인지 확인해 주세요)';
+      } else {
+        statusEl.className = 'key-detector-pill notice';
+        statusEl.innerHTML = '🔎 키를 끝까지 입력해 주세요... (Google 키는 보통 "AIza"로 시작합니다)';
+      }
+    }
+
+    function saveApiKey() {
+      const input = document.getElementById('modal-key-input').value.trim();
+      if (!input) {
+        alert("키를 입력해 주세요!");
+        return;
+      }
+      if (input.startsWith('sk-')) {
+        if (!confirm("OpenAI 키가 감지되었습니다. Google Gemini 키가 아니면 AI 채점이 동작하지 않을 수 있습니다. 그래도 저장할까요?")) {
+          return;
+        }
+      }
+      localStorage.setItem("GEMINI_API_KEY", input);
+      updateKeyStatusUI();
+      closeKeyModal();
+      alert("✅ API 키가 브라우저에 안전하게 저장되었습니다!\n(깃허브나 외부에는 절대 유출되지 않습니다)");
+    }
+
+    function deleteApiKey() {
+      if (confirm("저장된 API 키를 삭제하시겠습니까?")) {
+        localStorage.removeItem("GEMINI_API_KEY");
+        document.getElementById('modal-key-input').value = "";
+        handleKeyInputChange();
+        updateKeyStatusUI();
+        alert("🗑️ API 키가 브라우저에서 삭제되었습니다.");
+      }
+    }
+
+    function updateKeyStatusUI() {
+      const statusPill = document.getElementById('top-key-status');
+      const badgeText = document.getElementById('key-badge-text');
+      if (statusPill && badgeText) {
+        statusPill.className = 'key-status-pill saved';
+        badgeText.innerText = '✨ AI 실시간 채점 준비완료';
+      }
+    }
+
+    /* ========================================================
+       인트로 화면 선택 로직
+       ======================================================== */
+    function selectGrade(grade) {
+      currentGrade = grade;
+      document.getElementById('grade-btn-34').classList.toggle('active', grade === '34');
+      document.getElementById('grade-btn-56').classList.toggle('active', grade === '56');
+    }
+
+    function selectType(type) {
+      currentQuizType = type;
+      document.getElementById('type-card-choice').classList.toggle('active', type === 'choice');
+      document.getElementById('type-card-short').classList.toggle('active', type === 'short');
+      document.getElementById('type-card-desc').classList.toggle('active', type === 'descriptive');
+    }
+
+    // 이전에 맞춘 단어 영구 누적 Set (새로운 10문제 도전 시 필수로 제외! 틀린 단어는 복습 가능하도록 풀에 유지)
+    let masteredWords = new Set();
+
+    function getUniqueSessionQuestions(grade, count) {
+      const fullDb = (grade === '34') ? DB_GRADE_34 : DB_GRADE_56;
+      // DB 자체 중복 제거 안전장치 (단어 소문자 기준 고유화)
+      const uniqueList = [];
+      const seen = new Set();
+      for (const item of fullDb) {
+        const wLower = item.word.toLowerCase();
+        if (!seen.has(wLower)) {
+          seen.add(wLower);
+          uniqueList.push(item);
+        }
+      }
+
+      // [핵심] 이전에 맞췄던 단어는 필수로 제외! (틀린 단어는 풀에 남아 계속 도전 가능)
+      let unmastered = uniqueList.filter(item => !masteredWords.has(item.word.toLowerCase()));
+
+      // 만약 미완료 단어가 10개 미만이면 (대부분 맞춘 경우), 맞춘 목록을 리셋하여 다시 복습 가능하도록 순환
+      if (unmastered.length < count) {
+        masteredWords.clear();
+        unmastered = [...uniqueList];
+      }
+
+      // 셔플 후 count(10)개 추출
+      return shuffleArray(unmastered).slice(0, count);
+    }
+
+    // 주관식 정답과 학생 답안을 비교하여 틀리거나 빠진 철자 밑에 밑줄 긋는 함수 (LCS 최장공통부분수열 기반 정밀 diff)
+    function highlightMismatchedLetters(userWord, correctWord) {
+      const u = (userWord || '').toLowerCase().trim();
+      const c = (correctWord || '').toLowerCase().trim();
+      const orig = correctWord.trim();
+      
+      const n = u.length;
+      const m = c.length;
+      const dp = Array.from({ length: n + 1 }, () => Array(m + 1).fill(0));
+      
+      for (let i = 1; i <= n; i++) {
+        for (let j = 1; j <= m; j++) {
+          if (u[i - 1] === c[j - 1]) {
+            dp[i][j] = dp[i - 1][j - 1] + 1;
+          } else {
+            dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+          }
+        }
+      }
+
+      const matchedInC = new Set();
+      let i = n, j = m;
+      while (i > 0 && j > 0) {
+        if (u[i - 1] === c[j - 1]) {
+          matchedInC.add(j - 1);
+          i--;
+          j--;
+        } else if (dp[i - 1][j] >= dp[i][j - 1]) {
+          i--;
+        } else {
+          j--;
+        }
+      }
+
+      let html = '';
+      for (let idx = 0; idx < orig.length; idx++) {
+        const char = orig[idx];
+        if (matchedInC.has(idx)) {
+          html += `<span>${char}</span>`;
+        } else {
+          html += `<span style="color: #e11d48; font-weight: 800; text-decoration: underline; text-decoration-color: #e11d48; text-decoration-thickness: 3px; background: #ffe4e6; border-radius: 4px; padding: 0 2px;">${char}</span>`;
+        }
+      }
+      return html;
+    }
+
+    // 단어 카테고리 & 학년별 5점 만점 실전 추천 패턴 생성기 (참여자 응용 유도용)
+    function getRecommendedPatterns(item, grade) {
+      const w = item.word.toLowerCase();
+      const isVowel = /^[aeiou]/i.test(w);
+      const art = isVowel ? 'an' : 'a';
+      const cat = item.category || '';
+
+      if (grade === '34') {
+        if (cat.includes('동물')) {
+          return [
+            { label: '좋아하는 동물 표현', pattern: `I like ${w}s.`, meaning: `나는 ${item.meaning}을(를) 좋아해요.` },
+            { label: '동물 소개하기', pattern: `This is ${art} ${w}.`, meaning: `이것은 ${item.meaning}이에요.` }
+          ];
+        } else if (cat.includes('음식') || cat.includes('과일')) {
+          return [
+            { label: '좋아하는 음식 표현', pattern: `I like ${w}s.`, meaning: `나는 ${item.meaning}을(를) 좋아해요.` },
+            { label: '먹는 동작 표현', pattern: `I eat ${art} ${w}.`, meaning: `나는 ${item.meaning}을(를) 먹어요.` }
+          ];
+        } else if (cat.includes('학교') || cat.includes('학용품')) {
+          return [
+            { label: '가지고 있는 물건', pattern: `I have ${art} ${w}.`, meaning: `나는 ${item.meaning}을(를) 가지고 있어요.` },
+            { label: '물건 소개하기', pattern: `This is ${art} ${w}.`, meaning: `이것은 ${item.meaning}이에요.` }
+          ];
+        } else if (cat.includes('색깔')) {
+          return [
+            { label: '좋아하는 색 표현', pattern: `I like ${w}.`, meaning: `나는 ${item.meaning}을 좋아해요.` },
+            { label: '사물 색깔 묘사', pattern: `The apple is ${w}.`, meaning: `그 사과는 ${item.meaning}이에요.` }
+          ];
+        } else if (cat.includes('가족')) {
+          return [
+            { label: '가족 소개하기', pattern: `This is my ${w}.`, meaning: `이분은 우리 ${item.meaning}이에요.` },
+            { label: '가족 사랑 표현', pattern: `I love my ${w}.`, meaning: `나는 우리 ${item.meaning}을 사랑해요.` }
+          ];
+        } else {
+          return [
+            { label: '기본 소개 패턴', pattern: `This is ${art} ${w}.`, meaning: `이것은 ${item.meaning}이에요.` },
+            { label: '기본 선호 패턴', pattern: `I like ${w}s.`, meaning: `나는 ${item.meaning}을 좋아해요.` }
+          ];
+        }
+      } else {
+        // 5~6학년 (열매반)
+        if (cat.includes('직업')) {
+          return [
+            { label: '미래의 꿈 (소망 표현)', pattern: `I want to be ${art} ${w}.`, meaning: `나는 ${item.meaning}이(가) 되고 싶어요.` },
+            { label: '미래의 꿈 (구어체 미래)', pattern: `I'm gonna be ${art} ${w} in the future.`, meaning: `나는 미래에 ${item.meaning}이(가) 될 거예요.` }
+          ];
+        } else if (cat.includes('공공장소')) {
+          return [
+            { label: '장소 특징 묘사', pattern: `The ${w} is very big.`, meaning: `그 ${item.meaning}은(는) 매우 커요.` },
+            { label: '장소 방문 표현', pattern: `I go to the ${w}.`, meaning: `나는 ${item.meaning}에 가요.` }
+          ];
+        } else if (cat.includes('교통')) {
+          return [
+            { label: '교통수단 이용', pattern: `I take the ${w}.`, meaning: `나는 ${item.meaning}을(를) 타요.` },
+            { label: '속도/특징 묘사', pattern: `The ${w} is very fast.`, meaning: `그 ${item.meaning}은(는) 매우 빨라요.` }
+          ];
+        } else if (cat.includes('자연') || cat.includes('환경') || cat.includes('우주')) {
+          return [
+            { label: '자연 상태 묘사', pattern: `The ${w} is beautiful.`, meaning: `그 ${item.meaning}은(는) 아름다워요.` },
+            { label: '환경 보호 표현', pattern: `We should protect the ${w}.`, meaning: `우리는 ${item.meaning}을(를) 보호해야 해요.` }
+          ];
+        } else {
+          return [
+            { label: '특징 묘사 패턴', pattern: `The ${w} is very nice.`, meaning: `그 ${item.meaning}은(는) 아주 멋져요.` },
+            { label: '문맥 활용 패턴', pattern: `I like this ${w}.`, meaning: `나는 이 ${item.meaning}이(가) 마음에 들어요.` }
+          ];
+        }
+      }
+    }
+
+    // 패턴 문장에서 미션 단어만 쏙 빼고 문장 뼈대(스캐폴딩)를 추출하는 함수
+    function getScaffoldSentence(patternText, targetWord) {
+      if (!targetWord) return { text: patternText, cursorIdx: patternText.length };
+      const tw = targetWord.trim().toLowerCase();
+      
+      // 단수형 및 복수형(-s, -es) 매칭
+      const regex = new RegExp(`\\b${tw}(s|es)?\\b`, 'i');
+      const match = patternText.match(regex);
+      if (match) {
+        const start = match.index;
+        const end = start + match[0].length;
+        const before = patternText.slice(0, start);
+        const after = patternText.slice(end);
+        return {
+          text: before + after,
+          cursorIdx: before.length
+        };
+      }
+      
+      const idx = patternText.toLowerCase().indexOf(tw);
+      if (idx !== -1) {
+        const before = patternText.slice(0, idx);
+        const after = patternText.slice(idx + tw.length);
+        return {
+          text: before + after,
+          cursorIdx: before.length
+        };
+      }
+      
+      return { text: patternText, cursorIdx: patternText.length };
+    }
+
+    // 추천 패턴 클릭 시 '미션 단어만 없애고 뼈대 문장만 자동 채우기' (자기주도 영작 유도)
+    function applyPatternToInput(patternText) {
+      const inputEl = document.getElementById('desc-input');
+      const targetWord = currentQuiz?.word || '';
+      
+      const { text, cursorIdx } = getScaffoldSentence(patternText, targetWord);
+      inputEl.value = text;
+      inputEl.focus();
+      // 커서를 딱 미션 단어를 적어야 하는 빈자리로 정확히 이동!
+      inputEl.setSelectionRange(cursorIdx, cursorIdx);
+
+      // 몽글몽글 시각 피드백 효과 (초록 펄스)
+      inputEl.style.borderColor = '#10b981';
+      inputEl.style.boxShadow = '0 0 0 5px rgba(16, 185, 129, 0.25)';
+      setTimeout(() => {
+        inputEl.style.borderColor = '#86efac';
+        inputEl.style.boxShadow = '';
+      }, 350);
+    }
+
+    // 결과창에서 추천 문장으로 바로 채우고 재도전하는 함수 (결과창은 완성 모범 문장 채우기)
+    function applySuggestedAndRetry() {
+      enableDescriptiveRetry();
+      if (currentSuggestedSentence) {
+        const inputEl = document.getElementById('desc-input');
+        inputEl.value = currentSuggestedSentence;
+        inputEl.focus();
+        inputEl.setSelectionRange(currentSuggestedSentence.length, currentSuggestedSentence.length);
+      }
+    }
+
+    function startQuizSession() {
+      initAudio();
+
+      // 10문제 고유 단어 무작위 출제 (중복 출제 0% 절대 보장)
+      sessionQuestions = getUniqueSessionQuestions(currentGrade, totalSessionQuestions);
+      currentQuestionIndex = 0;
+      score = 0;
+      correctCount = 0;
+
+      // 과거 오답 데이터 기반 취약 단원 분석 (get_weakest_unit_and_topic 연계)
+      fetch(`/english/api/weakest?user_name=${encodeURIComponent(currentUser)}`)
+        .then(res => res.ok ? res.json() : null)
+        .then(data => {
+          if (data && data.unit) {
+            console.log(`[맞춤학습] 취약 단원(${data.unit}) 집중 출제 연계`);
+          }
+        })
+        .catch(() => {});
+
+      document.getElementById('intro-screen').style.display = 'none';
+      document.getElementById('finish-screen').style.display = 'none';
+      document.getElementById('quiz-screen').style.display = 'block';
+
+      const gradeName = (currentGrade === '34') ? '🐥 3~4학년' : '🦁 5~6학년';
+      const typeNames = { choice: '🎈 객관식', short: '✏️ 주관식', descriptive: '📝 서술형' };
+      document.getElementById('header-grade-type-text').innerText = `${gradeName} · ${typeNames[currentQuizType]}`;
+      document.getElementById('score-text').innerText = `⭐ 0점`;
+
+      renderCurrentQuestion();
+    }
+
+    function backToIntro() {
+      document.getElementById('quiz-screen').style.display = 'none';
+      document.getElementById('finish-screen').style.display = 'none';
+      document.getElementById('intro-screen').style.display = 'block';
+      setMascotEmotion('normal');
+    }
+
+    /* ========================================================
+       문제 렌더링 로직 (1번 객관식 vs 2번 주관식/서술형)
+       ======================================================== */
+    function renderCurrentQuestion() {
+      isAnswered = false;
+      hasGradedCurrentQuestion = false;
+      currentQuestionFirstScore = null;
+      isRetrySubmission = false;
+      currentSuggestedSentence = null;
+      setMascotEmotion('normal');
+      resetChatUI();
+
+      const targetItem = sessionQuestions[currentQuestionIndex];
+      const questionNum = currentQuestionIndex + 1;
+
+      // 헤더 및 프로그레스 갱신
+      document.getElementById('progress-text').innerText = `🎯 ${questionNum} / ${totalSessionQuestions} 문제`;
+      document.getElementById('progress-bar-fill').style.width = `${(questionNum / totalSessionQuestions) * 100}%`;
+      document.getElementById('category-tag').innerText = `🌱 [${targetItem.category}] 단원`;
+      document.getElementById('result-box').style.display = 'none';
+      document.getElementById('loading-spinner-box').style.display = 'none';
+
+      // 다음 버튼 안내 문구
+      const nextBtn = document.getElementById('next-btn');
+      if (currentQuestionIndex === totalSessionQuestions - 1) {
+        nextBtn.innerText = '👉 최종 결과 확인하기! 🏆';
+      } else {
+        nextBtn.innerText = `👉 다음 문제 풀기 (${questionNum + 1}/${totalSessionQuestions}) 🎈`;
+      }
+
+      // 영역 전환
+      const optsCont = document.getElementById('options-container');
+      const shortCont = document.getElementById('short-answer-container');
+      const descCont = document.getElementById('desc-answer-container');
+
+      // ----------------------------------------------------
+      // [1번] 4지선다 객관식 (문제은행 방식 - 0.001초 출제)
+      // ----------------------------------------------------
+      if (currentQuizType === 'choice') {
+        optsCont.style.display = 'grid';
+        shortCont.style.display = 'none';
+        descCont.style.display = 'none';
+
+        const fullDb = (currentGrade === '34') ? DB_GRADE_34 : DB_GRADE_56;
+        const wrongPool = fullDb.filter(item => item.word !== targetItem.word);
+        const shuffledWrong = shuffleArray(wrongPool).slice(0, 3);
+        const candidates = shuffleArray([targetItem, ...shuffledWrong]);
+        const correctIdx = candidates.findIndex(item => item.word === targetItem.word);
+
+        if (currentGrade === '34') {
+          document.getElementById('question-text').innerHTML = `'${targetItem.meaning}'을(를) 뜻하는 영어 단어는 무엇일까요? ✨`;
+        } else {
+          document.getElementById('question-text').innerHTML = `[힌트: ${targetItem.hint}]<br>'${targetItem.meaning}'에 딱 맞는 단어는? 💡`;
+        }
+
+        currentQuiz = {
+          word: targetItem.word,
+          ipa: targetItem.ipa,
+          meaning: targetItem.meaning,
+          options: candidates,
+          answerIndex: correctIdx,
+          explanation: `${targetItem.word}는(은) '${targetItem.meaning}'을(를) 뜻하는 단어예요!`
+        };
+
+        optsCont.innerHTML = '';
+        candidates.forEach((opt, idx) => {
+          const btn = document.createElement('div');
+          btn.className = 'option-btn';
+          btn.innerHTML = `
+            <div class="option-text-wrap">
+              <span>${idx + 1}. ${opt.word}</span>
+              <span class="phonetic-tag">${opt.ipa}</span>
+            </div>
+            <button class="sound-btn" title="미국식 발음 듣기" onclick="event.stopPropagation(); speakAccent('en-US', '${opt.word}')">
+              ${getSpeakerSvg()}
+            </button>
+          `;
+          btn.onclick = () => checkChoiceAnswer(idx, btn);
+          optsCont.appendChild(btn);
+        });
+
+      // ----------------------------------------------------
+      // [2번] 주관식 철자 쓰기 (첫·끝글자 힌트 슬롯 블록)
+      // ----------------------------------------------------
+      } else if (currentQuizType === 'short') {
+        optsCont.style.display = 'none';
+        shortCont.style.display = 'block';
+        descCont.style.display = 'none';
+
+        document.getElementById('question-text').innerHTML = `발음과 힌트를 확인하고, 알맞은 영어 단어 철자를 완성해 보세요!`;
+
+        const wClean = targetItem.word.trim();
+        const wLen = wClean.length;
+        const fChar = wClean[0].toUpperCase();
+        const lChar = (wLen >= 3) ? wClean[wLen - 1].toUpperCase() : '';
+
+        document.getElementById('short-clue-text').innerText = `"${targetItem.hint}"`;
+        document.getElementById('short-meaning-text').innerText = targetItem.meaning;
+        
+        if (lChar) {
+          document.getElementById('letter-count-info').innerHTML = `총 <b>${wLen}</b>글자 (첫 글자 <b>'${fChar}'</b> / 끝 글자 <b>'${lChar}'</b>) · 💡 전체 단어를 적어주세요!`;
+        } else {
+          document.getElementById('letter-count-info').innerHTML = `총 <b>${wLen}</b>글자 (첫 글자 <b>'${fChar}'</b>) · 💡 전체 단어를 적어주세요!`;
+        }
+
+        // 슬롯 블록 생성
+        const slotsCont = document.getElementById('letter-slots-container');
+        slotsCont.innerHTML = '';
+        Array.from(wClean).forEach((ch, idx) => {
+          const isRevealed = (idx === 0) || (wLen >= 3 && idx === wLen - 1);
+          const slot = document.createElement('div');
+          slot.className = `letter-slot-box ${isRevealed ? 'revealed' : 'hidden'}`;
+          slot.innerText = isRevealed ? ch.toUpperCase() : '_';
+          slotsCont.appendChild(slot);
+        });
+
+        const shortInput = document.getElementById('short-input');
+        shortInput.value = '';
+        shortInput.placeholder = "힌트를 포함한 전체 글자 (예: dog)";
+        shortInput.disabled = false;
+        setTimeout(() => shortInput.focus(), 100);
+
+        currentQuiz = {
+          word: targetItem.word,
+          ipa: targetItem.ipa,
+          meaning: targetItem.meaning,
+          explanation: `정답은 '${targetItem.word}' (${targetItem.ipa})입니다! 뜻은 '${targetItem.meaning}'이에요.`
+        };
+
+      // ----------------------------------------------------
+      // [3번] 서술형 문장 표현 (Gemini AI 문맥 정밀 채점)
+      // ----------------------------------------------------
+      } else if (currentQuizType === 'descriptive') {
+        optsCont.style.display = 'none';
+        shortCont.style.display = 'none';
+        descCont.style.display = 'block';
+
+        document.getElementById('question-text').innerHTML = `오늘 배운 단어 <b>"${targetItem.word}"</b> (${targetItem.meaning})나 원하는 표현으로 자유롭게 영어 문장을 만들어 보세요! 🌟`;
+        document.getElementById('desc-target-word').innerText = `🎯 추천 단어: ${targetItem.word} (${targetItem.meaning}) · 자유롭게 표현해 보세요!`;
+
+        // 5점 만점 실전 추천 패턴 렌더링
+        const patterns = getRecommendedPatterns(targetItem, currentGrade);
+        const patternsGrid = document.getElementById('desc-patterns-grid');
+        patternsGrid.innerHTML = '';
+        patterns.forEach((pat, pIdx) => {
+          const card = document.createElement('div');
+          card.className = 'pattern-card-btn';
+          card.title = '터치하면 문장 틀이 채워져요!';
+          card.innerHTML = `
+            <div class="pattern-badge-title">
+              <span>📌 [표현 예시 ${pIdx + 1}] ${pat.label}</span>
+              <span style="font-size: 11px; color: #047857; background: #ecfdf5; padding: 2px 8px; border-radius: 12px; font-weight: bold; border: 1px solid #a7f3d0;">👆 터치 시 채우기</span>
+            </div>
+            <div class="pattern-text-en">"${pat.pattern}"</div>
+            <div class="pattern-text-ko">💡 ${pat.meaning}</div>
+          `;
+          card.onclick = () => applyPatternToInput(pat.pattern);
+          patternsGrid.appendChild(card);
+        });
+
+        const descInput = document.getElementById('desc-input');
+        descInput.value = '';
+        descInput.disabled = false;
+        descInput.placeholder = "예: I like dogs. / This is my family. (자유롭게 영어로 써보세요!)";
+        const descSubmitBtn = document.getElementById('desc-submit-btn');
+        descSubmitBtn.disabled = false;
+        descSubmitBtn.innerText = '🤖 AI 3단계 검수 & 첨삭받기 ✨';
+        descSubmitBtn.style.background = 'linear-gradient(135deg, #16a34a, #15803d)';
+        setTimeout(() => descInput.focus(), 100);
+
+        currentQuiz = {
+          word: targetItem.word,
+          ipa: targetItem.ipa,
+          meaning: targetItem.meaning,
+          category: targetItem.category,
+          patterns: patterns
+        };
+      }
+    }
+
+    /* ========================================================
+       답안 판정 및 채점 로직
+       ======================================================== */
+    // 1. 객관식 채점
+    function checkChoiceAnswer(userIndex, clickedBtn) {
+      if (isAnswered) return;
+      isAnswered = true;
+
+      const allBtns = document.querySelectorAll('.option-btn');
+      allBtns.forEach(b => b.classList.add('disabled'));
+
+      const isCorrect = (userIndex === currentQuiz.answerIndex);
+      playSound(isCorrect);
+
+      const resBox = document.getElementById('result-box');
+      const resTitle = document.getElementById('result-title');
+      const resDesc = document.getElementById('result-desc');
+      resBox.style.display = 'block';
+
+      // 가이드라인 통일 표준: 3~4학년: 난이도 '하' 1점 | 5~6학년: 난이도 '중' 3점
+      const choicePoints = (currentGrade === '34') ? 1 : 3;
+      const choiceDiff = (currentGrade === '34') ? '하' : '중';
+
+      if (isCorrect) {
+        setMascotEmotion('happy');
+        clickedBtn.classList.add('correct');
+        score += choicePoints;
+        correctCount += 1;
+        // 맞춘 문제는 다음 세션에서 필수로 제외되도록 마스터 목록에 등록!
+        masteredWords.add(currentQuiz.word.toLowerCase());
+        document.getElementById('score-text').innerText = `⭐ ${score}점`;
+        resTitle.innerText = `🎉 딩동댕! 정답이에요! (+${choicePoints}점)`;
+        resTitle.style.color = '#15803d';
+      } else {
+        setMascotEmotion('sad');
+        clickedBtn.classList.add('wrong');
+        allBtns[currentQuiz.answerIndex].classList.add('correct');
+        resTitle.innerText = '💡 아쉬워요! 정답을 확인해 보세요';
+        resTitle.style.color = '#b91c1c';
+      }
+
+      resDesc.innerHTML = `${currentQuiz.explanation}<br><b>발음:</b> ${currentQuiz.ipa}`;
+      setTimeout(() => speakAccent('en-US'), 300);
+
+      // 통합 DB(quiz_logs)에 풀이 내역 저장 & 누적 총점 자동 합산
+      const chosenWord = (currentQuiz.options && currentQuiz.options[userIndex]) ? currentQuiz.options[userIndex].word : '';
+      saveQuizResultToDb(
+        isCorrect ? choicePoints : 0,
+        isCorrect,
+        chosenWord,
+        '객관식',
+        `'${currentQuiz.meaning}'을(를) 뜻하는 알맞은 영어 단어는?`,
+        currentQuiz.explanation,
+        choiceDiff
+      );
+    }
+
+    // 2. 주관식 채점 (틀린 철자 밑줄 표기)
+    function submitShortAnswer() {
+      if (isAnswered) return;
+      const inputEl = document.getElementById('short-input');
+      const userText = inputEl.value.trim().toLowerCase();
+      if (!userText) {
+        alert("철자를 입력해 주세요!");
+        inputEl.focus();
+        return;
+      }
+
+      isAnswered = true;
+      inputEl.disabled = true;
+
+      const isCorrect = (userText === currentQuiz.word.toLowerCase());
+      playSound(isCorrect);
+
+      const resBox = document.getElementById('result-box');
+      const resTitle = document.getElementById('result-title');
+      const resDesc = document.getElementById('result-desc');
+      resBox.style.display = 'block';
+
+      // 가이드라인 통일 표준: 3~4학년: 난이도 '중' 3점 | 5~6학년: 난이도 '상' 5점
+      const shortPoints = (currentGrade === '34') ? 3 : 5;
+      const shortDiff = (currentGrade === '34') ? '중' : '상';
+
+      if (isCorrect) {
+        setMascotEmotion('happy');
+        score += shortPoints;
+        correctCount += 1;
+        // 맞춘 단어는 다음 세션에서 필수로 제외되도록 마스터 목록에 등록!
+        masteredWords.add(currentQuiz.word.toLowerCase());
+        document.getElementById('score-text').innerText = `⭐ ${score}점`;
+        resTitle.innerText = `🎉 완벽해요! 철자를 정확히 맞췄어요! (+${shortPoints}점)`;
+        resTitle.style.color = '#15803d';
+        resDesc.innerHTML = `${currentQuiz.explanation}`;
+      } else {
+        setMascotEmotion('sad');
+        // 정답 단어 철자 중 틀리거나 빠진 글자 밑에 빨간색 밑줄 생성
+        const highlightedLetters = highlightMismatchedLetters(userText, currentQuiz.word);
+        resTitle.innerText = `💡 아쉬워요! 바른 철자를 확인해 보세요`;
+        resTitle.style.color = '#b91c1c';
+
+        resDesc.innerHTML = `
+          <div style="background: #fff1f2; border: 2px solid #fecdd3; border-radius: 18px; padding: 14px 18px; margin-bottom: 12px; text-align: left;">
+            <div style="font-size: 13px; font-weight: bold; color: #be123c; margin-bottom: 6px;">
+              🔍 정답 철자 (빨간 밑줄 친 글자가 틀렸거나 빠진 부분이에요):
+            </div>
+            <div style="font-size: 26px; font-family: 'Nunito', sans-serif; font-weight: 800; letter-spacing: 3px; color: #1e293b; margin-bottom: 8px;">
+              ${highlightedLetters}
+            </div>
+            <div style="font-size: 14px; color: #64748b;">
+              내가 쓴 철자: <span style="color: #be123c; font-weight: bold;">"${escapeHtml(userText)}"</span>
+            </div>
+          </div>
+          ${currentQuiz.explanation}
+        `;
+      }
+
+      setTimeout(() => speakAccent('en-US'), 300);
+
+      // 통합 DB(quiz_logs)에 풀이 내역 저장 & 누적 총점 자동 합산
+      saveQuizResultToDb(
+        isCorrect ? shortPoints : 0,
+        isCorrect,
+        userText,
+        '주관식',
+        `[${currentQuiz.hint}] ${currentQuiz.meaning}`,
+        currentQuiz.explanation,
+        shortDiff
+      );
+    }
+
+    // 3. 서술형 문장 쓰기: 백엔드 실시간 AI 3단계 정밀 검수 & 첨삭 코칭 연동
+    async function submitDescriptiveAnswer() {
+      if (isAnswered) return;
+      const inputEl = document.getElementById('desc-input');
+      const userSentence = inputEl.value.trim();
+      if (!userSentence) {
+        alert("영어로 문장을 작성해 주세요!");
+        inputEl.focus();
+        return;
+      }
+
+      isAnswered = true;
+      inputEl.disabled = true;
+      document.getElementById('desc-submit-btn').disabled = true;
+      document.getElementById('loading-spinner-box').style.display = 'block';
+
+      const targetWord = currentQuiz?.word || "";
+      const targetMeaning = currentQuiz?.meaning || "";
+
+      try {
+        const payload = {
+          user_name: getResolvedUserName(),
+          grade: currentGrade,
+          target_word: targetWord,
+          user_answer: userSentence,
+          unit: currentQuiz?.category || "자유 영작",
+          topic: targetMeaning || "문장 표현",
+          difficulty: (currentGrade === '56') ? "상" : "중"
+        };
+
+        const res = await fetch('/english/api/grade', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          finishGrading({
+            verdict: data.verdict || "perfect",
+            verdict_kr: data.verdict_kr || "🎉 완벽하고 자연스러운 문장이에요!",
+            score: data.score || 5,
+            comment: data.feedback || "참 잘했어요!",
+            corrected: data.sample || userSentence,
+            earned_points: data.earned_score
+          }, userSentence, targetWord);
+          return;
+        }
+      } catch (err) {
+        console.warn("백엔드 실시간 AI 검수 호출 오류, 로컬 안전 검수로 전환:", err);
+      }
+
+      // 서버 일시 장애 시 로컬 안전 폴백
+      const fallbackResult = evaluateStrictFallback(userSentence, targetWord, targetMeaning, currentGrade);
+      finishGrading({
+        verdict: (fallbackResult.score >= 5) ? "perfect" : (fallbackResult.score >= 3 ? "awkward" : "incorrect"),
+        verdict_kr: (fallbackResult.score >= 5) ? "🎉 자연스럽고 완벽한 문장이에요!" : (fallbackResult.score >= 3 ? "💡 의미는 통하지만 표현이 조금 어색해요!" : "✏️ 틀린 부분이 있어 다시 확인해 보아요!"),
+        score: fallbackResult.score,
+        comment: fallbackResult.comment,
+        corrected: fallbackResult.corrected
+      }, userSentence, targetWord);
+    }
+
+    // 초등 기본 유효 어휘 사전 (비단어/오타 식별용 확장)
+    const CORE_ENGLISH_VOCAB = new Set([
+      'i', 'you', 'he', 'she', 'it', 'we', 'they', 'my', 'your', 'his', 'her', 'our', 'their', 'this', 'that', 'these', 'those',
+      'a', 'an', 'the', 'is', 'are', 'am', 'was', 'were', 'be', 'been', 'being',
+      'have', 'has', 'had', 'do', 'does', 'did', 'can', 'could', 'will', 'would', 'shall', 'should', 'may', 'might', 'must',
+      'gonna', 'wanna', 'gotta', 'become', 'becomes', 'became',
+      'like', 'likes', 'liked', 'love', 'loves', 'loved', 'see', 'sees', 'saw', 'go', 'goes', 'went', 'come', 'comes', 'came',
+      'eat', 'eats', 'ate', 'play', 'plays', 'played', 'read', 'reads', 'write', 'writes', 'wrote', 'study', 'studies', 'studied',
+      'make', 'makes', 'made', 'take', 'takes', 'took', 'look', 'looks', 'looked', 'listen', 'listens', 'listened', 'want', 'wants', 'wanted',
+      'help', 'helps', 'helped', 'run', 'runs', 'ran', 'walk', 'walks', 'walked', 'sleep', 'sleeps', 'slept', 'ride', 'rides', 'rode',
+      'cook', 'cooks', 'cooked', 'live', 'lives', 'lived', 'sing', 'sings', 'sang', 'swim', 'swims', 'swam', 'clean', 'cleans',
+      'so', 'very', 'too', 'well', 'much', 'many', 'good', 'bad', 'big', 'small', 'nice', 'new', 'old', 'pretty', 'cute',
+      'happy', 'sad', 'fast', 'slow', 'tall', 'short', 'hot', 'cold', 'warm', 'cool', 'busy', 'kind', 'fine', 'great', 'comfortable',
+      'in', 'at', 'on', 'under', 'for', 'to', 'with', 'from', 'about', 'by', 'near', 'of', 'and', 'but', 'or',
+      'there', 'here', 'now', 'today', 'future', 'dream', 'world', 'tools', 'tool', 'train', 'bus', 'subway', 'car', 'station'
+    ]);
+
+    function isRecognizedWord(w) {
+      // 축약형 처리 (I'm, gonna 등)
+      let clean = w.toLowerCase().replace(/['’]/g, '').replace(/[^a-z]/g, '');
+      if (!clean) return true;
+      if (clean === 'im' || clean === 'youre' || clean === 'hes' || clean === 'shes' || clean === 'theyre' || clean === 'were' || clean === 'dont' || clean === 'cant') return true;
+      if (CORE_ENGLISH_VOCAB.has(clean)) return true;
+      if (clean.endsWith('s') && CORE_ENGLISH_VOCAB.has(clean.slice(0, -1))) return true;
+      if (clean.endsWith('es') && CORE_ENGLISH_VOCAB.has(clean.slice(0, -2))) return true;
+      if (clean.endsWith('ing') && CORE_ENGLISH_VOCAB.has(clean.slice(0, -3))) return true;
+      if (clean.endsWith('ed') && CORE_ENGLISH_VOCAB.has(clean.slice(0, -2))) return true;
+      // DB 단어 대조
+      for (const item of DB_GRADE_34) {
+        if (item.word.toLowerCase() === clean) return true;
+      }
+      for (const item of DB_GRADE_56) {
+        if (item.word.toLowerCase() === clean) return true;
+      }
+      return false;
+    }
+
+    // 초등 영어 문장 구성 & 맥락 스마트 판정기 (학생의 자유로운 응용 문장 100% 수용)
+    function evaluateStrictFallback(sentence, targetWord, meaning, grade) {
+      const raw = sentence.trim();
+      const words = raw.split(/\s+/).filter(w => w.length > 0);
+      const lower = raw.toLowerCase();
+      const targetLower = (targetWord || '').toLowerCase();
+      const isVowelWord = /^[aeiou]/i.test(targetWord || '');
+      const art = isVowelWord ? 'an' : 'a';
+
+      // 1) 1단어만 작성한 경우 (예: "green", "dog")
+      if (words.length <= 1) {
+        return {
+          score: 2,
+          comment: `💡 단어 철자는 정확하지만 아직 문장이 아니에요! 'I like ${targetWord}.'처럼 주어와 동사를 넣어 완전한 문장으로 만들면 5점 만점이 돼요 ✨`,
+          corrected: `I like ${targetWord || 'it'}.`
+        };
+      }
+
+      // 2) 주어와 동사를 갖춘 자연스러운 완성형 문장 (예: "Green is the color of grass.", "I like green.")
+      const hasVerb = /\b(is|are|am|was|were|be|been|being|like|likes|liked|have|has|had|see|sees|saw|play|plays|played|eat|eats|ate|read|reads|study|studies|go|goes|went|want|wants|wanted|will|can|could|would|should|may|might|must|become|becomes|became|gonna|wanna|gotta)\b|('m|'re|'s|'ve|'ll|'d)\b/i.test(raw);
+      const startsCapital = /^[A-Z]/.test(raw);
+      const endsPunct = /[.!?]$/.test(raw);
+      const cleanNoPunct = raw.replace(/[.!?]+$/, '').trim();
+      const hasSubject = /\b(i|you|he|she|it|we|they|this|that|these|those|my\b|the\b)\b|('m|'re|'s)\b/i.test(raw);
+
+      // 2) 목표 단어 타당성 및 결 일치성 정밀 검사
+      if (targetMissing) {
+        // 목표 단어의 근접 철자 오타(예: target이 traffic인데 traffc로 작성)인지 검사
+        let typoWord = null;
+        for (const w of cleanWords) {
+          if (w.length >= 3 && Math.abs(w.length - targetLower.length) <= 2) {
+            let matches = 0;
+            for (const ch of w) { if (targetLower.includes(ch)) matches++; }
+            if (matches / targetLower.length >= 0.65) {
+              typoWord = w;
+              break;
+            }
+          }
+        }
+
+        if (typoWord) {
+          return {
+            score: 3,
+            comment: `💡 목표 단어 '${targetWord}'의 철자에 작은 오타('${typoWord}')가 있어요! 바른 단어 '${targetWord}'(으)로 고쳐 완성해 보세요 ✨`,
+            corrected: raw.replace(new RegExp(typoWord, 'gi'), `<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">${targetWord}</span>`)
+          };
+        } else {
+          // 목표 단어가 문장에 전혀 없고 엉뚱한 비단어(xlck 등)나 무관한 문장인 경우
+          const modelSentence = (targetLower === 'traffic') ? 'The traffic is heavy.' : `I like ${targetWord}.`;
+          return {
+            score: 2,
+            comment: `✏️ 문장의 형태를 시도한 것은 좋지만, 이번 문제의 목표 단어인 '${targetWord}'(${targetMeaning || '표현'})이(가) 들어있지 않아요! '${targetWord}'을(를) 활용해서 문장을 완성해 볼까요?`,
+            corrected: `<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">${modelSentence}</span>`
+          };
+        }
+      }
+
+      const hasObviousTypo = cleanWords.some(w => w.length >= 3 && !/[aeiouy]/.test(w));
+      if (hasObviousTypo) {
+        const typoWord = cleanWords.find(w => w.length >= 3 && !/[aeiouy]/.test(w)) || 'error';
+        return {
+          score: 3,
+          comment: `💡 문장 속 '${typoWord}' 철자에 오타가 있어요! 바른 철자로 고쳐 완성해 보세요 ✨`,
+          corrected: raw
+        };
+      }
+
+      // 3) 이미 주어+동사+대문자+마침표를 갖추고 오타가 없는 훌륭한 응용 문장 -> 5점 만점 부여!
+      if (hasVerb && words.length >= 3 && startsCapital && endsPunct) {
+        return {
+          score: 5,
+          comment: `🎉 와! 문맥과 표현이 아주 자연스럽고 완성도 높은 5점 만점 문장이에요! 훌륭한 영작 실력이에요 👏`,
+          corrected: raw
+        };
+      }
+
+      // 3) 주어와 동사는 있으나 대문자나 마침표만 빠진 경우 -> 4점 교정
+      if (hasVerb && words.length >= 3) {
+        let fixed = raw;
+        if (!startsCapital) fixed = fixed.charAt(0).toUpperCase() + fixed.slice(1);
+        if (!endsPunct) fixed = fixed + '.';
+        return {
+          score: 4,
+          comment: `💡 문맥과 표현이 정말 훌륭해요! 첫 글자를 대문자로 쓰고 끝에 마침표(.)를 찍어주면 5점 만점이 돼요 ✨`,
+          corrected: fixed
+        };
+      }
+
+      // 5) 부정관사 a vs an 정밀 검사 (예: "a artist", "a apple" 등)
+      const vowelWordsRegex = /\ba\s+(artist|apple|orange|egg|elephant|eraser|airport|ocean|actor|animal)\b/i;
+      const consonantWordsRegex = /\ban\s+(dog|cat|rabbit|bear|bird|duck|pig|lion|tiger|monkey|frog|horse|cow|sheep|fish|book|pencil|desk|chair|bag|ruler|clock|door|window|library|hospital|museum|station|market|restaurant|bank|park|cinema|doctor|teacher|pilot|cook|scientist|police|firefighter|farmer)\b/i;
+
+      if (vowelWordsRegex.test(raw)) {
+        const corrected = raw.replace(/\ba\s+(artist|apple|orange|egg|elephant|eraser|airport|ocean|actor|animal)\b/gi, (match, p1) => {
+          return `<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">an</span> ${p1}`;
+        });
+        const matchedWord = raw.match(vowelWordsRegex)[1];
+        return {
+          score: 4,
+          comment: `💡 모음(a, e, i, o, u) 소리로 시작하는 '${matchedWord}' 앞에는 'a' 대신 'an'을 써야 해요! (a ${matchedWord} ❌ -> an ${matchedWord} ⭕) ✨`,
+          corrected: corrected
+        };
+      }
+
+      if (consonantWordsRegex.test(raw)) {
+        const corrected = raw.replace(/\ban\s+(dog|cat|rabbit|bear|bird|duck|pig|lion|tiger|monkey|frog|horse|cow|sheep|fish|book|pencil|desk|chair|bag|ruler|clock|door|window|library|hospital|museum|station|market|restaurant|bank|park|cinema|doctor|teacher|pilot|cook|scientist|police|firefighter|farmer)\b/gi, (match, p1) => {
+          return `<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">a</span> ${p1}`;
+        });
+        const matchedWord = raw.match(consonantWordsRegex)[1];
+        return {
+          score: 4,
+          comment: `💡 자음 소리로 시작하는 '${matchedWord}' 앞에는 'an' 대신 'a'를 쓰는 것이 바른 표현이에요! (an ${matchedWord} ❌ -> a ${matchedWord} ⭕) ✨`,
+          corrected: corrected
+        };
+      }
+
+      // (A) 전치사구로 시작하는 미완성 숙어 파편 (예: "with my dog", "in the library")
+      if (/^(with|in|at|on|under|for|to|from|about|by|near)\b/i.test(cleanNoPunct)) {
+        const leadVerb = (grade === '34') ? 'I play' : 'I study';
+        return {
+          score: 3,
+          comment: `💡 숙어나 전치사 표현을 잘 썼지만, 앞에 주어와 동사('${leadVerb}')를 넣어주어야 완전한 문장이 완성돼요 ✨`,
+          corrected: `<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">${leadVerb}</span> ${cleanNoPunct}<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">.</span>`
+        };
+      }
+
+      // (B) 주어 없이 동사/숙어구로 시작하는 미완성 파편 (예: "take care of dog", "play with dog", "look at cat")
+      if (/^(take\s+care\s+of|look\s+at|listen\s+to|play\s+with|have|like|see|want|make)\b/i.test(cleanNoPunct)) {
+        let completed = cleanNoPunct;
+        if (new RegExp(`\\b${targetLower}$`, 'i').test(cleanNoPunct)) {
+          completed = cleanNoPunct + 's';
+        }
+        return {
+          score: 3,
+          comment: `💡 동사나 숙어 앞에 주어('I')를 넣어 완전한 문장으로 완성해 주어야 5점 만점이 돼요 ✨`,
+          corrected: `<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">I</span> ${completed}<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">.</span>`
+        };
+      }
+
+      // (C) 1~2단어짜리 순수 명사구 파편 (예: "cute dog", "big hospital") - 문장에 주어/동사가 아예 없는 짧은 조각일 때만
+      if (!hasVerb && !hasSubject && words.length <= 3) {
+        return {
+          score: 3,
+          comment: `💡 단어 활용은 좋지만, 주어와 동사('This is')가 빠져 문장이 완성되지 않았어요! 완전한 문장으로 다듬어볼까요? ✨`,
+          corrected: `<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">This is</span> ${cleanNoPunct}<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">.</span>`
+        };
+      }
+
+      // 7) 문맥상 어색하거나 틀린 동사/단어 체크 (Collocation mismatch)
+      const inedibleWords = ['dog', 'cat', 'car', 'book', 'pencil', 'desk', 'chair', 'friend', 'teacher', 'ball'];
+      const unplayableWords = ['apple', 'banana', 'water', 'milk', 'dog', 'cat', 'book'];
+      
+      const hasEatMismatch = /\beat\b/i.test(lower) && inedibleWords.includes(targetLower);
+      const hasPlayMismatch = /\bplay\b/i.test(lower) && unplayableWords.includes(targetLower);
+      const hasListenMismatch = /\blisten\b\s+(?!to\b)/i.test(lower);
+
+      if (hasEatMismatch) {
+        return {
+          score: 3,
+          comment: `💡 '${targetWord}' 앞에는 'eat(먹다)'보다 문맥에 어울리는 'have(가지다)'나 'like(좋아하다)'를 쓰는 것이 훨씬 자연스러워요!`,
+          corrected: `<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">I like</span> ${targetWord}<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">s.</span>`
+        };
+      }
+
+      if (hasPlayMismatch) {
+        return {
+          score: 3,
+          comment: `💡 '${targetWord}' 앞에는 'play(놀다)'보다 문맥에 어울리는 'eat(먹다)'이나 'have(가지다)'를 쓰는 것이 훨씬 자연스러워요!`,
+          corrected: `I <span style="color: #e11d48; font-weight: bold; text-decoration: underline;">eat ${art}</span> ${targetWord}<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">.</span>`
+        };
+      }
+
+      if (hasListenMismatch) {
+        return {
+          score: 4,
+          comment: `💡 'listen' 뒤에는 보통 전치사 'to'를 함께 써서 'listen to ~'라고 표현하는 것이 올바른 문장이에요 ✨`,
+          corrected: `<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">I</span> listen <span style="color: #e11d48; font-weight: bold; text-decoration: underline;">to</span> ${targetWord}<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">.</span>`
+        };
+      }
+
+      // 8) 문장 구조, 대소문자, 마침표, 관사/복수형 정밀 판정
+      // (startsCapital, endsPunct는 위에서 이미 선언됨!)
+      
+      // 관사 또는 복수형 누락 검사 (예: "i like dog", "this is apple")
+      const isBareCountable = new RegExp(`\\b(like|love|have|see|want|is|are)\\s+${targetLower}\\s*([.!?])?$`, 'i').test(raw);
+
+      // 이미 대문자 + 마침표 + 관사/복수형 결함 없음 -> 진정한 5점 만점!
+      if (startsCapital && endsPunct && !isBareCountable) {
+        return {
+          score: 5,
+          comment: `🎉 와! 미션 단어 '${targetWord}'를 넣어 문맥과 어휘, 완성된 문장 구조를 완벽하게 갖춘 5점 만점 문장이에요! 최고예요 👏`,
+          corrected: raw
+        };
+      }
+
+      // 4점 판정: 학생 문장의 결함을 확실히 고치고 빨간색으로 표기
+      let correctedHtml = raw;
+      
+      // 마침표 누락 교정
+      if (!endsPunct) {
+        correctedHtml = `${correctedHtml}<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">.</span>`;
+      }
+      
+      // 첫 글자 대문자 누락 교정
+      if (!startsCapital) {
+        const firstChar = raw.charAt(0).toUpperCase();
+        correctedHtml = `<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">${firstChar}</span>` + correctedHtml.slice(1);
+      }
+
+      // 관사 또는 복수형 결함 교정
+      if (isBareCountable) {
+        if (/^i\s+like\s+/i.test(raw)) {
+          const capI = startsCapital ? 'I' : '<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">I</span>';
+          correctedHtml = `${capI} like ${targetWord}<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">s.</span>`;
+        } else if (/^(this|that|it)\s+is\s+/i.test(raw)) {
+          const firstWord = raw.split(/\s+/)[0];
+          const lead = startsCapital ? firstWord : `<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">${firstWord.charAt(0).toUpperCase() + firstWord.slice(1)}</span>`;
+          correctedHtml = `${lead} is <span style="color: #e11d48; font-weight: bold; text-decoration: underline;">${art}</span> ${targetWord}<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">.</span>`;
+        } else if (/^i\s+(have|see)\s+/i.test(raw)) {
+          const verbMatch = raw.match(/\b(have|see)\b/i);
+          const verb = verbMatch ? verbMatch[0] : 'have';
+          const capI = startsCapital ? 'I' : '<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">I</span>';
+          correctedHtml = `${capI} ${verb} <span style="color: #e11d48; font-weight: bold; text-decoration: underline;">${art}</span> ${targetWord}<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">.</span>`;
+        }
+      }
+
+      let commentText = "💡 문맥과 표현이 아주 훌륭해요! ";
+      if (!startsCapital && !endsPunct) {
+        commentText += "첫 글자를 대문자로 쓰고 끝에 마침표(.)를 찍어주면 5점 만점이 돼요 ✨";
+      } else if (!startsCapital) {
+        commentText += "영어 문장의 첫 글자는 대문자로 시작해야 5점 만점이 돼요 ✨";
+      } else if (!endsPunct) {
+        commentText += "문장 끝에 마침표(.)를 콕 찍어주면 5점 만점이 돼요 ✨";
+      } else if (isBareCountable) {
+        commentText += `명사 앞에 관사(${art})를 붙이거나 복수형(-s)으로 쓰면 5점 만점이 돼요 ✨`;
+      } else {
+        commentText += "빨간색으로 표시된 교정 부분을 확인하고 다시 도전해 보세요 ✨";
+      }
+
+      return {
+        score: 4,
+        comment: commentText,
+        corrected: correctedHtml
+      };
+    }
+
+    // 학생 문장과 교정 문장을 비교하여 바뀐 부분만 빨간색으로 확실히 하이라이트하는 도우미 함수
+    function buildHighlightedCorrection(userSentence, correctedSentence, score) {
+      if (score === 5) {
+        return escapeHtml(correctedSentence.replace(/<[^>]*>/g, '').trim());
+      }
+
+      // 이미 HTML 태그가 적용되어 있는 경우 그대로 렌더링
+      if (correctedSentence.includes('<span') || correctedSentence.includes('style=')) {
+        return correctedSentence;
+      }
+
+      const uRaw = userSentence.trim();
+      const cRaw = correctedSentence.trim();
+
+      // 만약 문자열이 똑같은데 5점 미만으로 잘못 들어온 경우 방어
+      if (uRaw.toLowerCase().replace(/[^a-z0-9]/g, '') === cRaw.toLowerCase().replace(/[^a-z0-9]/g, '')) {
+        if (uRaw !== cRaw) {
+          const capC = cRaw.charAt(0).toUpperCase() + cRaw.slice(1);
+          return `<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">${capC.charAt(0)}</span>` +
+            escapeHtml(capC.slice(1, -1)) +
+            `<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">${capC.slice(-1)}</span>`;
+        }
+        return escapeHtml(cRaw);
+      }
+
+      const uWords = uRaw.split(/\s+/);
+      const cWords = cRaw.split(/\s+/);
+      const resultTokens = [];
+      let uIdx = 0;
+
+      for (let i = 0; i < cWords.length; i++) {
+        const cWord = cWords[i];
+        const uWord = uWords[uIdx];
+
+        if (uWord && cWord === uWord) {
+          resultTokens.push(escapeHtml(cWord));
+          uIdx++;
+        } else {
+          resultTokens.push(`<span style="color: #e11d48; font-weight: bold; text-decoration: underline;">${escapeHtml(cWord)}</span>`);
+          if (uWord && !cWords.slice(i + 1).some(cw => cw.toLowerCase().replace(/[^a-z0-9]/g, '') === uWord.toLowerCase().replace(/[^a-z0-9]/g, ''))) {
+            uIdx++;
+          }
+        }
+      }
+
+      return resultTokens.join(' ');
+    }
+
+    function escapeHtml(text) {
+      return text.replace(/[&<>"']/g, m => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+      }[m]));
+    }
+
+    // 서술형 내가 쓴 문장 수정하여 다시 체크받기 활성화 함수
+    function enableDescriptiveRetry() {
+      isAnswered = false;
+      isRetrySubmission = true;
+
+      const inputEl = document.getElementById('desc-input');
+      inputEl.disabled = false;
+      inputEl.focus();
+      // 커서를 맨 끝으로 이동
+      const val = inputEl.value;
+      inputEl.value = '';
+      inputEl.value = val;
+
+      const submitBtn = document.getElementById('desc-submit-btn');
+      submitBtn.disabled = false;
+      submitBtn.innerText = '🔄 수정한 문장 다시 체크받기 ✨';
+      submitBtn.style.background = 'linear-gradient(135deg, #0284c7, #0369a1)';
+
+      // 입력창으로 부드럽게 스크롤
+      inputEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // 채점 결과 화면 반영 공통 함수
+    function finishGrading(gradeResult, userSentence, targetWord) {
+      document.getElementById('loading-spinner-box').style.display = 'none';
+      const inputEl = document.getElementById('desc-input');
+      isAnswered = true;
+      inputEl.disabled = true;
+      const descSubmitBtn = document.getElementById('desc-submit-btn');
+      descSubmitBtn.disabled = true;
+
+      const finalScore = Math.max(1, Math.min(5, gradeResult.score || 1));
+      const isGrade56 = (currentGrade === '56');
+      const descDiff = isGrade56 ? '상' : '중';
+
+      // 서술형 부분 정답 포인트 매핑 (가이드라인 통일 표준: 5~6학년 상 5점 만점, 3~4학년 중 3점 만점)
+      const descPointMap = isGrade56
+        ? { 5: 5, 4: 4, 3: 3, 2: 2, 1: 1 }
+        : { 5: 3, 4: 2, 3: 2, 2: 1, 1: 1 };
+      const earnedPoints = descPointMap[finalScore] || 0;
+      const isCorrectAnswer = (finalScore >= 3); // 3점 이상 부분 정답 인정
+      const isRetry = isRetrySubmission;
+
+      if (!hasGradedCurrentQuestion) {
+        // [핵심 룰] 첫 채점 시에만 누적 점수에 반영! (오답이어도 최초 점수 보존)
+        hasGradedCurrentQuestion = true;
+        currentQuestionFirstScore = earnedPoints;
+        score += earnedPoints;
+        if (isCorrectAnswer) correctCount += 1;
+        // 4점 또는 5점 만점으로 멋지게 성공한 단어는 다음 세션에서 제외
+        if (finalScore >= 4) {
+          masteredWords.add(targetWord.toLowerCase());
+        }
+        document.getElementById('score-text').innerText = `⭐ ${score}점`;
+      }
+
+      // 통합 DB(quiz_logs)에 서술형 풀이 내역 저장 & 누적 총점 자동 합산
+      saveQuizResultToDb(
+        earnedPoints,
+        isCorrectAnswer,
+        userSentence,
+        '서술형',
+        `미션 단어 '${targetWord}' 문장 만들기`,
+        gradeResult.comment,
+        descDiff,
+        isRetry
+      );
+
+      playSound(isCorrectAnswer);
+      if (finalScore >= 4) setMascotEmotion('happy');
+      else if (finalScore <= 2) setMascotEmotion('sad');
+      else setMascotEmotion('normal');
+
+      const resBox = document.getElementById('result-box');
+      const resTitle = document.getElementById('result-title');
+      const resDesc = document.getElementById('result-desc');
+      resBox.style.display = 'block';
+
+      const verdictTitle = gradeResult.verdict_kr || ((finalScore >= 5) ? '🎉 자연스럽고 완벽한 문장이에요!' : ((finalScore >= 3) ? '💡 의미는 통하지만 표현이 조금 어색해요!' : '✏️ 틀린 부분이 있어 다시 확인해 보아요!'));
+
+      if (isRetry) {
+        resTitle.innerText = `🔄 [AI 재확인] ${verdictTitle} (⭐ ${finalScore} / 5점, +${earnedPoints}점)`;
+      } else {
+        resTitle.innerText = `🤖 [AI 3단계 검수] ${verdictTitle} (⭐ ${finalScore} / 5점, +${earnedPoints}점)`;
+      }
+      resTitle.style.color = (finalScore >= 4) ? '#15803d' : ((finalScore >= 3) ? '#d97706' : '#b91c1c');
+
+      const rawCorrected = gradeResult.corrected || `I like ${targetWord}s.`;
+      const highlightedSentence = buildHighlightedCorrection(userSentence, rawCorrected, finalScore);
+      const plainSpeechSentence = rawCorrected.replace(/<[^>]*>/g, '').trim();
+      currentSuggestedSentence = plainSpeechSentence;
+
+      let scoreNoticeHtml = '';
+      if (isRetry) {
+        scoreNoticeHtml = `
+          <div style="background: #fef3c7; border: 1.5px solid #fde68a; border-radius: 18px; padding: 10px 16px; margin-bottom: 14px; font-size: 14px; color: #92400e; display: flex; align-items: center; gap: 8px;">
+            <span>💡</span>
+            <span><b>[재도전 안심 알림]</b> 첫 채점 점수(⭐ ${currentQuestionFirstScore}점)가 안전하게 유지되며, 재체크 결과는 점수에 중복 가산되지 않습니다.</span>
+          </div>
+        `;
+      }
+
+      resDesc.innerHTML = `
+        ${scoreNoticeHtml}
+        <div style="margin-bottom: 14px; font-size: 16px;">
+          <b>👩‍🏫 선생님 피드백:</b> ${gradeResult.comment}
+        </div>
+        
+        <!-- 내가 쓴 문장을 좀 더 정답에 가깝게 다듬은 추천 문장 카드 -->
+        <div style="background: ${finalScore === 5 ? '#f0fdf4' : '#fff1f2'}; border: 2.5px solid ${finalScore === 5 ? '#86efac' : '#fecdd3'}; border-radius: 22px; padding: 18px 22px; margin-bottom: 14px; text-align: left;">
+          <div style="font-size: 15px; font-weight: bold; color: ${finalScore === 5 ? '#15803d' : '#be123c'}; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+            <span>${finalScore === 5 ? '🏆 완벽해요! 이미 5점 만점을 받은 멋진 문장이에요:' : '✨ 이렇게 고치면 5점 만점이에요 (빨간색 교정 부분 확인):'}</span>
+          </div>
+          <div style="font-size: 22px; color: #15803d; font-family: 'Nunito', sans-serif; font-weight: 800; letter-spacing: 0.3px; line-height: 1.5;">
+            "${highlightedSentence}"
+          </div>
+        </div>
+
+        <div style="font-size: 14px; color: #64748b; padding-left: 2px; margin-bottom: 16px;">
+          📝 내가 쓴 문장: "<span style="color: #334155; font-weight: bold;">${escapeHtml(userSentence)}</span>"
+        </div>
+
+        <!-- 5점 추천 문장 즉시 적용 및 재도전 유도 영역 -->
+        ${finalScore === 5 ? `
+          <div style="background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 20px; padding: 14px; text-align: center;">
+            <button type="button" class="desc-retry-btn" style="background: linear-gradient(135deg, #10b981, #059669);" onclick="enableDescriptiveRetry()">
+              ✏️ 다른 문장으로 또 연습해보기 🔄
+            </button>
+            <div style="font-size: 13px; color: #64748b; margin-top: 6px;">
+              현재 5점 만점 상태예요! 새로운 표현으로 문장을 또 만들어 볼 수도 있어요.
+            </div>
+          </div>
+        ` : `
+          <div style="background: #f0fdf4; border: 2.5px dashed #86efac; border-radius: 24px; padding: 18px 20px; text-align: center;">
+            <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
+              <button type="button" class="desc-apply-btn" onclick="applySuggestedAndRetry()">
+                📋 ✨ 5점 추천 문장으로 바로 채우고 재도전하기 🚀
+              </button>
+              <button type="button" class="desc-retry-btn" style="font-size: 15px; padding: 10px 22px; background: #64748b;" onclick="enableDescriptiveRetry()">
+                ✏️ 내가 직접 고쳐서 다시 확인받기 🔄
+              </button>
+            </div>
+            <div style="font-size: 13px; color: #15803d; margin-top: 10px; font-weight: 600;">
+              💡 [5점 추천 문장으로 바로 채우기]를 누르면 입력창에 쏙 채워져 쉽게 5점을 획득할 수 있어요! (첫 채점 점수는 안전하게 보존돼요)
+            </div>
+          </div>
+        `}
+      `;
+
+      setTimeout(() => speakAccent('en-US', plainSpeechSentence), 300);
+    }
+
+    function handleNextClick() {
+      currentQuestionIndex++;
+      if (currentQuestionIndex < totalSessionQuestions) {
+        renderCurrentQuestion();
+      } else {
+        showFinishScreen();
+      }
+    }
+
+    function showFinishScreen() {
+      document.getElementById('quiz-screen').style.display = 'none';
+      document.getElementById('finish-screen').style.display = 'block';
+      playVictorySound();
+      setMascotEmotion('happy');
+
+      document.getElementById('finish-score-display').innerText = `${score}점`;
+      document.getElementById('finish-detail-display').innerText = `총 ${totalSessionQuestions}문제 중 ${correctCount}문제 정답 완주! 💕`;
+    }
+
+    /* ========================================================
+       오디오 및 사운드 효과
+       ======================================================== */
+    function playSound(isCorrect) {
+      if (!audioCtx) return;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (isCorrect) {
+        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+        osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1);
+        osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.2);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.45);
+        osc.start(); osc.stop(audioCtx.currentTime + 0.45);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(220, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
+        osc.start(); osc.stop(audioCtx.currentTime + 0.35);
+      }
+    }
+
+    function playVictorySound() {
+      if (!audioCtx) return;
+      const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+      notes.forEach((freq, idx) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime + idx * 0.1);
+        gain.gain.setValueAtTime(0.18, audioCtx.currentTime + idx * 0.1);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + idx * 0.1 + 0.3);
+        osc.start(audioCtx.currentTime + idx * 0.1);
+        osc.stop(audioCtx.currentTime + idx * 0.1 + 0.3);
+      });
+    }
+
+    function speakAccent(langCode, customWord = null) {
+      const wordToSpeak = customWord || (currentQuizType === 'descriptive' && currentSuggestedSentence ? currentSuggestedSentence : currentQuiz?.word);
+      if (!wordToSpeak) return;
+
+      window.speechSynthesis.cancel();
+
+      // 브라우저에 등록된 사용 가능한 음성 목록 가져오기
+      const voices = window.speechSynthesis.getVoices() || [];
+      const utter = new SpeechSynthesisUtterance(wordToSpeak);
+
+      // 모든 국가(미국, 영국, 호주) 동일하게 최대 볼륨(1.0)으로 통일!
+      utter.volume = 1.0;
+
+      const normLang = (langCode || '').toLowerCase();
+
+      if (normLang.includes('au')) {
+        // [호주식 발음 (en-AU)]
+        utter.lang = 'en-AU';
+        // 1) 브라우저에 등록된 실제 호주 음성 검색 (Australia, en-AU, Karen, Catherine, Russell 등)
+        const auVoice = voices.find(v => {
+          const l = (v.lang || '').replace('_', '-').toLowerCase();
+          const n = (v.name || '').toLowerCase();
+          return l === 'en-au' || n.includes('australia') || n.includes('australian');
+        });
+
+        if (auVoice) {
+          utter.voice = auVoice;
+          utter.rate = 0.90;
+          utter.pitch = 1.02;
+        } else {
+          // 호주 보이스가 시스템에 없을 때는 영국/Commonwealth 보이스를 바탕으로 호주식 억양(Aussie broad vowel & intonation) 시뮬레이션
+          const fallbackGb = voices.find(v => (v.lang || '').replace('_', '-').toLowerCase() === 'en-gb');
+          if (fallbackGb) utter.voice = fallbackGb;
+          utter.rate = 0.88;
+          utter.pitch = 1.06;
+        }
+      } else if (normLang.includes('gb')) {
+        // [영국식 발음 (en-GB)]
+        utter.lang = 'en-GB';
+        const gbVoice = voices.find(v => {
+          const l = (v.lang || '').replace('_', '-').toLowerCase();
+          const n = (v.name || '').toLowerCase();
+          return l === 'en-gb' || n.includes('united kingdom') || n.includes('uk') || n.includes('george') || n.includes('hazel');
+        });
+        if (gbVoice) utter.voice = gbVoice;
+        utter.rate = 0.92;
+        utter.pitch = 0.98;
+      } else {
+        // [미국식 발음 (en-US)]
+        utter.lang = 'en-US';
+        const usVoice = voices.find(v => {
+          const l = (v.lang || '').replace('_', '-').toLowerCase();
+          const n = (v.name || '').toLowerCase();
+          return l === 'en-us' || n.includes('united states') || n.includes('us');
+        });
+        if (usVoice) utter.voice = usVoice;
+        utter.rate = 0.95;
+        utter.pitch = 1.0;
+      }
+
+      // 음성 재생 (작은 딜레이로 안정화)
+      setTimeout(() => {
+        window.speechSynthesis.speak(utter);
+      }, 30);
+    }
+
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.getVoices();
+      };
+    }
+
+    /* 마스코트 표정 전환 */
+    function setMascotEmotion(emotion) {
+      const stage = document.getElementById('main-mascot');
+      if (emotion === 'happy') {
+        stage.classList.add('bounce');
+      } else {
+        stage.classList.remove('bounce');
+      }
+    }
+
+    function getSpeakerSvg() {
+      return `
+        <svg viewBox="0 0 24 24" fill="none" stroke="#854d0e" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11 5.5 L6.8 8.8 C6.4 9.1 5.9 9.3 5.4 9.3 H3.8 C2.8 9.3 2 10.1 2 11.1 V12.9 C2 13.9 2.8 14.7 3.8 14.7 H5.4 C5.9 14.7 6.4 14.9 6.8 15.2 L11 18.5 C11.8 19.1 13 18.5 13 17.5 V6.5 C13 5.5 11.8 4.9 11 5.5 Z" fill="#fef9c3"/>
+          <path d="M16.5 9.5 C17.8 10.8 17.8 13.2 16.5 14.5" />
+          <path d="M19.5 6.5 C22.5 9.5 22.5 14.5 19.5 17.5" />
+        </svg>
+      `;
+    }
+
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+  </script>
+</body>
+</html>

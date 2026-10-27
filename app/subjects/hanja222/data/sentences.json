@@ -1,0 +1,1276 @@
+[
+  {
+    "id": "idiom-01",
+    "original": "一石二鳥",
+    "reading": "일석이조",
+    "model_answer": "한 가지 일을 해서 두 가지 이익을 얻는다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 한가지, 한번, 하나",
+        "weight": 50,
+        "patterns": [
+          "한가지",
+          "한번",
+          "하나"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 두가지, 둘, 이익, 효과",
+        "weight": 50,
+        "patterns": [
+          "두가지",
+          "둘",
+          "이익",
+          "효과"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "한가지",
+      "한번",
+      "하나",
+      "두가지",
+      "둘",
+      "이익",
+      "효과"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=일석이조",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-02",
+    "original": "一擧兩得",
+    "reading": "일거양득",
+    "model_answer": "한 번의 행동으로 두 가지 좋은 결과를 얻는다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 한번, 한가지, 하나",
+        "weight": 50,
+        "patterns": [
+          "한번",
+          "한가지",
+          "하나"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 두가지, 둘, 이익, 효과",
+        "weight": 50,
+        "patterns": [
+          "두가지",
+          "둘",
+          "이익",
+          "효과"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "한번",
+      "한가지",
+      "하나",
+      "두가지",
+      "둘",
+      "이익",
+      "효과"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=일거양득",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-03",
+    "original": "東問西答",
+    "reading": "동문서답",
+    "model_answer": "물어본 것과 관계없는 엉뚱한 대답을 한다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 질문, 물어, 묻",
+        "weight": 50,
+        "patterns": [
+          "질문",
+          "물어",
+          "묻"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 엉뚱, 다른, 상관없, 관계없",
+        "weight": 50,
+        "patterns": [
+          "엉뚱",
+          "다른",
+          "상관없",
+          "관계없"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "질문",
+      "물어",
+      "묻",
+      "엉뚱",
+      "다른",
+      "상관없",
+      "관계없"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=동문서답",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-04",
+    "original": "三日天下",
+    "reading": "삼일천하",
+    "model_answer": "권력이나 좋은 기세가 아주 짧은 시간만 이어진다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 권력, 기세, 세력, 성공",
+        "weight": 50,
+        "patterns": [
+          "권력",
+          "기세",
+          "세력",
+          "성공"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 짧, 잠깐, 오래못",
+        "weight": 50,
+        "patterns": [
+          "짧",
+          "잠깐",
+          "오래못"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "권력",
+      "기세",
+      "세력",
+      "성공",
+      "짧",
+      "잠깐",
+      "오래못"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=삼일천하",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-05",
+    "original": "作心三日",
+    "reading": "작심삼일",
+    "model_answer": "마음먹은 일을 오래 하지 못하고 금방 그만둔다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 결심, 마음, 계획, 다짐",
+        "weight": 50,
+        "patterns": [
+          "결심",
+          "마음",
+          "계획",
+          "다짐"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 삼일, 3일, 금방, 그만, 오래못",
+        "weight": 50,
+        "patterns": [
+          "삼일",
+          "3일",
+          "금방",
+          "그만",
+          "오래못"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "결심",
+      "마음",
+      "계획",
+      "다짐",
+      "삼일",
+      "3일",
+      "금방",
+      "그만",
+      "오래못"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=작심삼일",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-06",
+    "original": "有備無患",
+    "reading": "유비무환",
+    "model_answer": "미리 준비해 두면 걱정하거나 곤란해질 일이 없다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 미리, 준비, 대비",
+        "weight": 50,
+        "patterns": [
+          "미리",
+          "준비",
+          "대비"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 걱정없, 안전, 곤란, 문제없",
+        "weight": 50,
+        "patterns": [
+          "걱정없",
+          "안전",
+          "곤란",
+          "문제없"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "미리",
+      "준비",
+      "대비",
+      "걱정없",
+      "안전",
+      "곤란",
+      "문제없"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=유비무환",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-07",
+    "original": "苦盡甘來",
+    "reading": "고진감래",
+    "model_answer": "힘든 일을 견디고 나면 즐겁고 좋은 일이 온다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 힘든, 고생, 어려움, 괴로",
+        "weight": 50,
+        "patterns": [
+          "힘든",
+          "고생",
+          "어려움",
+          "괴로"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 좋은, 기쁨, 즐거, 행복",
+        "weight": 50,
+        "patterns": [
+          "좋은",
+          "기쁨",
+          "즐거",
+          "행복"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "힘든",
+      "고생",
+      "어려움",
+      "괴로",
+      "좋은",
+      "기쁨",
+      "즐거",
+      "행복"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=고진감래",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-08",
+    "original": "七顚八起",
+    "reading": "칠전팔기",
+    "model_answer": "여러 번 실패해도 포기하지 않고 다시 도전한다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 실패, 넘어, 쓰러",
+        "weight": 50,
+        "patterns": [
+          "실패",
+          "넘어",
+          "쓰러"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 다시, 포기하지, 도전, 일어나",
+        "weight": 50,
+        "patterns": [
+          "다시",
+          "포기하지",
+          "도전",
+          "일어나"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "실패",
+      "넘어",
+      "쓰러",
+      "다시",
+      "포기하지",
+      "도전",
+      "일어나"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=칠전팔기",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-09",
+    "original": "百發百中",
+    "reading": "백발백중",
+    "model_answer": "목표를 겨냥할 때마다 모두 맞히거나 예상이 늘 들어맞는다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 목표, 겨냥, 예상, 쏘",
+        "weight": 50,
+        "patterns": [
+          "목표",
+          "겨냥",
+          "예상",
+          "쏘"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 모두, 항상, 늘, 맞",
+        "weight": 50,
+        "patterns": [
+          "모두",
+          "항상",
+          "늘",
+          "맞"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "목표",
+      "겨냥",
+      "예상",
+      "쏘",
+      "모두",
+      "항상",
+      "늘",
+      "맞"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=백발백중",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-10",
+    "original": "異口同聲",
+    "reading": "이구동성",
+    "model_answer": "여러 사람이 한목소리로 같은 말을 한다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 여러, 모두, 사람들",
+        "weight": 50,
+        "patterns": [
+          "여러",
+          "모두",
+          "사람들"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 같은말, 한목소리, 똑같",
+        "weight": 50,
+        "patterns": [
+          "같은말",
+          "한목소리",
+          "똑같"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "여러",
+      "모두",
+      "사람들",
+      "같은말",
+      "한목소리",
+      "똑같"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=이구동성",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-11",
+    "original": "以心傳心",
+    "reading": "이심전심",
+    "model_answer": "말하지 않아도 서로의 마음이 통한다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 말하지, 말없이, 안해",
+        "weight": 50,
+        "patterns": [
+          "말하지",
+          "말없이",
+          "안해"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 마음, 통하, 알아",
+        "weight": 50,
+        "patterns": [
+          "마음",
+          "통하",
+          "알아"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "말하지",
+      "말없이",
+      "안해",
+      "마음",
+      "통하",
+      "알아"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=이심전심",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-12",
+    "original": "十匙一飯",
+    "reading": "십시일반",
+    "model_answer": "여러 사람이 조금씩 힘을 보태 한 사람을 돕는다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 여러, 조금씩, 함께",
+        "weight": 50,
+        "patterns": [
+          "여러",
+          "조금씩",
+          "함께"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 도움, 돕, 도와, 보태",
+        "weight": 50,
+        "patterns": [
+          "도움",
+          "돕",
+          "도와",
+          "보태"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "여러",
+      "조금씩",
+      "함께",
+      "도움",
+      "돕",
+      "도와",
+      "보태"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=십시일반",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-13",
+    "original": "相扶相助",
+    "reading": "상부상조",
+    "model_answer": "서로 힘을 보태고 도우며 지낸다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 서로, 함께",
+        "weight": 50,
+        "patterns": [
+          "서로",
+          "함께"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 돕, 도와, 도움, 보태",
+        "weight": 50,
+        "patterns": [
+          "돕",
+          "도와",
+          "도움",
+          "보태"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "서로",
+      "함께",
+      "돕",
+      "도와",
+      "도움",
+      "보태"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=상부상조",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-14",
+    "original": "切磋琢磨",
+    "reading": "절차탁마",
+    "model_answer": "학문이나 재주를 꾸준히 갈고닦아 발전시킨다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 공부, 학문, 재주, 실력",
+        "weight": 50,
+        "patterns": [
+          "공부",
+          "학문",
+          "재주",
+          "실력"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 노력, 꾸준, 갈고, 닦, 발전",
+        "weight": 50,
+        "patterns": [
+          "노력",
+          "꾸준",
+          "갈고",
+          "닦",
+          "발전"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "공부",
+      "학문",
+      "재주",
+      "실력",
+      "노력",
+      "꾸준",
+      "갈고",
+      "닦",
+      "발전"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=절차탁마",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-15",
+    "original": "溫故知新",
+    "reading": "온고지신",
+    "model_answer": "옛것을 배우고 익혀 새로운 것을 알게 된다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 옛, 이전, 과거",
+        "weight": 50,
+        "patterns": [
+          "옛",
+          "이전",
+          "과거"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 새로, 새것, 깨달",
+        "weight": 50,
+        "patterns": [
+          "새로",
+          "새것",
+          "깨달"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "옛",
+      "이전",
+      "과거",
+      "새로",
+      "새것",
+      "깨달"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=온고지신",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-16",
+    "original": "大器晩成",
+    "reading": "대기만성",
+    "model_answer": "크게 될 사람은 오랜 노력 끝에 뒤늦게 이루어진다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 큰사람, 훌륭, 성공, 크게",
+        "weight": 50,
+        "patterns": [
+          "큰사람",
+          "훌륭",
+          "성공",
+          "크게"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 늦, 오래, 시간",
+        "weight": 50,
+        "patterns": [
+          "늦",
+          "오래",
+          "시간"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "큰사람",
+      "훌륭",
+      "성공",
+      "크게",
+      "늦",
+      "오래",
+      "시간"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=대기만성",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-17",
+    "original": "井底之蛙",
+    "reading": "정저지와",
+    "model_answer": "아는 세상이 좁아 더 넓은 세상을 모르는 사람이라는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 좁, 우물, 자기세상",
+        "weight": 50,
+        "patterns": [
+          "좁",
+          "우물",
+          "자기세상"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 모르, 세상, 생각, 지식",
+        "weight": 50,
+        "patterns": [
+          "모르",
+          "세상",
+          "생각",
+          "지식"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "좁",
+      "우물",
+      "자기세상",
+      "모르",
+      "세상",
+      "생각",
+      "지식"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=정저지와",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-18",
+    "original": "走馬看山",
+    "reading": "주마간산",
+    "model_answer": "자세히 살피지 않고 대강 보고 지나간다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 대충, 대강, 훑, 겉",
+        "weight": 50,
+        "patterns": [
+          "대충",
+          "대강",
+          "훑",
+          "겉"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 보, 살피, 지나",
+        "weight": 50,
+        "patterns": [
+          "보",
+          "살피",
+          "지나"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "대충",
+      "대강",
+      "훑",
+      "겉",
+      "보",
+      "살피",
+      "지나"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=주마간산",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-19",
+    "original": "雪上加霜",
+    "reading": "설상가상",
+    "model_answer": "어려운 일이 생겼는데 또 다른 어려움이 겹친다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 힘든, 어려, 나쁜",
+        "weight": 50,
+        "patterns": [
+          "힘든",
+          "어려",
+          "나쁜"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 또, 겹, 더, 계속",
+        "weight": 50,
+        "patterns": [
+          "또",
+          "겹",
+          "더",
+          "계속"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "힘든",
+      "어려",
+      "나쁜",
+      "또",
+      "겹",
+      "더",
+      "계속"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=설상가상",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-20",
+    "original": "錦上添花",
+    "reading": "금상첨화",
+    "model_answer": "이미 좋은 일에 더 좋은 일이 더해진다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 좋은, 좋다, 좋은일",
+        "weight": 50,
+        "patterns": [
+          "좋은",
+          "좋다",
+          "좋은일"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 더, 또, 겹, 추가",
+        "weight": 50,
+        "patterns": [
+          "더",
+          "또",
+          "겹",
+          "추가"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "좋은",
+      "좋다",
+      "좋은일",
+      "더",
+      "또",
+      "겹",
+      "추가"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=금상첨화",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-21",
+    "original": "自業自得",
+    "reading": "자업자득",
+    "model_answer": "자기가 한 행동의 결과를 자기가 받는다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 자기, 스스로, 자신",
+        "weight": 50,
+        "patterns": [
+          "자기",
+          "스스로",
+          "자신"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 결과, 돌아, 받, 책임",
+        "weight": 50,
+        "patterns": [
+          "결과",
+          "돌아",
+          "받",
+          "책임"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "자기",
+      "스스로",
+      "자신",
+      "결과",
+      "돌아",
+      "받",
+      "책임"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=자업자득",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-22",
+    "original": "自繩自縛",
+    "reading": "자승자박",
+    "model_answer": "자기가 한 말이나 행동 때문에 스스로 곤란해진다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 자기, 스스로, 자신",
+        "weight": 50,
+        "patterns": [
+          "자기",
+          "스스로",
+          "자신"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 곤란, 묶, 힘들, 갇",
+        "weight": 50,
+        "patterns": [
+          "곤란",
+          "묶",
+          "힘들",
+          "갇"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "자기",
+      "스스로",
+      "자신",
+      "곤란",
+      "묶",
+      "힘들",
+      "갇"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=자승자박",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-23",
+    "original": "多多益善",
+    "reading": "다다익선",
+    "model_answer": "많으면 많을수록 더 좋다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 많",
+        "weight": 50,
+        "patterns": [
+          "많"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 좋",
+        "weight": 50,
+        "patterns": [
+          "좋"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "많",
+      "좋"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=다다익선",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-24",
+    "original": "半信半疑",
+    "reading": "반신반의",
+    "model_answer": "어느 정도 믿으면서도 한편으로는 의심한다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 믿",
+        "weight": 50,
+        "patterns": [
+          "믿"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 의심, 못믿, 반반",
+        "weight": 50,
+        "patterns": [
+          "의심",
+          "못믿",
+          "반반"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "믿",
+      "의심",
+      "못믿",
+      "반반"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=반신반의",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-25",
+    "original": "大同小異",
+    "reading": "대동소이",
+    "model_answer": "조금 차이는 있어도 본질적으로는 거의 같다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 차이, 다르, 조금",
+        "weight": 50,
+        "patterns": [
+          "차이",
+          "다르",
+          "조금"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 비슷, 같, 별차이없",
+        "weight": 50,
+        "patterns": [
+          "비슷",
+          "같",
+          "별차이없"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "차이",
+      "다르",
+      "조금",
+      "비슷",
+      "같",
+      "별차이없"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=대동소이",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-26",
+    "original": "天高馬肥",
+    "reading": "천고마비",
+    "model_answer": "하늘이 높고 말이 살찌는, 날씨가 좋고 풍성한 가을이라는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 하늘, 높, 말",
+        "weight": 50,
+        "patterns": [
+          "하늘",
+          "높",
+          "말"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 가을, 살찌, 풍성",
+        "weight": 50,
+        "patterns": [
+          "가을",
+          "살찌",
+          "풍성"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "하늘",
+      "높",
+      "말",
+      "가을",
+      "살찌",
+      "풍성"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=천고마비",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-27",
+    "original": "山海珍味",
+    "reading": "산해진미",
+    "model_answer": "산과 바다에서 나는 재료로 만든 맛있고 귀한 음식이라는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 음식, 먹을, 요리",
+        "weight": 50,
+        "patterns": [
+          "음식",
+          "먹을",
+          "요리"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 맛있, 귀한, 산과바다, 진귀",
+        "weight": 50,
+        "patterns": [
+          "맛있",
+          "귀한",
+          "산과바다",
+          "진귀"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "음식",
+      "먹을",
+      "요리",
+      "맛있",
+      "귀한",
+      "산과바다",
+      "진귀"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=산해진미",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-28",
+    "original": "右往左往",
+    "reading": "우왕좌왕",
+    "model_answer": "어떻게 해야 할지 몰라 이리저리 갈팡질팡한다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 어떻게, 방향, 판단, 정하지",
+        "weight": 50,
+        "patterns": [
+          "어떻게",
+          "방향",
+          "판단",
+          "정하지"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 헤매, 갈팡질팡, 이리저리, 당황",
+        "weight": 50,
+        "patterns": [
+          "헤매",
+          "갈팡질팡",
+          "이리저리",
+          "당황"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "어떻게",
+      "방향",
+      "판단",
+      "정하지",
+      "헤매",
+      "갈팡질팡",
+      "이리저리",
+      "당황"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=우왕좌왕",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-29",
+    "original": "一心同體",
+    "reading": "일심동체",
+    "model_answer": "여럿이 한 사람처럼 마음을 모아 함께한다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 마음, 뜻",
+        "weight": 50,
+        "patterns": [
+          "마음",
+          "뜻"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 하나, 함께, 같, 모아",
+        "weight": 50,
+        "patterns": [
+          "하나",
+          "함께",
+          "같",
+          "모아"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "마음",
+      "뜻",
+      "하나",
+      "함께",
+      "같",
+      "모아"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=일심동체",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  },
+  {
+    "id": "idiom-30",
+    "original": "同苦同樂",
+    "reading": "동고동락",
+    "model_answer": "괴로운 일과 즐거운 일을 함께 겪으며 지낸다는 뜻이에요.",
+    "rubric": [
+      {
+        "label": "핵심 의미 1: 괴로, 힘든, 고생",
+        "weight": 50,
+        "patterns": [
+          "괴로",
+          "힘든",
+          "고생"
+        ],
+        "blocks": []
+      },
+      {
+        "label": "핵심 의미 2: 즐거, 기쁨, 행복, 함께",
+        "weight": 50,
+        "patterns": [
+          "즐거",
+          "기쁨",
+          "행복",
+          "함께"
+        ],
+        "blocks": []
+      }
+    ],
+    "keywords": [
+      "괴로",
+      "힘든",
+      "고생",
+      "즐거",
+      "기쁨",
+      "행복",
+      "함께"
+    ],
+    "source_title": "사자성어 사전 찾아보기",
+    "source_url": "https://krdict.korean.go.kr/kor/dicSearch/search?mainSearchWord=동고동락",
+    "source_note": "쉬운 뜻풀이 연습 30개 · 한자 급수와 별개로 출제해요.",
+    "kind": "idiom",
+    "category": "idioms"
+  }
+]

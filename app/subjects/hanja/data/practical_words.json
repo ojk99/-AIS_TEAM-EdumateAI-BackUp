@@ -1,0 +1,558 @@
+[
+  {
+    "id": "news-01",
+    "target_word": "敎材",
+    "reading": "교재",
+    "target_meaning": "공부할 때 쓰는 책이나 자료",
+    "grade": 6,
+    "character_grades": [
+      {
+        "character": "敎",
+        "grade": 6
+      },
+      {
+        "character": "材",
+        "grade": 7
+      }
+    ],
+    "fallback_sentence": "어린이들이 새 敎材로 공부해요."
+  },
+  {
+    "id": "news-02",
+    "target_word": "讀書",
+    "reading": "독서",
+    "target_meaning": "책을 읽는 일",
+    "grade": 5,
+    "character_grades": [
+      {
+        "character": "讀",
+        "grade": 5
+      },
+      {
+        "character": "書",
+        "grade": 8
+      }
+    ],
+    "fallback_sentence": "방학 동안 讀書를 즐겨요."
+  },
+  {
+    "id": "news-03",
+    "target_word": "父母",
+    "reading": "부모",
+    "target_meaning": "아버지와 어머니",
+    "grade": 9,
+    "character_grades": [
+      {
+        "character": "父",
+        "grade": 9
+      },
+      {
+        "character": "母",
+        "grade": 9
+      }
+    ],
+    "fallback_sentence": "父母가 아이의 이야기를 들어요."
+  },
+  {
+    "id": "news-04",
+    "target_word": "漢文",
+    "reading": "한문",
+    "target_meaning": "한자로 쓰인 글",
+    "grade": 6,
+    "character_grades": [
+      {
+        "character": "漢",
+        "grade": 6
+      },
+      {
+        "character": "文",
+        "grade": 9
+      }
+    ],
+    "fallback_sentence": "어린이들이 漢文을 배워요."
+  },
+  {
+    "id": "news-05",
+    "target_word": "名畫",
+    "reading": "명화",
+    "target_meaning": "이름난 훌륭한 그림",
+    "grade": 7,
+    "character_grades": [
+      {
+        "character": "名",
+        "grade": 8
+      },
+      {
+        "character": "畫",
+        "grade": 7
+      }
+    ],
+    "fallback_sentence": "미술관에서 名畫를 보아요."
+  },
+  {
+    "id": "news-06",
+    "target_word": "安全",
+    "reading": "안전",
+    "target_meaning": "위험하지 않고 다치지 않는 것",
+    "grade": 7,
+    "character_grades": [
+      {
+        "character": "安",
+        "grade": 7
+      },
+      {
+        "character": "全",
+        "grade": 8
+      }
+    ],
+    "fallback_sentence": "길을 건널 때는 安全을 먼저 생각해요."
+  },
+  {
+    "id": "news-07",
+    "target_word": "交通",
+    "reading": "교통",
+    "target_meaning": "사람이나 차가 오가는 것",
+    "grade": 6,
+    "character_grades": [
+      {
+        "character": "交",
+        "grade": 9
+      },
+      {
+        "character": "通",
+        "grade": 6
+      }
+    ],
+    "fallback_sentence": "어린이들이 交通 규칙을 배워요."
+  },
+  {
+    "id": "news-08",
+    "target_word": "家族",
+    "reading": "가족",
+    "target_meaning": "집안에서 함께 지내는 사람들",
+    "grade": 7,
+    "character_grades": [
+      {
+        "character": "家",
+        "grade": 8
+      },
+      {
+        "character": "族",
+        "grade": 7
+      }
+    ],
+    "fallback_sentence": "家族이 함께 공연을 보아요."
+  },
+  {
+    "id": "news-09",
+    "target_word": "兒童",
+    "reading": "아동",
+    "target_meaning": "어린이",
+    "grade": 7,
+    "character_grades": [
+      {
+        "character": "兒",
+        "grade": 9
+      },
+      {
+        "character": "童",
+        "grade": 7
+      }
+    ],
+    "fallback_sentence": "兒童을 위한 연극이 열려요."
+  },
+  {
+    "id": "news-10",
+    "target_word": "農産物",
+    "reading": "농산물",
+    "target_meaning": "농사를 지어 얻은 곡식이나 채소 같은 것",
+    "grade": 6,
+    "character_grades": [
+      {
+        "character": "農",
+        "grade": 7
+      },
+      {
+        "character": "産",
+        "grade": 6
+      },
+      {
+        "character": "物",
+        "grade": 7
+      }
+    ],
+    "fallback_sentence": "장터에서 신선한 農産物을 사요."
+  },
+  {
+    "id": "news-11",
+    "target_word": "電氣",
+    "reading": "전기",
+    "target_meaning": "불을 켜거나 기계를 움직이는 에너지",
+    "grade": 7,
+    "character_grades": [
+      {
+        "character": "電",
+        "grade": 7
+      },
+      {
+        "character": "氣",
+        "grade": 7
+      }
+    ],
+    "fallback_sentence": "좋은 電氣를 안정되게 공급해요."
+  },
+  {
+    "id": "news-12",
+    "target_word": "文化",
+    "reading": "문화",
+    "target_meaning": "사람들이 살아가며 만든 생활 방식과 예술",
+    "grade": 7,
+    "character_grades": [
+      {
+        "character": "文",
+        "grade": 9
+      },
+      {
+        "character": "化",
+        "grade": 7
+      }
+    ],
+    "fallback_sentence": "공연으로 우리 文化를 알려요."
+  },
+  {
+    "id": "news-13",
+    "target_word": "公園",
+    "reading": "공원",
+    "target_meaning": "사람들이 산책하거나 쉬도록 만든 곳",
+    "grade": 6,
+    "character_grades": [
+      {
+        "character": "公",
+        "grade": 7
+      },
+      {
+        "character": "園",
+        "grade": 6
+      }
+    ],
+    "fallback_sentence": "이웃들이 公園에서 쉬어요."
+  },
+  {
+    "id": "news-14",
+    "target_word": "女子",
+    "reading": "여자",
+    "target_meaning": "여성",
+    "grade": 9,
+    "character_grades": [
+      {
+        "character": "女",
+        "grade": 9
+      },
+      {
+        "character": "子",
+        "grade": 9
+      }
+    ],
+    "fallback_sentence": "女子 농구 선수들이 연습해요."
+  },
+  {
+    "id": "news-15",
+    "target_word": "海水浴",
+    "reading": "해수욕",
+    "target_meaning": "바닷물에서 헤엄치거나 몸을 담그며 노는 일",
+    "grade": 5,
+    "character_grades": [
+      {
+        "character": "海",
+        "grade": 7
+      },
+      {
+        "character": "水",
+        "grade": 9
+      },
+      {
+        "character": "浴",
+        "grade": 5
+      }
+    ],
+    "fallback_sentence": "여름에는 海水浴을 즐겨요."
+  },
+  {
+    "id": "news-16",
+    "target_word": "數學",
+    "reading": "수학",
+    "target_meaning": "수와 계산 등을 배우는 공부",
+    "grade": 6,
+    "character_grades": [
+      {
+        "character": "數",
+        "grade": 6
+      },
+      {
+        "character": "學",
+        "grade": 7
+      }
+    ],
+    "fallback_sentence": "어린이들이 數學 문제를 풀어요."
+  },
+  {
+    "id": "news-17",
+    "target_word": "文學",
+    "reading": "문학",
+    "target_meaning": "시나 소설처럼 말과 글로 표현한 예술",
+    "grade": 7,
+    "character_grades": [
+      {
+        "character": "文",
+        "grade": 9
+      },
+      {
+        "character": "學",
+        "grade": 7
+      }
+    ],
+    "fallback_sentence": "재미있는 文學 작품을 읽어요."
+  },
+  {
+    "id": "news-18",
+    "target_word": "少年",
+    "reading": "소년",
+    "target_meaning": "어린 남자아이 또는 아직 어른이 되지 않은 아이",
+    "grade": 8,
+    "character_grades": [
+      {
+        "character": "少",
+        "grade": 8
+      },
+      {
+        "character": "年",
+        "grade": 8
+      }
+    ],
+    "fallback_sentence": "少年에게 읽을 만한 책을 골라요."
+  },
+  {
+    "id": "news-19",
+    "target_word": "大會",
+    "reading": "대회",
+    "target_meaning": "많은 사람이 모여 겨루거나 행사하는 모임",
+    "grade": 6,
+    "character_grades": [
+      {
+        "character": "大",
+        "grade": 9
+      },
+      {
+        "character": "會",
+        "grade": 6
+      }
+    ],
+    "fallback_sentence": "친구들이 운동 大會에 나가요."
+  },
+  {
+    "id": "news-20",
+    "target_word": "全國",
+    "reading": "전국",
+    "target_meaning": "나라 전체",
+    "grade": 7,
+    "character_grades": [
+      {
+        "character": "全",
+        "grade": 8
+      },
+      {
+        "character": "國",
+        "grade": 7
+      }
+    ],
+    "fallback_sentence": "全國의 어린이들이 행사에 모여요."
+  },
+  {
+    "id": "news-21",
+    "target_word": "新年",
+    "reading": "신년",
+    "target_meaning": "새해",
+    "grade": 5,
+    "character_grades": [
+      {
+        "character": "新",
+        "grade": 5
+      },
+      {
+        "character": "年",
+        "grade": 8
+      }
+    ],
+    "fallback_sentence": "新年을 맞아 서로 인사해요."
+  },
+  {
+    "id": "news-22",
+    "target_word": "新聞",
+    "reading": "신문",
+    "target_meaning": "여러 소식을 전하는 종이 매체",
+    "grade": 5,
+    "character_grades": [
+      {
+        "character": "新",
+        "grade": 5
+      },
+      {
+        "character": "聞",
+        "grade": 7
+      }
+    ],
+    "fallback_sentence": "오늘의 소식을 新聞에서 읽어요."
+  },
+  {
+    "id": "news-23",
+    "target_word": "電子",
+    "reading": "전자",
+    "target_meaning": "전기를 이용하는 기술과 관련된 것",
+    "grade": 7,
+    "character_grades": [
+      {
+        "character": "電",
+        "grade": 7
+      },
+      {
+        "character": "子",
+        "grade": 9
+      }
+    ],
+    "fallback_sentence": "電子 기기로 소식을 볼 수 있어요."
+  },
+  {
+    "id": "news-24",
+    "target_word": "音樂",
+    "reading": "음악",
+    "target_meaning": "소리로 표현하는 노래나 연주",
+    "grade": 8,
+    "character_grades": [
+      {
+        "character": "音",
+        "grade": 8
+      },
+      {
+        "character": "樂",
+        "grade": 8
+      }
+    ],
+    "fallback_sentence": "아름다운 音樂을 함께 들어요."
+  },
+  {
+    "id": "news-25",
+    "target_word": "世界",
+    "reading": "세계",
+    "target_meaning": "지구의 모든 나라와 사람들의 사회",
+    "grade": 7,
+    "character_grades": [
+      {
+        "character": "世",
+        "grade": 8
+      },
+      {
+        "character": "界",
+        "grade": 7
+      }
+    ],
+    "fallback_sentence": "世界 여러 나라의 소식을 알아보아요."
+  },
+  {
+    "id": "news-26",
+    "target_word": "高價品",
+    "reading": "고가품",
+    "target_meaning": "가격이 비싼 물건",
+    "grade": 6,
+    "character_grades": [
+      {
+        "character": "高",
+        "grade": 9
+      },
+      {
+        "character": "價",
+        "grade": 6
+      },
+      {
+        "character": "品",
+        "grade": 7
+      }
+    ],
+    "fallback_sentence": "가게에 값이 비싼 高價品이 있어요."
+  },
+  {
+    "id": "news-27",
+    "target_word": "食生活",
+    "reading": "식생활",
+    "target_meaning": "음식을 먹으며 살아가는 생활",
+    "grade": 7,
+    "character_grades": [
+      {
+        "character": "食",
+        "grade": 8
+      },
+      {
+        "character": "生",
+        "grade": 8
+      },
+      {
+        "character": "活",
+        "grade": 7
+      }
+    ],
+    "fallback_sentence": "좋은 食生活을 위해 음식을 골고루 먹어요."
+  },
+  {
+    "id": "news-28",
+    "target_word": "農業",
+    "reading": "농업",
+    "target_meaning": "곡식이나 채소 등을 기르는 일",
+    "grade": 7,
+    "character_grades": [
+      {
+        "character": "農",
+        "grade": 7
+      },
+      {
+        "character": "業",
+        "grade": 8
+      }
+    ],
+    "fallback_sentence": "農業은 우리에게 먹을 것을 마련해 줘요."
+  },
+  {
+    "id": "news-29",
+    "target_word": "電話",
+    "reading": "전화",
+    "target_meaning": "멀리 있는 사람과 목소리로 이야기하는 기기",
+    "grade": 7,
+    "character_grades": [
+      {
+        "character": "電",
+        "grade": 7
+      },
+      {
+        "character": "話",
+        "grade": 7
+      }
+    ],
+    "fallback_sentence": "산에서 電話로 도움을 요청해요."
+  },
+  {
+    "id": "news-30",
+    "target_word": "植物",
+    "reading": "식물",
+    "target_meaning": "나무나 풀처럼 자라는 생물",
+    "grade": 6,
+    "character_grades": [
+      {
+        "character": "植",
+        "grade": 6
+      },
+      {
+        "character": "物",
+        "grade": 7
+      }
+    ],
+    "fallback_sentence": "植物이 자라는 모습을 살펴보아요."
+  }
+]

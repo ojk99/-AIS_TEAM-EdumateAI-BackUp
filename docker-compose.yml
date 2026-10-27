@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  edumate-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: edumate_ai_app
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data

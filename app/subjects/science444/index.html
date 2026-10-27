@@ -1,0 +1,4694 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduMate AI - 초등 과학 통합 학습관 (OX · 5지선다 · 서술형)</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Pretendard", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f0f9ff 0%, #fefce8 50%, #f0fdf4 100%);
+      min-height: 100vh;
+      color: #1e293b;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ==============================================================================
+       1. 최상단 2단 메뉴바 (과목 1단 + 풀이 방식 2단)
+       ============================================================================== */
+    .app-header {
+      background: #ffffff;
+      border-bottom: 2px solid #bae6fd;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    /* 1단: 과목 선택 바 (반응형 지원) */
+    .top-subject-bar {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 0 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .top-subject-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 52px;
+      height: auto;
+      padding: 6px 0;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 19px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: #ffffff;
+      flex-shrink: 0;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .brand-logo:hover {
+      opacity: 0.92;
+    }
+
+    .brand-badge {
+      background: #0284c7;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 6px;
+    }
+
+    /* 포켓몬 5대 진화 바 & 누적 점수 패널 */
+    .user-pokemon-panel {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      padding: 5px 14px;
+      border-radius: 9999px;
+      color: #ffffff;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .user-exp-track {
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 9999px;
+      height: 7px;
+      width: 70px;
+      overflow: hidden;
+    }
+
+    .user-exp-fill {
+      background: #38bdf8;
+      height: 100%;
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    /* AI 질문하기 및 즐겨찾기 스타일 */
+    .btn-fav-star {
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      color: #64748b;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+
+    .btn-fav-star:hover {
+      background: #fef08a;
+      border-color: #facc15;
+      color: #854d0e;
+    }
+
+    .btn-fav-star.active {
+      background: #fef08a;
+      border-color: #eab308;
+      color: #854d0e;
+    }
+
+    .btn-ask-teacher {
+      background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+      color: #ffffff;
+      border: none;
+      font-size: 12.5px;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+
+    .btn-ask-teacher:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(2, 132, 199, 0.3);
+    }
+
+    .qa-chat-box {
+      margin-top: 10px;
+      background: #f8fafc;
+      border: 1.5px solid #bae6fd;
+      border-radius: 12px;
+      padding: 12px;
+      text-align: left;
+    }
+
+    .qa-history-list {
+      max-height: 180px;
+      overflow-y: auto;
+      margin-bottom: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .qa-msg-bubble {
+      padding: 7px 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .qa-msg-bubble.user {
+      background: #e0f2fe;
+      color: #0369a1;
+      align-self: flex-end;
+      border-bottom-right-radius: 2px;
+      max-width: 80%;
+    }
+
+    .qa-msg-bubble.ai {
+      background: #f0fdf4;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+      align-self: flex-start;
+      border-bottom-left-radius: 2px;
+      max-width: 85%;
+    }
+
+    .qa-input-row {
+      display: flex;
+      gap: 6px;
+    }
+
+    .qa-input-field {
+      flex: 1;
+      padding: 7px 12px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .qa-input-field:focus {
+      border-color: #0284c7;
+    }
+
+    .qa-submit-btn {
+      background: #0284c7;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+
+    .subject-nav-list {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      overflow-x: auto;
+      flex: 1;
+      margin: 0 16px;
+    }
+
+    .subject-nav-list::-webkit-scrollbar {
+      display: none;
+    }
+
+    .subject-nav-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 14.5px;
+      font-weight: 800;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.18s;
+      white-space: nowrap;
+    }
+
+    .subject-nav-btn.active {
+      color: #ffffff;
+      background: #0284c7;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+    }
+
+    .subject-nav-btn.disabled,
+    .subject-nav-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      pointer-events: none;
+      color: #64748b;
+    }
+
+    .subject-tag {
+      font-size: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+
+    .header-status-area {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-archive-header {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #ffffff;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-archive-header:hover {
+      background: rgba(255, 255, 255, 0.28);
+      transform: translateY(-1px);
+    }
+
+    .status-pill {
+      font-size: 12.5px;
+      font-weight: 800;
+      background: rgba(255, 255, 255, 0.12);
+      color: #7dd3fc;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      border: 1px solid rgba(125, 211, 252, 0.3);
+    }
+
+    /* 2단: 문제 풀이 방식 서브바 (Mode Level - 반응형 지원) */
+    .mode-sub-bar {
+      background: #ffffff;
+      padding: 0 20px;
+      border-bottom: 1.5px solid #e0f2fe;
+    }
+
+    .mode-sub-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      min-height: 60px;
+      height: auto;
+      padding: 6px 0;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .mode-sub-inner::-webkit-scrollbar {
+      display: none;
+    }
+
+    .mode-sub-label {
+      font-size: 13.5px;
+      font-weight: 900;
+      color: #0369a1;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .mode-sub-label .dot {
+      width: 7px;
+      height: 7px;
+      background: #0284c7;
+      border-radius: 50%;
+    }
+
+    .mode-tabs-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      flex-wrap: wrap;
+    }
+
+    .mode-menu-tab {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 13px;
+      border-radius: 12px;
+      border: 1.5px solid #e2e8f0;
+      background: #f8fafc;
+      color: #475569;
+      font-size: 13.5px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .mode-menu-tab:hover:not(.disabled) {
+      background: #f0f9ff;
+      border-color: #7dd3fc;
+      color: #0284c7;
+      transform: translateY(-1px);
+    }
+
+    .mode-menu-tab.active {
+      background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+      color: #ffffff;
+      border-color: #0369a1;
+      box-shadow: 0 3px 10px rgba(2, 132, 199, 0.25);
+    }
+
+    .mode-menu-tab .tab-icon {
+      font-size: 14.5px;
+    }
+
+    .tab-badge-sub {
+      font-size: 10px;
+      font-weight: 700;
+      background: rgba(0, 0, 0, 0.08);
+      padding: 1px 5px;
+      border-radius: 5px;
+    }
+
+    .mode-menu-tab.active .tab-badge-sub {
+      background: rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+    }
+
+    /* 화면 너비 축소 시 버튼 슬림화 및 2열 감싸기 반응형 */
+    @media (max-width: 1180px) {
+      .user-pokemon-panel {
+        padding: 4px 10px;
+        font-size: 12px;
+        gap: 6px;
+      }
+      .user-exp-track {
+        width: 50px;
+      }
+      .status-pill {
+        font-size: 11.5px;
+        padding: 3px 9px;
+      }
+      .mode-menu-tab {
+        padding: 7px 9px;
+        font-size: 12px;
+        gap: 4px;
+      }
+      .mode-menu-tab .tab-icon {
+        font-size: 13px;
+      }
+      .tab-badge-sub {
+        font-size: 9.5px;
+        padding: 1px 4px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .top-subject-inner {
+        justify-content: space-between;
+      }
+      .header-status-area {
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .user-pokemon-panel {
+        font-size: 11.5px;
+        padding: 3px 8px;
+        gap: 5px;
+      }
+      .user-exp-track {
+        width: 40px;
+        height: 6px;
+      }
+      .status-pill {
+        font-size: 11px;
+        padding: 3px 7px;
+      }
+      .mode-sub-inner {
+        padding: 8px 0;
+      }
+      .mode-tabs-wrap {
+        width: 100%;
+        gap: 6px;
+      }
+      .mode-menu-tab {
+        flex: 1 1 calc(50% - 6px);
+        justify-content: center;
+        padding: 8px 6px;
+        font-size: 11.5px;
+      }
+    }
+
+    /* ==============================================================================
+       2. 전체 레이아웃 (2-Column 슬림 사이드바 + 메인 카드)
+       ============================================================================== */
+    .app-layout {
+      max-width: 1360px;
+      width: 100%;
+      margin: 24px auto;
+      padding: 0 20px 40px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 20px;
+      align-items: start;
+      flex: 1;
+    }
+
+    .app-sidebar-2col {
+      background: #ffffff;
+      border-radius: 20px;
+      border: 2px solid #bae6fd;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 130px;
+      height: calc(100vh - 150px);
+      min-height: 540px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .sidebar-header-bar {
+      padding: 12px 14px;
+      background: #f8fafc;
+      border-bottom: 2px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .sidebar-header-title {
+      font-size: 13.5px;
+      font-weight: 900;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .sidebar-header-hint {
+      font-size: 11px;
+      color: #64748b;
+      font-weight: 700;
+    }
+
+    .sidebar-split-body {
+      display: grid;
+      grid-template-columns: 66px 1fr;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* 사이드바 1열: 학년 세로 선택 바 */
+    .grade-vertical-col {
+      background: #f1f5f9;
+      border-right: 2px solid #e2e8f0;
+      padding: 6px 3px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      overflow-y: auto;
+    }
+
+    .grade-v-btn {
+      width: 100%;
+      padding: 9px 2px;
+      background: #ffffff;
+      border: 2px solid transparent;
+      border-radius: 11px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      transition: all 0.18s;
+      color: #475569;
+    }
+
+    .grade-v-btn:hover {
+      background: #e0f2fe;
+      color: #0284c7;
+    }
+
+    .grade-v-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0369a1;
+      box-shadow: 0 3px 8px rgba(2, 132, 199, 0.3);
+      font-weight: 900;
+    }
+
+    .grade-v-btn .g-num {
+      font-size: 16px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .grade-v-btn .g-title {
+      font-size: 10.5px;
+      font-weight: 800;
+    }
+
+    /* 사이드바 2열: 단원 스크롤 영역 */
+    .units-scroll-col {
+      padding: 8px 6px;
+      overflow-y: auto;
+      background: #ffffff;
+    }
+
+    .units-scroll-col::-webkit-scrollbar {
+      width: 4px;
+    }
+    .units-scroll-col::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+
+    .grade-panel {
+      display: none;
+    }
+    .grade-panel.active {
+      display: block;
+      animation: fadeInPanel 0.2s ease-in-out;
+    }
+
+    @keyframes fadeInPanel {
+      from { opacity: 0; transform: translateY(3px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .summary-unit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%);
+      border: 1.5px solid #7dd3fc;
+      border-radius: 11px;
+      padding: 9px 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      text-align: left;
+      margin-bottom: 8px;
+      transition: all 0.18s;
+    }
+
+    .summary-unit-btn:hover {
+      border-color: #0284c7;
+      transform: translateY(-1px);
+      box-shadow: 0 3px 6px rgba(2, 132, 199, 0.15);
+    }
+
+    .summary-unit-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0369a1;
+      box-shadow: 0 3px 8px rgba(2, 132, 199, 0.3);
+    }
+
+    .summary-badge {
+      font-size: 9.5px;
+      font-weight: 800;
+      background: #0284c7;
+      color: white;
+      padding: 2px 5px;
+      border-radius: 5px;
+      flex-shrink: 0;
+    }
+
+    .summary-unit-btn.active .summary-badge {
+      background: rgba(255, 255, 255, 0.3);
+      color: #ffffff;
+    }
+
+    .semester-group-box {
+      margin-bottom: 10px;
+    }
+
+    .semester-header-tag {
+      font-size: 11px;
+      font-weight: 800;
+      color: #0369a1;
+      padding: 2px 6px;
+      margin-bottom: 4px;
+      background: #f0f9ff;
+      border-radius: 5px;
+      display: inline-block;
+      border-left: 3px solid #0284c7;
+    }
+
+    .unit-item-btn {
+      width: 100%;
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 7px 7px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      text-align: left;
+      transition: all 0.18s;
+      margin-bottom: 4px;
+    }
+
+    .unit-item-btn:hover {
+      background: #f0f9ff;
+      border-color: #7dd3fc;
+      transform: translateX(2px);
+    }
+
+    .unit-item-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0369a1;
+      box-shadow: 0 3px 8px rgba(2, 132, 199, 0.25);
+    }
+
+    .unit-item-info {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .unit-item-icon {
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .unit-item-text {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .unit-item-name {
+      font-size: 12px;
+      font-weight: 800;
+      color: inherit;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.3;
+    }
+
+    .unit-item-sub {
+      font-size: 10px;
+      color: #64748b;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 1px;
+    }
+
+    .unit-item-btn.active .unit-item-sub {
+      color: #e0f2fe;
+    }
+
+    .unit-domain-tag {
+      font-size: 9px;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 5px;
+      background: #e2e8f0;
+      color: #475569;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    .unit-item-btn.active .unit-domain-tag {
+      background: rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+    }
+
+    /* ==============================================================================
+       3. 메인 콘텐츠 영역 (문제 풀이 카드, 결과 카드)
+       ============================================================================== */
+    .app-main {
+      min-width: 0;
+    }
+
+    .main-card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 34px 30px;
+      border: 3px solid #38bdf8;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      min-height: 560px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .current-unit-banner {
+      background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%);
+      border: 2px solid #7dd3fc;
+      border-radius: 20px;
+      padding: 24px 20px;
+      margin-bottom: 24px;
+    }
+
+    .selected-tag {
+      display: inline-block;
+      background: #0284c7;
+      color: white;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      margin-bottom: 10px;
+    }
+
+    .selected-unit-title {
+      font-size: 24px;
+      font-weight: 900;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+
+    .selected-unit-desc {
+      font-size: 14px;
+      color: #475569;
+      line-height: 1.5;
+    }
+
+    .ai-create-btn {
+      background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 18px 24px;
+      font-size: 18.5px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(2, 132, 199, 0.35);
+      transition: all 0.2s;
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .ai-create-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(2, 132, 199, 0.45);
+    }
+
+    .ai-create-btn:disabled {
+      background: #94a3b8;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .loading-box {
+      display: none;
+      padding: 30px 20px;
+      background: #f8fafc;
+      border-radius: 20px;
+      border: 2px dashed #38bdf8;
+      margin-top: 20px;
+    }
+
+    .spinner {
+      width: 46px;
+      height: 46px;
+      border: 5px solid #e2e8f0;
+      border-top: 5px solid #0284c7;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 16px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0369a1;
+    }
+
+    /* ==============================================================================
+       4. 객관식 / OX 퀴즈 풀이 화면 스타일
+       ============================================================================== */
+    #quiz-section {
+      display: none;
+      text-align: left;
+    }
+
+    .progress-bar-container {
+      margin-bottom: 20px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 800;
+      color: #0369a1;
+      margin-bottom: 6px;
+    }
+
+    .progress-track {
+      background: #e2e8f0;
+      height: 10px;
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      background: linear-gradient(90deg, #0284c7, #38bdf8);
+      height: 100%;
+      width: 10%;
+      transition: width 0.3s ease;
+    }
+
+    .question-card {
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .question-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .category-tag {
+      font-size: 12px;
+      font-weight: 800;
+      color: #0284c7;
+      background: #e0f2fe;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .question-text-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .speak-btn {
+      background: white;
+      border: 2px solid #bae6fd;
+      border-radius: 12px;
+      padding: 8px 12px;
+      font-size: 18px;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .speak-btn:hover {
+      background: #e0f2fe;
+      transform: scale(1.05);
+    }
+
+    .ox-options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .ox-btn {
+      border: 3px solid transparent;
+      border-radius: 20px;
+      padding: 24px;
+      font-size: 32px;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .ox-btn .label {
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .btn-o {
+      background: #f0fdf4;
+      color: #16a34a;
+      border-color: #bbf7d0;
+    }
+    .btn-o:hover {
+      background: #dcfce7;
+      border-color: #86efac;
+      transform: translateY(-3px);
+    }
+
+    .btn-x {
+      background: #fef2f2;
+      color: #dc2626;
+      border-color: #fecaca;
+    }
+    .btn-x:hover {
+      background: #fee2e2;
+      border-color: #fca5a5;
+      transform: translateY(-3px);
+    }
+
+    .mcq-options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mcq-option-btn {
+      background: #ffffff;
+      border: 2px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 16px 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-align: left;
+      transition: all 0.18s ease;
+      font-size: 17px;
+      font-weight: 700;
+      color: #1e293b;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+    }
+
+    .mcq-option-btn:hover {
+      background: #f0f9ff;
+      border-color: #38bdf8;
+      transform: translateX(4px);
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.12);
+    }
+
+    .option-num-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: #f1f5f9;
+      color: #0284c7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 900;
+      flex-shrink: 0;
+      border: 1.5px solid #cbd5e1;
+      transition: all 0.18s;
+    }
+
+    .mcq-option-btn:hover .option-num-badge {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+    }
+
+    .option-text {
+      flex: 1;
+      line-height: 1.5;
+    }
+
+    /* ==============================================================================
+       5. 서술형 퀴즈 전용 UI 스타일 (science_eval 결합)
+       ============================================================================== */
+    .question-nav-bar {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 16px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .question-nav-bar::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .q-chip-btn {
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      color: #64748b;
+      border-radius: 10px;
+      padding: 7px 12px;
+      font-size: 13.5px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.18s;
+      white-space: nowrap;
+    }
+
+    .q-chip-btn.answered {
+      background: #e0f2fe;
+      border-color: #38bdf8;
+      color: #0284c7;
+    }
+
+    .q-chip-btn.active {
+      background: #0284c7;
+      border-color: #0369a1;
+      color: #ffffff;
+      box-shadow: 0 3px 8px rgba(2, 132, 199, 0.3);
+    }
+
+    .btn-hint-toggle {
+      background: #fffbeb;
+      border: 1px solid #fcd34d;
+      color: #b45309;
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+
+    .btn-hint-toggle:hover {
+      background: #fef3c7;
+      transform: translateY(-1px);
+    }
+
+    .hint-drawer {
+      display: none;
+      background: #fffbeb;
+      border: 1.5px dashed #f59e0b;
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hint-drawer-title {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #b45309;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .hint-drawer-body {
+      font-size: 14px;
+      color: #92400e;
+      line-height: 1.5;
+      font-weight: 600;
+    }
+
+    .answer-label {
+      font-size: 14px;
+      font-weight: 800;
+      color: #1e293b;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .answer-textarea {
+      width: 100%;
+      height: 125px;
+      border: 2px solid #cbd5e1;
+      border-radius: 14px;
+      padding: 16px;
+      font-size: 15.5px;
+      line-height: 1.6;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.2s;
+      background: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    .answer-textarea:focus {
+      border-color: #0284c7;
+      box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.12);
+    }
+
+    .quiz-nav-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-step-nav {
+      background: #f1f5f9;
+      border: 1.5px solid #cbd5e1;
+      color: #334155;
+      padding: 13px 22px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-step-nav:hover:not(:disabled) {
+      background: #e2e8f0;
+      border-color: #94a3b8;
+    }
+
+    .btn-step-nav:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .btn-submit-final {
+      background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+      color: white;
+      border: none;
+      border-radius: 14px;
+      padding: 14px 28px;
+      font-size: 16px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.35);
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-submit-final:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(2, 132, 199, 0.45);
+    }
+
+    /* ==============================================================================
+       6. 최종 결과 섹션
+       ============================================================================== */
+    #result-section {
+      display: none;
+      text-align: center;
+    }
+
+    .score-banner {
+      background: linear-gradient(135deg, #e0f2fe 0%, #fef3c7 100%);
+      border: 3px solid #7dd3fc;
+      border-radius: 24px;
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .score-emoji {
+      display: inline-block;
+      width: auto;
+      min-width: 60px;
+      height: 60px;
+      line-height: 60px;
+      font-size: 52px;
+      margin: 0 auto 8px auto;
+      cursor: pointer;
+      user-select: none;
+      text-align: center;
+      vertical-align: middle;
+      border-radius: 50%;
+      transition: transform 0.2s cubic-bezier(.175,.885,.32,1.275);
+    }
+    .score-emoji:hover {
+      transform: scale(1.15);
+      filter: drop-shadow(0 4px 12px rgba(251, 191, 36, 0.5));
+    }
+
+    .score-title {
+      font-size: 24px;
+      font-weight: 900;
+      color: #0f172a;
+      margin-bottom: 6px;
+    }
+
+    .score-summary {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0369a1;
+      margin-bottom: 14px;
+    }
+
+    .score-pills {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .score-pill {
+      font-size: 13.5px;
+      font-weight: 800;
+      padding: 6px 16px;
+      border-radius: 9999px;
+    }
+
+    .pill-correct { background: #dcfce7; color: #16a34a; }
+    .pill-partial { background: #fef3c7; color: #d97706; }
+    .pill-wrong { background: #fee2e2; color: #dc2626; }
+
+    .review-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-align: left;
+      margin-bottom: 24px;
+    }
+
+    .review-item {
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 18px 20px;
+      transition: all 0.2s ease;
+    }
+
+    /* 10문제 전체 복습 & AI 해설: 정답 / 오답 / 부분점수 테두리 색상 및 배경 강조 */
+    .review-item.is-correct-item {
+      background: #f0fdf4 !important;
+      border: 2px solid #86efac !important;
+      border-left: 7px solid #10b981 !important;
+    }
+
+    .review-item.is-wrong-item {
+      background: #fef2f2 !important;
+      border: 2px solid #fca5a5 !important;
+      border-left: 7px solid #ef4444 !important;
+    }
+
+    .review-item.is-partial-item {
+      background: #fffbeb !important;
+      border: 2px solid #fde68a !important;
+      border-left: 7px solid #f59e0b !important;
+    }
+
+    .review-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .review-num {
+      font-weight: 800;
+      font-size: 14px;
+      color: #475569;
+    }
+
+    .review-badge {
+      font-size: 12px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 9999px;
+    }
+    .badge-pass { background: #dcfce7; color: #16a34a; }
+    .badge-fail { background: #fee2e2; color: #dc2626; }
+
+    .review-question {
+      font-size: 16px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .review-options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 10px;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .review-option-row {
+      font-size: 13.5px;
+      padding: 5px 8px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .review-option-row.is-correct-opt {
+      background: #dcfce7;
+      color: #15803d;
+      font-weight: 800;
+    }
+
+    .review-option-row.is-my-wrong-opt {
+      background: #fee2e2;
+      color: #b91c1c;
+      font-weight: 800;
+    }
+
+    .review-exp {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #334155;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 10px;
+      padding: 10px 14px;
+      border-left: 4px solid #0284c7;
+    }
+
+    .restart-btn {
+      background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+      color: white;
+      border: none;
+      border-radius: 16px;
+      padding: 16px 28px;
+      font-size: 17px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(2, 132, 199, 0.3);
+      transition: all 0.2s;
+    }
+
+    .restart-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(2, 132, 199, 0.4);
+    }
+
+    /* ==============================================================================
+       7. 아카이브 모달 (saved_results 열람)
+       ============================================================================== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-card {
+      background: white;
+      border-radius: 24px;
+      max-width: 680px;
+      width: 100%;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      animation: popModal 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes popModal {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-header {
+      padding: 20px 24px;
+      border-bottom: 1.5px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f8fafc;
+    }
+
+    .modal-title {
+      font-size: 17px;
+      font-weight: 900;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-close-btn {
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #94a3b8;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .modal-close-btn:hover { color: #0f172a; }
+
+    .modal-body {
+      padding: 20px 24px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .archive-item-card {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 14px 18px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+
+    .archive-item-card:hover {
+      background: #f0f9ff;
+      border-color: #38bdf8;
+      transform: translateX(4px);
+    }
+
+    .archive-view-badge {
+      font-size: 12px;
+      font-weight: 800;
+      background: #e0f2fe;
+      color: #0284c7;
+      padding: 5px 12px;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+    /* ==============================================================================
+       7. 스마트 오답노트 & 오류신고 전용 신규 스타일
+       ============================================================================== */
+    .btn-report-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #ef4444;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 6px;
+      padding: 3px 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+      flex-shrink: 0;
+    }
+    .btn-report-badge:hover {
+      background: #fee2e2;
+      border-color: #f87171;
+      transform: scale(1.03);
+    }
+
+    .wrong-card {
+      background: #ffffff;
+      border: 2px solid #fee2e2;
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 8px rgba(239, 68, 68, 0.05);
+      transition: all 0.2s;
+      text-align: left;
+    }
+    .wrong-card:hover {
+      border-color: #fca5a5;
+      box-shadow: 0 4px 14px rgba(239, 68, 68, 0.1);
+    }
+    .wrong-card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .wrong-card-title {
+      font-size: 16px;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    .wrong-card-answers {
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+    .wrong-card-feedback {
+      background: #f0fdf4;
+      border-left: 4px solid #22c55e;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: #15803d;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+    .wrong-card-actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
+      border-top: 1px dashed #e2e8f0;
+      padding-top: 10px;
+    }
+    .btn-retry-inline {
+      background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s;
+    }
+    .btn-retry-inline:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
+    }
+    .btn-delete-inline {
+      background: #f1f5f9;
+      color: #64748b;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-delete-inline:hover {
+      background: #fee2e2;
+      color: #dc2626;
+      border-color: #fca5a5;
+    }
+    .retry-box {
+      margin-top: 12px;
+      padding: 14px;
+      background: #f0f9ff;
+      border: 1.5px solid #bae6fd;
+      border-radius: 12px;
+    }
+
+    /* ==============================================================================
+       이스터에그 전용 스타일 (지구와달 무중력, 트로피 3단계, 한살이)
+       ============================================================================== */
+    @keyframes trophyShake1 {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      25% { transform: rotate(-12deg) scale(1.08); }
+      75% { transform: rotate(12deg) scale(1.08); }
+    }
+    @keyframes trophyShake2 {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      20% { transform: rotate(-20deg) scale(1.18); }
+      40% { transform: rotate(20deg) scale(1.18); }
+      60% { transform: rotate(-18deg) scale(1.22); }
+      80% { transform: rotate(18deg) scale(1.22); }
+    }
+    @keyframes trophyShake3 {
+      0% { transform: scale(1); }
+      20% { transform: rotate(-25deg) scale(1.3); }
+      40% { transform: rotate(25deg) scale(1.35); }
+      60% { transform: rotate(-30deg) scale(1.45); }
+      80% { transform: rotate(30deg) scale(1.55); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+    .trophy-shake-1 { animation: trophyShake1 0.4s ease-in-out; }
+    .trophy-shake-2 { animation: trophyShake2 0.8s ease-in-out; }
+    .trophy-shake-3 { animation: trophyShake3 1.1s ease-in-out; }
+
+    /* 무중력 모드 부유 애니메이션 */
+    @keyframes antigravityFloat1 {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-26px) rotate(2deg); }
+    }
+    @keyframes antigravityFloat2 {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-18px) rotate(-2.5deg); }
+    }
+    @keyframes antigravityFloat3 {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(1.5deg); }
+    }
+    body.antigravity-active .app-header {
+      animation: antigravityFloat2 3.5s ease-in-out infinite;
+      transition: transform 1.2s ease-out;
+    }
+    body.antigravity-active .main-card,
+    body.antigravity-active .quiz-card,
+    body.antigravity-active .question-card,
+    body.antigravity-active .current-unit-banner,
+    body.antigravity-active .ai-create-btn,
+    body.antigravity-active .score-banner,
+    body.antigravity-active .btn-step-nav {
+      animation: antigravityFloat1 2.8s ease-in-out infinite;
+      transition: transform 1.2s ease-out;
+    }
+    body.antigravity-active .mode-menu-tab,
+    body.antigravity-active .category-tag,
+    body.antigravity-active #keyboard-hint,
+    body.antigravity-active .restart-btn {
+      animation: antigravityFloat2 2.4s ease-in-out infinite;
+      transition: transform 1.2s ease-out;
+    }
+    body.antigravity-active .app-sidebar-2col,
+    body.antigravity-active .user-pokemon-panel,
+    body.antigravity-active .wrong-notes-section,
+    body.antigravity-active .reports-archive-section {
+      animation: antigravityFloat3 3.3s ease-in-out infinite;
+      transition: transform 1.2s ease-out;
+    }
+    body.antigravity-active .grade-panel,
+    body.antigravity-active .unit-btn,
+    body.antigravity-active .unit-group-card,
+    body.antigravity-active .review-item,
+    body.antigravity-active .wrong-card,
+    body.antigravity-active .archive-item-card {
+      animation: antigravityFloat1 3.1s ease-in-out infinite;
+      transition: transform 1.2s ease-out;
+    }
+
+    /* 이스터에그 일반 알림 토스트 (상단 중앙 플로팅 - 무중력, 배추흰나비용) */
+    .easter-egg-toast {
+      position: fixed;
+      top: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.94);
+      color: #ffffff;
+      padding: 14px 28px;
+      border-radius: 9999px;
+      font-size: 14.5px;
+      font-weight: 800;
+      line-height: 1.5;
+      text-align: center;
+      max-width: 90vw;
+      width: max-content;
+      border: 1.5px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(8px);
+      z-index: 99999999;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      animation: topToastIn 0.35s cubic-bezier(.175,.885,.32,1.275);
+    }
+    @keyframes topToastIn {
+      from { opacity: 0; transform: translate(-50%, -20px) scale(0.9); }
+      to { opacity: 1; transform: translate(-50%, 0) scale(1); }
+    }
+
+    /* 🏆 100점 만점 트로피 3단계 폭죽 축하 전용 중앙 배너 */
+    .trophy-celebration-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, rgba(30, 27, 75, 0.98), rgba(15, 23, 42, 0.98));
+      color: #ffffff;
+      padding: 30px 42px;
+      border-radius: 28px;
+      font-size: 16.5px;
+      font-weight: 800;
+      line-height: 1.6;
+      text-align: center;
+      max-width: 88vw;
+      width: max-content;
+      border: 3px solid #fbbf24;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65), 0 0 45px rgba(251, 191, 36, 0.45), 0 0 0 9999px rgba(0, 0, 0, 0.5);
+      z-index: 99999999;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      animation: trophyCenterIn 0.4s cubic-bezier(.175,.885,.32,1.275);
+    }
+    @keyframes trophyCenterIn {
+      from { opacity: 0; transform: translate(-50%, -40%) scale(0.85); }
+      to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==============================================================================
+       1. 최상단 2단 메뉴바
+       ============================================================================== -->
+  <header class="app-header">
+    <div class="top-subject-bar">
+      <div class="top-subject-inner">
+        <a href="/" class="brand-logo" title="통합 포털 메인 로비로 이동">
+          <img src="/science/logo.svg" alt="EduMate AI" style="height: 32px; width: auto; vertical-align: middle;" onerror="this.onerror=null; this.src='/logo.svg';">
+          <span>EduMate AI</span>
+          <span class="brand-badge">초등 과학</span>
+        </a>
+
+        <div class="header-status-area">
+          <!-- 포켓몬 5대 진화 및 전과목 통합 누적점수 패널 -->
+          <div class="user-pokemon-panel" id="user-pokemon-panel" title="전과목 통합 누적점수 및 포켓몬 진화 등급">
+            <span id="header-user-display" style="font-weight: 800;">👤 김에듀</span>
+            <span style="color: rgba(255,255,255,0.3);">|</span>
+            <span id="header-pokemon-title" style="font-weight: 900; color: #7dd3fc;">🌱 알 5티어</span>
+            <div class="user-exp-track" title="현재 티어 경험치 진행도">
+              <div class="user-exp-fill" id="header-exp-bar" style="width: 0%;"></div>
+            </div>
+            <span id="header-total-score" style="background: #0284c7; padding: 2px 8px; border-radius: 9999px; font-size: 11px; font-weight: 900;">0점</span>
+          </div>
+
+          <span class="status-pill" id="top-score-text">10문제 출제 모드</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mode-sub-bar">
+      <div class="mode-sub-inner">
+        <div class="mode-sub-label">
+          <span class="dot"></span>
+          <span id="current-subject-label">[초등 과학]</span> 풀이 방식:
+        </div>
+
+        <div class="mode-tabs-wrap">
+          <button class="mode-menu-tab active" id="tab-ox" onclick="switchQuizMode('ox')">
+            <span class="tab-icon">⭕❌</span>
+            <span>OX 퀴즈</span>
+            <span class="tab-badge-sub">참·거짓 판별</span>
+          </button>
+          <button class="mode-menu-tab" id="tab-mcq" onclick="switchQuizMode('mcq')">
+            <span class="tab-icon">📝</span>
+            <span>5지선다 객관식</span>
+            <span class="tab-badge-sub">실전 대비</span>
+          </button>
+          <button class="mode-menu-tab" id="tab-subjective" onclick="switchQuizMode('subjective')">
+            <span class="tab-icon">✍️</span>
+            <span>서술형 퀴즈</span>
+            <span class="tab-badge-sub">AI 문맥 채점</span>
+          </button>
+          <button class="mode-menu-tab" id="tab-wrongnotes" onclick="switchQuizMode('wrongnotes')" style="border-color: #fca5a5; background: #fff5f5;">
+            <span class="tab-icon">📖</span>
+            <span style="color: #b91c1c;">오답 노트</span>
+            <span class="tab-badge-sub" style="background: rgba(239, 68, 68, 0.15); color: #dc2626;">취약점 복습</span>
+          </button>
+          <button class="mode-menu-tab" id="tab-reports" onclick="switchQuizMode('reports')" style="border-color: #93c5fd; background: #eff6ff;">
+            <span class="tab-icon">📂</span>
+            <span style="color: #1d4ed8;">지난 리포트</span>
+            <span class="tab-badge-sub" style="background: rgba(37, 99, 235, 0.15); color: #2563eb;">채점 아카이브</span>
+          </button>
+          <button class="mode-menu-tab" id="btn-weakness-rec" onclick="applyWeaknessRecommendation()" style="border-color: #fde047; background: #fefce8; color: #854d0e;">
+            <span class="tab-icon">🎯</span>
+            <span>취약 단원 맞춤</span>
+            <span class="tab-badge-sub" style="background: rgba(234, 179, 8, 0.2); color: #a16207;">오답 분석</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==============================================================================
+       2. 전체 레이아웃 (좌측 2열 분할 사이드바 + 우측 메인 카드)
+       ============================================================================== -->
+  <div class="app-layout">
+    <aside class="app-sidebar-2col">
+      <div class="sidebar-header-bar">
+        <span class="sidebar-header-title">📚 학년 및 단원</span>
+        <span class="sidebar-header-hint" id="sidebar-grade-hint">1학년 선택 중</span>
+      </div>
+
+      <div class="sidebar-split-body">
+        <!-- 1열: 학년 선택 세로 탭 (1~6학년) -->
+        <div class="grade-vertical-col">
+          <button class="grade-v-btn active" onclick="switchGradeTab(1)" id="gbtn-1"><span class="g-num">1</span><span class="g-title">1학년</span></button>
+          <button class="grade-v-btn" onclick="switchGradeTab(2)" id="gbtn-2"><span class="g-num">2</span><span class="g-title">2학년</span></button>
+          <button class="grade-v-btn" onclick="switchGradeTab(3)" id="gbtn-3"><span class="g-num">3</span><span class="g-title">3학년</span></button>
+          <button class="grade-v-btn" onclick="switchGradeTab(4)" id="gbtn-4"><span class="g-num">4</span><span class="g-title">4학년</span></button>
+          <button class="grade-v-btn" onclick="switchGradeTab(5)" id="gbtn-5"><span class="g-num">5</span><span class="g-title">5학년</span></button>
+          <button class="grade-v-btn" onclick="switchGradeTab(6)" id="gbtn-6"><span class="g-num">6</span><span class="g-title">6학년</span></button>
+        </div>
+
+        <!-- 2열: 선택된 학년의 학기 및 단원 목록 -->
+        <div class="units-scroll-col">
+          <!-- 1학년 단원 -->
+          <div id="grade-panel-1" class="grade-panel active">
+            <button class="summary-unit-btn active" onclick="selectUnitMenu(this, '총정리', 1)">
+              <div class="unit-item-info">
+                <span class="unit-item-icon">🎲</span>
+                <div class="unit-item-text">
+                  <span class="unit-item-name">1학년 전체 총정리</span>
+                  <span class="unit-item-sub">1·2학기 전체 AI 랜덤 출제</span>
+                </div>
+              </div>
+              <span class="summary-badge">AI 출제</span>
+            </button>
+            <div class="semester-group-box">
+              <span class="semester-header-tag">🌱 1학년 1학기</span>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '입학', 1)"><div class="unit-item-info"><span class="unit-item-icon">🏫</span><div class="unit-item-text"><span class="unit-item-name">(1) 입학</span><span class="unit-item-sub">오감 관찰과 감각 기관</span></div></div><span class="unit-domain-tag">생명</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '봄', 1)"><div class="unit-item-info"><span class="unit-item-icon">🌱</span><div class="unit-item-text"><span class="unit-item-name">(2) 봄</span><span class="unit-item-sub">봄 날씨와 식물 관찰</span></div></div><span class="unit-domain-tag">지구</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '가족', 1)"><div class="unit-item-info"><span class="unit-item-icon">👀</span><div class="unit-item-text"><span class="unit-item-name">(3) 가족</span><span class="unit-item-sub">감각 기관과 동물 겉모습</span></div></div><span class="unit-domain-tag">생명</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '여름', 1)"><div class="unit-item-info"><span class="unit-item-icon">☀️</span><div class="unit-item-text"><span class="unit-item-name">(4) 여름</span><span class="unit-item-sub">여름 날씨와 곤충 관찰</span></div></div><span class="unit-domain-tag">지구</span></button>
+            </div>
+            <div class="semester-group-box">
+              <span class="semester-header-tag">🍁 1학년 2학기</span>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '하루', 1)"><div class="unit-item-info"><span class="unit-item-icon">🌅</span><div class="unit-item-text"><span class="unit-item-name">(1) 하루</span><span class="unit-item-sub">낮과 밤, 태양과 그림자</span></div></div><span class="unit-domain-tag">천문</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '가을', 1)"><div class="unit-item-info"><span class="unit-item-icon">🍁</span><div class="unit-item-text"><span class="unit-item-name">(2) 가을</span><span class="unit-item-sub">가을 날씨와 단풍, 열매</span></div></div><span class="unit-domain-tag">지구</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '나라', 1)"><div class="unit-item-info"><span class="unit-item-icon">🇰🇷</span><div class="unit-item-text"><span class="unit-item-name">(3) 나라</span><span class="unit-item-sub">사계절 자연환경의 변화</span></div></div><span class="unit-domain-tag">지구</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '겨울', 1)"><div class="unit-item-info"><span class="unit-item-icon">❄️</span><div class="unit-item-text"><span class="unit-item-name">(4) 겨울</span><span class="unit-item-sub">눈과 얼음, 동물의 겨울잠</span></div></div><span class="unit-domain-tag">물질</span></button>
+            </div>
+          </div>
+
+          <!-- 2학년 단원 -->
+          <div id="grade-panel-2" class="grade-panel">
+            <button class="summary-unit-btn" onclick="selectUnitMenu(this, '총정리', 2)">
+              <div class="unit-item-info"><span class="unit-item-icon">🎲</span><div class="unit-item-text"><span class="unit-item-name">2학년 전체 총정리</span><span class="unit-item-sub">1·2학기 전체 AI 랜덤 출제</span></div></div><span class="summary-badge">AI 출제</span>
+            </button>
+            <div class="semester-group-box">
+              <span class="semester-header-tag">🌱 2학년 1학기</span>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '나', 2)"><div class="unit-item-info"><span class="unit-item-icon">🏃</span><div class="unit-item-text"><span class="unit-item-name">(1) 나</span><span class="unit-item-sub">신체 성장과 이의 변화</span></div></div><span class="unit-domain-tag">생명</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '봄', 2)"><div class="unit-item-info"><span class="unit-item-icon">🐝</span><div class="unit-item-text"><span class="unit-item-name">(2) 봄</span><span class="unit-item-sub">봄 동식물과 꽃가루받이</span></div></div><span class="unit-domain-tag">생명</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '마을', 2)"><div class="unit-item-info"><span class="unit-item-icon">🧱</span><div class="unit-item-text"><span class="unit-item-name">(3) 마을</span><span class="unit-item-sub">사물의 재료와 물질 탐색</span></div></div><span class="unit-domain-tag">물질</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '여름', 2)"><div class="unit-item-info"><span class="unit-item-icon">🦗</span><div class="unit-item-text"><span class="unit-item-name">(4) 여름</span><span class="unit-item-sub">여름 곤충과 천둥 번개</span></div></div><span class="unit-domain-tag">생명</span></button>
+            </div>
+            <div class="semester-group-box">
+              <span class="semester-header-tag">🍁 2학년 2학기</span>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '일', 2)"><div class="unit-item-info"><span class="unit-item-icon">⚙️</span><div class="unit-item-text"><span class="unit-item-name">(1) 일</span><span class="unit-item-sub">햇빛과 바람을 이용한 생활</span></div></div><span class="unit-domain-tag">자연</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '가을', 2)"><div class="unit-item-info"><span class="unit-item-icon">🐿️</span><div class="unit-item-text"><span class="unit-item-name">(2) 가을</span><span class="unit-item-sub">낙엽과 도토리, 풀벌레 소리</span></div></div><span class="unit-domain-tag">생명</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '세상', 2)"><div class="unit-item-info"><span class="unit-item-icon">🌵</span><div class="unit-item-text"><span class="unit-item-name">(3) 세상</span><span class="unit-item-sub">환경에 적응한 생물들</span></div></div><span class="unit-domain-tag">지구</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '겨울', 2)"><div class="unit-item-info"><span class="unit-item-icon">☃️</span><div class="unit-item-text"><span class="unit-item-name">(4) 겨울</span><span class="unit-item-sub">얼음이 얼고 녹는 현상 관찰</span></div></div><span class="unit-domain-tag">물질</span></button>
+            </div>
+          </div>
+
+          <!-- 3학년 단원 -->
+          <div id="grade-panel-3" class="grade-panel">
+            <button class="summary-unit-btn" onclick="selectUnitMenu(this, '총정리', 3)">
+              <div class="unit-item-info"><span class="unit-item-icon">🎲</span><div class="unit-item-text"><span class="unit-item-name">3학년 전체 총정리</span><span class="unit-item-sub">1·2학기 전체 AI 랜덤 출제</span></div></div><span class="summary-badge">AI 출제</span>
+            </button>
+            <div class="semester-group-box">
+              <span class="semester-header-tag">🌱 3학년 1학기</span>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '힘과 우리 생활', 3)"><div class="unit-item-info"><span class="unit-item-icon">💪</span><div class="unit-item-text"><span class="unit-item-name">(1) 힘과 우리 생활</span><span class="unit-item-sub">중력, 탄성력과 모양 변화</span></div></div><span class="unit-domain-tag">물리</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '자석의 이용', 3)"><div class="unit-item-info"><span class="unit-item-icon">🧲</span><div class="unit-item-text"><span class="unit-item-name">(2) 자석의 이용</span><span class="unit-item-sub">N극과 S극, 나침반 원리</span></div></div><span class="unit-domain-tag">물리</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '물질의 성질', 3)"><div class="unit-item-info"><span class="unit-item-icon">🧪</span><div class="unit-item-text"><span class="unit-item-name">(3) 물질의 성질</span><span class="unit-item-sub">금속, 나무, 플라스틱 특징</span></div></div><span class="unit-domain-tag">화학</span></button>
+              <button class="unit-item-btn" id="easter-egg-btn-caterpillar" onclick="selectUnitMenu(this, '동물의 한살이', 3)"><div class="unit-item-info"><span class="unit-item-icon">🐛</span><div class="unit-item-text"><span class="unit-item-name">(4) 동물의 한살이</span><span class="unit-item-sub">배추흰나비 알, 애벌레, 번데기</span></div></div><span class="unit-domain-tag">생명</span></button>
+            </div>
+            <div class="semester-group-box">
+              <span class="semester-header-tag">🍁 3학년 2학기</span>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '동물의 생활', 3)"><div class="unit-item-info"><span class="unit-item-icon">🐾</span><div class="unit-item-text"><span class="unit-item-name">(1) 동물의 생활</span><span class="unit-item-sub">땅, 물, 사막의 동물들</span></div></div><span class="unit-domain-tag">생명</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '소리의 성질', 3)"><div class="unit-item-info"><span class="unit-item-icon">🔔</span><div class="unit-item-text"><span class="unit-item-name">(2) 소리의 성질</span><span class="unit-item-sub">물체의 떨림(진동)과 전달</span></div></div><span class="unit-domain-tag">물리</span></button>
+              <button class="unit-item-btn" id="easter-egg-btn-antigravity" onclick="selectUnitMenu(this, '지구와 달', 3)"><div class="unit-item-info"><span class="unit-item-icon">🌍</span><div class="unit-item-text"><span class="unit-item-name">(3) 지구와 달</span><span class="unit-item-sub">둥근 지구와 달 표면 구덩이</span></div></div><span class="unit-domain-tag">지구</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '물의 여행', 3)"><div class="unit-item-info"><span class="unit-item-icon">💧</span><div class="unit-item-text"><span class="unit-item-name">(4) 물의 여행</span><span class="unit-item-sub">물의 세 가지 상태와 순환</span></div></div><span class="unit-domain-tag">지구</span></button>
+            </div>
+          </div>
+
+          <!-- 4학년 단원 -->
+          <div id="grade-panel-4" class="grade-panel">
+            <button class="summary-unit-btn" onclick="selectUnitMenu(this, '총정리', 4)"><div class="unit-item-info"><span class="unit-item-icon">🎲</span><div class="unit-item-text"><span class="unit-item-name">4학년 전체 총정리</span><span class="unit-item-sub">1·2학기 전체 AI 랜덤 출제</span></div></div><span class="summary-badge">AI 출제</span></button>
+            <div class="semester-group-box">
+              <span class="semester-header-tag">🌱 4학년 1학기</span>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '식물의 생활', 4)"><div class="unit-item-info"><span class="unit-item-icon">🌿</span><div class="unit-item-text"><span class="unit-item-name">(1) 식물의 생활</span><span class="unit-item-sub">수생 식물과 사막 선인장</span></div></div><span class="unit-domain-tag">생명</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '지층과 화석', 4)"><div class="unit-item-info"><span class="unit-item-icon">🧱</span><div class="unit-item-text"><span class="unit-item-name">(2) 지층과 화석</span><span class="unit-item-sub">퇴적암 줄무늬와 고생물 화석</span></div></div><span class="unit-domain-tag">지구</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '물의 상태 변화', 4)"><div class="unit-item-info"><span class="unit-item-icon">❄️</span><div class="unit-item-text"><span class="unit-item-name">(3) 물의 상태 변화</span><span class="unit-item-sub">증발, 끓음, 수증기 응결</span></div></div><span class="unit-domain-tag">물질</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '기후변화와 우리 생활', 4)"><div class="unit-item-info"><span class="unit-item-icon">🌡️</span><div class="unit-item-text"><span class="unit-item-name">(4) 기후변화와 우리 생활</span><span class="unit-item-sub">지구 온난화와 환경 보호</span></div></div><span class="unit-domain-tag">지구</span></button>
+            </div>
+            <div class="semester-group-box">
+              <span class="semester-header-tag">🍁 4학년 2학기</span>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '식물의 한살이', 4)"><div class="unit-item-info"><span class="unit-item-icon">🌱</span><div class="unit-item-text"><span class="unit-item-name">(1) 식물의 한살이</span><span class="unit-item-sub">강낭콩 싹틈과 꽃, 열매</span></div></div><span class="unit-domain-tag">생명</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '빛과 그림자', 4)"><div class="unit-item-info"><span class="unit-item-icon">💡</span><div class="unit-item-text"><span class="unit-item-name">(2) 빛과 그림자</span><span class="unit-item-sub">빛의 직진과 거울 반사</span></div></div><span class="unit-domain-tag">물리</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '화산과 지진', 4)"><div class="unit-item-info"><span class="unit-item-icon">🌋</span><div class="unit-item-text"><span class="unit-item-name">(3) 화산과 지진</span><span class="unit-item-sub">마그마 분출과 안전 대피</span></div></div><span class="unit-domain-tag">지구</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '물체의 무게', 4)"><div class="unit-item-info"><span class="unit-item-icon">⚖️</span><div class="unit-item-text"><span class="unit-item-name">(4) 물체의 무게</span><span class="unit-item-sub">용수철저울과 수평 잡기</span></div></div><span class="unit-domain-tag">물리</span></button>
+            </div>
+          </div>
+
+          <!-- 5학년 단원 -->
+          <div id="grade-panel-5" class="grade-panel">
+            <button class="summary-unit-btn" onclick="selectUnitMenu(this, '총정리', 5)"><div class="unit-item-info"><span class="unit-item-icon">🎲</span><div class="unit-item-text"><span class="unit-item-name">5학년 전체 총정리</span><span class="unit-item-sub">1·2학기 전체 AI 랜덤 출제</span></div></div><span class="summary-badge">AI 출제</span></button>
+            <div class="semester-group-box">
+              <span class="semester-header-tag">🌱 5학년 1학기</span>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '여러 가지 기체', 5)"><div class="unit-item-info"><span class="unit-item-icon">💨</span><div class="unit-item-text"><span class="unit-item-name">(1) 여러 가지 기체</span><span class="unit-item-sub">산소 조연성과 이산화 탄소</span></div></div><span class="unit-domain-tag">화학</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '태양계와 별', 5)"><div class="unit-item-info"><span class="unit-item-icon">🪐</span><div class="unit-item-text"><span class="unit-item-name">(2) 태양계와 별</span><span class="unit-item-sub">태양계 8개 행성과 별자리</span></div></div><span class="unit-domain-tag">천문</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '용해와 용액', 5)"><div class="unit-item-info"><span class="unit-item-icon">🧂</span><div class="unit-item-text"><span class="unit-item-name">(3) 용해와 용액</span><span class="unit-item-sub">소금 용해와 무게 보존</span></div></div><span class="unit-domain-tag">화학</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '생물과 환경', 5)"><div class="unit-item-info"><span class="unit-item-icon">🌲</span><div class="unit-item-text"><span class="unit-item-name">(4) 생물과 환경</span><span class="unit-item-sub">생산자, 소비자, 먹이 그물</span></div></div><span class="unit-domain-tag">생명</span></button>
+            </div>
+            <div class="semester-group-box">
+              <span class="semester-header-tag">🍁 5학년 2학기</span>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '날씨와 우리 생활', 5)"><div class="unit-item-info"><span class="unit-item-icon">⛅</span><div class="unit-item-text"><span class="unit-item-name">(1) 날씨와 우리 생활</span><span class="unit-item-sub">이슬, 안개, 구름과 바람</span></div></div><span class="unit-domain-tag">지구</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '물체의 운동', 5)"><div class="unit-item-info"><span class="unit-item-icon">🚗</span><div class="unit-item-text"><span class="unit-item-name">(2) 물체의 운동</span><span class="unit-item-sub">물체의 속력과 빠르기 비교</span></div></div><span class="unit-domain-tag">물리</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '산과 염기', 5)"><div class="unit-item-info"><span class="unit-item-icon">🧪</span><div class="unit-item-text"><span class="unit-item-name">(3) 산과 염기</span><span class="unit-item-sub">리트머스 지시약 색 변화</span></div></div><span class="unit-domain-tag">화학</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '우리 몸의 구조와 기능', 5)"><div class="unit-item-info"><span class="unit-item-icon">🫀</span><div class="unit-item-text"><span class="unit-item-name">(4) 우리 몸의 구조와 기능</span><span class="unit-item-sub">소화계, 순환계, 호흡계, 배설계</span></div></div><span class="unit-domain-tag">생명</span></button>
+            </div>
+          </div>
+
+          <!-- 6학년 단원 -->
+          <div id="grade-panel-6" class="grade-panel">
+            <button class="summary-unit-btn" onclick="selectUnitMenu(this, '총정리', 6)"><div class="unit-item-info"><span class="unit-item-icon">🎲</span><div class="unit-item-text"><span class="unit-item-name">6학년 전체 총정리</span><span class="unit-item-sub">1·2학기 전체 AI 랜덤 출제</span></div></div><span class="summary-badge">AI 출제</span></button>
+            <div class="semester-group-box">
+              <span class="semester-header-tag">🌱 6학년 1학기</span>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '지구와 달의 운동', 6)"><div class="unit-item-info"><span class="unit-item-icon">🌍</span><div class="unit-item-text"><span class="unit-item-name">(1) 지구와 달의 운동</span><span class="unit-item-sub">지구 자전(낮과 밤)과 공전</span></div></div><span class="unit-domain-tag">지구</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '식물의 구조와 기능', 6)"><div class="unit-item-info"><span class="unit-item-icon">🍃</span><div class="unit-item-text"><span class="unit-item-name">(2) 식물의 구조와 기능</span><span class="unit-item-sub">뿌리 흡수와 잎의 증산 작용</span></div></div><span class="unit-domain-tag">생명</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '빛과 렌즈', 6)"><div class="unit-item-info"><span class="unit-item-icon">🔍</span><div class="unit-item-text"><span class="unit-item-name">(3) 빛과 렌즈</span><span class="unit-item-sub">빛의 굴절과 볼록렌즈</span></div></div><span class="unit-domain-tag">물리</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '전기의 이용', 6)"><div class="unit-item-info"><span class="unit-item-icon">⚡</span><div class="unit-item-text"><span class="unit-item-name">(4) 전기의 이용</span><span class="unit-item-sub">전기 회로와 전자석의 성질</span></div></div><span class="unit-domain-tag">물리</span></button>
+            </div>
+            <div class="semester-group-box">
+              <span class="semester-header-tag">🍁 6학년 2학기</span>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '계절의 변화', 6)"><div class="unit-item-info"><span class="unit-item-icon">🍂</span><div class="unit-item-text"><span class="unit-item-name">(1) 계절의 변화</span><span class="unit-item-sub">태양 고도와 자전축 경사</span></div></div><span class="unit-domain-tag">지구</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '물질의 연소와 소화', 6)"><div class="unit-item-info"><span class="unit-item-icon">🔥</span><div class="unit-item-text"><span class="unit-item-name">(2) 물질의 연소와 소화</span><span class="unit-item-sub">연소 3요소와 소화 원리</span></div></div><span class="unit-domain-tag">화학</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '에너지와 생활', 6)"><div class="unit-item-info"><span class="unit-item-icon">🔋</span><div class="unit-item-text"><span class="unit-item-name">(3) 에너지와 생활</span><span class="unit-item-sub">에너지 전환과 절약</span></div></div><span class="unit-domain-tag">물리</span></button>
+              <button class="unit-item-btn" onclick="selectUnitMenu(this, '과학과 나의 진로', 6)"><div class="unit-item-info"><span class="unit-item-icon">🚀</span><div class="unit-item-text"><span class="unit-item-name">(4) 과학과 나의 진로</span><span class="unit-item-sub">첨단 과학 기술과 미래 직업</span></div></div><span class="unit-domain-tag">융합</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 우측 메인 영역 -->
+    <main class="app-main">
+      <div class="main-card">
+
+        <!-- [화면 1] 대기 화면 -->
+        <div id="start-section">
+          <div class="current-unit-banner">
+            <span class="selected-tag" id="selected-badge">초등 과학</span>
+            <h2 class="selected-unit-title" id="selected-title">🎲 1학년 · 전체 총정리</h2>
+            <p class="selected-unit-desc" id="selected-desc">1·2학기 전체 핵심 자연과학 개념을 골고루 실시간 출제합니다.</p>
+          </div>
+
+          <button class="ai-create-btn" id="aiGenerateBtn" onclick="requestAiQuiz()">
+            <span>✨</span>
+            <span id="btn-text">Gemini AI 실시간 10문제 출제하기 (OX 퀴즈)</span>
+          </button>
+
+          <p id="keyboard-hint" style="font-size: 13px; color: #64748b; font-weight: 700; margin-top: 14px;">
+            💡 O / X 또는 마우스로 답을 골라보세요
+          </p>
+
+          <div class="loading-box" id="loadingBox">
+            <div class="spinner"></div>
+            <p class="loading-text" id="loadingText">구글 Gemini 3.5 AI가 교과서 기반 10문제를 정성껏 구성하고 있습니다...</p>
+          </div>
+        </div>
+
+        <!-- [화면 2] 문제 풀이 화면 -->
+        <div id="quiz-section">
+          
+          <!-- A. 객관식 / OX 전용 풀이 컨테이너 -->
+          <div id="objectiveQuizWrap" style="display: none;">
+            <!-- 문항 바로가기 칩 바 (1~10번 자유 이동) -->
+            <div class="question-nav-bar" id="objectiveNavBar" style="margin-bottom: 12px;"></div>
+
+            <div class="progress-bar-container">
+              <div class="progress-meta">
+                <span id="progress-text">문제 1 / 10</span>
+                <span id="progress-percent">10%</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" id="progress-fill"></div>
+              </div>
+            </div>
+
+            <div class="question-card">
+              <div class="question-card-top" style="display: flex; justify-content: space-between; align-items: center;">
+                <span class="category-tag" id="category-tag">[1학년 · 총정리]</span>
+                <button class="btn-report-badge" onclick="triggerReportCurrentObjective()" title="이 문제 오류 신고하기">🚨 오류 신고</button>
+              </div>
+              <div class="question-text-row">
+                <h3 class="question-text" id="question-text" style="font-size: 19px; font-weight: 900; line-height: 1.6;">질문을 불러오는 중...</h3>
+                <button class="speak-btn" onclick="speakQuestion()" title="음성으로 문제 듣기">🔊</button>
+              </div>
+            </div>
+
+            <div class="ox-options-grid" id="ox-options-wrap">
+              <button class="ox-btn btn-o" id="btn-ox-o" onclick="submitObjectiveAnswer('O')">
+                <span>⭕</span>
+                <span class="label">참 (맞아요)</span>
+              </button>
+              <button class="ox-btn btn-x" id="btn-ox-x" onclick="submitObjectiveAnswer('X')">
+                <span>❌</span>
+                <span class="label">거짓 (틀려요)</span>
+              </button>
+            </div>
+
+            <div class="mcq-options-list" id="mcq-options-wrap" style="display: none;"></div>
+
+            <!-- 이전 문제 / 다음 문제 이동 버튼 바 -->
+            <div class="quiz-nav-actions" style="margin-top: 18px; display: flex; justify-content: space-between; align-items: center;">
+              <button class="btn-step-nav" id="btnPrevObj" onclick="navigateObjectiveQuestion(-1)">
+                <span>⬅️ 이전 문제</span>
+              </button>
+              <div id="objRightActionArea">
+                <button class="btn-step-nav" id="btnNextObj" onclick="navigateObjectiveQuestion(1)">
+                  <span>다음 문제 ➡️</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- B. 서술형 전용 풀이 컨테이너 (출처: [science_eval] 서술형 작성 UI 모듈 통합) -->
+          <div id="subjectiveQuizWrap" style="display: none;">
+            <div class="question-nav-bar" id="questionNavBar"></div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <span class="category-tag" id="subjCategoryTag">[1학년 · 총정리]</span>
+              <span style="font-size: 12.5px; color: #64748b; font-weight: 800;">
+                작성 완료: <span id="subjAnsweredCountText" style="color: #0284c7;">0</span> / 10문제
+              </span>
+            </div>
+
+            <div class="question-card" style="margin-bottom: 14px;">
+              <div class="question-card-top" style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span class="category-tag" id="subjQueryNumTag" style="background:#e0f2fe; color:#0284c7;">Q1. 서술형 문제</span>
+                  <button class="btn-hint-toggle" onclick="toggleHint()">
+                    <span>💡 생각 힌트 보기</span>
+                  </button>
+                </div>
+                <button class="btn-report-badge" onclick="triggerReportCurrentSubjective()" title="이 문제 오류 신고하기">🚨 오류 신고</button>
+              </div>
+              <h3 class="question-text" id="subjQueryText" style="font-size: 18px; font-weight: 900; line-height: 1.6;">문제를 불러오는 중...</h3>
+            </div>
+
+            <div class="hint-drawer" id="hintDrawer">
+              <div class="hint-drawer-title">
+                <span>💡</span>
+                <span>과학 생각 힌트:</span>
+              </div>
+              <div class="hint-drawer-body" id="hintBody">힌트 내용이 여기에 표시됩니다.</div>
+            </div>
+
+            <label class="answer-label" for="studentAnswerInput">
+              ✏️ 나의 서술형 답안 작성:
+            </label>
+            <textarea id="studentAnswerInput" class="answer-textarea" placeholder="여러분이 생각하는 과학 원리와 까닭을 써주세요 😊" oninput="saveCurrentSubjectiveAnswer()"></textarea>
+
+            <div class="quiz-nav-actions">
+              <button class="btn-step-nav" id="btnPrevSubj" onclick="navigateSubjectiveQuestion(-1)">
+                <span>⬅️ 이전 문제</span>
+              </button>
+              <div id="subjRightActionArea">
+                <button class="btn-step-nav" id="btnNextSubj" onclick="navigateSubjectiveQuestion(1)">
+                  <span>다음 문제 ➡️</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- [화면 3] 최종 성적 & 결과 화면 -->
+        <div id="result-section">
+          
+          <!-- A. 객관식 / OX 결과 뷰 -->
+          <div id="objectiveResultWrap" style="display: none;">
+            <div class="score-banner">
+              <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 8px;">
+                <span class="score-emoji" id="score-emoji" onclick="handleTrophyEasterEgg(event, this)" style="cursor: pointer; user-select: none;" title="🏆 트로피를 터치해 보세요!">🏆</span>
+              </div>
+              <h2 class="score-title" id="score-title">퀴즈 완료!</h2>
+              <p class="score-summary" id="score-summary">총 10문제 중 10문제를 맞혔습니다! (100점)</p>
+              <div class="score-pills">
+                <div class="score-pill pill-correct" id="pill-correct">🟢 정답 10개</div>
+                <div class="score-pill pill-wrong" id="pill-wrong">🔴 오답 0개</div>
+              </div>
+            </div>
+
+            <h3 style="font-size: 17px; font-weight: 900; color: #0369a1; text-align: left; margin-bottom: 14px;">
+              📖 10문제 전체 복습 & AI 해설
+            </h3>
+
+            <div class="review-list" id="review-list"></div>
+
+            <button class="restart-btn" onclick="restartQuiz()">🔄 다른 단원 문제 다시 풀기</button>
+          </div>
+
+          <!-- B. 결과 및 AI 채점 리포트 화면 (출처: [science_eval] 채점 리포트 UI 모듈 통합) -->
+          <div id="subjectiveResultWrap" style="display: none;">
+            <div class="score-banner">
+              <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 8px;">
+                <span class="score-emoji" id="subjScoreEmoji" onclick="handleTrophyEasterEgg(event, this)" style="cursor: pointer; user-select: none;" title="🏆 트로피를 터치해 보세요!">🏆</span>
+              </div>
+              <h2 class="score-title" id="subjScoreTitle">10문제 퀴즈 채점 완료!</h2>
+              <p class="score-summary" id="subjScoreSummary">총 10문제 중 45점을 획득했습니다! (50점 만점)</p>
+              <div class="score-pills">
+                <div class="score-pill pill-correct" id="subjPillCorrect">🟢 만점(5점): 8개</div>
+                <div class="score-pill pill-partial" id="subjPillPartial">🟡 부분점수: 2개</div>
+                <div class="score-pill pill-wrong" id="subjPillWrong">🔴 노력요함/오답: 0개</div>
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; text-align: left;">
+              <span id="subjReportSectionTitle" style="font-weight: 900; color: #0369a1; font-size: 16.5px;">📖 10문제 AI 문맥 채점 & 피드백 리포트</span>
+              <span style="font-size: 12.5px; color: #64748b;" id="reportSavedNotice">💾 채점 기록 자동 보관됨</span>
+            </div>
+
+            <div class="review-list" id="subjReviewList"></div>
+
+            <div style="display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap;">
+              <button class="restart-btn" id="btnBackToReports" onclick="switchQuizMode('reports')" style="display: none; background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%); flex: 1;">
+                📂 지난 리포트 목록으로 돌아가기
+              </button>
+              <button class="restart-btn" onclick="restartQuiz()" style="flex: 1;">
+                🔄 다른 단원 서술형 다시 풀기
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- [화면 4] 메인 스마트 오답노트 전용 화면 (Wrong Answer Notebook) -->
+        <div id="wrong-notes-section" style="display: none;">
+          <div class="current-unit-banner" style="background: linear-gradient(135deg, #fef2f2 0%, #fff7ed 50%, #eff6ff 100%); border-color: #fecaca; margin-bottom: 20px; text-align: center;">
+            <span class="selected-tag" style="background: #ef4444; color: white;">스마트 복습</span>
+            <h2 class="selected-unit-title" style="color: #991b1b; margin-top: 6px;">📖 과학 취약점 오답노트</h2>
+            <p class="selected-unit-desc" style="color: #7f1d1d; margin: 0 auto;">내가 틀렸던 문제들을 모아보고, 원클릭으로 다시 풀어보며 완벽하게 내 것으로 만들어보세요!</p>
+          </div>
+
+          <!-- 상단 필터 및 새로고침 바 -->
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; background: #ffffff; padding: 14px 18px; border-radius: 16px; border: 1.5px solid #e2e8f0; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span style="font-size: 13px; font-weight: 800; color: #475569;">학년:</span>
+                <select id="wrongFilterGrade" onchange="loadWrongNotes()" style="padding: 8px 14px; border-radius: 10px; border: 1.5px solid #cbd5e1; font-weight: 800; font-size: 13.5px; color: #1e293b; background: white; cursor: pointer;">
+                  <option value="0">전체 학년 (1~6학년)</option>
+                  <option value="1">1학년</option>
+                  <option value="2">2학년</option>
+                  <option value="3">3학년</option>
+                  <option value="4">4학년</option>
+                  <option value="5">5학년</option>
+                  <option value="6">6학년</option>
+                </select>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span style="font-size: 13px; font-weight: 800; color: #475569;">유형:</span>
+                <select id="wrongFilterType" onchange="loadWrongNotes()" style="padding: 8px 14px; border-radius: 10px; border: 1.5px solid #cbd5e1; font-weight: 800; font-size: 13.5px; color: #1e293b; background: white; cursor: pointer;">
+                  <option value="all">전체 문제 유형</option>
+                  <option value="ox">⭕❌ OX 퀴즈</option>
+                  <option value="mcq">📝 5지선다 객관식</option>
+                  <option value="subjective">✍️ 서술형 퀴즈</option>
+                </select>
+              </div>
+
+              <span id="wrongNotesCountBadge" style="font-size: 13px; font-weight: 900; background: #fee2e2; color: #dc2626; padding: 5px 14px; border-radius: 9999px;">
+                오답 0건
+              </span>
+            </div>
+
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <button onclick="loadWrongNotes()" style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 8px 16px; font-size: 13px; font-weight: 800; color: #334155; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 1px 4px rgba(0,0,0,0.04);">
+                <span>🔄</span><span>새로고침</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 오답 목록 카드 컨테이너 -->
+          <div id="wrongNotesContainer">
+            <p style="text-align: center; color: #64748b; padding: 30px; font-size: 14px;">오답노트를 불러오는 중입니다...</p>
+          </div>
+        </div>
+
+        <!-- [화면 5] 지난 채점 리포트 아카이브 전용 화면 -->
+        <div id="reports-archive-section" style="display: none;">
+          <div class="current-unit-banner" style="background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 50%, #fefce8 100%); border-color: #bfdbfe; margin-bottom: 20px; text-align: center;">
+            <span class="selected-tag" style="background: #2563eb; color: white;">성적 & 채점 아카이브</span>
+            <h2 class="selected-unit-title" style="color: #1e40af; margin-top: 6px;">📂 지난 전체 채점 리포트 다시보기</h2>
+            <p class="selected-unit-desc" style="color: #1e3a8a; margin: 0 auto;">
+              공통 데이터베이스(edumate.db)에 저장된 과거 10문제 풀이 기록과 AI 상세 해설을 언제든 다시 열람할 수 있습니다.
+            </p>
+          </div>
+
+          <!-- 상단 현황 & 새로고침 바 -->
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; background: #ffffff; padding: 14px 18px; border-radius: 16px; border: 1.5px solid #e2e8f0; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span id="reportsArchiveCountBadge" style="font-size: 13px; font-weight: 900; background: #e0f2fe; color: #0369a1; padding: 6px 14px; border-radius: 9999px;">
+                기록 0건
+              </span>
+              <span style="font-size: 13px; color: #64748b; font-weight: 700;">
+                💡 원하시는 시험 세트를 클릭하면 10문제 전체 풀이 내역과 AI 피드백을 다시 보실 수 있습니다.
+              </span>
+            </div>
+            <button onclick="loadArchivePageList()" style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 8px 16px; font-size: 13px; font-weight: 800; color: #334155; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+              <span>🔄</span><span>새로고침</span>
+            </button>
+          </div>
+
+          <!-- 리포트 카드 리스트 -->
+          <div id="pageArchiveList" style="display: flex; flex-direction: column; gap: 12px;">
+            <p style="text-align: center; color: #64748b; padding: 30px; font-size: 14px;">채점 기록을 불러오는 중입니다...</p>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- [모달] 저장된 채점 기록 아카이브 -->
+  <div class="modal-overlay" id="archiveModal" onclick="closeArchiveModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span>📂</span>
+          <span>저장된 전체 채점 아카이브</span>
+        </div>
+        <button class="modal-close-btn" onclick="closeArchiveModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 12.5px; color: #64748b; margin-bottom: 12px;">
+          💡 과거에 풀었던 기록을 클릭하면 <strong>10문제 전체의 문맥 채점 결과와 AI 피드백 리포트</strong>를 그대로 다시 열람할 수 있습니다.
+        </p>
+        <div id="modalArchiveList">
+          <p style="font-size: 13px; color: #64748b; text-align: center; padding: 16px;">기록을 불러오는 중...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- [모달 1] 실시간 문제 오류 신고 (problem_reports & reported_issues) -->
+  <div class="modal-overlay" id="reportModal" onclick="closeReportModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()" style="max-width: 580px;">
+      <div class="modal-header">
+        <div class="modal-title" style="color: #ef4444;">
+          <span>🚨</span>
+          <span>실시간 문제 오류 신고</span>
+        </div>
+        <button class="modal-close-btn" onclick="closeReportModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- 신고 대상 문제 요약 카드 -->
+        <div style="background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 12px 16px; margin-bottom: 16px;">
+          <div style="font-size: 12px; color: #64748b; font-weight: 800; margin-bottom: 4px;" id="reportTargetMeta">
+            [3학년 · 자석의 이용] 문제 1번
+          </div>
+          <div style="font-size: 14.5px; font-weight: 800; color: #1e293b; line-height: 1.5;" id="reportTargetQuestion">
+            문제 지문이 여기에 표시됩니다.
+          </div>
+        </div>
+
+        <!-- 오류 유형 선택 (복수 선택 가능) -->
+        <div style="margin-bottom: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <label style="font-size: 13.5px; font-weight: 900; color: #334155; margin-bottom: 0;">
+              📌 오류 유형을 선택해 주세요 (복수 선택 가능):
+            </label>
+            <span style="font-size: 11.5px; color: #ef4444; font-weight: 700;">* 최소 1개 이상 선택</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 7px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px 14px;">
+            <label style="display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 700; color: #1e293b; cursor: pointer;">
+              <input type="checkbox" name="reportErrorType" value="과학적 사실 / 개념 오류" style="width: 16px; height: 16px; accent-color: #ef4444; cursor: pointer;">
+              <span>🧪 1) 과학적 사실 / 개념 오류 <span style="font-weight: normal; color: #64748b; font-size: 11.5px;">(원리나 설명이 틀림)</span></span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 700; color: #1e293b; cursor: pointer;">
+              <input type="checkbox" name="reportErrorType" value="정답 오류 / 보기 이상" style="width: 16px; height: 16px; accent-color: #ef4444; cursor: pointer;">
+              <span>🎯 2) 정답 오류 / 보기 이상 <span style="font-weight: normal; color: #64748b; font-size: 11.5px;">(정답 틀림, 복수정답, 답 없음)</span></span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 700; color: #1e293b; cursor: pointer;">
+              <input type="checkbox" name="reportErrorType" value="AI 채점 / 피드백 이상" style="width: 16px; height: 16px; accent-color: #ef4444; cursor: pointer;">
+              <span>⚖️ 3) AI 채점 / 피드백 이상 <span style="font-weight: normal; color: #64748b; font-size: 11.5px;">(서술형 감점 오류, 피드백 이상)</span></span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 700; color: #1e293b; cursor: pointer;">
+              <input type="checkbox" name="reportErrorType" value="학년 수준 부적합 / 고난도 어휘" style="width: 16px; height: 16px; accent-color: #ef4444; cursor: pointer;">
+              <span>🎒 4) 학년 수준 부적합 / 고난도 어휘 <span style="font-weight: normal; color: #64748b; font-size: 11.5px;">(교과 범위 초과, 어려운 어휘)</span></span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 700; color: #1e293b; cursor: pointer;">
+              <input type="checkbox" name="reportErrorType" value="지문 문맥 오류 / 문장 이상" style="width: 16px; height: 16px; accent-color: #ef4444; cursor: pointer;">
+              <span>📄 5) 지문 문맥 오류 / 문장 이상 <span style="font-weight: normal; color: #64748b; font-size: 11.5px;">(문장이 어색하여 이해 어려움)</span></span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 700; color: #1e293b; cursor: pointer;">
+              <input type="checkbox" name="reportErrorType" value="단순 오탈자 / 맞춤법 오류" style="width: 16px; height: 16px; accent-color: #ef4444; cursor: pointer;">
+              <span>✏️ 6) 단순 오탈자 / 맞춤법 오류 <span style="font-weight: normal; color: #64748b; font-size: 11.5px;">(글자 오타, 띄어쓰기 등)</span></span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 700; color: #1e293b; cursor: pointer;">
+              <input type="checkbox" name="reportErrorType" value="기타" id="reportErrorTypeEtc" style="width: 16px; height: 16px; accent-color: #ef4444; cursor: pointer;">
+              <span>💬 7) 기타 <span style="font-weight: normal; color: #64748b; font-size: 11.5px;">(아래 상세 의견에 자유롭게 입력)</span></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 상세 의견 textarea -->
+        <div style="margin-bottom: 16px;">
+          <label style="font-size: 13.5px; font-weight: 900; color: #334155; display: block; margin-bottom: 6px;">
+            💬 상세 의견 (선택):
+          </label>
+          <textarea id="reportCommentInput" style="width: 100%; height: 85px; padding: 10px 12px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 13.5px; resize: none; font-family: inherit;" placeholder="어떤 부분이 잘못되었는지 자세히 알려주시면 학습 모델 개선에 큰 도움이 됩니다."></textarea>
+        </div>
+
+        <!-- 버튼 영역 -->
+        <div style="display: flex; justify-content: flex-end; gap: 10px;">
+          <button class="btn-step-nav" onclick="closeReportModal()" style="background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; padding: 8px 16px;">취소</button>
+          <button class="btn-step-nav" id="btnSubmitReport" onclick="submitProblemReport()" style="background: #ef4444; color: white; border: none; padding: 8px 20px; font-weight: 900;">🚨 신고 접수하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- [모달 2] 완벽 정답 & 개념 마스터 축하 모달 -->
+  <div class="modal-overlay" id="masterSuccessModal" onclick="closeMasterSuccessModal(event)" style="display: none;">
+    <div class="modal-card" onclick="event.stopPropagation()" style="max-width: 480px; text-align: center; border: 2.5px solid #6ee7b7; box-shadow: 0 25px 50px -12px rgba(16, 185, 129, 0.25);">
+      <div class="modal-header" style="background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%); border-bottom: 2px solid #bbf7d0; padding: 18px 24px;">
+        <div class="modal-title" style="color: #059669; justify-content: center; width: 100%; font-size: 18px;">
+          <span>🎉</span>
+          <span>개념 마스터 축하합니다!</span>
+        </div>
+        <button class="modal-close-btn" onclick="closeMasterSuccessModal()">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 28px 24px;">
+        <div style="font-size: 58px; margin-bottom: 12px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));">🏆</div>
+        <h3 style="font-size: 22px; font-weight: 900; color: #065f46; margin-bottom: 10px;">
+          완벽하게 정답을 맞혔습니다!
+        </h3>
+        <p style="font-size: 14.5px; color: #334155; line-height: 1.6; margin-bottom: 22px;">
+          틀렸던 과학 원리를 스스로 극복하고 멋지게 정답을 찾아냈어요!<br>
+          스스로 해낸 열정과 끈기가 정말 자랑스럽습니다. 👏
+        </p>
+
+        <!-- 개념 마스터 배지 안내 박스 -->
+        <div style="background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%); border: 2px dashed #34d399; border-radius: 16px; padding: 18px; margin-bottom: 24px;">
+          <div style="display: inline-flex; align-items: center; gap: 6px; background: #059669; color: white; padding: 6px 16px; border-radius: 9999px; font-weight: 900; font-size: 14px; box-shadow: 0 4px 12px rgba(5,150,105,0.25);">
+            <span>✨</span><span>개념 마스터 완료</span><span>🎉</span>
+          </div>
+          <p style="margin-top: 12px; font-size: 13.5px; color: #047857; font-weight: 800; line-height: 1.55;">
+            이 문제는 오답노트에서 지워지지 않고,<br>
+            자랑스러운 <strong>마스터 배지</strong>와 함께 계속 보관됩니다.<br>
+            언제든 다시 꺼내보며 복습 포트폴리오로 활용하세요!
+          </p>
+        </div>
+
+        <button onclick="closeMasterSuccessModal()" style="width: 100%; background: linear-gradient(135deg, #059669 0%, #047857 100%); color: white; border: none; border-radius: 14px; padding: 14px 20px; font-size: 16px; font-weight: 900; cursor: pointer; box-shadow: 0 4px 14px rgba(5,150,105,0.35); transition: all 0.2s;">
+          ✨ 멋져요! 오답노트 계속 확인하기
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- [모달 3] 다시 풀기 오답 시 격려 모달 -->
+  <div class="modal-overlay" id="retryFailModal" onclick="closeRetryFailModal(event)" style="display: none;">
+    <div class="modal-card" onclick="event.stopPropagation()" style="max-width: 460px; text-align: center; border: 2px solid #fed7aa;">
+      <div class="modal-header" style="background: #fff7ed; border-bottom: 2px solid #fed7aa; padding: 18px 24px;">
+        <div class="modal-title" style="color: #ea580c; justify-content: center; width: 100%; font-size: 17px;">
+          <span>💡</span>
+          <span>다시 한번 생각해볼까요?</span>
+        </div>
+        <button class="modal-close-btn" onclick="closeRetryFailModal()">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 26px 20px;">
+        <div style="font-size: 50px; margin-bottom: 12px;">🤔</div>
+        <h3 style="font-size: 20px; font-weight: 900; color: #9a3412; margin-bottom: 8px;">
+          아쉬워요! 조금 더 생각해보세요
+        </h3>
+        <p style="font-size: 14px; color: #475569; line-height: 1.6; margin-bottom: 22px;">
+          모범 정답과 AI 피드백 힌트를 꼼꼼히 다시 읽어보고<br>
+          어떤 과학 개념이 숨어있는지 한 번 더 도전해 보세요! 💪
+        </p>
+        <button onclick="closeRetryFailModal()" style="width: 100%; background: #ea580c; color: white; border: none; border-radius: 12px; padding: 13px 18px; font-size: 15px; font-weight: 900; cursor: pointer; transition: all 0.2s;">
+          ✏️ 다시 도전하기
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ==========================================
+    // 상태 관리 변수 (Step B 공통 계정 및 포켓몬 진화 체계 포함)
+    // ==========================================
+    let currentGrade = 1;
+    let currentUnit = "총정리";
+    let currentMode = "ox"; // "ox" | "mcq" | "subjective"
+
+    // API 기본 경로 (독립 실행 및 메인 포털 include_router 동시 지원)
+    const API_BASE = window.location.pathname.startsWith('/science') ? '/science' : '';
+
+    // 중앙 통합 로그인 계정 및 포켓몬 진화 정보 안전 복원
+    function getStoredUserName() {
+      const directName = localStorage.getItem("edumate_math_user_name");
+      if (directName) return directName;
+      try {
+        const raw = localStorage.getItem("edumate_current_account");
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (typeof parsed === "object" && parsed.name) return parsed.name;
+          if (typeof parsed === "string") return parsed;
+        }
+      } catch (e) {}
+      return "김에듀";
+    }
+
+    function getStoredUserId() {
+      const directId = localStorage.getItem("currentUserId") || localStorage.getItem("edumate_user_id") || localStorage.getItem("edumate_math_user_id");
+      if (directId) return directId;
+      try {
+        const raw = localStorage.getItem("edumate_current_account");
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (typeof parsed === "object") {
+            return parsed.user_id || parsed.userId || parsed.id || null;
+          }
+        }
+      } catch (e) {}
+      return null;
+    }
+
+    let currentAccount = getStoredUserName();
+    let currentUserId = getStoredUserId();
+    let currentPokemonType = localStorage.getItem("edumate_pokemon_type") || "grass";
+    let currentUserStatus = null;
+    let quizLogIds = {}; // 각 문제 index -> quiz_logs log_id 매핑
+    let favoriteStatus = {}; // log_id -> boolean
+
+    // 객관식 / OX 상태
+    let currentQuizSet = [];
+    let userAnswers = [];
+    let currentIndex = 0;
+    let currentQuizSessionTime = Date.now(); // 같은 단원 반복 풀이 시 덮어쓰기 방지용 고유 세트 시간값
+
+    // 서술형 퀴즈 상태 관리 (출처: [science_eval] 모듈 통합)
+    let subjectiveQuizSet = [];
+    let subjectiveUserAnswers = {};
+    let currentSubjIndex = 0;
+    let cachedArchives = [];
+
+    const numSymbols = ["①", "②", "③", "④", "⑤"];
+
+    // ==========================================
+    // 학생 누적 점수 및 포켓몬 5대 진화 등급 동기화
+    // ==========================================
+    async function loadUserStatus() {
+      try {
+        currentAccount = getStoredUserName();
+        currentUserId = getStoredUserId();
+        currentPokemonType = localStorage.getItem("edumate_pokemon_type") || "grass";
+        const uidParam = currentUserId ? `&user_id=${encodeURIComponent(currentUserId)}` : '';
+        const res = await fetch(`${API_BASE}/api/user/status?user_name=${encodeURIComponent(currentAccount)}&grade=${currentGrade}&pokemon_type=${currentPokemonType}${uidParam}`);
+        if (!res.ok) return;
+        const json = await res.json();
+        if (json.status === "success" && json.data) {
+          currentUserStatus = json.data;
+          renderUserStatusUI(json.data);
+        }
+      } catch (e) {
+        console.warn("[EduMate] 유저 상태 로드 알림:", e);
+      }
+    }
+
+    function renderUserStatusUI(statusData) {
+      if (!statusData) return;
+      const userName = statusData.user_name || currentAccount;
+      const grade = statusData.grade || currentGrade;
+      const totalScore = statusData.total_score || 0;
+      const levelInfo = statusData.level_info || {};
+
+      const nameEl = document.getElementById("header-user-display");
+      if (nameEl) nameEl.textContent = `👤 ${userName} (${grade}학년)`;
+
+      const titleEl = document.getElementById("header-pokemon-title");
+      if (titleEl) {
+        titleEl.textContent = levelInfo.badge_text || levelInfo.full_title || "알 5티어";
+        if (levelInfo.color_hex) {
+          titleEl.style.color = levelInfo.color_hex;
+        }
+      }
+
+      const scoreEl = document.getElementById("header-total-score");
+      if (scoreEl) {
+        scoreEl.textContent = `${totalScore}점`;
+      }
+
+      const expBar = document.getElementById("header-exp-bar");
+      if (expBar) {
+        const pct = levelInfo.progress_pct || 0;
+        expBar.style.width = `${pct}%`;
+        if (levelInfo.color_hex) {
+          expBar.style.backgroundColor = levelInfo.color_hex;
+        }
+      }
+    }
+
+
+    // ==========================================
+    // 효과음 및 TTS
+    // ==========================================
+    function playTone(freq, type, duration) {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(0.12, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function playSound(isCorrect) {
+      if (isCorrect) {
+        playTone(523.25, 'sine', 0.15);
+        setTimeout(() => playTone(659.25, 'sine', 0.25), 100);
+      } else {
+        playTone(220, 'sawtooth', 0.25);
+      }
+    }
+
+    function speakQuestion() {
+      if (!currentQuizSet[currentIndex]) return;
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(currentQuizSet[currentIndex].question);
+      utter.lang = 'ko-KR';
+      utter.rate = 0.95;
+      window.speechSynthesis.speak(utter);
+    }
+
+    // ==========================================
+    // 풀이 방식 탭 전환 (OX ↔ 5지선다 ↔ 서술형 ↔ 오답노트 ↔ 지난 리포트)
+    // ==========================================
+    function switchQuizMode(mode) {
+      currentMode = mode;
+
+      document.getElementById("tab-ox").classList.toggle("active", mode === "ox");
+      document.getElementById("tab-mcq").classList.toggle("active", mode === "mcq");
+      document.getElementById("tab-subjective").classList.toggle("active", mode === "subjective");
+      const tabWn = document.getElementById("tab-wrongnotes");
+      if (tabWn) tabWn.classList.toggle("active", mode === "wrongnotes");
+      const tabRep = document.getElementById("tab-reports");
+      if (tabRep) tabRep.classList.toggle("active", mode === "reports");
+
+      if (mode === "wrongnotes") {
+        // 메인 오답노트 화면 띄우기
+        document.getElementById("start-section").style.display = "none";
+        document.getElementById("quiz-section").style.display = "none";
+        document.getElementById("result-section").style.display = "none";
+        document.getElementById("reports-archive-section").style.display = "none";
+        document.getElementById("wrong-notes-section").style.display = "block";
+        document.getElementById("top-score-text").textContent = "스마트 오답노트 (복습)";
+        const filterGrade = document.getElementById("wrongFilterGrade");
+        if (filterGrade && !filterGrade.value) {
+          filterGrade.value = "0";
+        }
+        loadWrongNotes();
+        return;
+      }
+
+      if (mode === "reports") {
+        // 지난 채점 리포트 아카이브 화면 띄우기
+        document.getElementById("start-section").style.display = "none";
+        document.getElementById("quiz-section").style.display = "none";
+        document.getElementById("result-section").style.display = "none";
+        document.getElementById("wrong-notes-section").style.display = "none";
+        document.getElementById("reports-archive-section").style.display = "block";
+        document.getElementById("top-score-text").textContent = "지난 채점 리포트 (아카이브)";
+        loadArchivePageList();
+        return;
+      }
+
+      // 일반 퀴즈 모드로 복귀 시 특수 섹션 숨김
+      document.getElementById("wrong-notes-section").style.display = "none";
+      document.getElementById("reports-archive-section").style.display = "none";
+
+      const modeLabels = { ox: "OX 퀴즈", mcq: "5지선다 객관식", subjective: "서술형 퀴즈" };
+      const modeTitle = modeLabels[mode] || mode;
+
+      document.getElementById("top-score-text").textContent = `10문제 출제 모드 (${modeTitle})`;
+      document.getElementById("btn-text").textContent = (mode === "subjective")
+        ? `✍️ Gemini AI 실시간 10문제 출제하기 (${modeTitle})`
+        : `✨ Gemini AI 실시간 10문제 출제하기 (${modeTitle})`;
+
+      if (mode === "ox") {
+        document.getElementById("keyboard-hint").textContent = "💡 O / X 또는 마우스로 답을 골라보세요";
+      } else if (mode === "mcq") {
+        document.getElementById("keyboard-hint").textContent = "💡 키보드 숫자키(1~5)로도 답을 선택할 수 있어요";
+      } else {
+        document.getElementById("keyboard-hint").textContent = "💡 10문제를 차례대로 작성한 후 마지막 문제에서 일괄 채점합니다";
+      }
+
+      restartQuiz();
+    }
+
+    // ==========================================
+    // 학년 세로 탭 & 단원 선택
+    // ==========================================
+    function switchGradeTab(gradeNum) {
+      currentGrade = gradeNum;
+      document.querySelectorAll(".grade-v-btn").forEach(btn => btn.classList.remove("active"));
+      const targetBtn = document.getElementById(`gbtn-${gradeNum}`);
+      if (targetBtn) targetBtn.classList.add("active");
+
+      document.querySelectorAll(".grade-panel").forEach(p => p.classList.remove("active"));
+      const p = document.getElementById(`grade-panel-${gradeNum}`);
+      if (p) p.classList.add("active");
+
+      document.getElementById("sidebar-grade-hint").textContent = `${gradeNum}학년 선택 중`;
+
+      // 오답노트 모드일 때 사이드바 학년 클릭 시 해당 학년 필터 즉시 동기화
+      if (currentMode === "wrongnotes") {
+        const filterGrade = document.getElementById("wrongFilterGrade");
+        if (filterGrade) {
+          filterGrade.value = String(gradeNum);
+          loadWrongNotes();
+        }
+        return;
+      }
+
+      const firstBtn = p.querySelector(".summary-unit-btn") || p.querySelector(".unit-item-btn");
+      if (firstBtn) selectUnitMenu(firstBtn, "총정리", gradeNum);
+    }
+
+    function selectUnitMenu(btnElement, unitName, gradeNum) {
+      currentGrade = gradeNum;
+      currentUnit = unitName;
+
+      document.querySelectorAll(".summary-unit-btn, .unit-item-btn").forEach(b => b.classList.remove("active"));
+      btnElement.classList.add("active");
+
+      const subDesc = btnElement.querySelector(".unit-item-sub")?.textContent || "";
+      document.getElementById("selected-title").textContent = (unitName === "총정리")
+        ? `🎲 ${gradeNum}학년 · 전체 총정리`
+        : `📖 ${gradeNum}학년 · ${unitName}`;
+      
+      document.getElementById("selected-desc").textContent = subDesc || `${unitName} 핵심 개념 AI 실시간 출제`;
+
+      restartQuiz();
+    }
+
+    // ==========================================
+    // AI 퀴즈 출제 요청 (모드별 분기)
+    // ==========================================
+    async function requestAiQuiz() {
+      const btn = document.getElementById("aiGenerateBtn");
+      const loading = document.getElementById("loadingBox");
+
+      btn.disabled = true;
+      loading.style.display = "block";
+
+      const isSubj = (currentMode === "subjective");
+      const apiUrl = isSubj ? `${API_BASE}/api/quiz/subjective` : `${API_BASE}/api/quiz`;
+
+      try {
+        const payload = isSubj
+          ? { grade: currentGrade, unit: currentUnit, count: 10 }
+          : { grade: currentGrade, unit: currentUnit, mode: currentMode };
+
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          const errData = await response.json();
+          throw new Error(errData.detail || errData.error || "서버 응답 오류 (코드: " + response.status + ")");
+        }
+
+        const json = await response.json();
+
+        document.getElementById("start-section").style.display = "none";
+        document.getElementById("result-section").style.display = "none";
+        document.getElementById("quiz-section").style.display = "block";
+
+        if (isSubj) {
+          // 서술형 초기화 및 렌더링
+          subjectiveQuizSet = json.data.items || [];
+          if (subjectiveQuizSet.length === 0) throw new Error("출제된 서술형 문제가 없습니다.");
+          currentSubjIndex = 0;
+          subjectiveUserAnswers = {};
+
+          document.getElementById("objectiveQuizWrap").style.display = "none";
+          document.getElementById("subjectiveQuizWrap").style.display = "block";
+
+          renderSubjectiveNavChips();
+          renderCurrentSubjectiveQuestion();
+
+        } else {
+          // OX / 5지선다 초기화 및 렌더링
+          currentQuizSet = Array.isArray(json) ? json : (json.data || []);
+          if (currentQuizSet.length === 0) throw new Error("출제된 객관식 문제가 없습니다.");
+          currentIndex = 0;
+          userAnswers = [];
+          currentQuizSessionTime = Date.now();
+
+          document.getElementById("subjectiveQuizWrap").style.display = "none";
+          document.getElementById("objectiveQuizWrap").style.display = "block";
+
+          renderObjectiveQuestion();
+        }
+
+      } catch (err) {
+        console.error(err);
+        alert("❌ AI 퀴즈 생성 중 오류가 발생했습니다:\n" + err.message + "\n\n💡 서버가 잘 켜져 있는지 확인해 주세요!");
+      } finally {
+        loading.style.display = "none";
+        btn.disabled = false;
+      }
+    }
+
+    // ==========================================
+    // [모드 A] OX / 5지선다 풀이 로직
+    // ==========================================
+    // ==========================================
+    // 객관식 / OX 문제 네비게이션 및 렌더링
+    // ==========================================
+    function renderObjectiveNavChips() {
+      const navBar = document.getElementById("objectiveNavBar");
+      if (!navBar || !currentQuizSet || currentQuizSet.length === 0) return;
+
+      navBar.innerHTML = currentQuizSet.map((_, i) => {
+        const hasAnswer = (userAnswers[i] !== undefined && userAnswers[i] !== null);
+        const isActive = (i === currentIndex);
+        let cls = "q-chip-btn";
+        if (hasAnswer) cls += " answered";
+        if (isActive) cls += " active";
+        return `<button class="${cls}" onclick="jumpToObjectiveQuestion(${i})">${i + 1}</button>`;
+      }).join("");
+    }
+
+    function jumpToObjectiveQuestion(idx) {
+      if (idx >= 0 && idx < currentQuizSet.length) {
+        currentIndex = idx;
+        renderObjectiveQuestion();
+      }
+    }
+
+    function navigateObjectiveQuestion(delta) {
+      const newIdx = currentIndex + delta;
+      if (newIdx >= 0 && newIdx < currentQuizSet.length) {
+        currentIndex = newIdx;
+        renderObjectiveQuestion();
+      }
+    }
+
+    function renderObjectiveQuestion() {
+      const q = currentQuizSet[currentIndex];
+      const total = currentQuizSet.length;
+      const progressPercent = Math.round(((currentIndex + 1) / total) * 100);
+
+      renderObjectiveNavChips();
+
+      document.getElementById("progress-text").textContent = `문제 ${currentIndex + 1} / ${total}`;
+      document.getElementById("progress-percent").textContent = `${progressPercent}%`;
+      document.getElementById("progress-fill").style.width = `${progressPercent}%`;
+
+      document.getElementById("category-tag").textContent = `[${currentGrade}학년 · ${q.unit || currentUnit}]`;
+      document.getElementById("question-text").textContent = `Q${currentIndex + 1}. ${q.question}`;
+      document.getElementById("top-score-text").textContent = `진행: ${currentIndex + 1}/${total}`;
+
+      // 이전 문제 버튼 상태 제어
+      const btnPrev = document.getElementById("btnPrevObj");
+      if (btnPrev) {
+        btnPrev.disabled = (currentIndex === 0);
+        btnPrev.style.opacity = (currentIndex === 0) ? "0.4" : "1";
+        btnPrev.style.cursor = (currentIndex === 0) ? "not-allowed" : "pointer";
+      }
+
+      // 우측 액션 버튼 영역 (다음 문제 또는 채점 결과 보기)
+      const rightArea = document.getElementById("objRightActionArea");
+      if (rightArea) {
+        const allAnswered = (userAnswers.filter(a => a !== undefined && a !== null).length === total);
+        if (currentIndex === total - 1 || allAnswered) {
+          rightArea.innerHTML = `
+            <button class="btn-submit-final" id="btnFinishObj" onclick="finishObjectiveQuiz()">
+              <span>📝 10문제 전체 제출 및 채점 결과 보기 (${userAnswers.filter(a => a !== undefined && a !== null).length}/${total})</span>
+            </button>
+          `;
+        } else {
+          rightArea.innerHTML = `
+            <button class="btn-step-nav" id="btnNextObj" onclick="navigateObjectiveQuestion(1)">
+              <span>다음 문제 ➡️</span>
+            </button>
+          `;
+        }
+      }
+
+      const oxWrap = document.getElementById("ox-options-wrap");
+      const mcqWrap = document.getElementById("mcq-options-wrap");
+      const currentAnswer = userAnswers[currentIndex];
+
+      if (currentMode === "mcq" && q.options && q.options.length > 0) {
+        oxWrap.style.display = "none";
+        mcqWrap.style.display = "flex";
+        mcqWrap.innerHTML = "";
+
+        q.options.forEach((optText, optIdx) => {
+          const choiceNum = optIdx + 1;
+          const isSelected = (currentAnswer === choiceNum);
+          const optBtn = document.createElement("button");
+          optBtn.className = "mcq-option-btn" + (isSelected ? " selected" : "");
+          if (isSelected) {
+            optBtn.style.borderColor = "#0284c7";
+            optBtn.style.backgroundColor = "#e0f2fe";
+            optBtn.style.boxShadow = "0 0 0 2px #0284c7";
+          }
+          optBtn.innerHTML = `
+            <div class="option-num-badge" style="${isSelected ? 'background: #0284c7; color: white;' : ''}">${numSymbols[optIdx] || choiceNum}</div>
+            <span class="option-text" style="${isSelected ? 'font-weight: 900; color: #0369a1;' : ''}">${optText}</span>
+          `;
+          optBtn.onclick = () => submitObjectiveAnswer(choiceNum);
+          mcqWrap.appendChild(optBtn);
+        });
+      } else {
+        mcqWrap.style.display = "none";
+        oxWrap.style.display = "grid";
+
+        const btnO = document.getElementById("btn-ox-o");
+        const btnX = document.getElementById("btn-ox-x");
+        if (btnO && btnX) {
+          btnO.style.outline = (currentAnswer === 'O') ? "4px solid #22c55e" : "none";
+          btnO.style.boxShadow = (currentAnswer === 'O') ? "0 0 16px rgba(34, 197, 94, 0.45)" : "none";
+          btnX.style.outline = (currentAnswer === 'X') ? "4px solid #ef4444" : "none";
+          btnX.style.boxShadow = (currentAnswer === 'X') ? "0 0 16px rgba(239, 68, 68, 0.45)" : "none";
+        }
+      }
+    }
+
+    function submitObjectiveAnswer(choice) {
+      userAnswers[currentIndex] = choice;
+      const q = currentQuizSet[currentIndex];
+      let isCorrect = false;
+
+      if (currentMode === "mcq") {
+        isCorrect = (parseInt(choice, 10) === parseInt(q.answer, 10));
+      } else {
+        isCorrect = (String(choice).toUpperCase() === String(q.answer).toUpperCase());
+      }
+
+      playSound(isCorrect);
+      renderObjectiveNavChips();
+
+      // 다음 문제로 자동 전진 (1~9번 문제일 때만)
+      if (currentIndex + 1 < currentQuizSet.length) {
+        currentIndex++;
+        renderObjectiveQuestion();
+      } else {
+        // 마지막 문제 선택 시 화면만 갱신하고, 학생이 직접 '결과 보기' 버튼을 누를 때까지 대기
+        renderObjectiveQuestion();
+      }
+    }
+
+    function finishObjectiveQuiz() {
+      const total = currentQuizSet.length;
+      const answeredCount = userAnswers.filter(a => a !== undefined && a !== null).length;
+      if (answeredCount < total) {
+        const confirmFinish = confirm(`아직 풀지 않은 문제가 ${total - answeredCount}개 있습니다. 이대로 채점을 진행할까요?`);
+        if (!confirmFinish) return;
+      }
+      showFinalObjectiveResults();
+    }
+
+    function showFinalObjectiveResults() {
+      document.getElementById("quiz-section").style.display = "none";
+      document.getElementById("result-section").style.display = "block";
+      document.getElementById("subjectiveResultWrap").style.display = "none";
+      document.getElementById("objectiveResultWrap").style.display = "block";
+
+      let correctCount = 0;
+      let reviewHtml = "";
+
+      currentQuizSet.forEach((q, idx) => {
+        const myChoice = userAnswers[idx];
+        let isCorrect = false;
+
+        if (currentMode === "mcq") {
+          const myNum = parseInt(myChoice, 10);
+          const corNum = parseInt(q.answer, 10);
+          isCorrect = (myNum === corNum);
+
+          let optionsRowsHtml = "";
+          (q.options || []).forEach((optText, optIdx) => {
+            const optNum = optIdx + 1;
+            let rowClass = "";
+            let badgeText = "";
+            if (optNum === corNum) {
+              rowClass = "is-correct-opt";
+              badgeText = " (정답 ✅)";
+            } else if (optNum === myNum && !isCorrect) {
+              rowClass = "is-my-wrong-opt";
+              badgeText = " (내가 고른 답 ❌)";
+            }
+            optionsRowsHtml += `
+              <div class="review-option-row ${rowClass}">
+                <span>${numSymbols[optIdx] || optNum} ${optText}</span>
+                <span>${badgeText}</span>
+              </div>
+            `;
+          });
+
+          const objBorder = isCorrect ? '#10b981' : '#ef4444';
+          const objBg = isCorrect ? '#f0fdf4' : '#fef2f2';
+          reviewHtml += `
+            <div class="review-item ${isCorrect ? 'is-correct-item' : 'is-wrong-item'}" style="border: 2px solid ${objBorder} !important; border-left: 7px solid ${objBorder} !important; background: ${objBg} !important;">
+              <div class="review-top">
+                <span class="review-num">Q${idx + 1}. [${q.unit || currentUnit}]</span>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <button class="btn-fav-star" id="btn-fav-obj-${idx}" onclick="toggleObjectiveFavorite(${idx})" title="즐겨찾기">⭐ 즐겨찾기</button>
+                  <button class="btn-ask-teacher" onclick="toggleObjectiveQaBox(${idx})" title="AI 선생님께 질문하기">💬 AI 질문</button>
+                  <span class="review-badge ${isCorrect ? 'badge-pass' : 'badge-fail'}">
+                    ${isCorrect ? '정답 🎉' : '오답 💡'}
+                  </span>
+                  <button class="btn-report-badge" onclick="triggerReportFromObjectiveReview(${idx})">🚨 오류 신고</button>
+                </div>
+              </div>
+              <div class="review-question">${q.question}</div>
+              <div class="review-options-grid">${optionsRowsHtml}</div>
+              <div class="review-exp"><strong>💡 AI 선생님 해설:</strong> ${q.explanation}</div>
+              <!-- AI 질문하기 미니 채팅창 -->
+              <div class="qa-chat-box" id="qa-box-obj-${idx}" style="display: none;">
+                <div style="font-weight: 800; font-size: 13px; color: #0284c7; margin-bottom: 6px;">💬 AI 선생님과 1:1 대화</div>
+                <div class="qa-history-list" id="qa-history-obj-${idx}"></div>
+                <div class="qa-input-row">
+                  <input type="text" class="qa-input-field" id="qa-input-obj-${idx}" placeholder="선생님께 궁금한 점을 질문해보세요..." onkeydown="if(event.key==='Enter') submitObjectiveQa(${idx})">
+                  <button class="qa-submit-btn" onclick="submitObjectiveQa(${idx})">전송</button>
+                </div>
+              </div>
+            </div>
+          `;
+
+        } else {
+          isCorrect = (String(myChoice).toUpperCase() === String(q.answer).toUpperCase());
+          const objBorder = isCorrect ? '#10b981' : '#ef4444';
+          const objBg = isCorrect ? '#f0fdf4' : '#fef2f2';
+          reviewHtml += `
+            <div class="review-item ${isCorrect ? 'is-correct-item' : 'is-wrong-item'}" style="border: 2px solid ${objBorder} !important; border-left: 7px solid ${objBorder} !important; background: ${objBg} !important;">
+              <div class="review-top">
+                <span class="review-num">Q${idx + 1}. [${q.unit || currentUnit}]</span>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <button class="btn-fav-star" id="btn-fav-obj-${idx}" onclick="toggleObjectiveFavorite(${idx})" title="즐겨찾기">⭐ 즐겨찾기</button>
+                  <button class="btn-ask-teacher" onclick="toggleObjectiveQaBox(${idx})" title="AI 선생님께 질문하기">💬 AI 질문</button>
+                  <span class="review-badge ${isCorrect ? 'badge-pass' : 'badge-fail'}">
+                    ${isCorrect ? '정답 🎉' : '오답 💡'}
+                  </span>
+                  <button class="btn-report-badge" onclick="triggerReportFromObjectiveReview(${idx})">🚨 오류 신고</button>
+                </div>
+              </div>
+              <div class="review-question">${q.question}</div>
+              <div style="font-size: 13.5px; margin-bottom: 8px;">
+                <span>내 답안: <strong>${myChoice}</strong></span> | 
+                <span style="color:#0284c7;">실제 정답: <strong>${q.answer}</strong></span>
+              </div>
+              <div class="review-exp"><strong>💡 AI 선생님 해설:</strong> ${q.explanation}</div>
+              <!-- AI 질문하기 미니 채팅창 -->
+              <div class="qa-chat-box" id="qa-box-obj-${idx}" style="display: none;">
+                <div style="font-weight: 800; font-size: 13px; color: #0284c7; margin-bottom: 6px;">💬 AI 선생님과 1:1 대화</div>
+                <div class="qa-history-list" id="qa-history-obj-${idx}"></div>
+                <div class="qa-input-row">
+                  <input type="text" class="qa-input-field" id="qa-input-obj-${idx}" placeholder="선생님께 궁금한 점을 질문해보세요..." onkeydown="if(event.key==='Enter') submitObjectiveQa(${idx})">
+                  <button class="qa-submit-btn" onclick="submitObjectiveQa(${idx})">전송</button>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+
+        if (isCorrect) {
+          correctCount++;
+        } else {
+          // 틀린 문제 오답노트 DB 자동 저장 (MySQL / SQLite 무중단 연동)
+          saveObjectiveWrongNote(q, myChoice);
+        }
+
+        // EduMate AI 공통 표준 DB quiz_logs 저장 & 학생 누적 점수 반영
+        saveObjectiveQuizLogToDb(idx, q, myChoice, isCorrect);
+      });
+
+      const total = currentQuizSet.length;
+      const wrongCount = total - correctCount;
+      const score = Math.round((correctCount / total) * 100);
+
+      const emojiEl = document.getElementById("score-emoji");
+      const titleEl = document.getElementById("score-title");
+
+      if (score === 100) {
+        emojiEl.textContent = "🏆";
+        titleEl.textContent = "만점입니다! 최고의 과학 박사님!";
+      } else if (score >= 80) {
+        emojiEl.textContent = "🌟";
+        titleEl.textContent = "훌륭해요! 과학 실력이 정말 뛰어납니다!";
+      } else if (score >= 60) {
+        emojiEl.textContent = "👏";
+        titleEl.textContent = "참 잘했어요! 조금만 더 복습해 볼까요?";
+      } else {
+        emojiEl.textContent = "💪";
+        titleEl.textContent = "힘내요! 아래 해설을 읽어보면 실력이 쑥쑥 늘어요!";
+      }
+
+      document.getElementById("score-summary").textContent = `총 ${total}문제 중 ${correctCount}문제를 맞혔습니다! (${score}점)`;
+      document.getElementById("pill-correct").textContent = `🟢 정답 ${correctCount}개`;
+      document.getElementById("pill-wrong").textContent = `🔴 오답 ${wrongCount}개`;
+      document.getElementById("review-list").innerHTML = reviewHtml;
+      document.getElementById("top-score-text").textContent = `점수: ${score}점`;
+    }
+
+    // 키보드 풀이 지원 (1~5번 또는 O/X)
+    window.addEventListener("keydown", (e) => {
+      const objWrap = document.getElementById("objectiveQuizWrap");
+      if (document.getElementById("quiz-section").style.display === "block" && objWrap.style.display === "block") {
+        if (currentMode === "mcq") {
+          const keyNum = parseInt(e.key, 10);
+          if (keyNum >= 1 && keyNum <= 5) submitObjectiveAnswer(keyNum);
+        } else if (currentMode === "ox") {
+          if (e.key === "o" || e.key === "O" || e.key === "1") submitObjectiveAnswer("O");
+          if (e.key === "x" || e.key === "X" || e.key === "2") submitObjectiveAnswer("X");
+        }
+      }
+    });
+
+    // ==========================================
+    // [모드 B] 서술형 퀴즈 풀이 및 일괄 채점 로직 (science_eval)
+    // ==========================================
+    function renderSubjectiveNavChips() {
+      const navBar = document.getElementById("questionNavBar");
+      navBar.innerHTML = subjectiveQuizSet.map((_, i) => {
+        const hasAnswer = (subjectiveUserAnswers[i] && subjectiveUserAnswers[i].trim().length > 0);
+        const isActive = (i === currentSubjIndex);
+        let cls = "q-chip-btn";
+        if (hasAnswer) cls += " answered";
+        if (isActive) cls += " active";
+        return `<button class="${cls}" onclick="jumpToSubjQuestion(${i})">${i + 1}</button>`;
+      }).join("");
+
+      let filledCount = 0;
+      for (let i = 0; i < subjectiveQuizSet.length; i++) {
+        if (subjectiveUserAnswers[i] && subjectiveUserAnswers[i].trim().length > 0) filledCount++;
+      }
+      document.getElementById("subjAnsweredCountText").innerText = filledCount;
+    }
+
+    function renderCurrentSubjectiveQuestion() {
+      const q = subjectiveQuizSet[currentSubjIndex];
+      const total = subjectiveQuizSet.length;
+
+      document.getElementById("subjCategoryTag").innerText = `[${currentGrade}학년 · ${currentUnit}]`;
+      document.getElementById("subjQueryNumTag").innerText = `Q${currentSubjIndex + 1}. 서술형 문제 (${currentSubjIndex + 1}/${total})`;
+      document.getElementById("subjQueryText").innerText = q.question;
+
+      document.getElementById("hintBody").innerText = q.guide || "핵심 과학 개념을 바탕으로 여러분의 생각을 자유롭게 적어 보세요.";
+      document.getElementById("hintDrawer").style.display = "none";
+
+      const textarea = document.getElementById("studentAnswerInput");
+      textarea.value = subjectiveUserAnswers[currentSubjIndex] || "";
+      textarea.focus();
+
+      document.getElementById("btnPrevSubj").disabled = (currentSubjIndex === 0);
+
+      const rightArea = document.getElementById("subjRightActionArea");
+      if (currentSubjIndex === total - 1) {
+        rightArea.innerHTML = `
+          <button class="btn-submit-final" id="btnSubmitSubjFinal" onclick="submitBatchSubjectiveEvaluation()">
+            <span>📝 10문제 전체 제출 및 AI 일괄 채점하기</span>
+          </button>
+        `;
+      } else {
+        rightArea.innerHTML = `
+          <button class="btn-step-nav" id="btnNextSubj" onclick="navigateSubjectiveQuestion(1)">
+            <span>다음 문제 ➡️</span>
+          </button>
+        `;
+      }
+
+      renderSubjectiveNavChips();
+    }
+
+    function saveCurrentSubjectiveAnswer() {
+      subjectiveUserAnswers[currentSubjIndex] = document.getElementById("studentAnswerInput").value;
+      renderSubjectiveNavChips();
+    }
+
+    function jumpToSubjQuestion(idx) {
+      saveCurrentSubjectiveAnswer();
+      currentSubjIndex = idx;
+      renderCurrentSubjectiveQuestion();
+    }
+
+    function navigateSubjectiveQuestion(delta) {
+      saveCurrentSubjectiveAnswer();
+      const newIdx = currentSubjIndex + delta;
+      if (newIdx >= 0 && newIdx < subjectiveQuizSet.length) {
+        currentSubjIndex = newIdx;
+        renderCurrentSubjectiveQuestion();
+      }
+    }
+
+    function toggleHint() {
+      const drawer = document.getElementById("hintDrawer");
+      drawer.style.display = (drawer.style.display === "none" || !drawer.style.display) ? "block" : "none";
+    }
+
+    async function submitBatchSubjectiveEvaluation() {
+      saveCurrentSubjectiveAnswer();
+
+      let unfilledCount = 0;
+      for (let i = 0; i < subjectiveQuizSet.length; i++) {
+        if (!subjectiveUserAnswers[i] || subjectiveUserAnswers[i].trim().length === 0) unfilledCount++;
+      }
+
+      if (unfilledCount > 0) {
+        const confirmSubmit = confirm(`아직 작성하지 않은 서술형 문제가 ${unfilledCount}개 있습니다. 이대로 10문제 전체 채점을 진행할까요?`);
+        if (!confirmSubmit) return;
+      }
+
+      const submitBtn = document.getElementById("btnSubmitSubjFinal");
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "<span>⏳ AI 선생님이 10문제를 꼼꼼하게 문맥 채점 중입니다...</span>";
+      }
+
+      currentAccount = getStoredUserName();
+      currentUserId = getStoredUserId();
+      const payload = {
+        grade: currentGrade,
+        unit: currentUnit,
+        user_id: currentUserId,
+        answers: subjectiveQuizSet.map((q, i) => ({
+          id: i + 1,
+          question: q.question,
+          model_answer: q.model_answer,
+          student_answer: subjectiveUserAnswers[i] || ""
+        }))
+      };
+
+      try {
+        const uidParam = currentUserId ? `&user_id=${encodeURIComponent(currentUserId)}` : '';
+        const response = await fetch(`${API_BASE}/api/quiz/evaluate_batch?user_name=${encodeURIComponent(currentAccount)}&pokemon_type=${currentPokemonType}${uidParam}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          const errData = await response.json();
+          throw new Error(errData.detail || "서술형 채점 응답 오류");
+        }
+
+        const json = await response.json();
+        showFinalBatchResult(json.data);
+
+        // 최신 누적 점수 및 포켓몬 진화 정보 즉시 동기화
+        if (json.data && json.data.user_status) {
+          renderUserStatusUI(json.data.user_status);
+        } else {
+          loadUserStatus();
+        }
+
+      } catch (err) {
+        alert("❌ 채점 중 오류가 발생했습니다: " + err.message);
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "<span>📝 10문제 전체 제출 및 AI 일괄 채점하기</span>";
+        }
+      }
+    }
+
+    // 퀴즈 세트의 유형(ox, mcq, subjective) 및 총 배점 체계 계산 헬퍼
+    function getQuizTypeAndMaxScore(batchData) {
+      let qType = (batchData.quiz_type || "").toLowerCase();
+      const unitStr = batchData.unit || "";
+      if (!qType || qType === "quiz") {
+        if (unitStr.includes("OX")) qType = "ox";
+        else if (unitStr.includes("5지선다") || unitStr.includes("객관식") || unitStr.includes("mcq")) qType = "mcq";
+        else qType = "subjective";
+      }
+
+      const qCount = (batchData.answers && batchData.answers.length > 0)
+        ? batchData.answers.length
+        : ((batchData.results && batchData.results.length > 0) ? batchData.results.length : (batchData.question_count || 10));
+
+      let perQuestionMax = 5;
+      let typeLabel = "서술형 퀴즈";
+      if (qType === "ox") {
+        perQuestionMax = 1;
+        typeLabel = "OX 퀴즈";
+      } else if (qType === "mcq") {
+        perQuestionMax = 3;
+        typeLabel = "5지선다 객관식";
+      }
+      const maxScore = qCount * perQuestionMax;
+      return { qType, qCount, perQuestionMax, maxScore, typeLabel };
+    }
+
+    function showFinalBatchResult(batchData, isRestoredArchive = false) {
+      document.getElementById("quiz-section").style.display = "none";
+      document.getElementById("start-section").style.display = "none";
+      document.getElementById("result-section").style.display = "block";
+      document.getElementById("objectiveResultWrap").style.display = "none";
+      document.getElementById("subjectiveResultWrap").style.display = "block";
+
+      const totalScore = batchData.total_score || 0;
+      const results = batchData.results || [];
+      const answers = batchData.answers || [];
+
+      // 유저 상태가 포함되어 있으면 헤더 업데이트
+      if (batchData.user_status) {
+        renderUserStatusUI(batchData.user_status);
+      }
+
+      // 퀴즈 유형별 배점 및 문제수 동적 계산 (OX: 1점 만점, 객관식: 3점 만점, 서술형: 5점 만점)
+      const { qType, qCount, perQuestionMax, maxScore, typeLabel } = getQuizTypeAndMaxScore(batchData);
+
+      let countCorrect = 0;
+      let countPartial = 0;
+      let countWrong = 0;
+
+      results.forEach((r, i) => {
+        if (r.log_id) {
+          quizLogIds['subj_' + i] = r.log_id;
+        }
+        const sc = parseInt((r && r.score !== undefined) ? r.score : 0, 10);
+        const isCor = (r.is_correct === true || r.is_correct === 1 || sc === perQuestionMax);
+
+        if (qType === "subjective") {
+          if (sc === 5) countCorrect++;
+          else if (sc >= 3) countPartial++;
+          else countWrong++;
+        } else {
+          // OX 또는 MCQ
+          if (isCor) countCorrect++;
+          else countWrong++;
+        }
+      });
+
+      document.getElementById("subjScoreSummary").innerText = `총 ${qCount}문제 중 ${totalScore}점을 획득했습니다! (${maxScore}점 만점)`;
+
+      const pillCorrect = document.getElementById("subjPillCorrect");
+      const pillPartial = document.getElementById("subjPillPartial");
+      const pillWrong = document.getElementById("subjPillWrong");
+
+      if (qType === "subjective") {
+        pillCorrect.innerText = `🟢 만점(5점): ${countCorrect}개`;
+        pillCorrect.style.display = "inline-flex";
+        pillPartial.innerText = `🟡 부분점수(3~4점): ${countPartial}개`;
+        pillPartial.style.display = "inline-flex";
+        pillWrong.innerText = `🔴 노력요함(0~2점): ${countWrong}개`;
+        pillWrong.style.display = "inline-flex";
+      } else {
+        pillCorrect.innerText = `🟢 정답(${perQuestionMax}점): ${countCorrect}개`;
+        pillCorrect.style.display = "inline-flex";
+        pillPartial.style.display = "none";
+        pillWrong.innerText = `🔴 오답(0점): ${countWrong}개`;
+        pillWrong.style.display = "inline-flex";
+      }
+
+      const isAllCorrect = (totalScore === maxScore);
+      if (isRestoredArchive) {
+        document.getElementById("subjScoreEmoji").innerText = isAllCorrect ? "🏆" : "📂";
+        document.getElementById("subjScoreTitle").innerText = `[저장된 기록 열람] ${batchData.grade}학년 [${batchData.unit}]`;
+        document.getElementById("reportSavedNotice").innerText = `📅 저장 일시: ${batchData.created_at || '기록됨'}`;
+        const backBtn = document.getElementById("btnBackToReports");
+        if (backBtn) backBtn.style.display = "block";
+      } else {
+        if (isAllCorrect) {
+          document.getElementById("subjScoreEmoji").innerText = "🏆";
+          document.getElementById("subjScoreTitle").innerText = "대단해요! 최고의 과학 박사님!";
+        } else if (totalScore >= Math.round(maxScore * 0.6)) {
+          document.getElementById("subjScoreEmoji").innerText = "🌟";
+          document.getElementById("subjScoreTitle").innerText = "참 잘했어요! 과학 원리를 바르게 이해하고 있네요!";
+        } else {
+          document.getElementById("subjScoreEmoji").innerText = "💪";
+          document.getElementById("subjScoreTitle").innerText = "조금 더 연습하면 훨씬 더 잘할 수 있어요!";
+        }
+        document.getElementById("reportSavedNotice").innerText = "💾 edumate.db 에 자동 보관 완료";
+        const backBtn = document.getElementById("btnBackToReports");
+        if (backBtn) backBtn.style.display = "none";
+      }
+
+      const sectionTitleEl = document.getElementById("subjReportSectionTitle");
+      if (sectionTitleEl) {
+        sectionTitleEl.textContent = isRestoredArchive
+          ? `📖 10문제 AI 문맥 채점 & 피드백 리포트 (${typeLabel} 기록 열람)`
+          : `📖 10문제 AI 문맥 채점 & 피드백 리포트`;
+      }
+
+      const reviewList = document.getElementById("subjReviewList");
+      reviewList.innerHTML = results.map((r, i) => {
+        const studentAns = (answers[i] && answers[i].student_answer) ? answers[i].student_answer : "(작성하지 않음)";
+        const modelAns = (answers[i] && answers[i].model_answer) ? answers[i].model_answer : "";
+        const qText = (answers[i] && answers[i].question) ? answers[i].question : "";
+        const sc = parseInt((r && r.score !== undefined) ? r.score : 0, 10);
+        const isCor = (r.is_correct === true || r.is_correct === 1 || sc === perQuestionMax);
+
+        let statusClass = "is-wrong-item";
+        let borderColor = "#ef4444";
+        let bgColor = "#fef2f2";
+        let badgeBg = "#fee2e2";
+        let badgeText = `오답 💡 ${sc}점/${perQuestionMax}점`;
+
+        if (qType === "subjective") {
+          if (sc === 5) {
+            statusClass = "is-correct-item";
+            borderColor = "#10b981";
+            bgColor = "#f0fdf4";
+            badgeBg = "#dcfce7";
+            badgeText = "정답 🎉 5점/5점";
+          } else if (sc >= 3) {
+            statusClass = "is-partial-item";
+            borderColor = "#f59e0b";
+            bgColor = "#fffbeb";
+            badgeBg = "#fef3c7";
+            badgeText = `부분정답 🟡 ${sc}점/5점`;
+          } else {
+            statusClass = "is-wrong-item";
+            borderColor = "#ef4444";
+            bgColor = "#fef2f2";
+            badgeBg = "#fee2e2";
+            badgeText = `노력요함 💡 ${sc}점/5점`;
+          }
+        } else {
+          // OX (1점 만점) 및 객관식 (3점 만점)
+          if (isCor) {
+            statusClass = "is-correct-item";
+            borderColor = "#10b981";
+            bgColor = "#f0fdf4";
+            badgeBg = "#dcfce7";
+            badgeText = `정답 🎉 ${perQuestionMax}점/${perQuestionMax}점`;
+          } else {
+            statusClass = "is-wrong-item";
+            borderColor = "#ef4444";
+            bgColor = "#fef2f2";
+            badgeBg = "#fee2e2";
+            badgeText = `오답 💡 0점/${perQuestionMax}점`;
+          }
+        }
+
+        const logId = r.log_id || quizLogIds['subj_' + i] || 0;
+
+        return `
+          <div class="review-item ${statusClass}" style="border: 2px solid ${borderColor} !important; border-left: 7px solid ${borderColor} !important; background: ${bgColor} !important;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <strong style="color: #0284c7; font-size: 14.5px;">Q${i + 1}. ${qText}</strong>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <button class="btn-fav-star" id="btn-fav-subj-${i}" onclick="toggleSubjectiveFavorite(${i}, ${logId})" title="즐겨찾기">⭐ 즐겨찾기</button>
+                <button class="btn-ask-teacher" onclick="toggleSubjectiveQaBox(${i})" title="AI 선생님께 질문하기">💬 AI 질문</button>
+                <span style="font-weight: 900; font-size: 13px; color: ${borderColor}; background: ${badgeBg}; padding: 3px 10px; border-radius: 9999px; border: 1px solid ${borderColor};">${badgeText}</span>
+                <button class="btn-report-badge" onclick="triggerReportFromSubjReview(${i})">🚨 오류 신고</button>
+              </div>
+            </div>
+            <div style="font-size: 13.5px; color: #1e293b; margin-bottom: 6px;">
+              <strong>✏️ 내가 쓴 답안:</strong> "${studentAns}"
+            </div>
+            <div style="font-size: 13.5px; color: #047857; margin-bottom: 6px;">
+              <strong>📖 모범 정답:</strong> ${modelAns}
+            </div>
+            <div style="font-size: 13px; color: #78350f; background: #fffbeb; padding: 10px 14px; border-radius: 8px; margin-top: 8px;">
+              💌 <strong>선생님 피드백:</strong> ${r.feedback}
+            </div>
+            <div style="font-size: 12.5px; color: #475569; background: #f8fafc; padding: 8px 12px; border-radius: 8px; margin-top: 6px;">
+              🧠 <strong>AI 판정 근거:</strong> ${r.analysis}
+            </div>
+            <!-- AI 질문하기 미니 채팅창 -->
+            <div class="qa-chat-box" id="qa-box-subj-${i}" style="display: none;">
+              <div style="font-weight: 800; font-size: 13px; color: #0284c7; margin-bottom: 6px;">💬 AI 선생님과 1:1 대화</div>
+              <div class="qa-history-list" id="qa-history-subj-${i}"></div>
+              <div class="qa-input-row">
+                <input type="text" class="qa-input-field" id="qa-input-subj-${i}" placeholder="선생님께 궁금한 점을 질문해보세요..." onkeydown="if(event.key==='Enter') submitSubjectiveQa(${i})">
+                <button class="qa-submit-btn" onclick="submitSubjectiveQa(${i})">전송</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      document.getElementById("result-section").scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // ==========================================
+    // 리셋
+    // ==========================================
+    function restartQuiz() {
+      document.getElementById("result-section").style.display = "none";
+      document.getElementById("quiz-section").style.display = "none";
+      document.getElementById("reports-archive-section").style.display = "none";
+      if (currentMode === "wrongnotes") {
+        document.getElementById("wrong-notes-section").style.display = "block";
+        document.getElementById("start-section").style.display = "none";
+        document.getElementById("top-score-text").textContent = "스마트 오답노트 (복습)";
+        loadWrongNotes();
+        return;
+      }
+      if (currentMode === "reports") {
+        document.getElementById("wrong-notes-section").style.display = "none";
+        document.getElementById("reports-archive-section").style.display = "block";
+        document.getElementById("start-section").style.display = "none";
+        document.getElementById("top-score-text").textContent = "지난 채점 리포트 (아카이브)";
+        loadArchivePageList();
+        return;
+      }
+      document.getElementById("wrong-notes-section").style.display = "none";
+      document.getElementById("start-section").style.display = "block";
+      const modeTitles = { ox: "OX 퀴즈", mcq: "5지선다 객관식", subjective: "서술형 퀴즈" };
+      document.getElementById("top-score-text").textContent = `10문제 출제 모드 (${modeTitles[currentMode] || currentMode})`;
+    }
+
+    // ==========================================
+    // 지난 채점 리포트 전용 화면 로드 (edumate.db 연동)
+    // ==========================================
+    async function loadArchivePageList() {
+      const container = document.getElementById("pageArchiveList");
+      const badge = document.getElementById("reportsArchiveCountBadge");
+      if (!container) return;
+
+      container.innerHTML = `<p style="text-align: center; color: #64748b; padding: 30px; font-size: 14px;">채점 기록을 불러오는 중입니다...</p>`;
+
+      try {
+        const uName = getStoredUserName();
+        const uId = getStoredUserId();
+        const uidParam = uId ? `&user_id=${encodeURIComponent(uId)}` : '';
+        const res = await fetch(`${API_BASE}/api/history?user_name=${encodeURIComponent(uName)}${uidParam}`);
+        const json = await res.json();
+        cachedArchives = json.history || [];
+
+        if (badge) badge.textContent = `기록 ${cachedArchives.length}건`;
+
+        if (cachedArchives.length === 0) {
+          container.innerHTML = `
+            <div style="text-align: center; padding: 50px 20px; background: white; border-radius: 16px; border: 1.5px dashed #cbd5e1;">
+              <div style="font-size: 40px; margin-bottom: 10px;">📭</div>
+              <h4 style="font-size: 16px; font-weight: 800; color: #334155; margin-bottom: 6px;">아직 저장된 채점 리포트가 없습니다</h4>
+              <p style="font-size: 13.5px; color: #64748b; margin-bottom: 16px;">10문제를 풀고 채점을 완료하면 이곳에 전체 리포트가 자동으로 누적 보관됩니다!</p>
+              <button onclick="switchQuizMode('ox')" style="background: #0284c7; color: white; border: none; border-radius: 10px; padding: 9px 18px; font-size: 13.5px; font-weight: 800; cursor: pointer;">
+                ✨ 퀴즈 풀러 가기
+              </button>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = cachedArchives.map((item, idx) => {
+          const dbBadge = item.source === "edumate.db" 
+            ? `<span style="font-size: 11px; background: #dcfce7; color: #15803d; padding: 3px 8px; border-radius: 6px; font-weight: 800;">💾 edumate.db</span>`
+            : `<span style="font-size: 11px; background: #e0f2fe; color: #0369a1; padding: 3px 8px; border-radius: 6px; font-weight: 800;">📄 파일 백업</span>`;
+
+          const { qType, qCount, maxScore, typeLabel } = getQuizTypeAndMaxScore(item);
+
+          return `
+            <div class="archive-item-card" onclick="restoreArchiveDetail(${idx})" style="display: flex; justify-content: space-between; align-items: center; background: white; border: 1.5px solid #e2e8f0; border-radius: 14px; padding: 16px 20px; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 6px rgba(0,0,0,0.03);">
+              <div>
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                  <span style="font-size: 12.5px; color: #64748b; font-weight: 700;">📅 ${item.created_at || '최근'}</span>
+                  <span style="font-size: 12.5px; font-weight: 900; color: #0369a1;">🏷️ ${item.grade}학년 [${item.unit}] 10문제 세트</span>
+                  ${dbBadge}
+                </div>
+                <div style="font-size: 15.5px; font-weight: 900; color: #1e293b;">
+                  획득 점수: <span style="color: #0284c7;">${item.total_score}점</span> <span style="font-size: 13px; color: #64748b; font-weight: normal;">/ ${maxScore}점 만점 (${qCount}문제)</span>
+                </div>
+              </div>
+              <button class="archive-view-badge" style="background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%); color: white; border: none; border-radius: 10px; padding: 9px 16px; font-size: 13px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);">
+                <span>리포트 전체 보기</span><span>🔍</span>
+              </button>
+            </div>
+          `;
+        }).join("");
+
+      } catch (err) {
+        container.innerHTML = `<p style="text-align: center; color: #ef4444; padding: 20px;">기록 로드 실패: ${err.message}</p>`;
+      }
+    }
+
+    // ==========================================
+    // 아카이브 모달 (보조 모달)
+    // ==========================================
+    async function openArchiveModal() {
+      const modal = document.getElementById("archiveModal");
+      const listContainer = document.getElementById("modalArchiveList");
+      if (!modal) return;
+      modal.style.display = "flex";
+      listContainer.innerHTML = `<p style="font-size: 13px; color: #64748b; text-align: center; padding: 16px;">기록을 불러오는 중...</p>`;
+
+      try {
+        const uName = getStoredUserName();
+        const uId = getStoredUserId();
+        const uidParam = uId ? `&user_id=${encodeURIComponent(uId)}` : '';
+        const res = await fetch(`${API_BASE}/api/history?user_name=${encodeURIComponent(uName)}${uidParam}`);
+        const json = await res.json();
+        cachedArchives = json.history || [];
+
+        if (cachedArchives.length === 0) {
+          listContainer.innerHTML = `<p style="font-size: 13px; color: #64748b; text-align: center; padding: 20px;">아직 저장된 채점 기록이 없습니다.</p>`;
+          return;
+        }
+
+        listContainer.innerHTML = cachedArchives.map((item, idx) => {
+          const dbBadge = item.source === "edumate.db" 
+            ? `<span style="font-size: 10px; background: #dcfce7; color: #15803d; padding: 2px 6px; border-radius: 4px; font-weight: 800; margin-left: 6px;">💾 DB 기록</span>`
+            : `<span style="font-size: 10px; background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 4px; font-weight: 800; margin-left: 6px;">📄 파일 백업</span>`;
+
+          const { qCount, maxScore } = getQuizTypeAndMaxScore(item);
+
+          return `
+            <div class="archive-item-card" onclick="restoreArchiveDetail(${idx})">
+              <div>
+                <div style="font-size: 12px; color: #64748b; font-weight: 700; display: flex; align-items: center;">
+                  <span>📅 ${item.created_at} · 🏷️ ${item.grade}학년 [${item.unit}] 10문제 세트</span>
+                  ${dbBadge}
+                </div>
+                <div style="font-size: 14.5px; font-weight: 800; color: #1e293b; margin-top: 4px;">
+                  총점: <strong style="color: #0284c7;">${item.total_score}점</strong> / ${maxScore}점 만점 (${qCount}문제)
+                </div>
+              </div>
+              <span class="archive-view-badge">리포트 전체 보기 🔍</span>
+            </div>
+          `;
+        }).join("");
+
+      } catch (err) {
+        listContainer.innerHTML = `<p style="font-size: 13px; color: #ef4444; text-align: center; padding: 16px;">기록 로드 실패: ${err.message}</p>`;
+      }
+    }
+
+    function restoreArchiveDetail(idx) {
+      const item = cachedArchives[idx];
+      if (!item) return;
+      closeArchiveModal();
+      document.getElementById("reports-archive-section").style.display = "none";
+      showFinalBatchResult(item, true);
+    }
+
+    function closeArchiveModal() {
+      const modal = document.getElementById("archiveModal");
+      if (modal) modal.style.display = "none";
+    }
+
+    // ==============================================================================
+    // [기능 A] 스마트 오답노트 & 오답 자동 추출 연동
+    // ==============================================================================
+    let cachedWrongNotes = [];
+
+    // OX / 객관식 오답 발생 시 DB 자동 기록
+    function saveObjectiveWrongNote(q, myChoice) {
+      const payload = {
+        problem_id: q.id || null,
+        grade: currentGrade,
+        unit: q.unit || currentUnit,
+        quiz_type: currentMode,
+        question: q.question,
+        options: q.options || null,
+        student_answer: String(myChoice),
+        correct_answer: String(q.answer),
+        score: 0,
+        feedback: q.explanation || "",
+        deduction_reason: "객관식/OX 오답"
+      };
+
+      fetch(`${API_BASE}/api/wrong-notes`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log("오답노트 자동 등록 완료 (ID:", data.id, ")");
+      })
+      .catch(err => console.error("오답 자동 저장 오류:", err));
+    }
+
+    // 오답노트 화면 열기 (모달 대신 메인 화면 모드 전환)
+    function openWrongNotesModal() {
+      switchQuizMode("wrongnotes");
+    }
+
+    function closeWrongNotesModal() {
+      // 호환용 더미
+    }
+
+    // 기존 채점 기록(saved_results) 오답 수동 동기화 함수
+    async function syncSavedResultsToWrongNotesUI() {
+      const countBadge = document.getElementById("wrongNotesCountBadge");
+      countBadge.textContent = "동기화 중...";
+      try {
+        const res = await fetch(`${API_BASE}/api/wrong-notes/sync`, { method: "POST" });
+        const json = await res.json();
+        const synced = json.synced_count || 0;
+        alert(`📥 기존 채점 기록에서 ${synced}건의 틀린 문제를 성공적으로 불러와 오답노트에 반영했습니다! 🎉`);
+        loadWrongNotes();
+      } catch (err) {
+        alert("기존 기록 동기화 중 오류가 발생했습니다: " + err.message);
+        loadWrongNotes();
+      }
+    }
+
+    // 오답 목록 서버에서 불러오기
+    async function loadWrongNotes() {
+      const container = document.getElementById("wrongNotesContainer");
+      const gradeSel = document.getElementById("wrongFilterGrade").value;
+      const typeSel = document.getElementById("wrongFilterType").value;
+      const countBadge = document.getElementById("wrongNotesCountBadge");
+
+      container.innerHTML = `<p style="text-align: center; color: #64748b; padding: 24px; font-size: 13.5px;">오답노트를 불러오는 중...</p>`;
+
+      try {
+        let url = `${API_BASE}/api/wrong-notes?`;
+        if (gradeSel && parseInt(gradeSel, 10) > 0) url += `grade=${gradeSel}&`;
+        if (typeSel && typeSel !== "all") url += `quiz_type=${typeSel}&`;
+
+        const res = await fetch(url);
+        const json = await res.json();
+        cachedWrongNotes = json.data || [];
+
+        if (countBadge) {
+          countBadge.textContent = `오답 ${cachedWrongNotes.length}건`;
+        }
+
+        renderWrongNotes(cachedWrongNotes);
+      } catch (err) {
+        container.innerHTML = `<p style="text-align: center; color: #ef4444; padding: 24px; font-size: 13.5px;">오답 로드 실패: ${err.message}</p>`;
+      }
+    }
+
+    // 오답 목록 카드 렌더링
+    function renderWrongNotes(notes) {
+      const container = document.getElementById("wrongNotesContainer");
+      if (!notes || notes.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 40px 20px; color: #64748b;">
+            <div style="font-size: 40px; margin-bottom: 10px;">🎉</div>
+            <div style="font-size: 16px; font-weight: 800; color: #1e293b; margin-bottom: 4px;">틀린 문제가 없습니다!</div>
+            <div style="font-size: 13px;">선택한 조건의 모든 문제를 맞혔거나 오답노트가 비어있습니다.</div>
+          </div>
+        `;
+        return;
+      }
+
+      const typeLabels = { ox: "⭕❌ OX 퀴즈", mcq: "📝 5지선다", subjective: "✍️ 서술형" };
+
+      container.innerHTML = notes.map((item) => {
+        const isMastered = !!item.is_mastered;
+        const cardStyle = isMastered ? "border: 2.5px solid #10b981; background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.12);" : "";
+        const masteredBadge = isMastered
+          ? `<span style="font-size: 12px; font-weight: 900; background: #dcfce7; color: #15803d; padding: 4px 10px; border-radius: 9999px; border: 1.5px solid #86efac; display: inline-flex; align-items: center; gap: 4px;">
+              <span>✨ 개념 마스터 완료</span><span>🎉</span>
+            </span>`
+          : `<span style="font-size: 11px; font-weight: 800; background: #fee2e2; color: #dc2626; padding: 3px 8px; border-radius: 6px;">
+              복습 필요 ⚠️
+            </span>`;
+
+        // 객관식 5지선다 오답일 경우: 1~5번 보기 리스트와 정답/내답 표시 (복습 화면 스타일)
+        let answersBlock = "";
+        if (item.quiz_type === "mcq" && Array.isArray(item.options) && item.options.length > 0) {
+          const myNum = parseInt(item.student_answer, 10);
+          const corNum = parseInt(item.correct_answer, 10);
+          let optionsRowsHtml = "";
+          item.options.forEach((optText, optIdx) => {
+            const optNum = optIdx + 1;
+            let rowClass = "";
+            let badgeText = "";
+            if (optNum === corNum) {
+              rowClass = "is-correct-opt";
+              badgeText = " (정답 ✅)";
+            } else if (optNum === myNum) {
+              rowClass = "is-my-wrong-opt";
+              badgeText = " (내가 고른 답 ❌)";
+            }
+            optionsRowsHtml += `
+              <div class="review-option-row ${rowClass}" style="margin-bottom: 4px; padding: 6px 10px; border-radius: 8px;">
+                <span>${numSymbols[optIdx] || optNum} ${optText}</span>
+                <span style="font-weight: 800;">${badgeText}</span>
+              </div>
+            `;
+          });
+          answersBlock = `
+            <div class="review-options-grid" style="margin: 10px 0; background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 10px 12px;">
+              ${optionsRowsHtml}
+            </div>
+          `;
+        } else {
+          // OX 또는 서술형
+          answersBlock = `
+            <div class="wrong-card-answers">
+              <div>❌ <strong>내가 썼던 답:</strong> <span style="color: #dc2626; font-weight: 800;">${item.student_answer || '(답안 없음)'}</span></div>
+              <div style="margin-top: 3px;">✅ <strong>모범 정답:</strong> <span style="color: #16a34a; font-weight: 800;">${item.correct_answer}</span></div>
+            </div>
+          `;
+        }
+
+        return `
+          <div class="wrong-card" id="wrong-card-${item.id}" style="${cardStyle}">
+            <div class="wrong-card-meta">
+              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <span class="category-tag">[${item.grade}학년 · ${item.unit}] ${typeLabels[item.quiz_type] || item.quiz_type}</span>
+                ${masteredBadge}
+              </div>
+              <span style="font-size: 11.5px; color: #94a3b8; font-weight: 700;">풀이: ${item.created_at || ''}</span>
+            </div>
+            <div class="wrong-card-title">Q. ${item.question}</div>
+            ${answersBlock}
+            ${item.feedback ? `<div class="wrong-card-feedback">💡 <strong>AI 피드백:</strong> ${item.feedback}</div>` : ''}
+            
+            <div class="wrong-card-actions">
+              <button class="btn-report-badge" onclick="triggerReportFromWrongNote(${item.id})">🚨 오류 신고</button>
+              <button class="btn-delete-inline" onclick="deleteWrongNoteItem(${item.id})">🗑️ 삭제</button>
+              <button class="btn-retry-inline" onclick="toggleRetryBox(${item.id})" style="${isMastered ? 'background: linear-gradient(135deg, #10b981 0%, #059669 100%);' : ''}">
+                ${isMastered ? '🔄 다시 연습해보기' : '✏️ 다시 풀어보기'}
+              </button>
+            </div>
+
+            <!-- 다시 풀기 인라인 영역 -->
+            <div class="retry-box" id="retry-box-${item.id}" style="display: none;"></div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    // 다시 풀어보기 토글
+    function toggleRetryBox(noteId) {
+      const box = document.getElementById(`retry-box-${noteId}`);
+      if (!box) return;
+
+      if (box.style.display === "block") {
+        box.style.display = "none";
+        return;
+      }
+
+      const item = cachedWrongNotes.find(n => n.id === noteId);
+      if (!item) return;
+
+      box.style.display = "block";
+
+      if (item.quiz_type === "ox") {
+        box.innerHTML = `
+          <div style="font-size: 13.5px; font-weight: 800; color: #0284c7; margin-bottom: 8px;">🤔 다시 생각해보세요: 정답은 O일까요 X일까요?</div>
+          <div style="display: flex; gap: 10px;">
+            <button class="ox-btn btn-o" style="padding: 10px 24px; font-size: 16px;" onclick="submitRetryAnswer(${noteId}, 'O', '${item.correct_answer}', 'ox')">⭕ 참 (O)</button>
+            <button class="ox-btn btn-x" style="padding: 10px 24px; font-size: 16px;" onclick="submitRetryAnswer(${noteId}, 'X', '${item.correct_answer}', 'ox')">❌ 거짓 (X)</button>
+          </div>
+        `;
+      } else if (item.quiz_type === "mcq" && item.options && item.options.length > 0) {
+        let optsHtml = item.options.map((opt, oIdx) => {
+          const num = oIdx + 1;
+          return `
+            <button class="mcq-option-btn" style="padding: 8px 12px; font-size: 14px; margin-bottom: 6px;" onclick="submitRetryAnswer(${noteId}, '${num}', '${item.correct_answer}', 'mcq')">
+              <span class="option-num-badge" style="width:26px; height:26px; font-size:13px;">${numSymbols[oIdx] || num}</span>
+              <span>${opt}</span>
+            </button>
+          `;
+        }).join("");
+        box.innerHTML = `
+          <div style="font-size: 13.5px; font-weight: 800; color: #0284c7; margin-bottom: 8px;">🤔 올바른 보기를 골라보세요:</div>
+          <div style="display: flex; flex-direction: column;">${optsHtml}</div>
+        `;
+      } else {
+        box.innerHTML = `
+          <div style="font-size: 13.5px; font-weight: 800; color: #0284c7; margin-bottom: 8px;">🤔 서술형 답안을 다시 입력해 보세요:</div>
+          <textarea id="retry-input-${noteId}" class="answer-textarea" style="height: 70px; margin-bottom: 8px;" placeholder="올바른 과학 원리를 작성해 보세요."></textarea>
+          <button class="btn-retry-inline" onclick="submitRetryAnswer(${noteId}, document.getElementById('retry-input-${noteId}').value, '${item.correct_answer}', 'subjective')">✅ 다시 제출하기</button>
+        `;
+      }
+    }
+
+    // 다시 푼 답안 검증 및 정답 시 '개념 마스터' 표식 부여 (자동 삭제 방지)
+    async function submitRetryAnswer(noteId, submittedAns, correctAns, quizType) {
+      let isCorrect = false;
+
+      if (quizType === "ox") {
+        isCorrect = (String(submittedAns).toUpperCase() === String(correctAns).toUpperCase());
+      } else if (quizType === "mcq") {
+        isCorrect = (parseInt(submittedAns, 10) === parseInt(correctAns, 10));
+      } else {
+        const sub = (submittedAns || "").trim();
+        isCorrect = (sub.length >= 2);
+      }
+
+      if (isCorrect) {
+        playSound(true);
+        openMasterSuccessModal();
+        try {
+          await fetch(`${API_BASE}/api/wrong-notes/${noteId}/master`, { method: "POST" });
+        } catch (e) {
+          console.error("마스터 상태 저장 실패:", e);
+        }
+        loadWrongNotes();
+      } else {
+        playSound(false);
+        openRetryFailModal();
+      }
+    }
+
+    // [모달 제어] 개념 마스터 성공 축하 모달 열기/닫기
+    function openMasterSuccessModal() {
+      const modal = document.getElementById("masterSuccessModal");
+      if (modal) modal.style.display = "flex";
+    }
+
+    function closeMasterSuccessModal(e) {
+      if (e && e.target && e.target !== e.currentTarget && !e.target.classList.contains("modal-close-btn")) return;
+      const modal = document.getElementById("masterSuccessModal");
+      if (modal) modal.style.display = "none";
+    }
+
+    // [모달 제어] 다시 풀기 오답 시 격려 모달 열기/닫기
+    function openRetryFailModal() {
+      const modal = document.getElementById("retryFailModal");
+      if (modal) modal.style.display = "flex";
+    }
+
+    function closeRetryFailModal(e) {
+      if (e && e.target && e.target !== e.currentTarget && !e.target.classList.contains("modal-close-btn")) return;
+      const modal = document.getElementById("retryFailModal");
+      if (modal) modal.style.display = "none";
+    }
+
+    // 오답노트 항목 개별 삭제
+    async function deleteWrongNoteItem(noteId) {
+      if (!confirm("이 문제를 오답노트에서 삭제하시겠습니까?")) return;
+      try {
+        await fetch(`${API_BASE}/api/wrong-notes/${noteId}`, { method: "DELETE" });
+        loadWrongNotes();
+      } catch (err) {
+        alert("삭제 실패: " + err.message);
+      }
+    }
+
+    // ==============================================================================
+    // [기능 B] 실시간 문제 오류 신고 시스템
+    // ==============================================================================
+    let currentReportTarget = null;
+
+    // OX/객관식 문제 풀이 도중 신고
+    function triggerReportCurrentObjective() {
+      const q = currentQuizSet[currentIndex];
+      if (!q) return;
+      openReportModal({
+        problem_id: q.id || (currentIndex + 1),
+        grade: currentGrade,
+        unit: q.unit || currentUnit,
+        quiz_type: currentMode,
+        question: q.question
+      });
+    }
+
+    // 서술형 문제 풀이 도중 신고
+    function triggerReportCurrentSubjective() {
+      const q = subjectiveQuizSet[currentSubjIndex];
+      if (!q) return;
+      openReportModal({
+        problem_id: q.id || (currentSubjIndex + 1),
+        grade: currentGrade,
+        unit: currentUnit,
+        quiz_type: "subjective",
+        question: q.question
+      });
+    }
+
+    // 객관식 리뷰에서 신고
+    function triggerReportFromObjectiveReview(idx) {
+      const q = currentQuizSet[idx];
+      if (!q) return;
+      openReportModal({
+        problem_id: q.id || (idx + 1),
+        grade: currentGrade,
+        unit: q.unit || currentUnit,
+        quiz_type: currentMode,
+        question: q.question
+      });
+    }
+
+    // 서술형 리뷰에서 신고
+    function triggerReportFromSubjReview(idx) {
+      const q = subjectiveQuizSet[idx];
+      const qText = q ? q.question : (document.querySelectorAll("#subjReviewList strong")[idx] ? document.querySelectorAll("#subjReviewList strong")[idx].innerText : "서술형 문제");
+      openReportModal({
+        problem_id: idx + 1,
+        grade: currentGrade,
+        unit: currentUnit,
+        quiz_type: "subjective",
+        question: qText
+      });
+    }
+
+    // 오답노트 카드에서 신고
+    function triggerReportFromWrongNote(noteId) {
+      const item = cachedWrongNotes.find(n => n.id === noteId);
+      if (!item) return;
+      openReportModal({
+        problem_id: item.problem_id || item.id,
+        grade: item.grade,
+        unit: item.unit,
+        quiz_type: item.quiz_type,
+        question: item.question
+      });
+    }
+
+    // 오류 신고 모달 열기
+    function openReportModal(targetInfo) {
+      currentReportTarget = targetInfo;
+      const modal = document.getElementById("reportModal");
+      document.getElementById("reportTargetMeta").textContent = `[${targetInfo.grade || currentGrade}학년 · ${targetInfo.unit || currentUnit}] 문제 ${targetInfo.problem_id || 1}번 (${targetInfo.quiz_type || 'quiz'})`;
+      document.getElementById("reportTargetQuestion").textContent = targetInfo.question || "문제 지문";
+      document.getElementById("reportCommentInput").value = "";
+      // 체크박스 전체 초기화 (체크 해제)
+      document.querySelectorAll('input[name="reportErrorType"]').forEach(cb => cb.checked = false);
+      modal.style.display = "flex";
+    }
+
+    // 오류 신고 모달 닫기
+    function closeReportModal(e) {
+      if (!e || e.target.id === "reportModal" || e.target.classList.contains("modal-close-btn")) {
+        document.getElementById("reportModal").style.display = "none";
+        currentReportTarget = null;
+      }
+    }
+
+    // 오류 신고 제출
+    async function submitProblemReport() {
+      if (!currentReportTarget) return;
+
+      const checkedBoxes = Array.from(document.querySelectorAll('input[name="reportErrorType"]:checked'));
+      if (checkedBoxes.length === 0) {
+        alert("⚠️ 오류 유형을 최소 1개 이상 선택해 주세요!");
+        return;
+      }
+      const errorType = checkedBoxes.map(cb => cb.value).join(", ");
+      const comment = document.getElementById("reportCommentInput").value.trim();
+      const submitBtn = document.getElementById("btnSubmitReport");
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "⏳ 신고 접수 중...";
+
+      const payload = {
+        problem_id: currentReportTarget.problem_id || null,
+        grade: currentReportTarget.grade || currentGrade,
+        unit: currentReportTarget.unit || currentUnit,
+        quiz_type: currentReportTarget.quiz_type || currentMode,
+        question: currentReportTarget.question || "",
+        error_type: errorType,
+        comment: comment
+      };
+
+      try {
+        const res = await fetch(`${API_BASE}/api/reports`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) throw new Error("서버 오류");
+
+        alert("🚨 문제 오류 신고가 성공적으로 접수되었습니다!\n\nDB에 안전하게 저장되었으며, reported_issues/ 폴더에 비상용 백업 파일이 생성되었습니다.\n더 좋은 교육 콘텐츠를 위해 소중한 의견을 주셔서 감사합니다! 💡");
+        closeReportModal();
+      } catch (err) {
+        alert("신고 접수 중 오류가 발생했습니다: " + err.message);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "🚨 신고 접수하기";
+      }
+    }
+
+    // ==========================================
+    // EduMate AI 공통 표준 DB 연동 (quiz_logs & 즐겨찾기 & AI 질문 & 취약단원)
+    // ==========================================
+
+    // 1. 객관식 / OX 개별 문제 quiz_logs 저장
+    async function saveObjectiveQuizLogToDb(idx, q, userChoice, isCorrect) {
+      try {
+        currentAccount = getStoredUserName();
+        currentUserId = getStoredUserId();
+        const scoreVal = isCorrect ? (currentMode === "ox" ? 1 : 3) : 0;
+        const diffVal = (currentMode === "ox") ? "하" : "중";
+        const payload = {
+          user_id: currentUserId,
+          user_name: currentAccount,
+          quiz_id: `science_g${currentGrade}_${currentUnit}_${currentQuizSessionTime}_q${idx + 1}`,
+          grade: currentGrade,
+          unit: q.unit || currentUnit,
+          topic: null,
+          difficulty: diffVal,
+          question_type: currentMode,
+          question: q.question || "",
+          user_answer: String(userChoice || ""),
+          correct_answer: String(q.answer || ""),
+          solution: q.explanation || null,
+          earned_score: scoreVal,
+          is_correct: isCorrect
+        };
+
+        const res = await fetch(`${API_BASE}/api/quiz/log`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          const json = await res.json();
+          if (json.status === "success" && json.data) {
+            quizLogIds['obj_' + idx] = json.data.log_id;
+            loadUserStatus();
+          }
+        }
+      } catch (err) {
+        console.warn("[quiz_logs] 객관식 저장 알림:", err);
+      }
+    }
+
+    // 2. 즐겨찾기 토글 (객관식 / OX)
+    async function toggleObjectiveFavorite(idx) {
+      const logId = quizLogIds['obj_' + idx];
+      if (!logId) {
+        alert("문제 기록이 저장 중입니다. 잠시 후 다시 시도해 주세요!");
+        return;
+      }
+      await callToggleFavorite(logId, `btn-fav-obj-${idx}`);
+    }
+
+    // 2-2. 즐겨찾기 토글 (서술형)
+    async function toggleSubjectiveFavorite(idx, directLogId) {
+      const logId = directLogId || quizLogIds['subj_' + idx];
+      if (!logId) {
+        alert("문제 기록이 저장 중입니다. 잠시 후 다시 시도해 주세요!");
+        return;
+      }
+      await callToggleFavorite(logId, `btn-fav-subj-${idx}`);
+    }
+
+    async function callToggleFavorite(logId, btnId) {
+      try {
+        const res = await fetch(`${API_BASE}/api/favorite/${logId}`, { method: "POST" });
+        if (res.ok) {
+          const json = await res.json();
+          const isFav = json.is_favorite;
+          favoriteStatus[logId] = isFav;
+          const btn = document.getElementById(btnId);
+          if (btn) {
+            btn.classList.toggle("active", isFav);
+            btn.innerHTML = isFav ? "⭐ 즐겨찾기됨" : "⭐ 즐겨찾기";
+          }
+        }
+      } catch (e) {
+        alert("즐겨찾기 반영 중 오류가 발생했습니다: " + e.message);
+      }
+    }
+
+    // 3. AI 추가 질문 대화창 토글 (객관식 / OX)
+    function toggleObjectiveQaBox(idx) {
+      const box = document.getElementById(`qa-box-obj-${idx}`);
+      if (box) {
+        box.style.display = (box.style.display === "none" || !box.style.display) ? "block" : "none";
+        if (box.style.display === "block") {
+          const input = document.getElementById(`qa-input-obj-${idx}`);
+          if (input) input.focus();
+        }
+      }
+    }
+
+    // 3-2. AI 추가 질문 대화창 토글 (서술형)
+    function toggleSubjectiveQaBox(idx) {
+      const box = document.getElementById(`qa-box-subj-${idx}`);
+      if (box) {
+        box.style.display = (box.style.display === "none" || !box.style.display) ? "block" : "none";
+        if (box.style.display === "block") {
+          const input = document.getElementById(`qa-input-subj-${idx}`);
+          if (input) input.focus();
+        }
+      }
+    }
+
+    // 4. AI 추가 질문 제출 (객관식 / OX)
+    async function submitObjectiveQa(idx) {
+      const input = document.getElementById(`qa-input-obj-${idx}`);
+      const histList = document.getElementById(`qa-history-obj-${idx}`);
+      const q = currentQuizSet[idx];
+      const myChoice = userAnswers[idx];
+      const logId = quizLogIds['obj_' + idx];
+
+      if (!input || !histList || !q) return;
+      const questionText = input.value.trim();
+      if (!questionText) {
+        alert("선생님께 질문할 내용을 입력해 주세요!");
+        return;
+      }
+
+      if (!logId) {
+        alert("문제 기록 확인 중입니다. 1~2초 후 다시 시도해 주세요!");
+        return;
+      }
+
+      histList.innerHTML += `<div class="qa-msg-bubble user">🙋 ${questionText}</div>`;
+      histList.scrollTop = histList.scrollHeight;
+      input.value = "";
+      input.disabled = true;
+
+      const loadingBubbleId = `qa-load-obj-${idx}-${Date.now()}`;
+      histList.innerHTML += `<div class="qa-msg-bubble ai" id="${loadingBubbleId}">⏳ AI 선생님이 답변을 생각하고 있어요...</div>`;
+      histList.scrollTop = histList.scrollHeight;
+
+      try {
+        const res = await fetch(`${API_BASE}/api/chat`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            log_id: logId,
+            student_question: questionText,
+            question_context: q.question,
+            student_answer: String(myChoice || ""),
+            correct_answer: String(q.answer || ""),
+            feedback: q.explanation || ""
+          })
+        });
+
+        const loadEl = document.getElementById(loadingBubbleId);
+        if (res.ok) {
+          const json = await res.json();
+          if (loadEl) loadEl.innerHTML = `👩‍🏫 ${json.reply}`;
+        } else {
+          if (loadEl) loadEl.innerHTML = `👩‍🏫 좋은 질문이에요! 문제의 핵심 원리를 한 번 더 짚어보면 큰 도움이 될 거예요!`;
+        }
+      } catch (err) {
+        const loadEl = document.getElementById(loadingBubbleId);
+        if (loadEl) loadEl.innerHTML = `👩‍🏫 연결에 일시적인 지연이 있었어요. 핵심 과학 원리를 다시 한번 잘 관찰해 보세요!`;
+      } finally {
+        input.disabled = false;
+        input.focus();
+        histList.scrollTop = histList.scrollHeight;
+      }
+    }
+
+    // 4-2. AI 추가 질문 제출 (서술형)
+    async function submitSubjectiveQa(idx) {
+      const input = document.getElementById(`qa-input-subj-${idx}`);
+      const histList = document.getElementById(`qa-history-subj-${idx}`);
+      const logId = quizLogIds['subj_' + idx];
+      const q = subjectiveQuizSet[idx];
+      const ans = subjectiveUserAnswers[idx] || "";
+
+      if (!input || !histList || !q) return;
+      const questionText = input.value.trim();
+      if (!questionText) {
+        alert("선생님께 질문할 내용을 입력해 주세요!");
+        return;
+      }
+
+      if (!logId) {
+        alert("문제 기록 확인 중입니다. 1~2초 후 다시 시도해 주세요!");
+        return;
+      }
+
+      histList.innerHTML += `<div class="qa-msg-bubble user">🙋 ${questionText}</div>`;
+      histList.scrollTop = histList.scrollHeight;
+      input.value = "";
+      input.disabled = true;
+
+      const loadingBubbleId = `qa-load-subj-${idx}-${Date.now()}`;
+      histList.innerHTML += `<div class="qa-msg-bubble ai" id="${loadingBubbleId}">⏳ AI 선생님이 답변을 생각하고 있어요...</div>`;
+      histList.scrollTop = histList.scrollHeight;
+
+      try {
+        const res = await fetch(`${API_BASE}/api/chat`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            log_id: logId,
+            student_question: questionText,
+            question_context: q.question,
+            student_answer: ans,
+            correct_answer: q.model_answer || "",
+            feedback: ""
+          })
+        });
+
+        const loadEl = document.getElementById(loadingBubbleId);
+        if (res.ok) {
+          const json = await res.json();
+          if (loadEl) loadEl.innerHTML = `👩‍🏫 ${json.reply}`;
+        } else {
+          if (loadEl) loadEl.innerHTML = `👩‍🏫 좋은 질문이에요! 모범 정답의 핵심 키워드를 떠올려보면 쉽게 이해할 수 있어요!`;
+        }
+      } catch (err) {
+        const loadEl = document.getElementById(loadingBubbleId);
+        if (loadEl) loadEl.innerHTML = `👩‍🏫 일시적인 지연이 있었어요. 과학의 원리를 다시 천천히 떠올려 보세요!`;
+      } finally {
+        input.disabled = false;
+        input.focus();
+        histList.scrollTop = histList.scrollHeight;
+      }
+    }
+
+    // 5. 취약 단원 맞춤 추천
+    async function applyWeaknessRecommendation() {
+      try {
+        const targetUser = getStoredUserName();
+        const res = await fetch(`${API_BASE}/api/recommend/weakness?user_name=${encodeURIComponent(targetUser)}`);
+        if (!res.ok) throw new Error("분석 서버 오류");
+        const json = await res.json();
+        const data = json.data;
+
+        if (data && data.unit) {
+          const reasonText = (data.wrong_count > 0)
+            ? `학생의 과거 오답 데이터 분석 결과,\n가장 많은 노력이 필요한 단원은 [${data.unit}] (오답 ${data.wrong_count}회)입니다!`
+            : `학생의 최근 학습 분석 결과,\n맞춤 복습 및 개념 정리가 필요한 단원은 [${data.unit}]입니다!`;
+
+          const confirmApply = confirm(`🎯 [취약 단원 AI 분석 완료]\n\n${reasonText}\n\n이 단원으로 바로 이동하여 맞춤 퀴즈를 풀어볼까요?`);
+          if (confirmApply) {
+            const allUnitBtns = document.querySelectorAll('.unit-item-btn, .summary-unit-btn');
+            let matchedBtn = null;
+            for (let btn of allUnitBtns) {
+              if (btn.innerText.includes(data.unit)) {
+                matchedBtn = btn;
+                break;
+              }
+            }
+            if (matchedBtn) {
+              const panel = matchedBtn.closest('.grade-panel');
+              if (panel && panel.id) {
+                const gNum = parseInt(panel.id.replace('grade-panel-', ''), 10);
+                if (gNum) switchGradeTab(gNum);
+              }
+              matchedBtn.click();
+            } else {
+              currentUnit = data.unit;
+              const unitTitleEl = document.getElementById("selected-title");
+              if (unitTitleEl) unitTitleEl.textContent = `📖 맞춤단원 · ${data.unit}`;
+              restartQuiz();
+            }
+          }
+        } else {
+          alert(`🎉 축하합니다! 아직 틀린 기록이 없거나 모든 단원을 훌륭하게 마스터했습니다!\n자유롭게 원하는 단원을 선택해 퀴즈에 도전해 보세요!`);
+        }
+      } catch (e) {
+        alert("취약 단원 추천을 조회하는 중 오류가 발생했습니다: " + e.message);
+      }
+    }
+
+    // ==============================================================================
+    // [이스터에그 엔진] 1. 지구와 달 무중력, 2. 동물의 한살이 완전변태, 3. 100점 트로피 3단계
+    // ==============================================================================
+
+    // 토스트 알림 헬퍼 (상단 플로팅 - 무중력, 배추흰나비용)
+    function showEasterEggToast(text, duration = 3000) {
+      const existing = document.querySelector(".easter-egg-toast");
+      if (existing) existing.remove();
+
+      const toast = document.createElement("div");
+      toast.className = "easter-egg-toast";
+      toast.innerHTML = text;
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = "0";
+        toast.style.transform = "translate(-50%, -20px) scale(0.9)";
+        toast.style.transition = "all 0.35s ease";
+        setTimeout(() => toast.remove(), 350);
+      }, duration);
+    }
+
+    // 🏆 100점 만점 트로피 전용 화면 중앙 축하 배너 헬퍼
+    function showTrophyCelebrationModal(htmlContent, duration = 5000) {
+      const existing = document.querySelector(".trophy-celebration-modal");
+      if (existing) existing.remove();
+
+      const modal = document.createElement("div");
+      modal.className = "trophy-celebration-modal";
+      modal.innerHTML = htmlContent;
+      document.body.appendChild(modal);
+
+      setTimeout(() => {
+        modal.style.opacity = "0";
+        modal.style.transform = "translate(-50%, -50%) scale(0.85)";
+        modal.style.transition = "all 0.45s ease";
+        setTimeout(() => modal.remove(), 450);
+      }, duration);
+    }
+
+    // 1) 3학년 2학기 '지구와 달' 3초 롱클릭 -> 우주 무중력 모드 (4초간)
+    function triggerAntigravityEasterEgg() {
+      if (document.body.classList.contains("antigravity-active")) return;
+      document.body.classList.add("antigravity-active");
+      playTone(220, "sine", 0.8);
+      showEasterEggToast("🚀 [이스터에그] 우주 무중력(Antigravity) 가동!<br><span style='font-size:14px; color:#7dd3fc; font-weight:normal;'>화면의 모든 요소들이 4초간 둥실둥실 떠다닙니다.</span>", 4000);
+
+      setTimeout(() => {
+        document.body.classList.remove("antigravity-active");
+        playTone(330, "triangle", 0.4);
+      }, 4500);
+    }
+
+    // 2) 3학년 1학기 '동물의 한살이' 3초 롱클릭 -> 알 🥚 -> 캐터피 🐛 (화면 냠냠) -> 단데기 🌱 -> 버터플 🦋 날아가기
+    function triggerCaterpillarMetamorphosis() {
+      if (document.getElementById("easter-egg-metamorphosis-stage")) return;
+
+      // 이미지 사전 로딩 (애니메이션 중 깜빡임 방지)
+      const pokeImages = {
+        egg: "https://play.pokemonshowdown.com/sprites/gen5/egg.png",
+        caterpie: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10.png",
+        metapod: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/11.png",
+        butterfree: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/12.png"
+      };
+      Object.values(pokeImages).forEach(src => {
+        const pre = new Image();
+        pre.src = src;
+      });
+
+      const stage = document.createElement("div");
+      stage.id = "easter-egg-metamorphosis-stage";
+      stage.style.cssText = "position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999999; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; background: rgba(15, 23, 42, 0.25); backdrop-filter: blur(2px);";
+
+      const charImg = document.createElement("img");
+      charImg.id = "easter-egg-poke-img";
+      charImg.src = pokeImages.egg;
+      charImg.alt = "포켓몬 알";
+      charImg.style.cssText = "width: 100px; height: 100px; object-fit: contain; filter: drop-shadow(0 14px 28px rgba(0,0,0,0.35)); transition: all 0.6s cubic-bezier(.175,.885,.32,1.275); transform: scale(0);";
+
+      const subtext = document.createElement("div");
+      subtext.style.cssText = "margin-top: 20px; font-size: 19px; font-weight: 900; color: #166534; background: rgba(240, 253, 244, 0.96); border: 2.5px solid #86efac; padding: 10px 24px; border-radius: 9999px; box-shadow: 0 6px 18px rgba(0,0,0,0.12); opacity: 0; transition: opacity 0.4s; text-align: center;";
+      subtext.innerHTML = "🌱 <b>1단계: 조그만 포켓몬 알 🥚</b>";
+
+      stage.appendChild(charImg);
+      stage.appendChild(subtext);
+      document.body.appendChild(stage);
+
+      // 화면에 있는 모든 주요 요소들 (내부 카드들, 사이드바, 헤더, 그리고 우측 메인 대형 카드 .main-card 포함!)
+      const candidateSelectors = [
+        ".current-unit-banner",
+        ".ai-create-btn",
+        "#keyboard-hint",
+        ".mode-menu-tab",
+        ".question-card",
+        ".quiz-card",
+        ".score-banner",
+        ".review-item",
+        ".wrong-card",
+        ".archive-item-card",
+        ".grade-panel.active",
+        ".app-sidebar-2col",
+        ".user-pokemon-panel",
+        ".app-header",
+        ".main-card"
+      ];
+      const targetCards = [];
+      candidateSelectors.forEach(sel => {
+        document.querySelectorAll(sel).forEach(el => {
+          if (el && el.offsetParent !== null && !targetCards.includes(el)) {
+            targetCards.push(el);
+          }
+        });
+      });
+
+      // 1) 0.1s: 알 뿅 등장
+      setTimeout(() => {
+        charImg.style.transform = "scale(1.2)";
+        subtext.style.opacity = "1";
+        playTone(523, "triangle", 0.3);
+      }, 100);
+
+      // 2) 1.4s: 알 깨지며 캐터피 등장 🐛
+      setTimeout(() => {
+        charImg.src = pokeImages.caterpie;
+        charImg.style.width = "180px";
+        charImg.style.height = "180px";
+        charImg.style.transform = "scale(1.25) rotate(-8deg)";
+        subtext.innerHTML = "🐛 <b>2단계: 알을 깨고 나온 귀여운 캐터피(애벌레)!</b>";
+        playTone(659, "sine", 0.25);
+      }, 1400);
+
+      // 3) 2.2s ~ 4.2s: 캐터피가 화면 카드와 대형 카드를 마구 냠냠 먹어치움!
+      setTimeout(() => {
+        subtext.innerHTML = "🍴 <b>냠냠! 배고픈 캐터피가 화면의 모든 요소들을 마구 먹어치워요!</b>";
+        charImg.style.transition = "transform 0.22s ease-in-out";
+        let step = 0;
+        const totalItems = targetCards.length;
+        const intervalMs = Math.max(100, Math.min(260, 2000 / (totalItems || 1)));
+
+        const eatInterval = setInterval(() => {
+          step++;
+          const angle = (step % 2 === 0) ? 14 : -14;
+          charImg.style.transform = `scale(1.35) rotate(${angle}deg) translateX(${Math.sin(step) * 40}px)`;
+          playTone(320 + (step * 25), "square", 0.08);
+
+          if (step <= targetCards.length) {
+            const card = targetCards[step - 1];
+            if (card) {
+              card.style.transition = "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)";
+              card.style.transform = "scale(0.04) rotate(15deg)";
+              card.style.opacity = "0";
+            }
+          }
+
+          if (step >= targetCards.length) {
+            clearInterval(eatInterval);
+          }
+        }, intervalMs);
+      }, 2200);
+
+      // 4) 4.6s: 단데기로 변신 🌱 (번데기)
+      setTimeout(() => {
+        charImg.src = pokeImages.metapod;
+        charImg.style.width = "175px";
+        charImg.style.height = "175px";
+        charImg.style.transition = "all 0.6s cubic-bezier(.175,.885,.32,1.275)";
+        charImg.style.transform = "scale(1.25) rotate(0deg)";
+        subtext.innerHTML = "🌱 <b>3단계: 배부른 캐터피가 단단한 단데기(번데기)로 굳어졌어요!</b>";
+        playTone(440, "sine", 0.4);
+      }, 4600);
+
+      // 5) 6.2s: 단데기 탈피 -> 버터플 🦋 부화!
+      setTimeout(() => {
+        charImg.src = pokeImages.butterfree;
+        charImg.style.width = "210px";
+        charImg.style.height = "210px";
+        charImg.style.transform = "scale(1.3) rotate(8deg)";
+        subtext.innerHTML = "✨ <b>4단계: 단데기에서 우화한 아름다운 버터플(나비) 탄생!</b>";
+        playTone(784, "triangle", 0.5);
+      }, 6200);
+
+      // 6) 7.6s: 버터플이 하늘로 훨훨 날아감 & 화면 카드 원상 복구!
+      setTimeout(() => {
+        charImg.style.transition = "all 1.8s cubic-bezier(.25,1,.5,1)";
+        charImg.style.transform = "translateY(-950px) translateX(260px) scale(1.1) rotate(-22deg)";
+        subtext.style.opacity = "0";
+
+        // 화면 원상 복구
+        targetCards.forEach(card => {
+          card.style.transition = "all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
+          card.style.transform = "";
+          card.style.opacity = "";
+        });
+
+        playTone(880, "sine", 0.6);
+        showEasterEggToast("🦋 [이스터에그] 알 ➔ 캐터피 ➔ 단데기 ➔ 버터플 완전변태 완료!<br><span style='font-size:14px; color:#86efac; font-weight:normal;'>화면이 원래대로 깨끗하게 복원되었습니다.</span>", 4500);
+      }, 7600);
+
+      // 7) 9.5s: 스테이지 제거
+      setTimeout(() => {
+        stage.remove();
+      }, 9500);
+    }
+
+    // 롱클릭 이벤트 리스너 등록 헬퍼
+    function attachLongPressListener(elementId, callback, duration = 3000) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+
+      let timer = null;
+
+      function startPress(e) {
+        timer = setTimeout(() => {
+          timer = null;
+          callback();
+        }, duration);
+      }
+
+      function cancelPress(e) {
+        if (timer) clearTimeout(timer);
+        timer = null;
+      }
+
+      el.addEventListener("mousedown", startPress);
+      el.addEventListener("touchstart", startPress, { passive: true });
+
+      el.addEventListener("mouseup", cancelPress);
+      el.addEventListener("mouseleave", cancelPress);
+      el.addEventListener("touchend", cancelPress);
+      el.addEventListener("touchcancel", cancelPress);
+    }
+
+    // 3) 100점 만점 트로피 3단계 오픈 이스터에그
+    let trophyClicks = 0;
+    let trophyTimer = null;
+
+    function handleTrophyEasterEgg(arg1, arg2) {
+      let e = null;
+      let emojiEl = null;
+      if (arg1 && arg1.target) {
+        e = arg1;
+        emojiEl = arg2 || e.currentTarget || e.target;
+        e.stopPropagation();
+      } else {
+        emojiEl = arg1;
+        if (window.event) window.event.stopPropagation();
+      }
+      if (!emojiEl) return;
+      const text = (emojiEl.textContent || "").trim();
+      if (!text.includes("🏆")) return;
+
+      trophyClicks++;
+      if (trophyTimer) clearTimeout(trophyTimer);
+
+      trophyTimer = setTimeout(() => {
+        trophyClicks = 0;
+      }, 4000);
+
+      emojiEl.classList.remove("trophy-shake-1", "trophy-shake-2", "trophy-shake-3");
+
+      if (trophyClicks === 1) {
+        void emojiEl.offsetWidth; // reflow
+        emojiEl.classList.add("trophy-shake-1");
+        playTone(440, "sine", 0.15);
+      } else if (trophyClicks === 2) {
+        void emojiEl.offsetWidth;
+        emojiEl.classList.add("trophy-shake-2");
+        playTone(520, "sine", 0.25);
+      } else if (trophyClicks >= 3) {
+        void emojiEl.offsetWidth;
+        emojiEl.classList.add("trophy-shake-3");
+        trophyClicks = 0;
+
+        playTone(300, "sawtooth", 0.3);
+
+        setTimeout(() => {
+          playTone(600, "square", 0.2);
+          playVictoryFanfare();
+          launchRainbowConfettiBurst();
+          showTrophyCelebrationModal(`
+            <div style="font-size: 52px; filter: drop-shadow(0 4px 14px rgba(251,191,36,0.6));">🏆✨</div>
+            <div style="font-size: 22px; font-weight: 900; color: #fbbf24; letter-spacing: -0.5px;">
+              [만점 이스터에그] 쿠구구... 펑! 💥
+            </div>
+            <div style="font-size: 16.5px; color: #f1f5f9; font-weight: 700;">
+              최고의 과학 박사님을 위한 화려한 축하 폭죽이 터졌습니다! 🌈
+            </div>
+            <div style="font-size: 13.5px; color: #cbd5e1; margin-top: 4px;">
+              ⭐ 100점 만점을 진심으로 축하합니다! EduMate AI 과학 탐험대 명예의 전당 등극 ⭐
+            </div>
+          `, 5000);
+        }, 1000);
+      }
+    }
+
+    // 승리의 팡파르 화음
+    function playVictoryFanfare() {
+      const notes = [523.25, 659.25, 783.99, 1046.50];
+      notes.forEach((freq, i) => {
+        setTimeout(() => playTone(freq, "triangle", 0.45), i * 140);
+      });
+    }
+
+    // 캔버스 무지개 콘페티 폭죽 효과
+    function launchRainbowConfettiBurst() {
+      const canvas = document.createElement("canvas");
+      canvas.style.cssText = "position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 99999999;";
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      document.body.appendChild(canvas);
+
+      const ctx = canvas.getContext("2d");
+      const colors = ["#ef4444", "#f97316", "#eab308", "#22c55e", "#06b6d4", "#3b82f6", "#a855f7", "#ec4899", "#fbbf24"];
+      const particles = [];
+
+      for (let i = 0; i < 180; i++) {
+        particles.push({
+          x: canvas.width / 2,
+          y: canvas.height / 2 - 40,
+          vx: (Math.random() - 0.5) * 24,
+          vy: (Math.random() - 0.75) * 26,
+          size: Math.random() * 9 + 5,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          vRot: (Math.random() - 0.5) * 12,
+          opacity: 1
+        });
+      }
+
+      let frame = 0;
+      function render() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let alive = false;
+
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.42; // gravity
+          p.vx *= 0.98;
+          p.rotation += p.vRot;
+          p.opacity -= 0.009;
+
+          if (p.opacity > 0) {
+            alive = true;
+            ctx.save();
+            ctx.globalAlpha = Math.max(0, p.opacity);
+            ctx.translate(p.x, p.y);
+            ctx.rotate((p.rotation * Math.PI) / 180);
+            ctx.fillStyle = p.color;
+            ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.7);
+            ctx.restore();
+          }
+        });
+
+        frame++;
+        if (alive && frame < 170) {
+          requestAnimationFrame(render);
+        } else {
+          canvas.remove();
+        }
+      }
+      render();
+    }
+
+    // 초기 로드 시 유저 계정 & 포켓몬 상태 동기화 & 이스터에그 리스너 연결
+    window.addEventListener("DOMContentLoaded", () => {
+      loadUserStatus();
+      attachLongPressListener("easter-egg-btn-antigravity", triggerAntigravityEasterEgg);
+      attachLongPressListener("easter-egg-btn-caterpillar", triggerCaterpillarMetamorphosis);
+    });
+  </script>
+</body>
+</html>

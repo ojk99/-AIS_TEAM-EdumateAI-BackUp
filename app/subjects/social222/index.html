@@ -1,0 +1,5385 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🧭 EduMate AI 초등사회 탐험대</title>
+  <style>
+    /* ==========================================================================
+       EduMate AI 초등사회 프리미엄 와이드 에듀테크 대시보드 테마
+       ========================================================================== */
+    @import url('https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap');
+
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-light: #e0f2fe;
+      --secondary: #8b5cf6;
+      --secondary-light: #f5f3ff;
+      --accent-green: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --slate-50: #f8fafc;
+      --slate-100: #f1f5f9;
+      --slate-200: #e2e8f0;
+      --slate-300: #cbd5e1;
+      --slate-600: #475569;
+      --slate-700: #334155;
+      --slate-800: #1e293b;
+      --slate-900: #0f172a;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+      --shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.04);
+      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 16px 40px rgba(14, 165, 233, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at 15% 15%, #e0f2fe 0%, #f1f5f9 45%, #fef3c7 100%);
+      color: var(--slate-800);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 20px;
+      letter-spacing: -0.2px;
+    }
+
+    /* 전체 화면 대형 래퍼 (1360px 풀 와이드 대시보드) */
+    .app-wrapper {
+      width: 100%;
+      max-width: 1360px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* ==========================================================================
+       1. 상단 글로벌 네비게이션 헤더 (GNB)
+       ========================================================================== */
+    .header-bar {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 60%, #0f172a 100%);
+      color: #ffffff;
+      padding: 18px 28px;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 12px 30px rgba(2, 132, 199, 0.25);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-bar::after {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.3) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      z-index: 1;
+    }
+
+    .brand-icon {
+      font-size: 34px;
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+      transition: transform 0.2s;
+    }
+
+    .brand-icon:hover {
+      transform: scale(1.05) rotate(5deg);
+    }
+
+    .brand-text h1 {
+      font-family: 'Jua', sans-serif;
+      font-size: 27px;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge-official {
+      background: #fef08a;
+      color: #854d0e;
+      font-size: 11px;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 20px;
+      letter-spacing: 0;
+    }
+
+    .brand-text p {
+      font-size: 13px;
+      opacity: 0.88;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* 상단 스탯 대시보드 뱃지 모음 */
+    .header-stats {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 1;
+    }
+
+    .stat-pill {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 8px 18px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s;
+    }
+
+    .stat-pill:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .stat-pill-icon {
+      font-size: 22px;
+    }
+
+    .stat-pill-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-pill-label {
+      font-size: 11px;
+      opacity: 0.8;
+      font-weight: 500;
+    }
+
+    .stat-pill-val {
+      font-family: 'Jua', sans-serif;
+      font-size: 20px;
+      color: #ffffff;
+      line-height: 1.1;
+    }
+
+    .stat-pill.score-pill .stat-pill-val {
+      color: #fef08a;
+    }
+
+    /* ==========================================================================
+       2. 대시보드 2컬럼 레이아웃 (좌측 사이드바 vs 우측 메인 영역)
+       ========================================================================== */
+    .dashboard-layout {
+      display: grid;
+      grid-template-columns: 330px 1fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    /* 좌측 사이드바 컬럼 (스테이터스 -> 단원 로드맵 -> 명예 배지) */
+    .dashboard-left-col {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* 우측 메인 학습관 컬럼 (모드 탭 -> 배너/컨트롤 -> 퀴즈 카드) */
+    .dashboard-right-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .card-panel {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+
+    .card-panel:hover {
+      box-shadow: var(--shadow-lg);
+    }
+
+    .panel-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--slate-100);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--slate-50);
+    }
+
+    .panel-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--slate-800);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .panel-body {
+      padding: 18px 20px;
+    }
+
+    /* 프로필 카드 */
+    .profile-summary {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .profile-avatar {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+      border: 2px solid #0284c7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      box-shadow: 0 4px 10px rgba(2, 132, 199, 0.15);
+      flex-shrink: 0;
+    }
+
+    .profile-meta h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--slate-900);
+    }
+
+    .profile-meta p {
+      font-size: 12px;
+      color: var(--slate-600);
+      margin-top: 2px;
+    }
+
+    /* 레벨 경험치 바 */
+    .level-container {
+      background: var(--slate-50);
+      border-radius: 12px;
+      padding: 12px 14px;
+      border: 1px solid var(--slate-200);
+      margin-bottom: 16px;
+    }
+
+    .level-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 6px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      background: var(--slate-200);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 35%;
+      background: linear-gradient(90deg, #38bdf8 0%, #0284c7 100%);
+      border-radius: 6px;
+      transition: width 0.4s ease;
+    }
+
+    /* 사이드바 통계 그리드 */
+    .side-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .metric-box {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .metric-val {
+      font-family: 'Jua', sans-serif;
+      font-size: 20px;
+      color: var(--primary);
+    }
+
+    .metric-name {
+      font-size: 11px;
+      color: var(--slate-600);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    /* 단원 탐색기 목록 */
+    .unit-roadmap {
+      max-height: 280px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding-right: 4px;
+    }
+
+    .unit-roadmap::-webkit-scrollbar {
+      width: 5px;
+    }
+    .unit-roadmap::-webkit-scrollbar-thumb {
+      background: var(--slate-300);
+      border-radius: 4px;
+    }
+
+    .unit-pill-item {
+      padding: 10px 14px;
+      background: var(--slate-50);
+      border: 1.5px solid var(--slate-200);
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--slate-700);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s;
+    }
+
+    .unit-pill-item:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary-dark);
+      transform: translateX(3px);
+    }
+
+    .unit-pill-item.active {
+      background: #e0f2fe;
+      border-color: #0284c7;
+      color: #0369a1;
+      font-weight: 800;
+    }
+
+    .unit-tag {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 6px;
+      background: #e2e8f0;
+      color: #64748b;
+    }
+
+    .unit-pill-item.active .unit-tag {
+      background: #0284c7;
+      color: #ffffff;
+    }
+
+    /* 배지 컬렉션 */
+    .badge-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .badge-item {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 12px;
+      padding: 10px 4px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .badge-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+    }
+
+    .badge-item.unlocked {
+      background: #fefce8;
+      border-color: #fde047;
+    }
+
+    .badge-item .badge-emoji {
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+
+    .badge-item .badge-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--slate-700);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ==========================================================================
+       3. 우측 메인 학습관 스테이션 (Hero & Quiz Station)
+       ========================================================================== */
+    .main-station {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* 상단 모드 전환 탭 (기본 퀴즈관 vs 심화 서술형 탐구관) */
+    .mode-switcher-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 10px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--slate-200);
+      display: flex;
+      gap: 12px;
+    }
+
+    .mode-tab-btn {
+      flex: 1;
+      padding: 16px 20px;
+      border: 2px solid transparent;
+      background: var(--slate-50);
+      border-radius: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .mode-tab-btn:hover {
+      background: #ffffff;
+      border-color: var(--slate-300);
+      transform: translateY(-2px);
+    }
+
+    .mode-tab-icon {
+      font-size: 30px;
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+
+    .mode-tab-btn.basic-tab .mode-tab-icon {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .mode-tab-btn.advanced-tab .mode-tab-icon {
+      background: #f3e8ff;
+      color: #7e22ce;
+    }
+
+    .mode-tab-btn.map-tab .mode-tab-icon {
+      background: #fef3c7;
+      color: #d97706;
+    }
+
+    .mode-tab-info {
+      text-align: left;
+    }
+
+    .mode-tab-info h2 {
+      font-family: 'Jua', sans-serif;
+      font-size: 18px;
+      color: var(--slate-800);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mode-tab-info p {
+      font-size: 11.5px;
+      color: var(--slate-600);
+      margin-top: 3px;
+    }
+
+    /* 활성화된 모드 버튼 스타일 */
+    .mode-tab-btn.active.basic-tab {
+      background: #ffffff;
+      border-color: #22c55e;
+      box-shadow: 0 8px 24px rgba(34, 197, 94, 0.18);
+    }
+    .mode-tab-btn.active.basic-tab .mode-tab-info h2 {
+      color: #15803d;
+    }
+
+    .mode-tab-btn.active.advanced-tab {
+      background: #ffffff;
+      border-color: #a855f7;
+      box-shadow: 0 8px 24px rgba(168, 85, 247, 0.2);
+    }
+    .mode-tab-btn.active.advanced-tab .mode-tab-info h2 {
+      color: #7e22ce;
+    }
+
+    .mode-tab-btn.active.map-tab {
+      background: #ffffff;
+      border-color: #f59e0b;
+      box-shadow: 0 8px 24px rgba(245, 158, 11, 0.22);
+    }
+    .mode-tab-btn.active.map-tab .mode-tab-info h2 {
+      color: #b45309;
+    }
+
+    /* 심화 모드 전용 안내 띠 배너 */
+    .advanced-alert-banner {
+      display: none;
+      background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+      border: 1.5px solid #d8b4fe;
+      padding: 14px 20px;
+      border-radius: 16px;
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #581c87;
+      box-shadow: 0 4px 12px rgba(147, 51, 234, 0.08);
+      animation: fadeIn 0.3s ease;
+    }
+
+    /* 지도 모드 전용 안내 띠 배너 */
+    .map-alert-banner {
+      display: none;
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      border: 1.5px solid #fde68a;
+      padding: 14px 20px;
+      border-radius: 16px;
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #78350f;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.1);
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 학년군 선택 & 필터 컨트롤 바 */
+    .controls-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 16px 20px;
+      border: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* 학년 선택 세그먼트 버튼 (테두리 안을 100% 가득 채우는 3분할 와이드 그리드) */
+    .grade-segmented {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      width: 100%;
+      background: #f1f5f9;
+      padding: 6px;
+      border-radius: 16px;
+      gap: 8px;
+      border: 1.5px solid #e2e8f0;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+    }
+
+    .grade-pill-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 18px;
+      border: 2px solid transparent;
+      background: transparent;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #64748b;
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+    }
+
+    .grade-pill-btn:hover {
+      color: #0f172a;
+      background: rgba(255, 255, 255, 0.7);
+      transform: translateY(-1px);
+    }
+
+    .grade-pill-btn.active {
+      background: #ffffff;
+      color: #0284c7;
+      font-weight: 800;
+      border-color: #7dd3fc;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.16), 0 1px 3px rgba(0, 0, 0, 0.05);
+      transform: translateY(-1px);
+    }
+
+    .grade-pill-btn .pill-emoji {
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .grade-pill-btn .pill-main {
+      font-size: 15.5px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+
+    .grade-pill-btn .pill-sub {
+      font-size: 13px;
+      font-weight: 600;
+      opacity: 0.85;
+      margin-left: 2px;
+    }
+
+    /* 필터 드롭다운 영역 */
+    .filter-tools {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-top: 10px;
+      border-top: 1px dashed #e2e8f0;
+    }
+
+    .filter-tools-left {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .filter-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--slate-700);
+    }
+
+    .styled-select {
+      padding: 9px 14px;
+      border-radius: 10px;
+      border: 1.5px solid var(--slate-300);
+      background: #ffffff;
+      font-size: 13.5px;
+      color: var(--slate-800);
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .styled-select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+
+    .btn-shuffle-quick {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 16px;
+      border-radius: 10px;
+      border: 1.5px solid #bae6fd;
+      background: #f0f9ff;
+      color: #0284c7;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-shuffle-quick:hover {
+      background: #e0f2fe;
+      border-color: #7dd3fc;
+      transform: translateY(-1px);
+    }
+
+    /* ==========================================================================
+       4. 프리미엄 퀴즈 메인 카드 (Hero Quest Card)
+       ========================================================================== */
+    .main-quiz-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      border: 2px solid #bae6fd;
+      box-shadow: 0 12px 36px rgba(14, 165, 233, 0.12);
+      padding: 32px 36px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 480px;
+      box-sizing: border-box;
+    }
+
+    /* 상단 메타 바 */
+    .quiz-meta-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .meta-badges {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge-chip {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12.5px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .badge-unit-chip {
+      background: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #bae6fd;
+    }
+
+    .badge-diff-chip {
+      background: #fef3c7;
+      color: #b45309;
+      border: 1px solid #fde68a;
+    }
+
+    .badge-type-chip {
+      background: #f3e8ff;
+      color: #7e22ce;
+      border: 1px solid #e9d5ff;
+    }
+
+    .quiz-id-tag {
+      font-size: 12px;
+      font-weight: 700;
+      color: #94a3b8;
+    }
+
+    /* 문제 지문 박스 */
+    .question-headline {
+      font-size: 22px;
+      line-height: 1.65;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 28px;
+      padding: 20px 24px;
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      border-left: 6px solid #0284c7;
+      border-radius: 0 16px 16px 0;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    /* 답안 섹션 */
+    .answer-station {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    /* OX 퀴즈 버튼 */
+    .ox-station {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      padding: 10px 0;
+    }
+
+    .ox-card-btn {
+      flex: 1;
+      max-width: 280px;
+      height: 110px;
+      border: 3px solid var(--slate-200);
+      border-radius: 20px;
+      background: #ffffff;
+      font-family: 'Jua', sans-serif;
+      font-size: 32px;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+
+    .ox-card-btn.o { color: #16a34a; }
+    .ox-card-btn.x { color: #dc2626; }
+
+    .ox-card-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.1);
+      border-color: currentColor;
+    }
+
+    .ox-card-btn.selected.o {
+      background: #dcfce7;
+      border-color: #16a34a;
+      box-shadow: 0 8px 24px rgba(22, 163, 74, 0.25);
+    }
+
+    .ox-card-btn.selected.x {
+      background: #fee2e2;
+      border-color: #dc2626;
+      box-shadow: 0 8px 24px rgba(220, 38, 38, 0.25);
+    }
+
+    /* 4지선다 객관식 카드 */
+    .mc-cards-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mc-card-option {
+      padding: 16px 22px;
+      border: 2px solid var(--slate-200);
+      border-radius: 16px;
+      background: #ffffff;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--slate-800);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+
+    .mc-card-option:hover {
+      background: var(--slate-50);
+      border-color: #93c5fd;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(14, 165, 233, 0.08);
+    }
+
+    .mc-card-option.selected {
+      background: #f0f9ff;
+      border-color: #0284c7;
+      color: #0369a1;
+      font-weight: 800;
+      box-shadow: 0 6px 20px rgba(2, 132, 199, 0.15);
+    }
+
+    .mc-num-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--slate-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--slate-600);
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .mc-card-option.selected .mc-num-badge {
+      background: #0284c7;
+      color: #ffffff;
+    }
+
+    /* 단답형 & 서술형 입력창 */
+    .input-box-styled {
+      width: 100%;
+      padding: 16px 22px;
+      border: 2px solid var(--slate-300);
+      border-radius: 16px;
+      font-size: 16px;
+      outline: none;
+      transition: all 0.2s;
+      background: #ffffff;
+      color: var(--slate-900);
+    }
+
+    .input-box-styled:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.18);
+    }
+
+    /* 하단 버튼 액션 그룹 */
+    .quiz-actions {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .btn-submit-main {
+      flex: 3;
+      padding: 18px 24px;
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 16px;
+      font-family: 'Jua', sans-serif;
+      font-size: 21px;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 8px 24px rgba(2, 132, 199, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn-submit-main:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(2, 132, 199, 0.45);
+      background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+    }
+
+    .btn-skip-next {
+      flex: 1;
+      padding: 18px 20px;
+      background: var(--slate-100);
+      color: var(--slate-700);
+      border: 1.5px solid var(--slate-300);
+      border-radius: 16px;
+      font-family: 'Jua', sans-serif;
+      font-size: 17px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-skip-next:hover {
+      background: #ffffff;
+      border-color: var(--slate-400);
+      color: var(--slate-900);
+    }
+
+    /* ==========================================================================
+       5. 채점 결과 팝업 모달 (프리미엄 팝업 룩)
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(6px);
+      z-index: 100;
+      padding: 20px;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 36px 32px;
+      width: 100%;
+      max-width: 540px;
+      text-align: center;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+      border: 3px solid #38bdf8;
+      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-emoji {
+      font-size: 60px;
+      margin-bottom: 10px;
+    }
+
+    .modal-title {
+      font-family: 'Jua', sans-serif;
+      font-size: 26px;
+      margin-bottom: 6px;
+    }
+
+    .modal-score {
+      font-family: 'Jua', sans-serif;
+      font-size: 36px;
+      color: #0284c7;
+      margin-bottom: 18px;
+    }
+
+    .feedback-box {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 16px;
+      padding: 18px 20px;
+      text-align: left;
+      font-size: 14.5px;
+      line-height: 1.65;
+      margin-bottom: 24px;
+      color: var(--slate-700);
+    }
+
+    .btn-next {
+      width: 100%;
+      padding: 16px 0;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 16px;
+      font-family: 'Jua', sans-serif;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 6px 18px rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-next:hover {
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(16, 185, 129, 0.4);
+    }
+
+    /* 문화재 사진 확대 모달 창 스타일 */
+    .photo-modal-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 0;
+      width: 100%;
+      max-width: 660px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.45);
+      border: 2px solid #38bdf8;
+      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .photo-modal-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .photo-modal-body {
+      background: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 280px;
+      max-height: 65vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .photo-modal-body img {
+      width: 100%;
+      height: 100%;
+      max-height: 65vh;
+      object-fit: contain;
+      display: block;
+    }
+
+    .photo-modal-footer {
+      padding: 16px 20px;
+      background: #ffffff;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-photo-modal-close {
+      background: #e2e8f0;
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      font-size: 16px;
+      font-weight: 800;
+      color: #475569;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .btn-photo-modal-close:hover {
+      background: #cbd5e1;
+      color: #0f172a;
+    }
+
+    .btn-open-newtab {
+      background: #f0f9ff;
+      border: 1.5px solid #bae6fd;
+      color: #0284c7;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-open-newtab:hover {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+    }
+
+    .photo-zoom-hint {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(4px);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      pointer-events: none;
+      transition: all 0.2s;
+    }
+
+    .culture-photo-card:hover .photo-zoom-hint {
+      background: #0284c7;
+      border-color: #38bdf8;
+      transform: scale(1.05);
+    }
+
+    /* ==========================================================================
+       6. 우리 국토 지도 탐구관 전용 스타일 (Map Arena Styles)
+       ========================================================================== */
+    .map-arena-card {
+      display: none;
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      border: 2px solid #fde68a;
+      box-shadow: 0 12px 36px rgba(245, 158, 11, 0.12);
+      padding: 28px 32px;
+      position: relative;
+      overflow: hidden;
+      flex: 1;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 480px;
+      box-sizing: border-box;
+    }
+
+    .map-split-grid {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 22px;
+      align-items: start;
+      margin-bottom: 20px;
+    }
+
+    /* 좌측 컬럼: 위성 지도 + 바로 밑 문화재 실물 사진 */
+    .map-left-col {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+    }
+
+    .korea-map-box {
+      background: #ffffff;
+      border-radius: 18px;
+      border: 1.5px solid #cbd5e1;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+    }
+
+    .korea-map-box-header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    /* 실제 위성사진 프레임 */
+    .satellite-map-frame {
+      position: relative;
+      width: 294px;
+      height: 345px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #0f2238;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .satellite-terrain-svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      pointer-events: none;
+    }
+
+    .svg-overlay-stage {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    /* 위성 지도 위 지명 텍스트 라벨 (경계선 대신 깔끔한 지명 표시) */
+    .map-region-label {
+      position: absolute;
+      font-size: 10px;
+      font-weight: 800;
+      color: #ffffff;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(3px);
+      padding: 2px 6px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+      z-index: 5;
+      white-space: nowrap;
+    }
+
+    /* 펄스 핀 마커 */
+    .map-pin {
+      position: absolute;
+      transform: translate(-50%, -100%);
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.25s ease;
+    }
+
+    .map-pin:hover {
+      z-index: 30;
+      transform: translate(-50%, -105%) scale(1.15);
+    }
+
+    .map-pin .pin-icon {
+      font-size: 26px;
+      line-height: 1;
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.6));
+    }
+
+    .map-pin .pin-text {
+      background: rgba(15, 23, 42, 0.92);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 10px;
+      white-space: nowrap;
+      margin-top: -2px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+    }
+
+    .map-pin.target .pin-icon {
+      font-size: 34px;
+      animation: pinBounce 0.9s infinite alternate ease-in-out;
+    }
+
+    .map-pin.target .pin-text {
+      background: #d97706;
+      color: #ffffff;
+      border: 1.5px solid #fef3c7;
+      font-size: 11.5px;
+      font-weight: 800;
+      transform: scale(1.15);
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.7);
+    }
+
+    @keyframes pinBounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-10px); }
+    }
+
+    /* =========================================================================
+       [국토 지도 탐구관] 핀 클릭 카메라 줌인 & 지역 지형 모양 팝업 카드 스타일
+       ========================================================================= */
+    .map-zoom-viewport {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transform-origin: 50% 50%;
+      will-change: transform;
+    }
+
+    /* 1배율 복귀 버튼 */
+    .btn-map-zoom-reset {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 25;
+      background: rgba(15, 23, 42, 0.9);
+      color: #38bdf8;
+      border: 1.5px solid #38bdf8;
+      padding: 5px 11px;
+      border-radius: 12px;
+      font-size: 11.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      backdrop-filter: blur(6px);
+    }
+
+    .btn-map-zoom-reset:hover {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #bae6fd;
+      transform: translateY(-1px) scale(1.04);
+      box-shadow: 0 6px 18px rgba(2, 132, 199, 0.6);
+    }
+
+    /* 핀 클릭 시 지도 정중앙에 둥실 떠오르는 지역 지형 모양 카드 */
+    .region-shape-popover {
+      position: absolute;
+      z-index: 35;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.96) 0%, rgba(30, 41, 59, 0.96) 100%);
+      backdrop-filter: blur(10px);
+      border: 2px solid #38bdf8;
+      border-radius: 18px;
+      padding: 13px 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75), 0 0 25px rgba(56, 189, 248, 0.45);
+      color: #ffffff;
+      width: 236px;
+      pointer-events: auto;
+      display: none;
+    }
+
+    .region-shape-popover.visible {
+      display: block;
+      animation: popCenter 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes popCenter {
+      0% { opacity: 0; transform: translate(-50%, -40%) scale(0.75); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+
+    .shape-popover-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .shape-region-badge {
+      font-size: 11px;
+      font-weight: 800;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 2px 8px;
+      border-radius: 8px;
+    }
+
+    .shape-popover-close {
+      background: rgba(255, 255, 255, 0.12);
+      border: none;
+      color: #94a3b8;
+      font-size: 13px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+
+    .shape-popover-close:hover {
+      background: #ef4444;
+      color: #ffffff;
+    }
+
+    .shape-title-text {
+      font-family: 'Jua', sans-serif;
+      font-size: 15.5px;
+      color: #f8fafc;
+      margin: 0 0 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .shape-silhouette-box {
+      background: rgba(2, 6, 23, 0.75);
+      border: 1.5px dashed rgba(56, 189, 248, 0.45);
+      border-radius: 12px;
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .shape-svg-icon {
+      width: 52px;
+      height: 48px;
+      flex-shrink: 0;
+      filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.8));
+    }
+
+    .shape-desc-box {
+      font-size: 11.5px;
+      color: #cbd5e1;
+      line-height: 1.45;
+      text-align: left;
+    }
+
+    .shape-desc-box strong {
+      color: #fde047;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .shape-explore-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 6px 10px;
+      font-size: 11.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+
+    .shape-explore-btn:hover {
+      background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+      transform: translateY(-1px);
+    }
+
+    .region-shape-popover.visible {
+      display: block;
+    }
+
+    .btn-map-zoom-reset.visible {
+      display: inline-flex;
+    }
+
+    /* 지도 바로 밑에 위치하는 대표 문화재 실물 사진 포토 카드 */
+    .culture-photo-card {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 0;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .culture-photo-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+    }
+
+    .photo-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 135px;
+      background: #0f172a;
+      overflow: hidden;
+    }
+
+    .photo-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+      display: block;
+    }
+
+    .culture-photo-card:hover .photo-img-wrap img {
+      transform: scale(1.05);
+    }
+
+    .photo-overlay-tag {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .photo-badge {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(4px);
+      color: #fef08a;
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 20px;
+      border: 1px solid rgba(254, 240, 138, 0.3);
+    }
+
+    .photo-region-pill {
+      background: #0284c7;
+      color: #ffffff;
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 20px;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.4);
+    }
+
+    .photo-caption {
+      padding: 8px 12px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #1e293b;
+      background: #f8fafc;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    /* 우측 퀘스트 패널 */
+    .map-info-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .region-feature-card {
+      background: #fffbeb;
+      border: 1.5px solid #fde68a;
+      border-radius: 16px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+    }
+
+    .feature-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .feature-title {
+      font-size: 15.5px;
+      font-weight: 800;
+      color: #b45309;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .feature-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 10px;
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fde68a;
+    }
+
+    .feature-story {
+      font-size: 13.5px;
+      color: #78350f;
+      line-height: 1.6;
+    }
+
+    .passport-footer {
+      background: #f8fafc;
+      border-radius: 14px;
+      border: 1.5px solid #e2e8f0;
+      padding: 12px 18px;
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .passport-label {
+      font-size: 13px;
+      font-weight: 800;
+      color: #475569;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .passport-stamps-wrap {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .stamp-chip {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 12px;
+      background: #e2e8f0;
+      color: #94a3b8;
+      border: 1px solid #cbd5e1;
+      transition: all 0.2s;
+    }
+
+    .stamp-chip.unlocked {
+      background: #fef3c7;
+      color: #b45309;
+      border-color: #fde68a;
+      font-weight: 800;
+      box-shadow: 0 2px 6px rgba(245, 158, 11, 0.2);
+    }
+
+    /* ====================================================================== */
+    /* 💮 리얼 스탬프 도장 쾅! 이펙트 & 화면 흔들림 스타일 */
+    /* ====================================================================== */
+    .stamp-chip.unlocked.just-stamped {
+      animation: chipStampedPulse 1.2s ease-out;
+    }
+    @keyframes chipStampedPulse {
+      0% { transform: scale(1); }
+      30% { transform: scale(1.4); background: #fde047; box-shadow: 0 0 15px rgba(234, 179, 8, 0.8); }
+      60% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    /* 화면 흔들림 효과 */
+    body.stamp-screen-shake {
+      animation: stampScreenShake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    }
+    @keyframes stampScreenShake {
+      10%, 90% { transform: translate3d(-3px, 2px, 0); }
+      20%, 80% { transform: translate3d(4px, -3px, 0); }
+      30%, 50%, 70% { transform: translate3d(-5px, 4px, 0); }
+      40%, 60% { transform: translate3d(5px, -4px, 0); }
+      100% { transform: translate3d(0, 0, 0); }
+    }
+
+    /* 스탬프 쾅! 오버레이 */
+    .stamp-slam-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 10001;
+      overflow: hidden;
+    }
+
+    .stamp-slam-seal {
+      width: 230px;
+      height: 230px;
+      border: 5px dashed #dc2626;
+      outline: 4px solid #dc2626;
+      outline-offset: 4px;
+      border-radius: 50%;
+      background: rgba(254, 242, 242, 0.92);
+      color: #dc2626;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 16px;
+      font-family: 'Jua', sans-serif;
+      box-shadow: 0 0 40px rgba(220, 38, 38, 0.5), inset 0 0 25px rgba(220, 38, 38, 0.2);
+      transform-origin: center center;
+      animation: stampSlamDrop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      opacity: 0;
+      position: relative;
+    }
+
+    .stamp-slam-seal::after {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1.5px solid rgba(220, 38, 38, 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .stamp-seal-badge {
+      font-size: 11px;
+      letter-spacing: 2px;
+      font-weight: 800;
+      color: #ef4444;
+      margin-bottom: 4px;
+    }
+
+    .stamp-seal-region {
+      font-size: 26px;
+      line-height: 1.15;
+      font-weight: 900;
+      color: #b91c1c;
+      text-shadow: 1px 1px 0 rgba(255,255,255,0.8);
+      margin: 4px 0;
+    }
+
+    .stamp-seal-verdict {
+      font-size: 13px;
+      background: #dc2626;
+      color: #ffffff;
+      padding: 3px 14px;
+      border-radius: 20px;
+      font-weight: 800;
+      margin-top: 4px;
+      letter-spacing: 1px;
+    }
+
+    .stamp-seal-date {
+      font-size: 9.5px;
+      color: #ef4444;
+      margin-top: 4px;
+      font-weight: 700;
+    }
+
+    @keyframes stampSlamDrop {
+      0% {
+        opacity: 0;
+        transform: scale(4.2) rotate(-35deg);
+        filter: blur(8px);
+      }
+      65% {
+        opacity: 1;
+        transform: scale(0.9) rotate(-10deg);
+        filter: blur(0);
+      }
+      85% {
+        transform: scale(1.08) rotate(-14deg);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) rotate(-12deg);
+      }
+    }
+
+    /* 도장 파티클 (별빛/꽃가루) */
+    .stamp-particle {
+      position: absolute;
+      pointer-events: none;
+      font-size: 20px;
+      animation: stampParticlePop 0.9s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    @keyframes stampParticlePop {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(0.4) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(1.3) rotate(var(--rot));
+      }
+    }
+
+    /* ==========================================================================
+       [국토 지도 탐구관 전용] 목업 완벽 대응: 상단 배너 밀착 & 명예배지 탭 아랫면 수평 일치
+       ========================================================================== */
+    body.mode-map .map-alert-banner {
+      margin-top: 0 !important;
+      padding: 10px 18px !important;
+      font-size: 13.5px !important;
+      line-height: 1.5 !important;
+      border-radius: 14px !important;
+    }
+
+    /* 지도 탐구 카드: 지도의 시원함을 유지하며 좌측 명예배지 바닥과 완벽 수평 */
+    body.mode-map .map-arena-card {
+      padding: 20px 24px !important;
+      box-sizing: border-box !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: space-between !important;
+      min-height: auto !important;
+      flex: 1 !important;
+    }
+
+    body.mode-map .map-arena-card .quiz-meta-bar {
+      margin-bottom: 12px !important;
+    }
+
+    body.mode-map .map-split-grid {
+      grid-template-columns: 280px 1fr !important;
+      gap: 20px !important;
+      margin-bottom: 12px !important;
+      align-items: start !important;
+    }
+
+    body.mode-map .korea-map-box {
+      padding: 8px 10px !important;
+      border-radius: 14px !important;
+    }
+
+    body.mode-map .korea-map-box-header {
+      margin-bottom: 6px !important;
+      font-size: 12.5px !important;
+    }
+
+    /* 위성 지도: 260px x 285px로 큼직하고 웅장한 지도 유지 */
+    body.mode-map .satellite-map-frame {
+      width: 260px !important;
+      height: 285px !important;
+      border-radius: 12px !important;
+    }
+
+    /* 대표 문화재 사진 카드 */
+    body.mode-map .culture-photo-card {
+      margin-top: 8px !important;
+      border-radius: 14px !important;
+    }
+
+    body.mode-map .photo-img-wrap {
+      height: 95px !important;
+    }
+
+    body.mode-map .photo-caption {
+      padding: 6px 10px !important;
+      font-size: 12px !important;
+    }
+
+    /* 우측 퀘스트 패널: 목업 이미지 레이아웃 적용 */
+    body.mode-map .region-feature-card {
+      padding: 10px 16px !important;
+      margin-bottom: 10px !important;
+      border-radius: 12px !important;
+    }
+
+    body.mode-map .feature-title {
+      font-size: 14.5px !important;
+    }
+
+    body.mode-map .feature-story {
+      font-size: 12.5px !important;
+      line-height: 1.5 !important;
+    }
+
+    /* 질문 본문: 파란색 바와 밝은 배경 (목업 반영) */
+    body.mode-map #map-question-text {
+      font-size: 15px !important;
+      font-weight: 800 !important;
+      color: #0f172a !important;
+      padding: 12px 16px !important;
+      margin-bottom: 10px !important;
+      line-height: 1.5 !important;
+      border-radius: 12px !important;
+      background: #f0f9ff !important;
+      border-left: 5px solid #0284c7 !important;
+    }
+
+    /* 4지선다 답안 옵션: 목업처럼 슬림하고 정돈된 카드 */
+    body.mode-map #map-answer-box .mc-cards-grid {
+      gap: 8px !important;
+      margin-bottom: 12px !important;
+    }
+
+    body.mode-map #map-answer-box .mc-card-option {
+      padding: 9px 14px !important;
+      font-size: 13px !important;
+      border-radius: 12px !important;
+    }
+
+    body.mode-map #map-answer-box .mc-num-badge {
+      width: 26px !important;
+      height: 26px !important;
+      font-size: 12px !important;
+    }
+
+    body.mode-map .map-info-panel .quiz-actions {
+      margin-top: 0 !important;
+      gap: 10px !important;
+    }
+
+    body.mode-map .map-info-panel .btn-submit-main {
+      padding: 10px 18px !important;
+      font-size: 13.5px !important;
+    }
+
+    body.mode-map .map-info-panel .btn-skip-next {
+      padding: 10px 14px !important;
+      font-size: 12.5px !important;
+    }
+
+    /* 하단 여권 스탬프 바 */
+    body.mode-map .passport-footer {
+      padding: 8px 16px !important;
+      margin-top: 10px !important;
+      font-size: 12px !important;
+      border-radius: 12px !important;
+    }
+
+    body.mode-map .stamp-chip {
+      padding: 3px 8px !important;
+      font-size: 11px !important;
+    }
+
+    /* 반응형 레이아웃 (1024px 이하 화면) */
+    @media (max-width: 1024px) {
+      .dashboard-layout {
+        grid-template-columns: 1fr;
+      }
+      .dashboard-left-col {
+        order: 2;
+      }
+      .dashboard-right-col {
+        order: 1;
+      }
+      .header-stats {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .grade-segmented {
+        grid-template-columns: 1fr;
+      }
+      .filter-tools {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .filter-tools-left {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .btn-shuffle-quick {
+        justify-content: center;
+      }
+    }
+
+    /* =========================================================================
+       [홈화면 전용] 초등 사회 시사 상식 5분 롤링 배너 스타일
+       ========================================================================= */
+    .current-affairs-container {
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    .current-affairs-bar {
+      position: relative;
+      background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+      border: 1.5px solid #86efac;
+      border-radius: 20px;
+      padding: 14px 22px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      cursor: pointer;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(34, 197, 94, 0.08);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .current-affairs-bar:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(34, 197, 94, 0.16);
+      border-color: #22c55e;
+      background: linear-gradient(135deg, #ffffff 0%, #dcfce7 100%);
+    }
+
+    .ca-left-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .ca-live-dot {
+      width: 10px;
+      height: 10px;
+      background-color: #ef4444;
+      border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+      animation: pulseDot 1.8s infinite;
+    }
+
+    @keyframes pulseDot {
+      0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+      70% { box-shadow: 0 0 0 7px rgba(239, 68, 68, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+
+    .ca-main-tag {
+      font-family: 'Jua', sans-serif;
+      font-size: 14.5px;
+      color: #166534;
+      letter-spacing: -0.2px;
+    }
+
+    .ca-cat-tag {
+      font-size: 11px;
+      font-weight: 800;
+      background: #dcfce7;
+      color: #15803d;
+      padding: 3px 9px;
+      border-radius: 20px;
+      border: 1px solid #bbf7d0;
+      white-space: nowrap;
+    }
+
+    .ca-center-content {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      transition: opacity 0.3s ease;
+    }
+
+    .ca-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ca-icon {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .ca-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #0f172a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      letter-spacing: -0.2px;
+    }
+
+    .ca-summary {
+      font-size: 12.5px;
+      color: #475569;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0;
+    }
+
+    .ca-right-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .ca-timer-badge {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #0369a1;
+      background: #e0f2fe;
+      padding: 4px 10px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      border: 1px solid #bae6fd;
+    }
+
+    .ca-nav-btns {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 20px;
+      padding: 2px 6px;
+    }
+
+    .ca-nav-btn {
+      background: transparent;
+      border: none;
+      font-size: 11px;
+      color: #64748b;
+      cursor: pointer;
+      padding: 3px 5px;
+      border-radius: 10px;
+      transition: all 0.15s;
+    }
+
+    .ca-nav-btn:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+
+    .ca-idx-text {
+      font-size: 11px;
+      font-weight: 700;
+      color: #64748b;
+      min-width: 38px;
+      text-align: center;
+    }
+
+    .ca-detail-btn {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 14px;
+      padding: 7px 14px;
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .ca-detail-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    }
+
+    .ca-progress-line {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #22c55e, #10b981);
+      width: 100%;
+      transform-origin: left;
+      transition: width 1s linear;
+    }
+
+    /* 시사 상식 상세 모달 스타일 */
+    .ca-modal-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 28px;
+      max-width: 580px;
+      width: 92%;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      text-align: left;
+    }
+
+    .ca-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .ca-modal-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 800;
+      background: #dcfce7;
+      color: #15803d;
+      border: 1px solid #bbf7d0;
+    }
+
+    .ca-modal-close {
+      background: #f1f5f9;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .ca-modal-close:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .ca-modal-title {
+      font-family: 'Jua', sans-serif;
+      font-size: 22px;
+      color: #0f172a;
+      margin: 8px 0 16px 0;
+      line-height: 1.4;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ca-highlight-box {
+      background: #fefce8;
+      border-left: 4px solid #eab308;
+      border-radius: 0 14px 14px 0;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #854d0e;
+      line-height: 1.5;
+    }
+
+    .ca-detail-section {
+      background: #f8fafc;
+      border-radius: 16px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .ca-detail-heading {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ca-detail-text {
+      font-size: 14px;
+      color: #334155;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .ca-action-box {
+      background: #f0fdf4;
+      border: 1.5px dashed #86efac;
+      border-radius: 16px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+
+    .ca-action-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #15803d;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ca-action-text {
+      font-size: 13px;
+      color: #166534;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .btn-ca-confirm {
+      width: 100%;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 16px;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.25);
+      transition: all 0.2s;
+    }
+
+    .btn-ca-confirm:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-wrapper">
+    <!-- 1. 최상단 GNB 헤더 -->
+    <header class="header-bar">
+      <a href="/" class="header-brand" style="text-decoration:none; color:inherit; cursor:pointer;" title="EduMate AI 메인 포털 로비로 이동">
+        <img src="logo.svg" onerror="this.onerror=null; this.src='/social/logo.svg';" alt="EduMate AI 로고" style="width:52px; height:52px; object-fit:contain; border-radius:14px; background:rgba(255,255,255,0.2); padding:4px;" />
+        <div class="brand-text">
+          <h1>
+            EduMate AI 초등사회 스마트 탐험관
+            <span class="badge-official">2022 개정 교육과정 인증</span>
+          </h1>
+          <p>
+            <span>📚 2022 개정 교육과정 AI 맞춤 퀴즈</span>
+            <span>•</span>
+            <span>⚡ AI 문맥 정밀 채점 엔진</span>
+          </p>
+        </div>
+      </a>
+      <div class="header-stats">
+        <div class="stat-pill">
+          <div class="stat-pill-icon">🎒</div>
+          <div class="stat-pill-info">
+            <span class="stat-pill-label">탐험 등급</span>
+            <span class="stat-pill-val" id="top-level">Lv.1 꿈나무</span>
+          </div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-pill-icon">🔥</div>
+          <div class="stat-pill-info">
+            <span class="stat-pill-label">연속 풀이</span>
+            <span class="stat-pill-val" id="top-streak">1일차</span>
+          </div>
+        </div>
+        <div class="stat-pill score-pill">
+          <div class="stat-pill-icon">⭐</div>
+          <div class="stat-pill-info">
+            <span class="stat-pill-label">누적 탐험 점수</span>
+            <span class="stat-pill-val" id="total-score">0점</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- [홈화면 전용] 💡 초등 사회 오늘의 시사 상식 5분 롤링 배너 -->
+    <div id="home-current-affairs" class="current-affairs-container">
+      <div class="current-affairs-bar" onclick="openCurrentAffairsModal()" title="클릭하면 자세한 이야기와 실천 팁을 볼 수 있어요!">
+        <div class="ca-left-badge">
+          <span class="ca-live-dot"></span>
+          <span class="ca-main-tag">💡 오늘의 시사 상식</span>
+          <span id="ca-category-badge" class="ca-cat-tag">🌍 환경/지구촌</span>
+        </div>
+        <div class="ca-center-content">
+          <div class="ca-title-row">
+            <span id="ca-icon" class="ca-icon">🌍</span>
+            <strong id="ca-title" class="ca-title">지구를 살리는 약속, '탄소중립'이란?</strong>
+          </div>
+          <p id="ca-summary" class="ca-summary">우리가 배출하는 탄소량과 흡수량을 같게 만들어 실질 배출량을 0으로 만드는 지구 살리기 운동이에요!</p>
+        </div>
+        <div class="ca-right-controls" onclick="event.stopPropagation()">
+          <div class="ca-nav-btns">
+            <button class="ca-nav-btn" onclick="prevAffairsNews(event)" title="이전 상식 보기">◀</button>
+            <span id="ca-index-indicator" class="ca-idx-text">1 / 3</span>
+            <button class="ca-nav-btn" onclick="nextAffairsNews(event)" title="다음 상식 보기">▶</button>
+          </div>
+          <button class="ca-detail-btn" onclick="openCurrentAffairsModal()">자세히 보기 🔍</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. 대시보드 메인 2컬럼 레이아웃 (좌측 사이드바 vs 우측 메인 학습관) -->
+    <div class="dashboard-layout">
+      <!-- 좌측 사이드바 컬럼: 위젯 1(스테이터스) + 위젯 2(단원 로드맵) + 위젯 3(명예 배지) -->
+      <aside class="dashboard-left-col">
+        <!-- 위젯 1: 나의 탐험 스테이터스 -->
+        <div class="card-panel">
+          <div class="panel-header">
+            <div class="panel-title">👤 나의 탐험 스테이터스</div>
+            <span style="font-size:11px; font-weight:700; color:#0284c7; background:#e0f2fe; padding:3px 8px; border-radius:12px;">실시간 연동</span>
+          </div>
+          <div class="panel-body">
+            <div class="profile-summary">
+              <div class="profile-avatar">🌱</div>
+              <div class="profile-meta">
+                <h3 id="user-nickname">꿈꾸는 사회 탐험가</h3>
+                <p>2022 개정 교육과정 정복 중</p>
+              </div>
+            </div>
+
+            <div class="level-container">
+              <div class="level-header">
+                <span id="exp-level-label">Level 1 (경험치)</span>
+                <span id="exp-text">0 / 100 XP</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" id="exp-bar" style="width: 10%;"></div>
+              </div>
+            </div>
+
+            <div class="side-metrics">
+              <div class="metric-box">
+                <div class="metric-val" id="solved-count">0</div>
+                <div class="metric-name">오늘 푼 문제</div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-val" id="accuracy-rate">100%</div>
+                <div class="metric-name">정답 성공률</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 위젯 2: 2022 개정 교육과정 단원 탐색기 -->
+        <div class="card-panel">
+          <div class="panel-header">
+            <div class="panel-title">🗺️ 학년별 단원 로드맵</div>
+            <span id="current-grade-badge" style="font-size:11px; font-weight:700; color:#6b21a8; background:#f3e8ff; padding:3px 8px; border-radius:12px;">3~4학년군</span>
+          </div>
+          <div class="panel-body" style="padding:12px 16px;">
+            <div class="unit-roadmap" id="unit-roadmap-list">
+              <!-- JS에서 동적으로 채워짐 -->
+            </div>
+          </div>
+        </div>
+
+        <!-- 위젯 3: 명예의 탐험 배지 -->
+        <div class="card-panel">
+          <div class="panel-header">
+            <div class="panel-title">🏅 탐험대 명예 배지</div>
+            <span style="font-size:11px; color:#64748b;" id="badge-count-text">1 / 4 획득</span>
+          </div>
+          <div class="panel-body">
+            <div class="badge-grid">
+              <div class="badge-item unlocked" id="badge-first" title="첫 문제 도전!">
+                <div class="badge-emoji">🧭</div>
+                <div class="badge-label">첫 걸음</div>
+              </div>
+              <div class="badge-item" id="badge-streak" title="3문제 연속 정답 달성!">
+                <div class="badge-emoji">⚡</div>
+                <div class="badge-label">3연승</div>
+              </div>
+              <div class="badge-item" id="badge-desc" title="서술형 5점 만점 획득!">
+                <div class="badge-emoji">📝</div>
+                <div class="badge-label">논술왕</div>
+              </div>
+              <div class="badge-item" id="badge-score100" title="누적 50점 돌파!">
+                <div class="badge-emoji">👑</div>
+                <div class="badge-label">마스터</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- 우측 메인 학습관 컬럼: 모드 탭 -> 안내 배너/컨트롤 바 -> 퀴즈 카드 -->
+      <main class="dashboard-right-col">
+        <!-- 1. 모드 전환 탭 (기본 퀴즈관 vs 심화 서술형 탐구관 vs 국토 지도 탐구관) -->
+        <div class="mode-switcher-card">
+          <button class="mode-tab-btn basic-tab active" id="btn-mode-basic" onclick="switchMode('basic')">
+            <div class="mode-tab-icon">🎯</div>
+            <div class="mode-tab-info">
+              <h2>기본 개념 퀴즈관</h2>
+              <p>OX · 4지선다 · 단답형 (240문항)</p>
+            </div>
+          </button>
+          <button class="mode-tab-btn advanced-tab" id="btn-mode-advanced" onclick="switchMode('advanced')">
+            <div class="mode-tab-icon">🎓</div>
+            <div class="mode-tab-info">
+              <h2>심화 서술형 탐구관</h2>
+              <p>논술 사고력 집중 (5점 만점 · 30문항)</p>
+            </div>
+          </button>
+          <button class="mode-tab-btn map-tab" id="btn-mode-map" onclick="switchMode('map')">
+            <div class="mode-tab-icon">🗺️</div>
+            <div class="mode-tab-info">
+              <h2>우리 국토 지도 탐구관</h2>
+              <p>전국 문화재 & 특산품 지도 여행 챌린지</p>
+            </div>
+          </button>
+        </div>
+
+        <!-- 심화 모드 안내 배너 -->
+        <div class="advanced-alert-banner" id="advanced-banner">
+          💡 <strong>심화 서술형 마스터 탐구관에 오신 것을 환영해요!</strong><br/>
+          단순 암기가 아닌 '왜 그럴까?'를 깊이 생각하고 나만의 문장으로 까닭을 설명해 보세요. 핵심 원리와 키워드를 분석하여 0~5점 정밀 채점과 1:1 맞춤 피드백을 제공합니다.
+        </div>
+
+        <!-- 지도 모드 안내 배너 -->
+        <div class="map-alert-banner" id="map-banner">
+          🧭 <strong>우리 국토 지도 탐구관에 오신 것을 환영해요!</strong><br/>
+          대한민국 지도 위 반짝이는 깃발(📍) 위치를 확인하고, 그 지역의 대표적인 역사 문화재와 유명한 특산품을 찾아보세요! 정답을 맞히면 내 여권에 탐험 도장이 쾅 찍힙니다.
+        </div>
+
+        <!-- 2. 컨트롤 바 (학년군 선택 세그먼트 & 단원/유형 필터) -->
+        <div class="controls-card">
+          <!-- 학년군 선택 세그먼트 (테두리를 빈틈없이 100% 채우는 3분할 탭) -->
+          <div class="grade-segmented">
+            <button class="grade-pill-btn" onclick="selectGrade('1~2학년군', this)">
+              <span class="pill-emoji">🎒</span>
+              <span class="pill-main">1~2학년</span>
+              <span class="pill-sub">(사회기초)</span>
+            </button>
+            <button class="grade-pill-btn active" onclick="selectGrade('3~4학년군', this)">
+              <span class="pill-emoji">🗺️</span>
+              <span class="pill-main">3~4학년</span>
+              <span class="pill-sub">(우리 지역)</span>
+            </button>
+            <button class="grade-pill-btn" onclick="selectGrade('5~6학년군', this)">
+              <span class="pill-emoji">🌍</span>
+              <span class="pill-main">5~6학년</span>
+              <span class="pill-sub">(국토·역사)</span>
+            </button>
+          </div>
+
+          <!-- 필터 툴 -->
+          <div class="filter-tools">
+            <div class="filter-tools-left">
+              <div class="filter-item">
+                <span>📚 단원:</span>
+                <select id="unit-select" class="styled-select" onchange="loadNewQuestion()">
+                  <option value="전체 단원">전체 단원 랜덤</option>
+                </select>
+              </div>
+              <div class="filter-item" id="type-filter-group">
+                <span>🎯 유형:</span>
+                <select id="type-select" class="styled-select" onchange="loadNewQuestion()">
+                  <option value="basic_all">🎲 기본 유형 전체 (OX/4지/단답)</option>
+                  <option value="ox">⭕❌ OX 퀴즈</option>
+                  <option value="multiple_choice">🔢 4지선다</option>
+                  <option value="short_answer">✍️ 단답형</option>
+                </select>
+              </div>
+            </div>
+            <button class="btn-shuffle-quick" onclick="loadWeakestUnitQuiz()" title="과거 오답이 많은 취약 단원 맞춤 출제" style="background:#fef2f2; border-color:#fecaca; color:#b91c1c;">
+              🎯 <span>취약 단원</span>
+            </button>
+            <button class="btn-shuffle-quick" onclick="nextQuestion()" title="새로운 문제 바로 불러오기">
+              🔄 <span>다른 문제</span>
+            </button>
+          </div>
+        </div>
+        <!-- 1) 기본/심화 문제 카드 -->
+        <div class="main-quiz-card" id="card-standard-quiz">
+          <!-- 상단 칩 메타 정보 -->
+          <div class="quiz-meta-bar">
+            <div class="meta-badges">
+              <span class="badge-chip badge-unit-chip" id="q-unit">단원 로딩 중...</span>
+              <span class="badge-chip badge-diff-chip" id="q-diff">난이도</span>
+              <span class="badge-chip badge-type-chip" id="q-type">유형</span>
+            </div>
+            <div class="quiz-id-tag" id="q-number-tag">Quest #1</div>
+          </div>
+
+          <!-- 문제 질문 본문 -->
+          <div class="question-headline" id="q-text">
+            문제를 불러오는 중입니다... 🧭
+          </div>
+
+          <!-- 답안 영역 -->
+          <div class="answer-station" id="answer-box"></div>
+
+          <!-- 액션 버튼 -->
+          <div class="quiz-actions">
+            <button class="btn-submit-main" onclick="submitAnswer()">
+              ✨ <span>답안 제출하고 AI 채점받기</span>
+            </button>
+            <button class="btn-skip-next" onclick="nextQuestion()">
+              건너뛰기 ➔
+            </button>
+          </div>
+        </div>
+
+        <!-- 2) 국토 지도 탐구관 전용 카드 (문화재 & 특산품 지도 여행) -->
+        <div class="map-arena-card" id="card-map-quiz">
+          <!-- 상단 칩 메타 정보 -->
+          <div class="quiz-meta-bar">
+            <div class="meta-badges">
+              <span class="badge-chip" style="background:#fef3c7; color:#b45309; border:1.5px solid #fde68a;">🗺️ 지도 탐구 챌린지</span>
+              <span class="badge-chip badge-unit-chip" id="map-region-badge">지역명</span>
+              <span class="badge-chip" style="background:#dcfce7; color:#15803d; border:1px solid #86efac;">문화재 & 특산품 (3점)</span>
+            </div>
+            <div class="quiz-id-tag" id="map-quest-tag">Map Quest #1</div>
+          </div>
+
+          <!-- 2분할 뷰: 좌측 (위성 지도 + 하단 문화재 사진) + 우측 퀴즈 패널 -->
+          <div class="map-split-grid">
+            <!-- 좌측 컬럼: 위성사진 지도 + 바로 밑 대표 문화재 실물 사진 -->
+            <div class="map-left-col">
+              <!-- 1) 한반도 위성사진 지도 (경계선 오버레이) -->
+              <div class="korea-map-box">
+                <div class="korea-map-box-header">
+                  <span>🛰️ 한반도 위성 지도</span>
+                  <span id="map-province-tag" style="font-size:11px; background:#e0f2fe; color:#0369a1; padding:2px 8px; border-radius:10px; font-weight:700;">경상북도</span>
+                </div>
+                <div class="satellite-map-frame" id="svg-map-stage">
+                  <!-- 줌인 카메라 뷰포트 래퍼 -->
+                  <div class="map-zoom-viewport" id="map-zoom-viewport">
+                    <!-- 위성 지형 지도 SVG (한반도 남한 전역 1:1 정밀 지형도) -->
+                    <svg class="satellite-terrain-svg" viewBox="0 0 300 350" preserveAspectRatio="none">
+                    <defs>
+                      <!-- 바다 깊이 그라데이션 -->
+                      <radialGradient id="oceanGlow" cx="50%" cy="50%" r="70%">
+                        <stop offset="0%" stop-color="#122b49"/>
+                        <stop offset="100%" stop-color="#08182b"/>
+                      </radialGradient>
+                      <!-- 연안 대륙붕 에메랄드 얕은 바다 발광 -->
+                      <filter id="coastalGlow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="3.5" result="blur"/>
+                        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                      </filter>
+                      <!-- 남한 본토 위성 지형 텍스처 그라데이션 -->
+                      <linearGradient id="satTerrain" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#31612e"/>
+                        <stop offset="35%" stop-color="#3e7336"/>
+                        <stop offset="65%" stop-color="#4c7739"/>
+                        <stop offset="100%" stop-color="#2a5a29"/>
+                      </linearGradient>
+                      <!-- 태백·소백 산맥 능선 엠보싱 그라데이션 -->
+                      <linearGradient id="ridgeColor" x1="0%" y1="0%" x2="100%" y2="80%">
+                        <stop offset="0%" stop-color="#69653a"/>
+                        <stop offset="50%" stop-color="#807246"/>
+                        <stop offset="100%" stop-color="#55582f"/>
+                      </linearGradient>
+                      <linearGradient id="sobaekColor" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#73663b"/>
+                        <stop offset="100%" stop-color="#545b2e"/>
+                      </linearGradient>
+                    </defs>
+
+                    <!-- 1) 해양 배경 (위성 심해 & 레이더 그리드) -->
+                    <rect width="300" height="350" fill="url(#oceanGlow)"/>
+                    
+                    <!-- 위도 / 경도 GIS 그리드선 (위성 HUD 느낌) -->
+                    <line x1="75" y1="0" x2="75" y2="350" stroke="rgba(147, 197, 253, 0.12)" stroke-dasharray="3,4"/>
+                    <line x1="150" y1="0" x2="150" y2="350" stroke="rgba(147, 197, 253, 0.12)" stroke-dasharray="3,4"/>
+                    <line x1="225" y1="0" x2="225" y2="350" stroke="rgba(147, 197, 253, 0.12)" stroke-dasharray="3,4"/>
+                    <line x1="0" y1="85" x2="300" y2="85" stroke="rgba(147, 197, 253, 0.12)" stroke-dasharray="3,4"/>
+                    <line x1="0" y1="175" x2="300" y2="175" stroke="rgba(147, 197, 253, 0.12)" stroke-dasharray="3,4"/>
+                    <line x1="0" y1="265" x2="300" y2="265" stroke="rgba(147, 197, 253, 0.12)" stroke-dasharray="3,4"/>
+                    <text x="8" y="18" fill="rgba(255,255,255,0.45)" font-size="8.5" font-family="monospace">🛰️ MODIS-TERRA / 36°N 128°E</text>
+                    <text x="248" y="342" fill="rgba(255,255,255,0.4)" font-size="8.5" font-family="monospace">남한 전역</text>
+
+                    <!-- 2) 연안 천해 대륙붕 발광 (해안선 바깥 얕은 바다 푸른 빛) -->
+                    <path d="M 82 66 C 84 72, 88 80, 88 88 C 86 98, 92 108, 90 114 C 78 116, 64 118, 64 126 C 64 134, 76 136, 82 142 C 86 148, 86 158, 84 168 C 76 174, 74 186, 76 195 C 74 205, 68 218, 66 232 C 64 244, 70 256, 78 266 C 88 270, 98 262, 106 258 C 114 262, 120 274, 124 276 C 130 272, 134 260, 142 258 C 146 266, 150 274, 152 272 C 158 260, 164 268, 172 268 C 180 264, 186 262, 192 262 C 198 268, 204 264, 206 256 C 214 254, 222 250, 228 246 C 234 238, 238 226, 236 216 C 236 206, 238 196, 244 190 C 248 184, 246 178, 238 174 C 232 164, 230 148, 228 134 C 224 116, 220 98, 214 84 C 210 74, 206 66, 202 62 C 180 62, 150 63, 120 64 C 105 64, 92 65, 82 66 Z" fill="#1b527e" opacity="0.5" filter="url(#coastalGlow)"/>
+
+                    <!-- 3) 남한 본토 육지 지형 (해안선 굴곡과 실제 지형 1:1) -->
+                    <path id="korea-mainland" d="M 82 66 C 84 72, 88 80, 88 88 C 86 98, 92 108, 90 114 C 78 116, 64 118, 64 126 C 64 134, 76 136, 82 142 C 86 148, 86 158, 84 168 C 76 174, 74 186, 76 195 C 74 205, 68 218, 66 232 C 64 244, 70 256, 78 266 C 88 270, 98 262, 106 258 C 114 262, 120 274, 124 276 C 130 272, 134 260, 142 258 C 146 266, 150 274, 152 272 C 158 260, 164 268, 172 268 C 180 264, 186 262, 192 262 C 198 268, 204 264, 206 256 C 214 254, 222 250, 228 246 C 234 238, 238 226, 236 216 C 236 206, 238 196, 244 190 C 248 184, 246 178, 238 174 C 232 164, 230 148, 228 134 C 224 116, 220 98, 214 84 C 210 74, 206 66, 202 62 C 180 62, 150 63, 120 64 C 105 64, 92 65, 82 66 Z" fill="url(#satTerrain)" stroke="#527d42" stroke-width="1.2"/>
+
+                    <!-- 4) 태백산맥 (동해안을 따라 뻗은 한반도의 척추 능선) -->
+                    <path d="M 198 64 C 205 78, 208 92, 212 110 C 215 125, 218 140, 220 160 C 222 175, 218 185, 212 195 C 206 185, 204 165, 202 145 C 200 125, 196 100, 194 80 Z" fill="url(#ridgeColor)" opacity="0.85"/>
+                    <path d="M 206 75 Q 212 110 215 145 T 216 180" stroke="#968550" stroke-width="1.5" fill="none" opacity="0.6"/>
+
+                    <!-- 5) 소백산맥 (강원도 태백에서 지리산까지 이어지는 서남 능선) -->
+                    <path d="M 204 135 C 190 145, 175 160, 160 180 C 148 200, 138 220, 132 242 C 140 238, 150 220, 164 198 C 178 176, 192 155, 202 142 Z" fill="url(#sobaekColor)" opacity="0.82"/>
+                    <path d="M 195 142 Q 165 180 138 235" stroke="#968550" stroke-width="1.5" fill="none" opacity="0.6"/>
+
+                    <!-- 6) 주요 강 줄기 (푸른 물길) -->
+                    <!-- 한강 (서울 관통) -->
+                    <path d="M 150 78 Q 125 76 105 78 Q 92 78 82 72" stroke="#1d4ed8" stroke-width="1.8" fill="none" opacity="0.8" stroke-linecap="round"/>
+                    <!-- 금강 (공주·부여 관통) -->
+                    <path d="M 140 145 Q 120 148 112 152 Q 95 158 84 168" stroke="#1d4ed8" stroke-width="1.6" fill="none" opacity="0.8" stroke-linecap="round"/>
+                    <!-- 낙동강 (안동 관통하여 남해로) -->
+                    <path d="M 205 130 Q 195 150 190 180 Q 192 215 224 246" stroke="#1d4ed8" stroke-width="1.6" fill="none" opacity="0.8" stroke-linecap="round"/>
+
+                    <!-- 7) 섬 지역 (제주도, 울릉도, 독도) -->
+                    <!-- 제주도 (연안 대륙붕 발광 + 타원형 화산섬 본체 + 한라산) -->
+                    <ellipse cx="85" cy="312" rx="22" ry="14" fill="#1b527e" opacity="0.5" filter="url(#coastalGlow)"/>
+                    <ellipse cx="85" cy="312" rx="18" ry="11" fill="url(#satTerrain)" stroke="#527d42" stroke-width="1"/>
+                    <circle cx="85" cy="311" r="4" fill="#756a3c" opacity="0.9"/>
+                    <circle cx="85" cy="311" r="1.5" fill="#fef08a"/> <!-- 백록담/정상 -->
+                    <circle cx="104" cy="310" r="2.2" fill="url(#satTerrain)"/> <!-- 우도 -->
+                    <circle cx="78" cy="324" r="1.5" fill="url(#satTerrain)"/> <!-- 마라도 -->
+
+                    <!-- 울릉도 -->
+                    <circle cx="248" cy="94" r="4.5" fill="url(#satTerrain)" stroke="#527d42" stroke-width="0.8"/>
+
+                    <!-- 독도 (동도와 서도) -->
+                    <circle cx="276" cy="98" r="3.2" fill="#807246" stroke="#fef08a" stroke-width="0.8"/>
+                    <circle cx="272" cy="99" r="2.4" fill="#807246" stroke="#fef08a" stroke-width="0.8"/>
+
+                    <!-- 주요 도서 (강화도, 거제도, 진도 등) -->
+                    <ellipse cx="78" cy="72" rx="3.5" ry="5" fill="url(#satTerrain)"/> <!-- 강화도 -->
+                    <circle cx="68" cy="245" r="4" fill="url(#satTerrain)"/> <!-- 진도 -->
+                    <ellipse cx="204" cy="265" rx="5" ry="6" fill="url(#satTerrain)"/> <!-- 거제도 -->
+                    <circle cx="170" cy="270" r="4" fill="url(#satTerrain)"/> <!-- 남해도 -->
+                  </svg>
+                  
+                  <!-- 지명 텍스트 라벨 (지도 위 깔끔한 지명 안내) -->
+                  <div class="map-labels-overlay">
+                    <span class="map-region-label" style="left:34%; top:12%;">수도권(서울·수원)</span>
+                    <span class="map-region-label" style="left:69%; top:23%;">강원(강릉)</span>
+                    <span class="map-region-label" style="left:37%; top:43%;">충청(공주·부여)</span>
+                    <span class="map-region-label" style="left:65%; top:43%;">경북(안동)</span>
+                    <span class="map-region-label" style="left:40%; top:56%;">전북(전주)</span>
+                    <span class="map-region-label" style="left:75%; top:58%;">경북(경주)</span>
+                    <span class="map-region-label" style="left:38%; top:72%;">전남(보성)</span>
+                    <span class="map-region-label" style="left:47%; top:71%;">전남(순천)</span>
+                    <span class="map-region-label" style="left:64%; top:73%;">경남(통영)</span>
+                    <span class="map-region-label" style="left:28%; top:89%;">제주도 🍊</span>
+                    <span class="map-region-label" style="left:92%; top:25%; color:#fef08a; border-color:#fde68a;">독도 🇰🇷</span>
+                  </div>
+
+                  <!-- 동적 핀 마커 컨테이너 -->
+                  <div id="map-pins-container"></div>
+                </div> <!-- /map-zoom-viewport -->
+
+                <!-- 🌟 핀 클릭 시 둥실 떠오르는 지역 지형 모양 팝업 카드 -->
+                <div class="region-shape-popover" id="region-shape-popover">
+                  <div class="shape-popover-top">
+                    <span class="shape-region-badge" id="shape-region-badge">경상북도 경주시</span>
+                    <button class="shape-popover-close" onclick="closeShapePopover(event)" title="닫기">✕</button>
+                  </div>
+                  <h4 class="shape-title-text">
+                    <span id="shape-icon">🏛️</span>
+                    <span id="shape-name">경주</span>
+                    <span style="font-size:11px; color:#38bdf8; font-weight:normal;">지형 모양</span>
+                  </h4>
+                  <div class="shape-silhouette-box">
+                    <div id="shape-svg-wrap" class="shape-svg-icon"></div>
+                    <div class="shape-desc-box">
+                      <strong id="shape-highlight">남산과 형산강 분지형 모양</strong>
+                      <span id="shape-desc">토함산과 남산이 둘러싼 천년 왕경 지형</span>
+                    </div>
+                  </div>
+                  <button class="shape-explore-btn" onclick="startRegionQuiz()">
+                    <span>🎯 이 지역 문제 풀기</span> ➔
+                  </button>
+                </div>
+
+                <!-- 1배율 복귀 버튼 (줌인 시 활성화) -->
+                <button class="btn-map-zoom-reset" id="btn-map-zoom-reset" onclick="resetMapZoom()">
+                  <span>🔍 1x 전체 지도</span>
+                </button>
+              </div> <!-- /satellite-map-frame -->
+            </div> <!-- /korea-map-box -->
+
+            <!-- 2) 지도 바로 밑: 대표 문화재 실물 사진 포토 카드 (클릭 시 확대 창 열림) -->
+              <div class="culture-photo-card" onclick="openPhotoModal()" style="cursor: pointer;" title="클릭하면 크게 볼 수 있는 창이 열려요!">
+                <div class="photo-img-wrap" id="map-photo-wrap">
+                  <img id="map-photo-img" src="" alt="문화재 실물 사진" onerror="this.style.opacity='0.2';"/>
+                  <div class="photo-overlay-tag">
+                    <span class="photo-badge">📸 대표 문화재 사진</span>
+                    <span class="photo-region-pill" id="map-photo-region-pill">경주</span>
+                  </div>
+                  <div class="photo-zoom-hint">
+                    <span>🔍 크게 보기</span>
+                  </div>
+                </div>
+                <div class="photo-caption" id="map-photo-caption">
+                  <span style="font-size:15px;">🏛️</span>
+                  <span id="map-photo-caption-text">국보 제31호 경주 첨성대</span>
+                  <span style="margin-left: auto; font-size: 11px; color: #0284c7; font-weight: 700;">확대 ➔</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 우측: 퀴즈 질문 & 4지선다 답안 패널 -->
+            <div class="map-info-panel">
+              <!-- 지역 배움 스토리 카드 -->
+              <div class="region-feature-card">
+                <div class="feature-header">
+                  <div class="feature-title" id="map-feature-title">
+                    <span>🧭</span> <span id="map-story-region">지역 이야기</span>
+                  </div>
+                  <span class="feature-badge" id="map-story-keyword">핵심 키워드</span>
+                </div>
+                <div class="feature-story" id="map-story-text">
+                  지역에 대한 흥미진진한 설명이 여기에 표시됩니다.
+                </div>
+              </div>
+
+              <!-- 문제 질문 본문 -->
+              <div class="question-headline" id="map-question-text" style="font-size:17.5px; margin-bottom:14px; padding:15px 18px; line-height:1.6;">
+                지도에 📍 깃발이 꽂힌 지역의 대표 문화재와 특산품으로 알맞은 것은?
+              </div>
+
+              <!-- 4지선다 답안 선택 영역 -->
+              <div class="answer-station" id="map-answer-box" style="margin-bottom:16px;"></div>
+
+              <!-- 액션 버튼 -->
+              <div class="quiz-actions" style="margin-top:0;">
+                <button class="btn-submit-main" onclick="submitMapAnswer()">
+                  ✨ <span>지도 답안 제출하고 스탬프 받기</span>
+                </button>
+                <button class="btn-skip-next" onclick="nextMapQuestion()">
+                  다음 지역 ➔
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 하단: 나의 전국 탐험 여권 스탬프 바 -->
+          <div class="passport-footer">
+            <div class="passport-label">
+              <span>🛂 나의 전국 탐험 여권:</span>
+              <span id="passport-count" style="color:#d97706; font-size:14px; font-weight:800;">0 / 12개 탐험 완료</span>
+            </div>
+            <div class="passport-stamps-wrap" id="passport-stamps-list">
+              <!-- JS에서 스탬프 칩 동적 생성 -->
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- 채점 결과 팝업 모달 (닫기 및 상세 해설 지원) -->
+  <div class="modal-overlay" id="result-modal">
+    <div class="modal-card" style="max-width: 540px; position: relative;">
+      <div style="display:flex; justify-content:space-between; align-items:center; width:100%; margin-bottom: 2px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <button id="btn-favorite" onclick="toggleCurrentFavorite()" style="background:#fef3c7; border:1px solid #fde68a; border-radius:20px; padding:4px 12px; font-size:12.5px; font-weight:700; color:#b45309; cursor:pointer; display:flex; align-items:center; gap:4px;">
+            <span id="fav-icon">☆</span> <span id="fav-text">즐겨찾기</span>
+          </button>
+          <span style="font-size:11.5px; color:#64748b;" id="result-log-id-tag"></span>
+        </div>
+        <button class="btn-result-close" onclick="closeResultModal()" title="해설 창 닫기" style="background:#f1f5f9; border:none; font-size:16px; color:#64748b; cursor:pointer; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; transition:all 0.2s;">✕</button>
+      </div>
+      <div class="modal-emoji" id="modal-emoji">🎉</div>
+      <div class="modal-title" id="modal-title">정답입니다!</div>
+      <div class="modal-score" id="modal-score">+3점</div>
+      <div class="feedback-box" id="modal-feedback" style="max-height: 240px; overflow-y: auto; text-align: left;">
+        해설 내용이 여기에 표시됩니다.
+      </div>
+
+      <!-- AI 선생님께 이어서 질문하기 (chat_history 연동) -->
+      <div class="ai-followup-box" style="width:100%; text-align:left; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:10px 12px; margin-top:10px; margin-bottom:12px; box-sizing:border-box;">
+        <div style="font-weight:700; font-size:12.5px; color:#0f172a; margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+          <span>🤖 AI 선생님께 이어서 질문하기</span>
+          <span style="font-size:10.5px; color:#64748b; font-weight:normal;">(DB chat_history에 자동 누적)</span>
+        </div>
+        <div id="ai-chat-history" style="max-height:110px; overflow-y:auto; font-size:12px; margin-bottom:6px; display:none; background:#ffffff; border-radius:8px; padding:8px; border:1px solid #e2e8f0;"></div>
+        <div style="display:flex; gap:6px;">
+          <input type="text" id="ai-followup-input" placeholder="이 문제에 대해 궁금한 점을 물어보세요!" style="flex:1; border:1px solid #cbd5e1; border-radius:8px; padding:6px 10px; font-size:12px;" onkeypress="if(event.key==='Enter') askAIFollowup()" />
+          <button id="btn-ai-followup" onclick="askAIFollowup()" style="background:#0284c7; color:#fff; border:none; border-radius:8px; padding:6px 12px; font-size:12px; font-weight:700; cursor:pointer;">질문</button>
+        </div>
+      </div>
+
+      <!-- 모달 하단 버튼: 창 닫기 vs 다음 문제 도전하기 -->
+      <div style="display:flex; gap:10px; width:100%;">
+        <button type="button" onclick="closeResultModal()" style="flex:1; background:#f1f5f9; color:#475569; border:1.5px solid #cbd5e1; border-radius:12px; padding:12px 14px; font-size:13.5px; font-weight:800; cursor:pointer; transition:all 0.2s;">
+          🔍 창 닫고 문제 보기
+        </button>
+        <button class="btn-next" id="btn-result-next" onclick="handleResultNext()" style="flex:1.6; margin:0;">
+          다음 문제 도전하기 ➔
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 문화재 큰 사진 팝업 모달 창 (새 창/새 탭 열기 지원) -->
+  <div class="modal-overlay" id="photo-zoom-modal" onclick="if(event.target === this) closePhotoModal()">
+    <div class="photo-modal-card">
+      <div class="photo-modal-top">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="photo-badge" id="zoom-modal-badge" style="background:#0284c7; color:#fff;">📸 문화유산 탐구</span>
+          <h3 id="zoom-modal-title" style="margin:0; font-size:16px; font-weight:800; color:#0f172a;">문화재 큰 사진</h3>
+        </div>
+        <button class="btn-photo-modal-close" onclick="closePhotoModal()" title="창 닫기">✕</button>
+      </div>
+      <div class="photo-modal-body">
+        <img id="zoom-modal-img" src="" alt="문화재 고화질 사진" />
+      </div>
+      <div class="photo-modal-footer">
+        <div style="flex: 1; min-width: 200px;">
+          <div id="zoom-modal-caption" style="font-size:13.5px; font-weight:700; color:#1e293b; margin-bottom:2px;"></div>
+          <div id="zoom-modal-keyword" style="font-size:12px; color:#64748b;"></div>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button class="btn-open-newtab" onclick="openPhotoInNewTab()" title="새 브라우저 창에서 원본 열기">
+            <span>🔗 새 창으로 열기</span>
+          </button>
+          <button onclick="closePhotoModal()" style="background:#0f172a; color:#fff; border:none; padding:8px 16px; border-radius:10px; font-size:13px; font-weight:700; cursor:pointer;">
+            닫기
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 💡 초등 사회 시사 상식 상세 설명 모달 -->
+  <div class="modal-overlay" id="current-affairs-modal" onclick="if(event.target === this) closeCurrentAffairsModal()">
+    <div class="ca-modal-card">
+      <div class="ca-modal-header">
+        <span class="ca-modal-badge" id="ca-modal-category">🌍 환경/지구촌</span>
+        <button class="ca-modal-close" onclick="closeCurrentAffairsModal()" title="창 닫기">✕</button>
+      </div>
+      <h3 class="ca-modal-title" id="ca-modal-title">
+        <span id="ca-modal-icon">🌍</span>
+        <span id="ca-modal-title-text">지구를 살리는 약속, '탄소중립'이란?</span>
+      </h3>
+      <div class="ca-highlight-box" id="ca-modal-summary">
+        우리가 배출하는 탄소량과 흡수량을 같게 만들어 실질 배출량을 0으로 만드는 지구 살리기 운동이에요!
+      </div>
+      <div class="ca-detail-section">
+        <div class="ca-detail-heading">
+          <span>📖 왜 중요하고 어떤 뜻일까요?</span>
+        </div>
+        <p class="ca-detail-text" id="ca-modal-detail">
+          상세 설명 내용이 여기에 표시됩니다.
+        </p>
+      </div>
+      <div class="ca-action-box">
+        <div class="ca-action-title">
+          <span>🌱 초등학생 실천 팁 & 생각해 보기</span>
+        </div>
+        <p class="ca-action-text" id="ca-modal-action">
+          실천 팁 내용이 여기에 표시됩니다.
+        </p>
+      </div>
+      <button class="btn-ca-confirm" onclick="closeCurrentAffairsModal()">확인했어요! 상식 UP! ✨</button>
+    </div>
+  </div>
+
+  <!-- 대규모 270문항 문제은행 및 93개 시사상식 데이터베이스 -->
+  <script src="current_affairs_data.js?v=20261015"></script>
+  <script src="questions_data.js?v=20261008"></script>
+  <script>
+    // =========================================================================
+    // 📚 내장 대규모 문제은행 데이터베이스 (서버 없이도 100% 끊김 없이 무한 출제!)
+    // =========================================================================
+    const LOCAL_QUESTION_BANK = [
+      // [1~2학년군]
+      {
+        id: "q12_01", grade_group: "1~2학년군", unit_name: "학교와 나", question_type: "ox", difficulty: "하", base_score: 1,
+        question: "수업 시간에 하고 싶은 말이 있을 때는 손을 들고 선생님의 허락을 받은 뒤 말해야 해요.",
+        options: [], answer: "O", explanation: "맞아요! 친구들의 말을 방해하지 않고 손을 든 뒤 차례를 기다려야 해요."
+      },
+      {
+        id: "q12_02", grade_group: "1~2학년군", unit_name: "학교와 나", question_type: "multiple_choice", difficulty: "중", base_score: 3,
+        question: "다음 중 학교에서 친구와 사이좋게 지내는 올바른 행동은 무엇일까요?",
+        options: ["친구가 실수했을 때 크게 놀린다.", "놀이를 할 때 규칙을 지키고 차례를 기다린다.", "장난감을 혼자만 독차지한다.", "친구에게 나쁜 별명을 부른다."],
+        answer: "놀이를 할 때 규칙을 지키고 차례를 기다린다.", explanation: "규칙을 잘 지키고 양보하며 차례를 지켜야 친구들과 즐겁게 지낼 수 있어요."
+      },
+      {
+        id: "q12_03", grade_group: "1~2학년군", unit_name: "학교와 나", question_type: "short_answer", difficulty: "중", base_score: 3,
+        question: "학교에서 몸이 아프거나 다쳤을 때 치료를 받으러 찾아가는 교실은 어디일까요?",
+        options: [], answer: "보건실", explanation: "몸이 아플 때는 보건 선생님이 계신 보건실로 가서 치료를 받아요."
+      },
+      {
+        id: "q12_04", grade_group: "1~2학년군", unit_name: "학교와 나", question_type: "descriptive", difficulty: "상", base_score: 5,
+        question: "복도나 계단을 다닐 때 뛰지 않고 오른쪽으로 조용히 걸어야 하는 까닭을 적어보세요.",
+        options: [], answer: "친구들과 부딪혀 다치는 사고를 막고 안전을 지키기 위해서입니다.",
+        grading_keywords: ["부딪", "다치", "안전", "사고", "방해", "조용"],
+        explanation: "복도에서 뛰면 친구와 부딪혀 크게 다칠 수 있으므로 우측통행을 하며 조용히 걸어야 해요."
+      },
+      {
+        id: "q12_05", grade_group: "1~2학년군", unit_name: "계절과 우리 생활", question_type: "ox", difficulty: "하", base_score: 1,
+        question: "여름에는 날씨가 춥기 때문에 두꺼운 패딩과 털장갑을 껴야 해요.",
+        options: [], answer: "X", explanation: "틀려요! 여름은 덥기 때문에 시원한 옷을 입고, 패딩과 장갑은 겨울에 착용해요."
+      },
+      {
+        id: "q12_06", grade_group: "1~2학년군", unit_name: "계절과 우리 생활", question_type: "multiple_choice", difficulty: "중", base_score: 3,
+        question: "가을에 볼 수 있는 알맞은 자연의 모습은 무엇일까요?",
+        options: ["알록달록 단풍이 들고 곡식이 무르익어요.", "눈사람을 만들 수 있을 만큼 눈이 내려요.", "매미가 나무에서 하루 종일 울어요.", "개나리와 진달래가 활짝 펴요."],
+        answer: "알록달록 단풍이 들고 곡식이 무르익어요.", explanation: "가을에는 나뭇잎이 붉고 노랗게 물드는 단풍이 들고 곡식이 풍성하게 익어요."
+      },
+      {
+        id: "q12_07", grade_group: "1~2학년군", unit_name: "우리 마을과 사람들", question_type: "multiple_choice", difficulty: "하", base_score: 1,
+        question: "우리 동네에 불이 나거나 위험한 사고가 났을 때 달려와 도와주시는 곳은 어디일까요?",
+        options: ["소방서", "도서관", "우체국", "은행"],
+        answer: "소방서", explanation: "소방서의 소방관님들은 불을 끄고 위험한 사고로부터 우리를 안전하게 지켜주십니다."
+      },
+      {
+        id: "q12_08", grade_group: "1~2학년군", unit_name: "가족과 안전", question_type: "descriptive", difficulty: "상", base_score: 5,
+        question: "초록불이 켜진 횡단보도를 건널 때에도 좌우를 살피며 조심해서 건너야 하는 까닭은 무엇일까요?",
+        options: [], answer: "갑자기 멈추지 못하고 달려오는 자동차가 있을 수 있어서 안전을 확인해야 하기 때문입니다.",
+        grading_keywords: ["자동차", "차", "사고", "안전", "멈추", "위험"],
+        explanation: "신호등이 초록불이더라도 멈추지 못한 차가 있을 수 있으니 꼭 차가 멈춘 것을 확인하고 건너야 해요."
+      },
+
+      // [3~4학년군]
+      {
+        id: "q34_01", grade_group: "3~4학년군", unit_name: "우리가 사는 곳", question_type: "ox", difficulty: "하", base_score: 1,
+        question: "사람마다 같은 장소에 대해 느끼는 감정과 생각(장소감)은 서로 다를 수 있다.",
+        options: [], answer: "O", explanation: "맞습니다. 같은 놀이터라도 경험에 따라 즐거운 곳일 수도, 아픈 기억이 있는 곳일 수도 있어요."
+      },
+      {
+        id: "q34_02", grade_group: "3~4학년군", unit_name: "우리가 사는 곳", question_type: "multiple_choice", difficulty: "중", base_score: 3,
+        question: "다음 중 '살기 좋은 우리 고장'을 만들기 위한 주민들의 바람직한 행동은 무엇일까요?",
+        options: ["내 집 앞만 치우고 골목길은 모른 척한다.", "마을 주민 회의에 참여하여 불편한 점을 함께 해결한다.", "공공시설을 지을 때 무조건 반대한다.", "공원 시설을 함부로 다룬다."],
+        answer: "마을 주민 회의에 참여하여 불편한 점을 함께 해결한다.", explanation: "살기 좋은 고장은 주민들이 서로 관심을 갖고 마을 회의에 참여할 때 만들어집니다."
+      },
+      {
+        id: "q34_03", grade_group: "3~4학년군", unit_name: "지도로 만나는 우리 지역", question_type: "multiple_choice", difficulty: "중", base_score: 3,
+        question: "지도에서 동서남북의 방향을 나타내어 위치를 쉽게 찾을 수 있도록 돕는 지도 요소는 무엇일까요?",
+        options: ["방위표", "축척", "기호와 범례", "등고선"],
+        answer: "방위표", explanation: "방위표는 지도에서 동, 서, 남, 북의 위치 방향을 정확하게 알려줍니다."
+      },
+      {
+        id: "q34_04", grade_group: "3~4학년군", unit_name: "지도로 만나는 우리 지역", question_type: "short_answer", difficulty: "중", base_score: 3,
+        question: "지도에서 실제 땅의 넓은 거리를 일정한 비율로 줄여서 나타낸 것을 무엇이라고 부를까요?",
+        options: [], answer: "축척", explanation: "넓은 땅을 종이 지도에 담기 위해 일정한 비율로 줄인 것을 '축척'이라고 합니다."
+      },
+      {
+        id: "q34_05", grade_group: "3~4학년군", unit_name: "우리 지역의 문화유산", question_type: "multiple_choice", difficulty: "하", base_score: 1,
+        question: "다음 중 형체는 없지만 조상들의 예술과 슬기가 담긴 '무형문화유산'에 해당하는 것은 무엇일까요?",
+        options: ["판소리", "석굴암", "다보탑", "수원화성"],
+        answer: "판소리", explanation: "판소리, 탈춤 등은 형태는 없지만 대대로 이어져 내려오는 소중한 무형문화유산입니다."
+      },
+      {
+        id: "q34_06", grade_group: "3~4학년군", unit_name: "우리 지역의 문화유산", question_type: "descriptive", difficulty: "상", base_score: 5,
+        question: "조상들이 남겨주신 우리 고장의 문화유산을 소중히 아끼고 보존해야 하는 까닭을 서술하세요.",
+        options: [], answer: "문화유산에는 조상들의 지혜와 역사가 담겨 있으며, 한 번 훼손되면 다시 되돌릴 수 없기 때문입니다.",
+        grading_keywords: ["조상", "역사", "지혜", "보존", "훼손", "되돌", "후손", "자랑"],
+        explanation: "문화유산은 과거 조상들의 슬기를 이해하는 소중한 보물이며 훼손되면 복구하기 어렵기 때문에 잘 보존해야 합니다."
+      },
+      {
+        id: "q34_07", grade_group: "3~4학년군", unit_name: "경제활동과 지역 간 교류", question_type: "ox", difficulty: "하", base_score: 1,
+        question: "사람들의 욕구에 비해 세상에 존재하는 돈과 자원의 양이 한정되어 있는 상태를 '자원의 희소성'이라고 한다.",
+        options: [], answer: "O", explanation: "맞습니다. 자원이 부족하기 때문에 우리는 언제나 더 현명한 '합리적 선택'을 해야 합니다."
+      },
+      {
+        id: "q34_08", grade_group: "3~4학년군", unit_name: "민주주의와 자치", question_type: "descriptive", difficulty: "상", base_score: 5,
+        question: "학급 회의에서 다수결로 결정을 내릴 때, 표를 적게 얻은 '소수의 의견'도 존중해야 하는 까닭을 적어보세요.",
+        options: [], answer: "다수의 의견이 항상 옳은 것은 아니며, 소수의 의견 속에도 좋은 생각과 권리가 담겨 있기 때문입니다.",
+        grading_keywords: ["소수", "옳", "틀릴", "권리", "존중", "배려", "의견"],
+        explanation: "민주주의에서는 다수결로 결정하더라도 소수의 권리와 의견을 무시하지 않고 끝까지 존중해야 합니다."
+      },
+
+      // [5~6학년군]
+      {
+        id: "q56_01", grade_group: "5~6학년군", unit_name: "우리나라 국토 여행", question_type: "ox", difficulty: "하", base_score: 1,
+        question: "한 나라의 주권이 미치는 국토의 범위는 영토(땅), 영해(바다), 영공(하늘)을 모두 포함한다.",
+        options: [], answer: "O", explanation: "맞습니다! 국토는 영토, 영해, 영공으로 이루어져 있습니다."
+      },
+      {
+        id: "q56_02", grade_group: "5~6학년군", unit_name: "우리나라 국토 여행", question_type: "multiple_choice", difficulty: "중", base_score: 3,
+        question: "우리나라 한반도 지형의 동쪽과 서쪽 높낮이 특징을 가장 바르게 설명한 것은 무엇일까요?",
+        options: ["동쪽이 높고 서쪽이 낮다 (동고서저)", "서쪽이 높고 동쪽이 낮다 (서고동저)", "남쪽이 높고 북쪽이 낮다", "모든 지역이 평평하다"],
+        answer: "동쪽이 높고 서쪽이 낮다 (동고서저)", explanation: "동쪽에는 높은 산맥이 있고 서쪽에는 넓은 평야가 발달한 '동고서저' 지형입니다."
+      },
+      {
+        id: "q56_03", grade_group: "5~6학년군", unit_name: "우리나라 국토 여행", question_type: "short_answer", difficulty: "중", base_score: 3,
+        question: "우리나라 가장 동쪽 끝에 위치하며, 화산 활동으로 생겨난 소중한 천연기념물 섬의 이름은 무엇일까요?",
+        options: [], answer: "독도", explanation: "독도는 울릉도 동남쪽에 위치한 대한민국의 고유 영토이자 소중한 화산섬입니다."
+      },
+      {
+        id: "q56_04", grade_group: "5~6학년군", unit_name: "법과 인권의 보장", question_type: "multiple_choice", difficulty: "중", base_score: 3,
+        question: "대한민국 모든 법의 으뜸이자 최고이며, 국민의 기본권을 보장하는 최고 법률은 무엇일까요?",
+        options: ["헌법", "민법", "도로교통법", "형법"],
+        answer: "헌법", explanation: "헌법은 국가의 기본 원리와 국민의 기본권을 담은 가장 으뜸이 되는 최고 법률입니다."
+      },
+      {
+        id: "q56_05", grade_group: "5~6학년군", unit_name: "법과 인권의 보장", question_type: "descriptive", difficulty: "상", base_score: 5,
+        question: "인간이라면 누구나 태어나면서부터 당연히 가지는 기본적 권리인 '인권'이 왜 소중한지 서술하세요.",
+        options: [], answer: "모든 인간은 존엄성을 지니며, 행복하게 살 권리를 누구에게도 빼앗길 수 없기 때문입니다.",
+        grading_keywords: ["존엄", "행복", "빼앗", "태어나", "권리", "자유", "평등"],
+        explanation: "인권은 사람이라면 누구나 인간답고 행복하게 살아갈 수 있도록 보장하는 침해받을 수 없는 권리입니다."
+      },
+      {
+        id: "q56_06", grade_group: "5~6학년군", unit_name: "유적과 유물로 살펴본 옛 사람들의 생활", question_type: "multiple_choice", difficulty: "하", base_score: 1,
+        question: "신석기 시대 사람들이 음식 조리와 곡식 저장을 위해 흙으로 빚어 만든 대표적인 유물은 무엇일까요?",
+        options: ["빗살무늬 토기", "민무늬 토기", "고려청자", "조선백자"],
+        answer: "빗살무늬 토기", explanation: "빗살무늬 토기는 신석기 시대를 대표하는 소중한 역사 유물입니다."
+      },
+      {
+        id: "q56_07", grade_group: "5~6학년군", unit_name: "달라지는 시대, 변화하는 생활 모습", question_type: "short_answer", difficulty: "하", base_score: 1,
+        question: "조선 시대 세종대왕이 백성들을 사랑하는 마음으로 1443년에 만든 우리나라 고유 글자의 이름은 무엇일까요?",
+        options: [], answer: "훈민정음", explanation: "세종대왕은 백성들이 쉽게 글을 익히도록 훈민정음(한글)을 창제하셨습니다."
+      },
+      {
+        id: "q56_08", grade_group: "5~6학년군", unit_name: "민주주의와 시민 참여", question_type: "multiple_choice", difficulty: "중", base_score: 3,
+        question: "권력의 독점을 막기 위해 국가 권력을 국회, 행정부, 법원으로 나누어 서로 견제하게 하는 원리는 무엇일까요?",
+        options: ["삼권분립", "국민주권", "다수결의 원칙", "지방자치"],
+        answer: "삼권분립", explanation: "입법부, 행정부, 사법부로 권력을 분립하여 국민의 자유와 권리를 지킵니다."
+      },
+      {
+        id: "q56_09", grade_group: "5~6학년군", unit_name: "민주주의와 시민 참여", question_type: "descriptive", difficulty: "상", base_score: 5,
+        question: "민주 국가의 꽃인 '선거'의 4대 원칙(보통·평등·직접·비밀) 중 2가지를 고르고 뜻을 설명하세요.",
+        options: [], answer: "보통 선거(일정 나이가 되면 누구나 투표), 평등 선거(누구나 1인 1표), 직접 선거(자신이 직접 투표), 비밀 선거(누구에게 투표했는지 비밀 보장) 중 2가지.",
+        grading_keywords: ["보통", "평등", "직접", "비밀", "1표", "나이"],
+        explanation: "선거의 4대 원칙은 보통, 평등, 직접, 비밀 선거입니다."
+      },
+      {
+        id: "q56_10", grade_group: "5~6학년군", unit_name: "시장경제와 국가 간 거래", question_type: "multiple_choice", difficulty: "중", base_score: 3,
+        question: "다른 나라에서 만든 물건이나 자원을 우리나라로 사들이는 경제 활동을 무엇이라고 할까요?",
+        options: ["수입", "수출", "생산", "환율"],
+        answer: "수입", explanation: "외국 물건을 사 오는 것을 '수입', 우리나라 물건을 외국에 파는 것을 '수출'이라고 합니다."
+      }
+    ];
+
+    const UNITS_BY_GRADE = {
+      "1~2학년군": [
+        "전체 단원",
+        "학교와 나",
+        "계절과 우리 생활",
+        "우리 마을과 사람들",
+        "가족과 안전"
+      ],
+      "3~4학년군": [
+        "전체 단원",
+        "우리가 사는 곳",
+        "일상에서 만나는 과거",
+        "사회 변화와 다양한 문화",
+        "옛날과 오늘날의 생활 모습",
+        "지도로 만나는 우리 지역",
+        "우리 지역의 문화유산",
+        "경제활동과 지역 간 교류",
+        "민주주의와 자치",
+        "지역문제를 해결하고 지역을 알리는 노력",
+        "다양한 환경과 삶의 모습"
+      ],
+      "5~6학년군": [
+        "전체 단원",
+        "우리나라 국토 여행",
+        "우리나라 지리 탐구",
+        "법과 인권의 보장",
+        "유적과 유물로 살펴본 옛 사람들의 생활",
+        "달라지는 시대, 변화하는 생활 모습",
+        "식민 통치와 저항, 전쟁이 바꾼 사회와 생활",
+        "평화 통일을 위한 노력, 민주화와 산업화",
+        "민주주의와 시민 참여",
+        "지구, 대륙 그리고 국가들",
+        "세계의 자연환경",
+        "시장경제와 국가 간 거래",
+        "지구촌 사람들"
+      ]
+    };
+
+    const UNIT_GRADE_TAGS = {
+      // 1~2학년군
+      "학교와 나": "1학년",
+      "계절과 우리 생활": "1~2학년",
+      "우리 마을과 사람들": "2학년",
+      "가족과 안전": "1~2학년",
+
+      // 3~4학년군
+      "우리가 사는 곳": "3학년",
+      "일상에서 만나는 과거": "3학년",
+      "사회 변화와 다양한 문화": "3학년",
+      "옛날과 오늘날의 생활 모습": "3학년",
+      "지도로 만나는 우리 지역": "4학년",
+      "우리 지역의 문화유산": "4학년",
+      "경제활동과 지역 간 교류": "4학년",
+      "민주주의와 자치": "4학년",
+      "지역문제를 해결하고 지역을 알리는 노력": "4학년",
+      "다양한 환경과 삶의 모습": "3~4학년",
+
+      // 5~6학년군
+      "우리나라 국토 여행": "5학년",
+      "우리나라 지리 탐구": "5학년",
+      "유적과 유물로 살펴본 옛 사람들의 생활": "5학년",
+      "달라지는 시대, 변화하는 생활 모습": "5학년",
+      "법과 인권의 보장": "5학년",
+      "식민 통치와 저항, 전쟁이 바꾼 사회와 생활": "6학년",
+      "평화 통일을 위한 노력, 민주화와 산업화": "6학년",
+      "민주주의와 시민 참여": "6학년",
+      "지구, 대륙 그리고 국가들": "6학년",
+      "세계의 자연환경": "6학년",
+      "시장경제와 국가 간 거래": "6학년",
+      "지구촌 사람들": "6학년"
+    };
+
+    let currentMode = "basic"; // "basic" (기본 퀴즈관) 또는 "advanced" (심화 서술형 탐구관)
+    let currentGrade = "3~4학년군";
+    let currentQuiz = null;
+    let selectedAnswer = "";
+    let totalScore = 0;
+    let solvedCount = 0;
+    let correctCount = 0;
+    let streakCount = 0;
+    let questIndex = 1;
+    let recentQuestionIds = []; // 중복 출제 방지 큐
+    let currentLogId = null;
+    let currentIsFavorite = 0;
+    let currentLevelInfo = null;
+
+    // =========================================================================
+    // 1. 대시보드 실시간 통계 및 배지 갱신
+    // =========================================================================
+    function updateDashboardStats() {
+      // 1) 누적 점수
+      document.getElementById('total-score').innerText = `${totalScore}점`;
+
+      // 2) 푼 문제 & 정답률
+      document.getElementById('solved-count').innerText = solvedCount;
+      const acc = solvedCount > 0 ? Math.round((correctCount / solvedCount) * 100) : 100;
+      document.getElementById('accuracy-rate').innerText = `${acc}%`;
+
+      // 3) 포켓몬 5대 타입 진화 등급 연동 (서버 level_info 우선)
+      if (currentLevelInfo) {
+        applyUserStatus({
+          user_name: localStorage.getItem("edumate_current_account") || "김에듀",
+          total_score: totalScore,
+          level_info: currentLevelInfo
+        });
+      } else {
+        const level = Math.floor(totalScore / 30) + 1;
+        const exp = totalScore % 30;
+        const expPercent = Math.min(100, Math.max(10, Math.round((exp / 30) * 100)));
+        const titleStr = `Lv.${level} 사회 탐험가`;
+        document.getElementById('top-level').innerText = titleStr;
+        document.getElementById('exp-level-label').innerText = `Level ${level}`;
+        document.getElementById('exp-text').innerText = `${exp} / 30 XP`;
+        document.getElementById('exp-bar').style.width = `${expPercent}%`;
+      }
+
+      // 4) 연속 스트릭
+      document.getElementById('top-streak').innerText = streakCount >= 2 ? `${streakCount}연승 달성! 🔥` : `${Math.max(1, solvedCount)}문제 풀이 중`;
+
+      // 5) 명예 배지 언락 판정
+      let unlockedBadges = 1;
+      if (solvedCount >= 1) {
+        document.getElementById('badge-first').classList.add('unlocked');
+      }
+      if (streakCount >= 3) {
+        document.getElementById('badge-streak').classList.add('unlocked');
+        unlockedBadges++;
+      }
+      if (currentQuiz && currentQuiz.question_type === 'descriptive' && totalScore >= 5) {
+        document.getElementById('badge-desc').classList.add('unlocked');
+        unlockedBadges++;
+      }
+      if (totalScore >= 50) {
+        document.getElementById('badge-score100').classList.add('unlocked');
+        unlockedBadges++;
+      }
+      document.getElementById('badge-count-text').innerText = `${unlockedBadges} / 4 획득`;
+    }
+
+    // =========================================================================
+    // 2. 단원 로드맵 네비게이터 렌더링
+    // =========================================================================
+    function renderUnitRoadmap(grade) {
+      const container = document.getElementById('unit-roadmap-list');
+      const badgeEl = document.getElementById('current-grade-badge');
+      if (badgeEl) badgeEl.innerText = grade;
+      if (!container) return;
+
+      container.innerHTML = '';
+      const units = UNITS_BY_GRADE[grade] || [];
+      const currentUnitVal = document.getElementById('unit-select').value;
+
+      units.forEach(unit => {
+        const item = document.createElement('div');
+        item.className = 'unit-pill-item' + (unit === currentUnitVal ? ' active' : '');
+        const gradeTag = UNIT_GRADE_TAGS[unit] ? `[${UNIT_GRADE_TAGS[unit]}] ` : '';
+        const tagBadge = (unit === currentUnitVal) ? '진행 중' : (UNIT_GRADE_TAGS[unit] || '탐험');
+        item.innerHTML = `
+          <span>${gradeTag}${unit}</span>
+          <span class="unit-tag">${tagBadge}</span>
+        `;
+        item.onclick = () => {
+          document.getElementById('unit-select').value = unit;
+          renderUnitRoadmap(grade);
+          loadNewQuestion();
+        };
+        container.appendChild(item);
+      });
+    }
+
+    // =========================================================================
+    // 3. 학습 모드 전환 (기본 퀴즈관 vs 심화 서술형 탐구관 vs 국토 지도 탐구관)
+    // =========================================================================
+    function switchMode(mode) {
+      currentMode = mode;
+      try { localStorage.setItem('social_current_mode', mode); } catch (e) {}
+
+      // 모드별 body 클래스 동기화 (국토 지도 탐구관 레이아웃 최적화 연동)
+      document.body.classList.remove('mode-basic', 'mode-advanced', 'mode-map');
+      document.body.classList.add('mode-' + mode);
+      
+      const btnBasic = document.getElementById('btn-mode-basic');
+      const btnAdv = document.getElementById('btn-mode-advanced');
+      const btnMap = document.getElementById('btn-mode-map');
+      const bannerAdv = document.getElementById('advanced-banner');
+      const bannerMap = document.getElementById('map-banner');
+      const controlsCard = document.querySelector('.controls-card');
+      const cardStandard = document.getElementById('card-standard-quiz');
+      const cardMap = document.getElementById('card-map-quiz');
+      const typeFilterGroup = document.getElementById('type-filter-group');
+      const typeSelect = document.getElementById('type-select');
+
+      btnBasic.classList.remove('active');
+      btnAdv.classList.remove('active');
+      btnMap.classList.remove('active');
+      bannerAdv.style.display = 'none';
+      bannerMap.style.display = 'none';
+
+      if (mode === 'basic') {
+        btnBasic.classList.add('active');
+        if (controlsCard) controlsCard.style.display = 'flex';
+        if (cardStandard) cardStandard.style.display = 'flex';
+        if (cardMap) cardMap.style.display = 'none';
+        if (typeFilterGroup) typeFilterGroup.style.display = 'flex';
+        if (typeSelect) {
+          typeSelect.innerHTML = `
+            <option value="basic_all">🎲 기본 유형 전체 (OX/4지/단답)</option>
+            <option value="ox">⭕❌ OX 퀴즈</option>
+            <option value="multiple_choice">🔢 4지선다</option>
+            <option value="short_answer">✍️ 단답형</option>
+          `;
+          typeSelect.value = "basic_all";
+        }
+        loadNewQuestion();
+      } else if (mode === 'advanced') {
+        btnAdv.classList.add('active');
+        bannerAdv.style.display = 'block';
+        if (controlsCard) controlsCard.style.display = 'flex';
+        if (cardStandard) cardStandard.style.display = 'flex';
+        if (cardMap) cardMap.style.display = 'none';
+        if (typeFilterGroup) typeFilterGroup.style.display = 'none';
+        if (typeSelect) {
+          typeSelect.innerHTML = `
+            <option value="descriptive" selected>📝 심화 서술형 (5점 배점)</option>
+          `;
+          typeSelect.value = "descriptive";
+        }
+        loadNewQuestion();
+      } else if (mode === 'map') {
+        btnMap.classList.add('active');
+        bannerMap.style.display = 'block';
+        if (controlsCard) controlsCard.style.display = 'none'; // 지도 모드는 전국 대상이므로 학년 필터 숨김
+        if (cardStandard) cardStandard.style.display = 'none';
+        if (cardMap) cardMap.style.display = 'flex';
+        resetMapZoom();
+        loadMapQuestion();
+      }
+    }
+
+    function selectGrade(grade, btn) {
+      currentGrade = grade;
+      try { localStorage.setItem('social_current_grade', grade); } catch (e) {}
+      document.querySelectorAll('.grade-pill-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const unitSelect = document.getElementById('unit-select');
+      unitSelect.innerHTML = '';
+      UNITS_BY_GRADE[grade].forEach(unit => {
+        const opt = document.createElement('option');
+        opt.value = unit;
+        const gradeTag = UNIT_GRADE_TAGS[unit] ? `[${UNIT_GRADE_TAGS[unit]}] ` : '';
+        opt.innerText = `${gradeTag}${unit}`;
+        unitSelect.appendChild(opt);
+      });
+
+      renderUnitRoadmap(grade);
+      loadNewQuestion();
+    }
+
+    // =========================================================================
+    // 4. 문제 로드 (직전 문제 배제 + 270문항 스마트 추첨)
+    // =========================================================================
+    async function loadNewQuestion() {
+      const unitName = document.getElementById('unit-select').value;
+      const qType = (currentMode === 'advanced') ? 'descriptive' : document.getElementById('type-select').value;
+
+      document.getElementById('q-text').innerText = (currentMode === 'advanced')
+        ? "깊이 생각하는 심화 서술형 탐구 문제를 준비하는 중입니다... 🎓"
+        : "새로운 탐험 문제를 준비하는 중입니다... 🧭";
+      document.getElementById('answer-box').innerHTML = "";
+      selectedAnswer = "";
+
+      let fetchedQuiz = null;
+
+      // 1) FastAPI 서버 통신 시도
+      try {
+        const res = await fetch('/social/quiz/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            grade_group: currentGrade,
+            unit_name: unitName,
+            question_type: qType,
+            recent_ids: recentQuestionIds
+          })
+        });
+        if (res.ok) fetchedQuiz = await res.json();
+      } catch (err) {}
+
+      // 2) 서버 미구동 시 로컬 270문항 데이터베이스에서 추첨
+      if (!fetchedQuiz) {
+        fetchedQuiz = pickFromLocalBank(currentGrade, unitName, qType, recentQuestionIds);
+      }
+
+      currentQuiz = fetchedQuiz;
+
+      // 최근 푼 문제 ID에 등록 (최대 50개까지 기억하여 겹침 방지)
+      if (currentQuiz && currentQuiz.id) {
+        recentQuestionIds.push(currentQuiz.id);
+        if (recentQuestionIds.length > 50) recentQuestionIds.shift();
+      }
+
+      renderQuiz(currentQuiz);
+      renderUnitRoadmap(currentGrade);
+    }
+
+    // 로컬 문제은행 스마트 추첨 함수 (단원 일치 100% 절대 보장)
+    function pickFromLocalBank(grade, unit, type, recentIds) {
+      const bank = (window.SOCIAL_QUESTION_BANK_ALL && window.SOCIAL_QUESTION_BANK_ALL.length > 0)
+        ? window.SOCIAL_QUESTION_BANK_ALL
+        : LOCAL_QUESTION_BANK;
+
+      // 1. 해당 학년군 기본 풀
+      let gradeCandidates = bank.filter(q => q.grade_group === grade);
+      if (!gradeCandidates || gradeCandidates.length === 0) {
+        gradeCandidates = bank;
+      }
+
+      // 2. 단원 필터링 (특정 단원이 지정된 경우 반드시 해당 단원 엄격 고수!)
+      let candidates = gradeCandidates;
+      const isSpecificUnit = unit && unit !== "전체 단원";
+      if (isSpecificUnit) {
+        let unitFiltered = gradeCandidates.filter(q => q.unit_name === unit);
+        if (unitFiltered.length === 0) {
+          // 부분 일치 탐색 (공백 또는 축약 호환)
+          unitFiltered = gradeCandidates.filter(q => q.unit_name && (q.unit_name.includes(unit) || unit.includes(q.unit_name)));
+        }
+        if (unitFiltered.length > 0) {
+          candidates = unitFiltered; // 단원 일치 후보군 확정!
+        }
+      }
+
+      // 3. 문제 유형 필터링 (단원 내에서 유형 탐색)
+      let typeFiltered = candidates;
+      if (currentMode === "advanced" || type === "descriptive") {
+        typeFiltered = candidates.filter(q => q.question_type === "descriptive");
+      } else if (type === "basic_all") {
+        typeFiltered = candidates.filter(q => q.question_type !== "descriptive");
+      } else if (type && type !== "random") {
+        typeFiltered = candidates.filter(q => q.question_type === type);
+      } else {
+        if (currentMode === "basic") {
+          typeFiltered = candidates.filter(q => q.question_type !== "descriptive");
+        }
+      }
+
+      // 만약 해당 단원에 요청한 특정 유형이 없더라도, 절대 다른 단원으로 튕겨 나가지 않고
+      // 해당 단원 내의 다른 유형 문제를 유지하여 단원 일치 100% 보장!
+      if (typeFiltered && typeFiltered.length > 0) {
+        candidates = typeFiltered;
+      }
+
+      // 4. 최근 푼 문제 제외 및 신선한 문제 추첨
+      let freshList = candidates.filter(q => !recentIds.includes(q.id));
+      if (freshList.length === 0) {
+        const lastFew = recentIds.slice(-2);
+        const semiFresh = candidates.filter(q => !lastFew.includes(q.id));
+        freshList = (semiFresh.length > 0) ? semiFresh : candidates;
+      }
+
+      return freshList[Math.floor(Math.random() * freshList.length)];
+    }
+
+    // 객관식 보기 내용 앞의 '1번 보기:', '1번', '1.', '①' 등 불필요한 번호 라벨을 말끔히 지우는 함수
+    function cleanOptionText(text) {
+      if (!text) return '';
+      return String(text)
+        .replace(/^(?:[0-9]+번\s*(?:보기)?[:\.]?\s*|[0-9]+[\.\)]\s*|[①②③④⑤]\s*|(?:보기\s*[0-9]+[:\.]?\s*))/i, '')
+        .trim();
+    }
+
+    // =========================================================================
+    // 5. 프리미엄 문제 카드 화면 렌더링
+    // =========================================================================
+    function renderQuiz(q) {
+      document.getElementById('q-number-tag').innerText = `Quest #${questIndex}`;
+      document.getElementById('q-unit').innerText = `단원: ${q.unit_name || '사회'}`;
+
+      const diffStars = { '하': '⭐ 기초', '중': '⭐⭐ 발전', '상': '⭐⭐⭐ 심화' };
+      const diffText = diffStars[q.difficulty] || q.difficulty;
+      document.getElementById('q-diff').innerText = `${diffText} (${q.base_score}점)`;
+      
+      const typeNames = { ox: "⭕❌ OX 퀴즈", multiple_choice: "🔢 4지선다", short_answer: "✍️ 단답형", descriptive: "📝 심화 서술형" };
+      document.getElementById('q-type').innerText = typeNames[q.question_type] || "퀴즈";
+      document.getElementById('q-text').innerText = q.question;
+
+      const answerBox = document.getElementById('answer-box');
+      answerBox.innerHTML = "";
+
+      const isOx = (q.question_type === 'ox') || (q.answer === 'O' || q.answer === 'X');
+      const isMc = (q.question_type === 'multiple_choice') || (q.options && q.options.length >= 2);
+      const isDesc = (q.question_type === 'descriptive');
+
+      if (isOx) {
+        answerBox.innerHTML = `
+          <div class="ox-station">
+            <button class="ox-card-btn o" onclick="selectOx('O', this)">
+              <span>⭕</span> <span>그렇다 (O)</span>
+            </button>
+            <button class="ox-card-btn x" onclick="selectOx('X', this)">
+              <span>❌</span> <span>아니다 (X)</span>
+            </button>
+          </div>
+        `;
+      } else if (isMc) {
+        const mcGrid = document.createElement('div');
+        mcGrid.className = 'mc-cards-grid';
+        if (q.answer) {
+          q.answer = cleanOptionText(q.answer);
+        }
+        (q.options || []).forEach((opt, idx) => {
+          const cleanedOpt = cleanOptionText(opt);
+          const item = document.createElement('div');
+          item.className = 'mc-card-option';
+          item.innerHTML = `
+            <div class="mc-num-badge">${idx + 1}</div>
+            <div style="flex:1;">${cleanedOpt}</div>
+          `;
+          item.onclick = () => selectMc(cleanedOpt, item);
+          mcGrid.appendChild(item);
+        });
+        answerBox.appendChild(mcGrid);
+      } else if (isDesc) {
+        answerBox.innerHTML = `
+          <div style="background:#faf5ff; border:1.5px solid #d8b4fe; border-radius:14px; padding:14px 18px; margin-bottom:14px;">
+            <div style="font-weight:800; color:#7e22ce; font-size:14px; margin-bottom:4px;">🧠 심화 서술형 핵심 평가 가이드:</div>
+            <div style="font-size:13px; color:#6b21a8; line-height:1.5;">단순 단어가 아닌 '까닭(~때문이다)'과 핵심 개념을 문장으로 논리정연하게 작성해 보세요! (0~5점 정밀 채점)</div>
+          </div>
+          <textarea id="desc-input" class="input-box-styled" style="min-height:130px; line-height:1.65; font-size:15px; resize:vertical;" placeholder="나의 생각과 까닭을 1~2문장의 완성된 글로 적어보세요..." oninput="selectedAnswer=this.value; document.getElementById('char-count').innerText=this.value.length;"></textarea>
+          <div style="display:flex; justify-content:space-between; font-size:12.5px; color:#64748b; margin-top:8px;">
+            <span>💡 5단계 평가: 핵심 단어와 원리가 논리적으로 설명될수록 높은 점수를 받습니다.</span>
+            <span>작성 글자 수: <strong id="char-count" style="color:#7e22ce; font-size:14px;">0</strong>자</span>
+          </div>
+        `;
+      } else {
+        // 단답형 및 기본 안전 폴백 (입력창이 절대 사라지지 않음)
+        answerBox.innerHTML = `
+          <input type="text" id="sa-input" class="input-box-styled" placeholder="정답 낱말을 입력해 주세요 (예: 축척, 헌법, 보건실)..." oninput="selectedAnswer=this.value" />
+          <p style="font-size:12.5px; color:#64748b; margin-top:8px;">💡 정확한 핵심 용어를 한글로 바르게 적어보세요.</p>
+        `;
+      }
+    }
+
+    function selectOx(val, btn) {
+      selectedAnswer = val;
+      document.querySelectorAll('.ox-card-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+    }
+
+    function selectMc(val, item) {
+      selectedAnswer = val;
+      document.querySelectorAll('.mc-card-option').forEach(i => i.classList.remove('selected'));
+      item.classList.add('selected');
+    }
+
+    // =========================================================================
+    // 6. 채점 처리 및 실시간 스탯 연동
+    // =========================================================================
+    async function submitAnswer() {
+      if (!selectedAnswer || selectedAnswer.trim() === "") {
+        alert("답안을 선택하거나 입력해 주세요!");
+        return;
+      }
+
+      let gradeResult = null;
+      const userName = localStorage.getItem("edumate_current_account") || "김에듀";
+      const ptype = localStorage.getItem("edumate_pokemon_type") || "grass";
+
+      try {
+        const res = await fetch('/social/quiz/grade', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            user_name: userName,
+            question_id: currentQuiz.id || "",
+            question_type: currentQuiz.question_type,
+            question: currentQuiz.question,
+            correct_answer: currentQuiz.answer,
+            user_answer: selectedAnswer,
+            base_score: currentQuiz.base_score || 3,
+            unit_name: currentQuiz.unit_name || "",
+            grade: 4,
+            pokemon_type: ptype
+          })
+        });
+        if (res.ok) gradeResult = await res.json();
+      } catch (err) {}
+
+      if (!gradeResult) {
+        gradeResult = localGrade(currentQuiz, selectedAnswer);
+      }
+
+      currentLogId = gradeResult.log_id || null;
+      currentIsFavorite = 0;
+
+      // 푼 문제 통계 갱신
+      solvedCount++;
+      if (gradeResult.is_correct || gradeResult.score >= 3) {
+        correctCount++;
+        streakCount++;
+      } else {
+        streakCount = 0;
+      }
+
+      if (gradeResult.total_score !== undefined) {
+        totalScore = gradeResult.total_score;
+      } else {
+        totalScore += gradeResult.score;
+      }
+
+      if (gradeResult.level_info) {
+        currentLevelInfo = gradeResult.level_info;
+      }
+
+      updateDashboardStats();
+      showResultModal(gradeResult);
+    }
+
+    function localGrade(quiz, userAns) {
+      const isDesc = quiz.question_type === 'descriptive';
+      if (!isDesc) {
+        const uClean = userAns.trim().replace(/\s+/g, '');
+        const cClean = (quiz.answer || '').trim().replace(/\s+/g, '');
+        let correct = (uClean.toLowerCase() === cClean.toLowerCase()) ||
+                      (cClean.includes(uClean) && uClean.length >= 2) ||
+                      (uClean.includes(cClean) && cClean.length >= 2);
+
+        // 초등사회 주요 유의어/동의어 그룹 검사
+        if (!correct && quiz.question_type === 'short_answer') {
+          const SYNONYM_GROUPS = [
+            ["특산물", "특산품"],
+            ["문화재", "문화유산"],
+            ["방위표", "방위표시", "방위"],
+            ["한글", "훈민정음"],
+            ["보건실", "양호실"],
+            ["소방서", "119", "119안전센터"],
+            ["경찰서", "파출소", "지구대"],
+            ["시장", "전통시장", "재래시장"],
+            ["의사소통", "소통"],
+            ["지도", "약도"],
+            ["온돌", "구들장"],
+            ["독도", "우산도"],
+            ["축척", "축척자"],
+            ["등고선", "등고선도"],
+            ["헌법", "대한민국헌법"],
+            ["삼권분립", "권력분립"],
+            ["선거", "투표"],
+            ["국회", "국회의사당"],
+            ["행정부", "정부"],
+            ["법원", "대법원"]
+          ];
+          for (const group of SYNONYM_GROUPS) {
+            const hasUser = group.some(word => uClean.includes(word));
+            const hasAns = group.some(word => cClean.includes(word));
+            if (hasUser && hasAns) {
+              correct = true;
+              break;
+            }
+          }
+        }
+
+        const score = correct ? quiz.base_score : 0;
+        return {
+          score: score,
+          max_score: quiz.base_score,
+          is_correct: correct,
+          feedback: correct ? "정답입니다! 핵심 개념을 완벽하게 이해하고 있군요! 🌟" : `아쉬워요! 올바른 정답은 [${quiz.answer}]입니다. 해설을 읽어보고 다음 문제에 도전해 볼까요? 💪`
+        };
+      } else {
+        const kws = (quiz.grading_keywords || []).slice();
+        const ansWords = (quiz.answer || '').split(/[\s,\.\?!]+/).filter(w => w.length >= 2);
+        const allKws = Array.from(new Set([...kws, ...ansWords]));
+        let hit = 0;
+        allKws.forEach(kw => { if (userAns.includes(kw)) hit++; });
+        const len = userAns.trim().length;
+
+        let s = 1;
+        let fb = "";
+        if (len < 3) {
+          s = 0;
+          fb = "답안이 너무 짧아요. 자신의 생각을 한 문장으로 조금 더 자세히 적어보세요! 🌱";
+        } else if (hit >= 3 || (hit >= 2 && len >= 20)) {
+          s = 5;
+          fb = "완벽해요! 핵심 개념과 까닭을 논리정연하게 아주 잘 서술했습니다. 만점입니다! 💯";
+        } else if (hit >= 2 || (hit >= 1 && len >= 12)) {
+          s = 4;
+          fb = "훌륭합니다! 정답에 아주 가까워요! 핵심 개념을 잘 파악하여 부분 점수 4점을 획득했습니다! 👏";
+        } else if (hit >= 1 || len >= 15) {
+          s = 3;
+          fb = "참 잘했어요! 좋은 생각이에요! 중요한 내용이 잘 들어가서 부분 점수 3점을 획득했습니다. 👍";
+        } else if (len >= 8) {
+          s = 2;
+          fb = "성실하게 작성한 노력이 돋보여요! 핵심 개념어를 조금 더 보강하면 더 높은 점수를 받을 수 있어요. 🌱";
+        } else {
+          s = 1;
+          fb = "좋은 도전이에요! 모범답안을 읽어보고 다음 문제에서는 더 멋지게 적어볼까요? 💪";
+        }
+
+        return {
+          score: s,
+          max_score: 5,
+          is_correct: s >= 3,
+          feedback: fb
+        };
+      }
+    }
+
+    function closeResultModal() {
+      const modal = document.getElementById('result-modal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function handleResultNext() {
+      closeResultModal();
+      if (currentMode === 'map') {
+        nextMapQuestion();
+      } else {
+        nextQuestion();
+      }
+    }
+
+    function showResultModal(res) {
+      const modal = document.getElementById('result-modal');
+      const emoji = document.getElementById('modal-emoji');
+      const title = document.getElementById('modal-title');
+      const scoreEl = document.getElementById('modal-score');
+      const feedback = document.getElementById('modal-feedback');
+      const nextBtn = document.getElementById('btn-result-next');
+
+      if (nextBtn) {
+        nextBtn.innerText = (currentMode === 'map') ? "다음 지역 탐험하기 ➔" : "다음 문제 도전하기 ➔";
+      }
+
+      const isCorrect = (res.is_correct || res.score === res.max_score);
+
+      if (res.score === res.max_score) {
+        emoji.innerText = "🏆";
+        title.innerText = "완벽해요! 만점!";
+        title.style.color = "#0284c7";
+      } else if (res.score >= 3) {
+        emoji.innerText = "🌟";
+        title.innerText = `부분 점수 (+${res.score}점) 획득! 참 잘했어요!`;
+        title.style.color = "#16a34a";
+      } else {
+        emoji.innerText = "🌱";
+        title.innerText = "조금 아쉬워요! 해설을 확인해 볼까요?";
+        title.style.color = "#e11d48";
+      }
+
+      scoreEl.innerText = `+${res.score}점 (배점: ${res.max_score}점)`;
+
+      // 1) 선택 답안 vs 바른 정답 비교 카드 (객관식/OX/단답형)
+      const myAns = selectedAnswer || '미선택';
+      const rightAns = currentQuiz.answer || '';
+      const compareBox = `
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
+          <div style="background:${isCorrect ? '#f0fdf4' : '#fff1f2'}; border:1.5px solid ${isCorrect ? '#86efac' : '#fca5a5'}; border-radius:10px; padding:9px 12px;">
+            <span style="font-size:11px; font-weight:700; color:${isCorrect ? '#166534' : '#991b1b'}; display:block; margin-bottom:2px;">
+              ${isCorrect ? '✅ 내가 선택한 정답' : '❌ 내가 선택한 오답'}
+            </span>
+            <div style="font-size:13.5px; font-weight:800; color:${isCorrect ? '#15803d' : '#dc2626'}; word-break:break-all;">
+              ${myAns}
+            </div>
+          </div>
+          <div style="background:#f0f9ff; border:1.5px solid #7dd3fc; border-radius:10px; padding:9px 12px;">
+            <span style="font-size:11px; font-weight:700; color:#0369a1; display:block; margin-bottom:2px;">
+              🎯 바른 정답
+            </span>
+            <div style="font-size:13.5px; font-weight:800; color:#0284c7; word-break:break-all;">
+              ${rightAns}
+            </div>
+          </div>
+        </div>
+      `;
+
+      // 2) 교과서 핵심 상세 해설 (객관식/OX/서술형 모두 자세히 풀이)
+      const explText = currentQuiz.explanation || res.feedback || "교과서 핵심 개념을 다시 한 번 꼼꼼히 정리해 보세요!";
+      const explanationSection = `
+        <div style="background:#ffffff; border:1.5px solid #cbd5e1; border-radius:12px; padding:12px 14px; margin-bottom:6px;">
+          <div style="font-weight:800; color:#0f172a; font-size:13px; margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+            <span>💡 왜 그럴까요? (핵심 개념 상세 해설)</span>
+          </div>
+          <div style="color:#334155; font-size:13px; line-height:1.65;">
+            ${explText}
+          </div>
+        </div>
+      `;
+
+      // 3) AI 또는 교사의 격려 피드백 멘트
+      let teacherComment = '';
+      if (res.feedback && res.feedback !== explText) {
+        teacherComment = `
+          <div style="font-size:12px; color:#475569; margin-top:6px; padding:2px 4px; line-height:1.5;">
+            💬 <strong>피드백:</strong> ${res.feedback}
+          </div>
+        `;
+      }
+
+      feedback.innerHTML = compareBox + explanationSection + teacherComment;
+
+      // 즐겨찾기 상태 초기화
+      const favIcon = document.getElementById('fav-icon');
+      const favText = document.getElementById('fav-text');
+      if (favIcon) favIcon.innerText = '☆';
+      if (favText) favText.innerText = '즐겨찾기';
+
+      // Log ID 태그 표시
+      const logTag = document.getElementById('result-log-id-tag');
+      if (logTag) logTag.innerText = currentLogId ? `기록 ID: #${currentLogId}` : '';
+
+      // AI 후속 질문창 초기화
+      const chatHistory = document.getElementById('ai-chat-history');
+      if (chatHistory) {
+        chatHistory.style.display = 'none';
+        chatHistory.innerHTML = '';
+      }
+      const chatInput = document.getElementById('ai-followup-input');
+      if (chatInput) chatInput.value = '';
+
+      modal.style.display = 'flex';
+    }
+
+    // =========================================================================
+    // 7. 🗺️ 우리 국토 지도 탐구관 전용 데이터셋 & 인터랙티브 제어 로직
+    // =========================================================================
+    const KOREA_MAP_EXPLORE_DATA = [
+      {
+        id: "map_seoul",
+        name: "서울",
+        province: "서울특별시",
+        x: 34, y: 22,
+        photoUrl: "images/seoul.jpg",
+        photoCaption: "조선 제일의 으뜸 법궁 경복궁 근정전",
+        culture: "경복궁, 창덕궁, 종묘, 숭례문",
+        specialty: "서울 설렁탕, 전통 한과",
+        keyword: "조선 600년 한양 & 대한민국의 수도",
+        shapeIcon: "🏛️",
+        shapeHighlight: "한강과 4대산 분지 지형",
+        shapeDesc: "북한산·남산과 한강이 S자로 감싸 흐르는 천혜의 수도 명당 지형",
+        shapeSvg: `<svg viewBox="0 0 60 50" fill="none"><path d="M8 25 C15 14, 45 14, 52 25 C45 36, 15 36, 8 25 Z" fill="#1e3a8a" fill-opacity="0.4" stroke="#38bdf8" stroke-width="1.8"/><path d="M6 24 Q 25 30 35 22 Q 45 16 54 26" stroke="#60a5fa" stroke-width="3" stroke-linecap="round"/><circle cx="30" cy="18" r="3" fill="#facc15"/></svg>`,
+        story: "조선 태조 이성계가 도읍으로 정한 이래 지금까지 600년 넘게 우리나라의 심장 역할을 해온 역사와 현대가 공존하는 수도예요. 유네스코 세계유산 창덕궁과 종묘, 웅장한 조선 제일의 법궁 경복궁이 있습니다.",
+        quiz: {
+          question: "지도에 📍 깃발이 꽂힌 대한민국의 수도는 조선 시대 600년의 역사가 살아 숨 쉬는 곳이에요. 대표 궁궐 문화재는 무엇일까요?",
+          options: [
+            "문화재: 경복궁·창덕궁·종묘",
+            "문화재: 경주 동궁과 월지",
+            "문화재: 공주 공산성",
+            "문화재: 강화 초지진"
+          ],
+          answer: "문화재: 경복궁·창덕궁·종묘",
+          explanation: "서울은 600년 도읍지로서 조선의 5대 궁궐(경복궁, 창덕궁 등)과 종묘, 숭례문 등 국가 핵심 문화유산이 집중되어 있습니다."
+        }
+      },
+      {
+        id: "map_suwon",
+        name: "수원",
+        province: "경기도",
+        x: 39, y: 34,
+        photoUrl: "images/suwon.webp",
+        photoCaption: "유네스코 세계유산 수원화성 팔달문과 옹성",
+        culture: "수원화성, 화성행궁",
+        specialty: "수원 왕갈비, 통닭거리",
+        keyword: "정조의 효심과 정약용의 거중기",
+        shapeIcon: "🏰",
+        shapeHighlight: "팔달산 중심 타원형 성곽",
+        shapeDesc: "팔달산을 중심에 품고 화성 성곽(5.7km)이 감싸 안은 계획도시 지형",
+        shapeSvg: `<svg viewBox="0 0 60 50" fill="none"><circle cx="30" cy="25" r="18" stroke="#38bdf8" stroke-width="2" stroke-dasharray="3 2" fill="#047857" fill-opacity="0.35"/><rect x="23" y="19" width="14" height="12" rx="2" fill="#f59e0b"/><line x1="30" y1="13" x2="30" y2="19" stroke="#f59e0b" stroke-width="2"/></svg>`,
+        story: "조선 22대 왕 정조가 아버지 사도세자를 향한 효심으로 세운 계획도시예요. 다산 정약용이 발명한 거중기를 이용해 과학적이고 튼튼하게 쌓은 성곽 '수원화성'은 유네스코 세계유산입니다.",
+        quiz: {
+          question: "지도에 📍 깃발이 꽂힌 [경기도] 지역은 정조 대왕과 정약용의 지혜가 담긴 성곽이 있는 곳이에요. 이 지역과 대표 문화재·특산품은?",
+          options: [
+            "문화재: 수원화성 / 특산품: 수원 왕갈비",
+            "문화재: 경복궁 / 특산품: 서울 떡갈비",
+            "문화재: 공주 공산성 / 특산품: 공주 알밤",
+            "문화재: 순천만 습지 / 특산품: 벌교 꼬막"
+          ],
+          answer: "문화재: 수원화성 / 특산품: 수원 왕갈비",
+          explanation: "수원은 유네스코 세계유산 수원화성이 자리 잡고 있으며, 과거 우시장이 발달해 수원 왕갈비가 특산 먹거리로 유명합니다."
+        }
+      },
+      {
+        id: "map_gangneung",
+        name: "강릉",
+        province: "강원특별자치도",
+        x: 69, y: 23,
+        photoUrl: "images/gangneung.webp",
+        photoCaption: "보물 제165호 강릉 오죽헌 (신사임당과 율곡 이이 생가)",
+        culture: "오죽헌, 선교장, 경포대",
+        specialty: "초당순두부, 커피거리",
+        keyword: "신사임당과 율곡 이이의 고향",
+        shapeIcon: "🌊",
+        shapeHighlight: "태백산맥과 동해안 석호",
+        shapeDesc: "대관령 능선 아래 경포호 석호와 푸른 동해안 모래사장이 펼쳐진 해안 지형",
+        shapeSvg: `<svg viewBox="0 0 60 50" fill="none"><path d="M10 12 L22 40 L32 22 L40 40 L48 16" stroke="#ca8a04" stroke-width="2.5" stroke-linejoin="round"/><path d="M42 12 C47 24, 47 32, 54 40" stroke="#38bdf8" stroke-width="3.5"/><ellipse cx="38" cy="28" rx="6" ry="4" fill="#60a5fa"/></svg>`,
+        story: "동해 바다와 경포호가 아름다운 강릉은 신사임당과 율곡 이이가 태어난 오죽헌이 있는 곳이에요. 깨끗한 바닷물(간수)로 굳혀 만든 부드러운 초당순두부가 매우 유명합니다.",
+        quiz: {
+          question: "지도에 📍 깃발이 꽂힌 [강원도] 지역은 신사임당과 율곡 이이의 생가인 오죽헌이 있는 곳이에요. 이 지역의 대표 문화재와 특산품은?",
+          options: [
+            "문화재: 오죽헌 / 특산품: 초당순두부",
+            "문화재: 월정사 / 특산품: 횡성 한우",
+            "문화재: 첨성대 / 특산품: 황남빵",
+            "문화재: 부석사 / 특산품: 풍기 인삼"
+          ],
+          answer: "문화재: 오죽헌 / 특산품: 초당순두부",
+          explanation: "강릉은 검은 대나무가 둘러싼 오죽헌이 있고, 맑은 동해 바닷물로 만든 초당순두부와 안목해변 커피거리가 명물입니다."
+        }
+      },
+      {
+        id: "map_gongju",
+        name: "공주·부여",
+        province: "충청남도",
+        x: 37, y: 43,
+        photoUrl: "images/gongju.jpg",
+        photoCaption: "유네스코 세계유산 공주 무령왕릉과 왕릉원",
+        culture: "무령왕릉, 공산성, 백제금동대향로",
+        specialty: "공주 알밤, 부여 양송이버섯",
+        keyword: "찬란한 백제의 숨결이 깃든 곳",
+        shapeIcon: "👑",
+        shapeHighlight: "금강 굽이치는 백제 천혜 요새",
+        shapeDesc: "비단결 금강이 말발굽 모양으로 휘감아 도는 공산성과 왕릉 분지 지형",
+        shapeSvg: `<svg viewBox="0 0 60 50" fill="none"><path d="M12 38 C 18 10, 42 10, 48 38" stroke="#38bdf8" stroke-width="4" fill="none"/><circle cx="30" cy="24" r="9" fill="#eab308" fill-opacity="0.5" stroke="#fef08a" stroke-width="2"/></svg>`,
+        story: "백제가 웅진(공주)과 사비(부여)로 도읍을 옮겨 찬란한 문화를 꽃피웠던 중심지예요. 무령왕릉에서 출토된 화려한 금제관식과 백제 예술의 극치인 백제금동대향로가 이곳에 전해집니다. 달콤한 알밤도 유명해요.",
+        quiz: {
+          question: "지도에 📍 깃발이 꽂힌 [충청남도] 금강 유역 지역은 백제의 찬란한 문화를 만날 수 있는 곳이에요. 대표 문화재와 특산품은?",
+          options: [
+            "문화재: 무령왕릉·백제금동대향로 / 특산품: 공주 알밤",
+            "문화재: 직지심체요절 / 특산품: 청주 직지빵",
+            "문화재: 독립기념관 / 특산품: 천안 호두과자",
+            "문화재: 덕수궁 / 특산품: 가평 잣"
+          ],
+          answer: "문화재: 무령왕릉·백제금동대향로 / 특산품: 공주 알밤",
+          explanation: "공주와 부여는 백제의 고도로 유네스코 세계유산 백제역사유적지구(무령왕릉, 공산성)가 있으며 공주 알밤이 유명합니다."
+        }
+      },
+      {
+        id: "map_andong",
+        name: "안동",
+        province: "경상북도",
+        x: 65, y: 43,
+        photoUrl: "images/andong.jpg",
+        photoCaption: "유네스코 세계유산 안동 하회마을과 부용대 전경",
+        culture: "하회마을, 도산서원, 병산서원",
+        specialty: "안동 간고등어, 안동찜닭, 하회탈",
+        keyword: "한국 정신문화의 수도 & 선비마을",
+        shapeIcon: "🎭",
+        shapeHighlight: "낙동강 S자 물도리 하회 지형",
+        shapeDesc: "낙동강 물길이 마을을 360도 굽이치며 연꽃 형태로 감싸 안은 배산임수 지형",
+        shapeSvg: `<svg viewBox="0 0 60 50" fill="none"><path d="M10 25 C10 12, 35 12, 35 25 C35 38, 50 38, 50 25 C50 12, 25 10, 20 20" stroke="#38bdf8" stroke-width="3.5" fill="none"/><circle cx="23" cy="23" r="7" fill="#10b981"/></svg>`,
+        story: "낙동강이 마을을 감싸 안고 흐르는 하회마을은 조상들의 양반 문화와 서민들의 하회별신굿탈놀이가 함께 전해지는 곳이에요. 바다와 멀어 고등어를 소금에 절여 먹던 지혜로 간고등어가 탄생했습니다.",
+        quiz: {
+          question: "지도에 📍 깃발이 꽂힌 [경상북도] 지역은 유서 깊은 하회마을과 도산서원이 있는 유교의 고장이에요. 대표 문화재와 특산품은?",
+          options: [
+            "문화재: 안동 하회마을·도산서원 / 특산품: 안동 간고등어",
+            "문화재: 석굴암 / 특산품: 경주빵",
+            "문화재: 통영 세병관 / 특산품: 충무김밥",
+            "문화재: 단양 고수동굴 / 특산품: 단양 마늘"
+          ],
+          answer: "문화재: 안동 하회마을·도산서원 / 특산품: 안동 간고등어",
+          explanation: "안동은 유네스코 세계유산 하회마을과 퇴계 이황의 도산서원이 있으며, 소금에 절여 운반하던 안동 간고등어가 유명합니다."
+        }
+      },
+      {
+        id: "map_gyeongju",
+        name: "경주",
+        province: "경상북도",
+        x: 75, y: 58,
+        photoUrl: "https://upload.wikimedia.org/wikipedia/commons/f/f1/Cheomseongdae.jpg",
+        photoCaption: "국보 제31호 경주 첨성대 (신라 선덕여왕 별 관측대)",
+        culture: "불국사, 석굴암, 첨성대",
+        specialty: "황남빵, 찰보리빵",
+        keyword: "신라 천년의 수도",
+        shapeIcon: "🏛️",
+        shapeHighlight: "토함산·남산 천년 왕경 분지",
+        shapeDesc: "토함산과 남산에 아늑하게 둘러싸이고 형산강이 흐르는 천년 분지 지형",
+        shapeSvg: `<svg viewBox="0 0 60 50" fill="none"><ellipse cx="30" cy="25" rx="22" ry="16" fill="#1e293b" stroke="#eab308" stroke-width="2"/><path d="M18 30 Q 30 14 42 30" stroke="#38bdf8" stroke-width="2.5" fill="none"/><circle cx="30" cy="22" r="4" fill="#fbbf24"/></svg>`,
+        story: "천년 동안 신라의 도읍지였던 경주는 도시 전체가 지붕 없는 거대한 박물관이에요! 유네스코 세계유산 불국사와 석굴암, 밤하늘 별을 관측하던 첨성대가 우뚝 서 있답니다.",
+        quiz: {
+          question: "지도에 📍 깃발이 꽂힌 [경상북도] 지역은 신라의 천년 수도였던 역사 도시예요. 이 지역의 대표 문화재와 특산품으로 바르게 짝지어진 것은?",
+          options: [
+            "문화재: 석굴암·불국사 / 특산품: 황남빵",
+            "문화재: 수원화성 / 특산품: 왕갈비",
+            "문화재: 오죽헌 / 특산품: 초당순두부",
+            "문화재: 한옥마을 / 특산품: 전주비빔밥"
+          ],
+          answer: "문화재: 석굴암·불국사 / 특산품: 황남빵",
+          explanation: "경주는 신라의 도읍지로 불국사, 석굴암, 첨성대 등 신라 문화유산이 가득하며, 달콤한 팥이 든 황남빵이 유명해요!"
+        }
+      },
+      {
+        id: "map_dokdo",
+        name: "울릉도·독도",
+        province: "경상북도",
+        x: 92, y: 28,
+        photoUrl: "images/dokdo.webp",
+        photoCaption: "천연기념물 제336호 대한민국 동쪽 끝 독도 비경",
+        culture: "독도 천연보호구역, 독도 의용수비대 유적",
+        specialty: "울릉도 오징어, 호박엿, 명이나물",
+        keyword: "대한민국 아침을 가장 먼저 여는 동쪽 끝 우리 땅",
+        shapeIcon: "🏝️",
+        shapeHighlight: "동도·서도 쌍둥이 화산암 섬",
+        shapeDesc: "동해 깊은 해저에서 솟아오른 웅장한 해저 화산체의 두 봉우리 바위섬 지형",
+        shapeSvg: `<svg viewBox="0 0 60 50" fill="none"><path d="M12 36 L22 18 L30 36 Z" fill="#d97706" stroke="#fde047" stroke-width="1.5"/><path d="M34 36 L44 14 L52 36 Z" fill="#b45309" stroke="#fde047" stroke-width="1.5"/><line x1="6" y1="36" x2="56" y2="36" stroke="#38bdf8" stroke-width="3"/></svg>`,
+        story: "동해 바다 깊은 곳 화산 활동으로 솟아오른 소중한 화산섬이에요. 신라 지증왕 때 이사부 장군이 우산국을 복속한 이래 역사적·지리적·국제법적으로 명백한 대한민국의 고유 영토입니다. 해풍에 말린 오징어가 유명해요.",
+        quiz: {
+          question: "지도에 📍 깃발이 꽂힌 대한민국 가장 동쪽 끝 섬은 역사적·국제법적으로 명백한 우리의 영토예요. 이 지역의 자연유산과 특산품은?",
+          options: [
+            "천연기념물: 독도 천연보호구역 / 특산품: 울릉도 오징어·호박엿",
+            "천연기념물: 거문도 등대 / 특산품: 흑산도 홍어",
+            "천연기념물: 마라도 천연보호구역 / 특산품: 자리돔",
+            "천연기념물: 백령도 두무진 / 특산품: 까나리액젓"
+          ],
+          answer: "천연기념물: 독도 천연보호구역 / 특산품: 울릉도 오징어·호박엿",
+          explanation: "독도는 대한민국 가장 동쪽 끝 천연기념물 화산섬이며, 인근 울릉도의 싱싱한 오징어와 달콤한 호박엿이 특산물입니다."
+        }
+      },
+      {
+        id: "map_tongyeong",
+        name: "통영",
+        province: "경상남도",
+        x: 64, y: 73,
+        photoUrl: "images/tongyeong.jpg",
+        photoCaption: "국보 제305호 통영 삼도수군통제영 망일루와 세병관",
+        culture: "세병관, 한산도 이충무공 유적",
+        specialty: "충무김밥, 통영 꿀빵, 굴",
+        keyword: "동양의 나폴리 & 충무공 이순신의 바다",
+        shapeIcon: "⚓",
+        shapeHighlight: "한려수도 리아스식 다도해 반도",
+        shapeDesc: "바다로 길게 뻗은 반도와 수많은 섬이 천연 방파제를 이루는 다도해 지형",
+        shapeSvg: `<svg viewBox="0 0 60 50" fill="none"><path d="M22 8 C 22 24, 38 24, 38 42" stroke="#38bdf8" stroke-width="4.5" stroke-linecap="round"/><circle cx="18" cy="28" r="5" fill="#059669"/><circle cx="42" cy="22" r="4" fill="#059669"/><circle cx="35" cy="38" r="3" fill="#059669"/></svg>`,
+        story: "임진왜란 때 이순신 장군이 삼도수군통제영을 두었던 구국의 바다예요. 한산도 대첩의 승리가 서려 있는 유적지와 조선 수군의 본영 건물인 국보 세병관이 남아있습니다. 바다 뱃사람들이 먹던 충무김밥과 굴이 명물이에요.",
+        quiz: {
+          question: "지도에 📍 깃발이 꽂힌 [경상남도] 해안 지역은 이순신 장군의 한산대첩 승리가 깃든 바다 도시예요. 대표 문화재와 특산품은?",
+          options: [
+            "문화재: 삼도수군통제영(세병관) / 특산품: 통영 굴·충무김밥",
+            "문화재: 진주성 / 특산품: 진주 비빔밥",
+            "문화재: 해인사 대장경판 / 특산품: 합천 도자기",
+            "문화재: 자갈치시장 / 특산품: 기장 미역"
+          ],
+          answer: "문화재: 삼도수군통제영(세병관) / 특산품: 통영 굴·충무김밥",
+          explanation: "통영은 이순신 장군의 통제영이 있던 역사 도시로 세병관이 있으며, 싱싱한 남해 굴과 충무김밥이 특산물입니다."
+        }
+      },
+      {
+        id: "map_jeonju",
+        name: "전주",
+        province: "전라북도",
+        x: 40, y: 56,
+        photoUrl: "images/jeonju.webp",
+        photoCaption: "전주 한옥마을의 전통 기와지붕과 고즈넉한 골목길",
+        culture: "전주 한옥마을, 경기전, 풍남문",
+        specialty: "전주비빔밥, 한지, 콩나물국밥",
+        keyword: "조선 왕실의 본향 & 맛의 고장",
+        shapeIcon: "🍚",
+        shapeHighlight: "완산칠봉과 전주천 부채꼴 분지",
+        shapeDesc: "동남쪽 완산칠봉 산지와 서북쪽 호남평야가 완만하게 이어지는 부채꼴 지형",
+        shapeSvg: `<svg viewBox="0 0 60 50" fill="none"><path d="M12 36 Q 30 10 48 36 Z" fill="#15803d" fill-opacity="0.45" stroke="#4ade80" stroke-width="2"/><path d="M30 18 Q 32 30 38 40" stroke="#38bdf8" stroke-width="2.5"/></svg>`,
+        story: "전주는 조선 태조 이성계의 어진(초상화)을 모신 경기전과 700여 채의 전통 한옥이 모여 있는 한옥마을이 유명해요. 알록달록 오색 나물이 어우러진 비빔밥의 본고장입니다.",
+        quiz: {
+          question: "지도에 📍 깃발이 꽂힌 [전라북도] 지역은 한옥마을과 맛있는 전통음식으로 유명해요. 이 지역의 대표 문화재와 특산품은 무엇일까요?",
+          options: [
+            "문화재: 전주 한옥마을·경기전 / 특산품: 전주비빔밥",
+            "문화재: 하회마을 / 특산품: 안동 간고등어",
+            "문화재: 도산서원 / 특산품: 영주 사과",
+            "문화재: 대한다원 / 특산품: 보성 녹차"
+          ],
+          answer: "문화재: 전주 한옥마을·경기전 / 특산품: 전주비빔밥",
+          explanation: "전주는 고즈넉한 한옥마을과 태조 이성계의 어진을 모신 경기전이 있으며, 대한민국 대표 음식 전주비빔밥의 고향입니다."
+        }
+      },
+      {
+        id: "map_suncheon",
+        name: "순천",
+        province: "전라남도",
+        x: 47, y: 71,
+        photoUrl: "images/suncheon.jpg",
+        photoCaption: "유네스코 세계유산 순천만 갯벌·습지와 갈대밭",
+        culture: "순천만 습지, 낙안읍성 민속마을, 선암사",
+        specialty: "순천만 칠게, 꼬막정식, 매실",
+        keyword: "세계 5대 연안습지 & 대한민국 생태수도",
+        shapeIcon: "🌾",
+        shapeHighlight: "순천만 S자 갯골과 원형 갈대군락",
+        shapeDesc: "동천과 이사천이 만나며 빚어낸 거대한 원형 갈대밭과 바닷길 갯골 지형",
+        shapeSvg: `<svg viewBox="0 0 60 50" fill="none"><path d="M15 10 Q 30 20 25 32 Q 20 44 45 42" stroke="#38bdf8" stroke-width="4" fill="none"/><circle cx="34" cy="24" r="8" fill="#ca8a04" fill-opacity="0.7"/><circle cx="20" cy="36" r="6" fill="#16a34a" fill-opacity="0.7"/></svg>`,
+        story: "광활한 갈대밭과 갯벌에 흑두루미와 온갖 철새들이 날아드는 세계적인 생태 보고예요. 조선 시대 성곽과 초가집 원형이 그대로 보존되어 주민들이 실제로 살고 있는 낙안읍성도 있습니다.",
+        quiz: {
+          question: "지도에 📍 깃발이 꽂힌 [전라남도] 지역은 광활한 갈대밭과 조선 시대 초가마을(낙안읍성)이 유명한 생태 도시예요. 올바른 짝꿍은?",
+          options: [
+            "자연·문화유산: 순천만 습지·낙안읍성 / 특산품: 칠게·매실",
+            "자연·문화유산: 우포늪 / 특산품: 창녕 양파",
+            "자연·문화유산: 주왕산 / 특산품: 청송 사과",
+            "자연·문화유산: 금강하구둑 / 특산품: 서천 한산모시"
+          ],
+          answer: "자연·문화유산: 순천만 습지·낙안읍성 / 특산품: 칠게·매실",
+          explanation: "순천은 유네스코 세계유산 순천만 갯벌·습지와 조선 시대 성곽 마을인 낙안읍성이 살아 숨 쉬는 생태 문화 도시입니다."
+        }
+      },
+      {
+        id: "map_boseong",
+        name: "보성",
+        province: "전라남도",
+        x: 38, y: 72,
+        photoUrl: "https://upload.wikimedia.org/wikipedia/commons/b/bc/Bo-seong_Tea_Field_-_panoramio_-_Cho%27s.jpg",
+        photoCaption: "산비탈을 따라 굽이치는 초록빛 보성 대한다원 녹차밭",
+        culture: "대한다원 녹차밭, 벌교 태백산맥 문학관",
+        specialty: "보성 녹차, 벌교 꼬막",
+        keyword: "초록빛 차향기 가득한 고장",
+        shapeIcon: "🍵",
+        shapeHighlight: "득량만 해풍과 계단식 차밭 능선",
+        shapeDesc: "득량만 바다 안개와 활성산 비탈을 깎아 만든 녹색 계단식 차밭 지형",
+        shapeSvg: `<svg viewBox="0 0 60 50" fill="none"><path d="M10 38 Q 30 34 50 38" stroke="#10b981" stroke-width="3"/><path d="M14 30 Q 30 26 46 30" stroke="#059669" stroke-width="3"/><path d="M18 22 Q 30 18 42 22" stroke="#047857" stroke-width="3"/></svg>`,
+        story: "온화한 기후와 알맞은 강수량 덕분에 고려 시대부터 차를 재배해 온 차(茶)의 고향이에요. 산비탈을 따라 초록빛 카펫처럼 펼쳐진 대한다원 녹차밭은 장관을 이룹니다. 갯벌에서 나는 벌교 꼬막도 으뜸이에요.",
+        quiz: {
+          question: "지도에 📍 깃발이 꽂힌 [전라남도] 남해안 지역은 초록빛 계단식 밭이 끝없이 펼쳐진 곳이에요. 이 지역의 대표 명소와 특산품은?",
+          options: [
+            "명소: 대한다원 녹차밭 / 특산품: 보성 녹차·벌교 꼬막",
+            "명소: 순천만 습지 / 특산품: 나주 배",
+            "명소: 담양 죽녹원 / 특산품: 영광 굴비",
+            "명소: 해남 땅끝마을 / 특산품: 완도 전복"
+          ],
+          answer: "명소: 대한다원 녹차밭 / 특산품: 보성 녹차·벌교 꼬막",
+          explanation: "보성은 전국 최대의 녹차 생산지로 아름다운 대한다원이 있으며, 청정 갯벌에서 잡히는 벌교 꼬막이 일품입니다."
+        }
+      },
+      {
+        id: "map_jeju",
+        name: "제주",
+        province: "제주특별자치도",
+        x: 28, y: 89,
+        photoUrl: "images/jeju.jpg",
+        photoCaption: "유네스코 세계자연유산 성산일출봉 수중 화산체",
+        culture: "성산일출봉, 만장굴, 제주 칠머리당영등굿",
+        specialty: "제주 감귤·한라봉, 흑돼지, 옥돔",
+        keyword: "화산이 빚어낸 세계자연유산의 보물섬",
+        shapeIcon: "🌋",
+        shapeHighlight: "한라산 중심의 타원형 화산섬",
+        shapeDesc: "가운데 우뚝 솟은 한라산과 360여 개의 오름이 완만하게 퍼진 타원형 화산섬",
+        shapeSvg: `<svg viewBox="0 0 60 50" fill="none"><ellipse cx="30" cy="26" rx="24" ry="15" fill="#15803d" fill-opacity="0.5" stroke="#4ade80" stroke-width="2"/><ellipse cx="30" cy="24" rx="8" ry="5" fill="#78350f"/><circle cx="30" cy="23" r="2.5" fill="#fde047"/></svg>`,
+        story: "한라산 화산 폭발로 만들어진 아름다운 화산섬이에요. 용암이 흘러 만든 거대한 만장굴과 바다 위 분화구 성산일출봉은 유네스코 세계자연유산입니다. 따뜻한 햇살을 받고 자란 감귤이 대표 특산물이에요.",
+        quiz: {
+          question: "지도에 📍 깃발이 꽂힌 남쪽 끝 섬 지역은 유네스코 세계자연유산에 등재된 화산섬이에요. 이 지역의 대표 문화재(자연유산)와 특산품은?",
+          options: [
+            "자연유산: 성산일출봉·만장굴 / 특산품: 제주 감귤",
+            "문화재: 한산도 이순신 유적 / 특산품: 거제 유자",
+            "문화재: 진도 남도진성 / 특산품: 진도 홍주",
+            "자연유산: 독도 / 특산품: 울릉도 오징어"
+          ],
+          answer: "자연유산: 성산일출봉·만장굴 / 특산품: 제주 감귤",
+          explanation: "제주도는 유네스코 세계자연유산인 성산일출봉과 만장굴이 있으며, 새콤달콤한 감귤과 한라봉이 대표 특산물입니다."
+        }
+      }
+    ];
+
+    let currentMapIndex = 0;
+    let currentMapQuiz = null;
+    let selectedMapAnswer = "";
+    let earnedStamps = [];
+    let mapQuestIndex = 1;
+
+    // 🌟 국토 탐구관: 특정 지역으로 부드럽게 줌인하고 지형 모양 팝업 표시
+    function zoomToRegion(item) {
+      if (!item) return;
+      const viewport = document.getElementById('map-zoom-viewport');
+      const resetBtn = document.getElementById('btn-map-zoom-reset');
+      const popover = document.getElementById('region-shape-popover');
+      if (!viewport || !popover) return;
+
+      // 1) 지도를 해당 핀 위치 중심으로 부드럽게 2.2배 확대
+      viewport.style.transformOrigin = `${item.x}% ${item.y}%`;
+      viewport.style.transform = 'scale(2.2)';
+
+      // 2) 1배율 리셋 버튼 활성화
+      if (resetBtn) {
+        resetBtn.classList.add('visible');
+      }
+
+      // 3) 팝업 데이터 주입
+      const badgeEl = document.getElementById('shape-region-badge');
+      const iconEl = document.getElementById('shape-icon');
+      const nameEl = document.getElementById('shape-name');
+      const highlightEl = document.getElementById('shape-highlight');
+      const descEl = document.getElementById('shape-desc');
+      const svgWrap = document.getElementById('shape-svg-wrap');
+
+      if (badgeEl) badgeEl.innerText = `${item.province} · ${item.name}`;
+      if (iconEl) iconEl.innerText = item.shapeIcon || '📍';
+      if (nameEl) nameEl.innerText = item.name;
+      if (highlightEl) highlightEl.innerText = item.shapeHighlight || `${item.name} 지형 특징`;
+      if (descEl) descEl.innerText = item.shapeDesc || item.story;
+      if (svgWrap) svgWrap.innerHTML = item.shapeSvg || '';
+
+      // 4) 팝업 위치: 윗쪽 지역(서울, 수원, 강릉 등)이나 가장자리를 눌러도 잘림 없이 지도 정중앙에 시원하게 배치
+      popover.style.left = '50%';
+      popover.style.top = '50%';
+      popover.style.transform = 'translate(-50%, -50%)';
+      popover.classList.add('visible');
+    }
+
+    // 🌟 지도 1배율(원래 크기)로 스무스하게 복귀
+    function resetMapZoom() {
+      const viewport = document.getElementById('map-zoom-viewport');
+      const resetBtn = document.getElementById('btn-map-zoom-reset');
+      const popover = document.getElementById('region-shape-popover');
+      if (viewport) {
+        viewport.style.transform = 'scale(1)';
+      }
+      if (resetBtn) {
+        resetBtn.classList.remove('visible');
+      }
+      if (popover) {
+        popover.classList.remove('visible');
+      }
+    }
+
+    // 🌟 지형 팝업 닫기
+    function closeShapePopover(event) {
+      if (event) event.stopPropagation();
+      const popover = document.getElementById('region-shape-popover');
+      if (popover) {
+        popover.classList.remove('visible');
+      }
+    }
+
+    // 🌟 [🎯 이 지역 문제 풀기] 클릭 시
+    function startRegionQuiz() {
+      closeShapePopover();
+      const questionCard = document.getElementById('map-question-text');
+      if (questionCard) {
+        questionCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    // 지도 핀 렌더링 (핀 클릭 시 부드러운 줌인 & 지형 모양 팝업 오픈)
+    function renderMapPins() {
+      const container = document.getElementById('map-pins-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      KOREA_MAP_EXPLORE_DATA.forEach(item => {
+        const isTarget = currentMapQuiz && (item.id === currentMapQuiz.id);
+        const pin = document.createElement('div');
+        pin.className = 'map-pin' + (isTarget ? ' target' : '');
+        pin.style.left = `${item.x}%`;
+        pin.style.top = `${item.y}%`;
+        pin.innerHTML = `
+          <div class="pin-icon">${isTarget ? '📍' : '📌'}</div>
+          <div class="pin-text">${item.name}</div>
+        `;
+        pin.onclick = (e) => {
+          e.stopPropagation();
+          loadSpecificMapQuestion(item.id);
+          zoomToRegion(item);
+        };
+        container.appendChild(pin);
+      });
+    }
+
+    // 여권 스탬프 바 렌더링
+    function renderPassportStamps() {
+      const wrap = document.getElementById('passport-stamps-list');
+      const countEl = document.getElementById('passport-count');
+      if (!wrap) return;
+
+      wrap.innerHTML = '';
+      if (countEl) {
+        countEl.innerText = `${earnedStamps.length} / ${KOREA_MAP_EXPLORE_DATA.length}개 탐험 완료`;
+      }
+
+      KOREA_MAP_EXPLORE_DATA.forEach(item => {
+        const isUnlocked = earnedStamps.includes(item.id);
+        const chip = document.createElement('span');
+        chip.id = 'stamp-chip-' + item.id;
+        chip.className = 'stamp-chip' + (isUnlocked ? ' unlocked' : '');
+        chip.innerText = isUnlocked ? `${item.name} 💮` : item.name;
+        wrap.appendChild(chip);
+      });
+    }
+
+    // 지도 퀴즈 로드 (순차적 코스 진행 & 한 사이클 내 중복 방지)
+    function loadMapQuestion(index) {
+      selectedMapAnswer = "";
+      if (typeof index === 'number') {
+        currentMapIndex = index % KOREA_MAP_EXPLORE_DATA.length;
+      }
+      try { localStorage.setItem('social_map_index', currentMapIndex); } catch (e) {}
+      currentMapQuiz = KOREA_MAP_EXPLORE_DATA[currentMapIndex];
+      renderMapQuiz(currentMapQuiz);
+    }
+
+    // 다음 지역으로 넘어가기 (1 -> 2 -> ... -> 12 순차 코스 완주 후 다음 사이클)
+    function nextMapQuestion() {
+      document.getElementById('result-modal').style.display = 'none';
+      selectedMapAnswer = "";
+      mapQuestIndex++;
+      // 12개 지역을 한 사이클 동안 절대 겹치지 않고 1칸씩 순차적으로 전진
+      currentMapIndex = (currentMapIndex + 1) % KOREA_MAP_EXPLORE_DATA.length;
+      loadMapQuestion(currentMapIndex);
+      // 만약 이미 줌 상태였다면 다음 지역으로 부드럽게 카메라 줌 이동
+      const viewport = document.getElementById('map-zoom-viewport');
+      if (viewport && viewport.style.transform && viewport.style.transform.includes('scale(2.2)')) {
+        zoomToRegion(currentMapQuiz);
+      }
+    }
+
+    // 지도 핀 직접 클릭 시 해당 지역으로 이동하고, 이후 그 자리에서부터 순차 전진
+    function loadSpecificMapQuestion(id) {
+      const foundIdx = KOREA_MAP_EXPLORE_DATA.findIndex(item => item.id === id);
+      if (foundIdx !== -1) {
+        selectedMapAnswer = "";
+        currentMapIndex = foundIdx;
+        loadMapQuestion(currentMapIndex);
+      }
+    }
+
+    function renderMapQuiz(item) {
+      renderMapPins();
+      renderPassportStamps();
+
+      const orderInCycle = currentMapIndex + 1;
+      document.getElementById('map-quest-tag').innerText = `Map Quest #${mapQuestIndex} (${orderInCycle}/${KOREA_MAP_EXPLORE_DATA.length} 코스)`;
+      document.getElementById('map-region-badge').innerText = item.name;
+      document.getElementById('map-province-tag').innerText = item.province;
+      document.getElementById('map-story-region').innerText = `${item.name} 이야기`;
+      document.getElementById('map-story-keyword').innerText = item.keyword;
+      document.getElementById('map-story-text').innerText = item.story;
+      document.getElementById('map-question-text').innerText = item.quiz.question;
+
+
+      // 문화재 실물 사진 카드 렌더링
+      const photoImg = document.getElementById('map-photo-img');
+      const photoCaption = document.getElementById('map-photo-caption-text');
+      const photoRegionPill = document.getElementById('map-photo-region-pill');
+      if (photoImg) {
+        photoImg.style.opacity = '1';
+        photoImg.onerror = function() {
+          if (!this.dataset.tried) {
+            this.dataset.tried = '1';
+            if (this.src && this.src.indexOf('/social/images/') !== -1) {
+              this.src = this.src.replace('/social/images/', '/images/');
+              return;
+            } else if (this.src && this.src.indexOf('/images/') !== -1) {
+              this.src = this.src.replace('/images/', '/social/images/');
+              return;
+            }
+          }
+          this.style.opacity = '0.3';
+        };
+        photoImg.dataset.tried = '';
+        photoImg.src = item.photoUrl || '';
+        photoImg.alt = `${item.name} 대표 문화재 사진`;
+      }
+      if (photoCaption) {
+        photoCaption.innerText = item.photoCaption || item.culture;
+      }
+      if (photoRegionPill) {
+        photoRegionPill.innerText = item.name;
+      }
+
+      const answerBox = document.getElementById('map-answer-box');
+      answerBox.innerHTML = '';
+
+      const mcGrid = document.createElement('div');
+      mcGrid.className = 'mc-cards-grid';
+
+      if (item.quiz && item.quiz.answer) {
+        item.quiz.answer = cleanOptionText(item.quiz.answer);
+      }
+
+      (item.quiz.options || []).forEach((opt, idx) => {
+        const cleanedOpt = cleanOptionText(opt);
+        const optionItem = document.createElement('div');
+        optionItem.className = 'mc-card-option';
+        optionItem.innerHTML = `
+          <div class="mc-num-badge">${idx + 1}</div>
+          <div style="flex:1;">${cleanedOpt}</div>
+        `;
+        optionItem.onclick = () => selectMapOption(cleanedOpt, optionItem);
+        mcGrid.appendChild(optionItem);
+      });
+
+      answerBox.appendChild(mcGrid);
+    }
+
+    function selectMapOption(val, item) {
+      selectedMapAnswer = val;
+      document.querySelectorAll('#map-answer-box .mc-card-option').forEach(i => i.classList.remove('selected'));
+      item.classList.add('selected');
+    }
+
+    async function submitMapAnswer() {
+      if (!selectedMapAnswer || selectedMapAnswer.trim() === "") {
+        alert("정답 보기를 선택해 주세요!");
+        return;
+      }
+
+      const isCorrect = (selectedMapAnswer === currentMapQuiz.quiz.answer);
+      solvedCount++;
+
+      const userName = localStorage.getItem("edumate_current_account") || "김에듀";
+      const ptype = localStorage.getItem("edumate_pokemon_type") || "grass";
+
+      try {
+        const res = await fetch('/social/quiz/grade', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            user_name: userName,
+            question_id: currentMapQuiz.id || "map_quiz",
+            question_type: "multiple_choice",
+            question: currentMapQuiz.quiz.question,
+            correct_answer: currentMapQuiz.quiz.answer,
+            user_answer: selectedMapAnswer,
+            base_score: 3,
+            unit_name: "우리나라 국토 여행",
+            grade: 4,
+            pokemon_type: ptype
+          })
+        });
+        if (res.ok) {
+          const gRes = await res.json();
+          currentLogId = gRes.log_id || null;
+          currentIsFavorite = 0;
+          if (gRes.total_score !== undefined) totalScore = gRes.total_score;
+          if (gRes.level_info) {
+            currentLevelInfo = gRes.level_info;
+          }
+        }
+      } catch (err) {}
+
+      if (isCorrect) {
+        correctCount++;
+        streakCount++;
+        const isFirst = !earnedStamps.includes(currentMapQuiz.id);
+        if (isFirst) {
+          earnedStamps.push(currentMapQuiz.id);
+        }
+        // 💮 도장 쾅! 리얼 스탬프 슬램 이펙트 & 사운드 발동
+        triggerStampSlamEffect(currentMapQuiz.name, currentMapQuiz.id);
+      } else {
+        streakCount = 0;
+      }
+
+      updateDashboardStats();
+      renderPassportStamps();
+
+      // 모달 표시
+      const modal = document.getElementById('result-modal');
+      const emoji = document.getElementById('modal-emoji');
+      const title = document.getElementById('modal-title');
+      const nextBtn = document.getElementById('btn-result-next');
+      if (nextBtn) {
+        nextBtn.innerText = "다음 지역 탐험하기 ➔";
+      }
+
+      if (isCorrect) {
+        emoji.innerText = "💮";
+        title.innerText = `[${currentMapQuiz.name}] 탐험 스탬프 획득!`;
+        title.style.color = "#d97706";
+        scoreEl.innerText = "+3점 (배점: 3점)";
+      } else {
+        emoji.innerText = "🧭";
+        title.innerText = "아쉬워요! 해설을 확인해 볼까요?";
+        title.style.color = "#e11d48";
+        scoreEl.innerText = "+0점 (배점: 3점)";
+      }
+
+      const myAns = selectedMapAnswer || '미선택';
+      const rightAns = currentMapQuiz.quiz.answer || '';
+
+      const compareBox = `
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:12px;">
+          <div style="background:${isCorrect ? '#f0fdf4' : '#fff1f2'}; border:1.5px solid ${isCorrect ? '#86efac' : '#fca5a5'}; border-radius:10px; padding:9px 12px;">
+            <span style="font-size:11px; font-weight:700; color:${isCorrect ? '#166534' : '#991b1b'}; display:block; margin-bottom:2px;">
+              ${isCorrect ? '✅ 내가 선택한 정답' : '❌ 내가 선택한 오답'}
+            </span>
+            <div style="font-size:13px; font-weight:800; color:${isCorrect ? '#15803d' : '#dc2626'}; word-break:break-all;">
+              ${myAns}
+            </div>
+          </div>
+          <div style="background:#f0f9ff; border:1.5px solid #7dd3fc; border-radius:10px; padding:9px 12px;">
+            <span style="font-size:11px; font-weight:700; color:#0369a1; display:block; margin-bottom:2px;">
+              🎯 바른 정답
+            </span>
+            <div style="font-size:13px; font-weight:800; color:#0284c7; word-break:break-all;">
+              ${rightAns}
+            </div>
+          </div>
+        </div>
+      `;
+
+      const photoBanner = `
+        <div style="display:flex; gap:12px; align-items:center; background:#fffbeb; border:1px solid #fde68a; border-radius:12px; padding:10px 14px; margin-bottom:12px;">
+          <img src="${currentMapQuiz.photoUrl}" onerror="if(!this.dataset.t){this.dataset.t=1;this.src=this.src.includes('/social/images/')?this.src.replace('/social/images/','/images/'):this.src.replace('/images/','/social/images/');}" style="width:68px; height:68px; border-radius:8px; object-fit:cover; border:1.5px solid #f59e0b;" alt="문화재 썸네일"/>
+          <div style="flex:1; font-size:13px; line-height:1.5;">
+            <strong style="color:#b45309;">🏛️ 대표 유산:</strong> ${currentMapQuiz.photoCaption}<br/>
+            <strong style="color:#b45309;">🍞 대표 특산품:</strong> ${currentMapQuiz.specialty}
+          </div>
+        </div>
+      `;
+
+      const explanationSection = `
+        <div style="background:#ffffff; border:1.5px solid #cbd5e1; border-radius:12px; padding:12px 14px;">
+          <div style="font-weight:800; color:#0f172a; font-size:13px; margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+            <span>💡 왜 그럴까요? (핵심 개념 상세 해설)</span>
+          </div>
+          <div style="color:#334155; font-size:13px; line-height:1.65;">
+            ${currentMapQuiz.quiz.explanation}
+          </div>
+        </div>
+      `;
+
+      feedback.innerHTML = compareBox + photoBanner + explanationSection;
+
+      // 즐겨찾기 상태 초기화
+      const favIcon = document.getElementById('fav-icon');
+      const favText = document.getElementById('fav-text');
+      if (favIcon) favIcon.innerText = '☆';
+      if (favText) favText.innerText = '즐겨찾기';
+
+      // Log ID 태그 표시
+      const logTag = document.getElementById('result-log-id-tag');
+      if (logTag) logTag.innerText = currentLogId ? `기록 ID: #${currentLogId}` : '';
+
+      // AI 후속 질문창 초기화
+      const chatHistory = document.getElementById('ai-chat-history');
+      if (chatHistory) {
+        chatHistory.style.display = 'none';
+        chatHistory.innerHTML = '';
+      }
+      const chatInput = document.getElementById('ai-followup-input');
+      if (chatInput) chatInput.value = '';
+
+      modal.style.display = 'flex';
+    }
+
+    // =========================================================================
+    // 💮 국토 탐구관 리얼 도장 쾅! 스탬프 이펙트 & 사운드
+    // =========================================================================
+    function triggerStampSlamEffect(regionName, regionId) {
+      // 1. 화면 진동 효과
+      document.body.classList.remove('stamp-screen-shake');
+      void document.body.offsetWidth; // Reflow 강제
+      document.body.classList.add('stamp-screen-shake');
+      setTimeout(() => document.body.classList.remove('stamp-screen-shake'), 450);
+
+      // 2. 도장 타격음 및 팡파르 효과음 재생
+      playStampSlamAudio();
+
+      // 3. 화면 오버레이 스탬프 엘리먼트 생성
+      const overlay = document.createElement('div');
+      overlay.className = 'stamp-slam-overlay';
+
+      const today = new Date();
+      const dateStr = `${today.getFullYear()}.${String(today.getMonth() + 1).padStart(2, '0')}.${String(today.getDate()).padStart(2, '0')}`;
+
+      overlay.innerHTML = `
+        <div class="stamp-slam-seal">
+          <div class="stamp-seal-badge">★ 2022 개정 초등사회 ★</div>
+          <div class="stamp-seal-region">${regionName}</div>
+          <div class="stamp-seal-verdict">탐험 완주 인증 💮</div>
+          <div class="stamp-seal-date">${dateStr} PASSED</div>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+
+      // 4. 스탬프 폭죽 파티클 24개 생성
+      const emojis = ['💮', '✨', '⭐', '🎉', '🌟', '🎊', '📍', '🎖️'];
+      for (let i = 0; i < 24; i++) {
+        const p = document.createElement('div');
+        p.className = 'stamp-particle';
+        p.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+        const angle = (Math.PI * 2 * i) / 24 + (Math.random() * 0.2 - 0.1);
+        const dist = 110 + Math.random() * 130;
+        const tx = Math.cos(angle) * dist + 'px';
+        const ty = Math.sin(angle) * dist + 'px';
+        const rot = (Math.random() * 360 - 180) + 'deg';
+        p.style.setProperty('--tx', tx);
+        p.style.setProperty('--ty', ty);
+        p.style.setProperty('--rot', rot);
+        p.style.left = '50%';
+        p.style.top = '50%';
+        overlay.appendChild(p);
+      }
+
+      // 5. 1.7초 후 부드럽게 페이드아웃 제거
+      setTimeout(() => {
+        overlay.style.transition = 'opacity 0.4s ease-out';
+        overlay.style.opacity = '0';
+        setTimeout(() => overlay.remove(), 400);
+      }, 1600);
+
+      // 6. 하단 여권 칩에 방금 획득 강조 애니메이션 적용
+      setTimeout(() => {
+        const chip = document.getElementById(`stamp-chip-${regionId}`);
+        if (chip) {
+          chip.classList.add('just-stamped');
+        }
+      }, 300);
+    }
+
+    // 🔊 Web Audio API를 활용한 도장 타격음 + 탐험 성공 팡파르 화음
+    function playStampSlamAudio() {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+
+        // [쿵!] 묵직한 고무 도장 타격음
+        const thudOsc = ctx.createOscillator();
+        const thudGain = ctx.createGain();
+        thudOsc.type = 'triangle';
+        thudOsc.frequency.setValueAtTime(160, ctx.currentTime);
+        thudOsc.frequency.exponentialRampToValueAtTime(28, ctx.currentTime + 0.18);
+        thudGain.gain.setValueAtTime(1.0, ctx.currentTime);
+        thudGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.22);
+        thudOsc.connect(thudGain);
+        thudGain.connect(ctx.destination);
+        thudOsc.start();
+        thudOsc.stop(ctx.currentTime + 0.25);
+
+        // [탁!] 잉크 압착 스냅음
+        const snapOsc = ctx.createOscillator();
+        const snapGain = ctx.createGain();
+        snapOsc.type = 'sine';
+        snapOsc.frequency.setValueAtTime(380, ctx.currentTime);
+        snapOsc.frequency.exponentialRampToValueAtTime(60, ctx.currentTime + 0.08);
+        snapGain.gain.setValueAtTime(0.6, ctx.currentTime);
+        snapGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.1);
+        snapOsc.connect(snapGain);
+        snapGain.connect(ctx.destination);
+        snapOsc.start();
+        snapOsc.stop(ctx.currentTime + 0.12);
+
+        // [샤라랑~✨] 도장 찍힌 직후 밝은 성공 화음 (도-미-솔-높은도)
+        const chord = [523.25, 659.25, 783.99, 1046.50];
+        chord.forEach((freq, idx) => {
+          const cOsc = ctx.createOscillator();
+          const cGain = ctx.createGain();
+          const startTime = ctx.currentTime + 0.08 + idx * 0.06;
+          cOsc.type = 'sine';
+          cOsc.frequency.setValueAtTime(freq, startTime);
+          cGain.gain.setValueAtTime(0.2, startTime);
+          cGain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.35);
+          cOsc.connect(cGain);
+          cGain.connect(ctx.destination);
+          cOsc.start(startTime);
+          cOsc.stop(startTime + 0.4);
+        });
+      } catch (e) {}
+    }
+
+
+    // 다음 문제로 넘어가기 (팝업 닫고 새로운 문제 즉시 호출!)
+    function nextQuestion() {
+      document.getElementById('result-modal').style.display = 'none';
+      if (currentMode === 'map') {
+        nextMapQuestion();
+      } else {
+        selectedAnswer = "";
+        questIndex++;
+        loadNewQuestion();
+      }
+    }
+
+    // =========================================================================
+    // 8. 📸 문화재 사진 크게 보기 모달 제어 로직 (새 창 열기 지원)
+    // =========================================================================
+    function openPhotoModal() {
+      if (!currentMapQuiz) return;
+      const modal = document.getElementById('photo-zoom-modal');
+      const img = document.getElementById('zoom-modal-img');
+      const title = document.getElementById('zoom-modal-title');
+      const caption = document.getElementById('zoom-modal-caption');
+      const keyword = document.getElementById('zoom-modal-keyword');
+      const badge = document.getElementById('zoom-modal-badge');
+
+      if (img) {
+        img.onerror = function() {
+          if (!this.dataset.tried) {
+            this.dataset.tried = '1';
+            if (this.src && this.src.indexOf('/social/images/') !== -1) {
+              this.src = this.src.replace('/social/images/', '/images/');
+              return;
+            } else if (this.src && this.src.indexOf('/images/') !== -1) {
+              this.src = this.src.replace('/images/', '/social/images/');
+              return;
+            }
+          }
+        };
+        img.dataset.tried = '';
+        img.src = currentMapQuiz.photoUrl || '';
+      }
+      if (title) title.innerText = `${currentMapQuiz.province} ${currentMapQuiz.name} 문화유산`;
+      if (caption) caption.innerText = currentMapQuiz.photoCaption || currentMapQuiz.culture;
+      if (keyword) keyword.innerText = `🧭 ${currentMapQuiz.keyword} | 🌾 특산품: ${currentMapQuiz.specialty}`;
+      if (badge) badge.innerText = `📸 ${currentMapQuiz.name}`;
+
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function closePhotoModal() {
+      const modal = document.getElementById('photo-zoom-modal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    function openPhotoInNewTab() {
+      if (currentMapQuiz && currentMapQuiz.photoUrl) {
+        window.open(currentMapQuiz.photoUrl, '_blank');
+      }
+    }
+
+    // ESC 키 누르면 큰 사진 모달 닫기
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closePhotoModal();
+      }
+    });
+
+    // =========================================================================
+    // 9. 🌟 EduMate AI 팀 공통 DB (quiz_logs.py) & 포켓몬 진화 등급 / 즐겨찾기 / AI 챗
+    // =========================================================================
+    async function initEdumateUser() {
+      const user = localStorage.getItem("edumate_current_account") || "김에듀";
+      const ptype = localStorage.getItem("edumate_pokemon_type") || "grass";
+      try {
+        const res = await fetch(`/social/user/status?user_name=${encodeURIComponent(user)}&grade=4&pokemon_type=${encodeURIComponent(ptype)}`);
+        if (res.ok) {
+          const data = await res.json();
+          totalScore = data.total_score || 0;
+          currentLevelInfo = data.level_info || null;
+          applyUserStatus(data);
+        }
+      } catch (e) {
+        console.error("initEdumateUser error:", e);
+      }
+    }
+
+    function applyUserStatus(data) {
+      if (!data) return;
+      const user = data.user_name || "김에듀";
+      const lv = data.level_info || {};
+
+      const userNickEl = document.getElementById("user-nickname");
+      if (userNickEl) {
+        userNickEl.innerHTML = `<span>${user}</span> <span style="font-size:12px; color:${lv.color_hex || '#0284c7'}; font-weight:800;">(${lv.full_title || '알 5티어'})</span>`;
+      }
+
+      const topLevelEl = document.getElementById("top-level");
+      if (topLevelEl) {
+        topLevelEl.innerText = lv.full_title || "알 5티어";
+        topLevelEl.style.color = lv.color_hex || "#0284c7";
+      }
+
+      const totalScoreEl = document.getElementById("total-score");
+      if (totalScoreEl) {
+        totalScoreEl.innerText = `${data.total_score || totalScore}점`;
+      }
+
+      const expLabelEl = document.getElementById("exp-level-label");
+      if (expLabelEl) {
+        expLabelEl.innerText = `${lv.pokemon_name || '알'} (${lv.tier || 5}티어)`;
+      }
+
+      const expTextEl = document.getElementById("exp-text");
+      if (expTextEl) {
+        expTextEl.innerText = `${lv.current_exp || 0} / ${lv.tier_exp_max || 10} XP (다음: ${lv.next_tier_remain || 0} XP)`;
+      }
+
+      const expBarEl = document.getElementById("exp-bar");
+      if (expBarEl) {
+        expBarEl.style.width = `${lv.progress_pct || 0}%`;
+        expBarEl.style.backgroundColor = lv.color_hex || "#22c55e";
+      }
+
+      const avatarEl = document.querySelector(".profile-avatar");
+      if (avatarEl) {
+        avatarEl.innerText = lv.pokemon_emoji || (lv.stage_num === 1 ? "🥚" : "🐾");
+      }
+    }
+
+    async function toggleCurrentFavorite() {
+      if (!currentLogId) {
+        alert("풀이 기록을 저장하는 중입니다. 잠시 후 다시 눌러주세요!");
+        return;
+      }
+      try {
+        const res = await fetch('/social/favorite/toggle', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ log_id: currentLogId })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          currentIsFavorite = data.is_favorite;
+          const favIcon = document.getElementById('fav-icon');
+          const favText = document.getElementById('fav-text');
+          if (favIcon) favIcon.innerText = currentIsFavorite ? '★' : '☆';
+          if (favText) favText.innerText = currentIsFavorite ? '즐겨찾기 됨' : '즐겨찾기';
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function askAIFollowup() {
+      const input = document.getElementById('ai-followup-input');
+      const q = input.value.trim();
+      if (!q) return;
+      if (!currentLogId) {
+        alert("풀이 기록 ID를 확인하는 중입니다.");
+        return;
+      }
+      input.value = '';
+      const btn = document.getElementById('btn-ai-followup');
+      if (btn) btn.disabled = true;
+
+      const chatBox = document.getElementById('ai-chat-history');
+      chatBox.style.display = 'block';
+      chatBox.innerHTML += `
+        <div style="margin-bottom:6px; color:#0369a1;"><strong>🙋 나:</strong> ${q}</div>
+        <div style="margin-bottom:6px; color:#64748b;" id="ai-loading-msg">🤖 AI 선생님이 생각 중입니다...</div>
+      `;
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      try {
+        const res = await fetch('/social/chat/ask', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            log_id: currentLogId,
+            question: q,
+            user_name: localStorage.getItem("edumate_current_account") || "김에듀"
+          })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          const loadEl = document.getElementById('ai-loading-msg');
+          if (loadEl) loadEl.remove();
+          chatBox.innerHTML += `<div style="margin-bottom:8px; color:#1e293b; background:#f1f5f9; padding:6px 10px; border-radius:6px; border-left:3px solid #0284c7;"><strong>🤖 AI 튜터:</strong> ${data.reply}</div>`;
+          chatBox.scrollTop = chatBox.scrollHeight;
+        }
+      } catch (e) {
+        console.error(e);
+      } finally {
+        if (btn) btn.disabled = false;
+      }
+    }
+
+    async function loadWeakestUnitQuiz() {
+      const user = localStorage.getItem("edumate_current_account") || "김에듀";
+      try {
+        const res = await fetch(`/social/user/weakest?user_name=${encodeURIComponent(user)}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.unit) {
+            alert(`과거에 많이 틀렸던 취약 단원 [${data.unit}]의 맞춤 문제를 출제합니다!`);
+            const sel = document.getElementById('unit-select');
+            if (sel) {
+              sel.value = data.unit;
+            }
+            loadNewQuestion();
+            return;
+          }
+        }
+      } catch (e) {}
+      alert("아직 오답 기록이 없습니다! 다양한 문제를 먼저 풀어보세요 😊");
+    }
+
+    // =========================================================================
+    // 💡 [초등 사회 전문] 매일 새롭게 만나는 31일치 시사 상식 및 자동 순환 시스템
+    // =========================================================================
+    const CURRENT_AFFAIRS_LIST = [
+      {
+        icon: "🌍",
+        category: "환경/지구촌",
+        title: "지구를 살리는 약속, '탄소중립'이란?",
+        summary: "우리가 배출하는 탄소량과 흡수량을 같게 만들어 실질 배출량을 0으로 만드는 지구 살리기 운동이에요!",
+        detail: "석탄이나 석유 같은 화석 연료를 태우면 온실가스가 나와 지구가 점점 뜨거워져요(지구온난화). 이를 막기 위해 태양광, 풍력 같은 친환경 에너지를 쓰고, 나무를 많이 심어서 공기 중 탄소를 흡수하는 것이 바로 '탄소중립(Net-Zero)'이에요. 세계 모든 나라가 지구를 지키기 위해 탄소 배출을 줄이기로 약속했답니다.",
+        actionTip: "가까운 거리는 걸어 다니거나 자전거를 타고, 방을 나올 때 전등을 끄는 작은 습관도 훌륭한 탄소중립 실천이에요!"
+      },
+      {
+        icon: "🤖",
+        category: "디지털/미래",
+        title: "인공지능(AI)과 '딥페이크', 디지털 시민 윤리",
+        summary: "진짜 같은 가짜 영상이나 목소리를 만드는 딥페이크! 올바르게 구별하고 조심해야 해요.",
+        detail: "인공지능 기술이 빠르게 발전하면서 사람의 얼굴이나 목소리를 진짜처럼 정교하게 흉내 내는 '딥페이크' 기술이 등장했어요. 영화나 게임에서는 재미있는 특수효과로 쓰이지만, 가짜 뉴스를 만들거나 친구의 얼굴을 함부로 합성해 괴롭히는 일은 절대 해서는 안 될 큰 범죄예요.",
+        actionTip: "인터넷에 떠도는 사진이나 소식을 무조건 믿지 말고, 다른 사람의 얼굴과 개인정보를 소중히 지켜주는 멋진 디지털 시민이 되어봐요!"
+      },
+      {
+        icon: "💰",
+        category: "경제/생활",
+        title: "과자 가격이 왜 올랐을까요? '인플레이션(물가 상승)'",
+        summary: "물건의 가격(물가)이 전반적으로 지속해서 오르는 경제 현상을 '인플레이션'이라고 해요.",
+        detail: "우리가 좋아하는 떡볶이나 과자, 학용품 가격이 오르면 같은 용돈으로 살 수 있는 물건의 양이 줄어들어요(돈의 가치 하락). 전쟁이나 기후 변화로 원자재가 부족해지거나, 시장에 돈이 너무 많이 풀렸을 때 인플레이션이 발생해요. 반대로 물가가 계속 떨어지는 현상은 '디플레이션'이라고 불러요.",
+        actionTip: "용돈 기입장을 쓰면서 꼭 필요한 물건인지 한 번 더 생각하고 계획적으로 소비하는 습관을 길러보세요!"
+      },
+      {
+        icon: "🗳️",
+        category: "정치/민주주의",
+        title: "민주주의의 꽃! 선거의 '4대 원칙'",
+        summary: "보통 선거, 평등 선거, 직접 선거, 비밀 선거는 모든 국민의 소중한 한 표를 지키는 헌법의 약속이에요!",
+        detail: "일정한 나이가 된 국민이라면 성별이나 재산에 상관없이 누구나 투표할 수 있는 보통 선거, 누구나 똑같이 공평하게 한 표씩만 행사하는 평등 선거, 다른 사람을 대신 시키지 않고 내가 직접 투표소에 가는 직접 선거, 누구를 뽑았는지 아무도 알 수 없도록 보장하는 비밀 선거가 민주주의를 지탱하는 4대 기둥이에요.",
+        actionTip: "학급 회장 선거에서도 친한 친구라고 무조건 뽑지 말고, 공약을 꼼꼼히 살피며 소중한 한 표를 비밀리에 행사해요!"
+      },
+      {
+        icon: "🛒",
+        category: "지구촌/무역",
+        title: "생산자를 생각하는 착한 소비, '공정무역(Fair Trade)'",
+        summary: "개발도상국의 가난한 농부들에게 정당한 대가를 지급하고 만든 물건을 구매하는 착한 소비 운동이에요.",
+        detail: "우리가 맛있게 먹는 달콤한 초콜릿이나 바나나는 열대 지방의 어린이나 농부들이 땀 흘려 수확한 경우가 많아요. 하지만 중간 유통 상인들이 이익을 독차지하면 정작 일한 사람들은 가난에 허덕이게 돼요. 공정무역은 생산자에게 정당한 가격을 지불하여 아이들이 학교에 가고 병원에 갈 수 있도록 도와줍니다.",
+        actionTip: "마트에 갔을 때 착한 초콜릿이나 과일 포장지에 '공정무역 인증 마크(Fairtrade)'가 있는지 찾아보세요!"
+      },
+      {
+        icon: "🇰🇷",
+        category: "국토/역사",
+        title: "동쪽 바다의 아름다운 우리 땅, '독도'",
+        summary: "독도는 역사적, 지리적, 국제법적으로 명백한 대한민국의 소중한 고유 영토예요!",
+        detail: "신라 지증왕 때 이사부 장군이 우산국을 우리 영토로 복속시킨 이후, '삼국사기'나 '세종실록지리지' 등 수많은 옛 문헌과 지도에 독도가 우리 영토로 기록되어 있어요. 동도와 서도를 비롯한 89개의 바위섬으로 이루어진 독도는 괭이갈매기의 천국이자 미래 에너지 자원인 '메탄하이드레이트'가 풍부한 보물섬이랍니다.",
+        actionTip: "독도가 왜 우리 땅인지 역사적 근거를 당당하게 설명할 수 있는 멋진 대한민국 어린이가 되어봐요!"
+      },
+      {
+        icon: "⚖️",
+        category: "사회/헌법",
+        title: "권력이 한곳에 쏠리지 않게! '삼권분립'",
+        summary: "국가 권력을 국회(입법부), 정부(행정부), 법원(사법부)의 셋으로 나누어 서로 견제하고 균형을 이루어요.",
+        detail: "만약 한 사람이나 한 기관이 모든 권력을 가지면 국민의 자유와 권리를 함부로 침해할 수 있어요. 그래서 법을 만드는 국회, 법에 따라 나라 살림을 운영하는 정부, 법을 지켰는지 공정하게 판결하는 법원이 서로를 감시하고 견제하도록 대한민국 헌법에 규정해 두었습니다.",
+        actionTip: "삼권분립은 독재를 막고 국민의 자유와 평등을 지키기 위한 최고의 민주적 안전장치예요!"
+      },
+      {
+        icon: "🔋",
+        category: "과학/사회",
+        title: "무한하고 깨끗한 에너지, '신재생 에너지'",
+        summary: "햇빛, 바람, 물처럼 자연에서 끊임없이 얻을 수 있고 환경오염을 일으키지 않는 착한 에너지예요.",
+        detail: "석탄과 석유 같은 화석 연료는 매연을 내뿜고 언젠가 고갈되지만, 태양광 발전, 풍력 발전, 수력 발전은 온실가스를 배출하지 않아요. 최근에는 친환경 수소를 이용해 달리는 수소 버스와 전기차가 도로를 달리며 우리 도시의 공기를 깨끗하게 만들어 주고 있어요.",
+        actionTip: "안 쓰는 전자제품의 플러그를 뽑는 '대기전력 줄이기'도 소중한 에너지를 아끼는 작은 실천이랍니다!"
+      },
+      {
+        icon: "🏙️",
+        category: "도시/미래",
+        title: "첨단 기술로 똑똑해진 우리 동네, '스마트 시티'",
+        summary: "인공지능과 사물인터넷(IoT) 기술을 활용해 교통 체증이나 쓰레기 문제를 똑똑하게 해결하는 미래형 도시예요.",
+        detail: "버스가 몇 분 뒤에 오는지 실시간으로 알려주는 정류장 안내판, 보행자가 있을 때 켜지는 횡단보도 바닥 신호등, 쓰레기가 차면 스스로 압축하는 스마트 쓰레기통 등이 모두 스마트 시티 기술이에요. 도시의 에너지 낭비를 줄이고 주민들이 안전하고 편리하게 생활할 수 있도록 도와줍니다.",
+        actionTip: "우리 동네 길거리나 공원에도 인공지능이나 IoT 기술이 숨어 있는지 호기심을 갖고 관찰해 보세요!"
+      },
+      {
+        icon: "🌾",
+        category: "지리/생활",
+        title: "우리 고장의 자부심과 정성, '지리적 표시제'",
+        summary: "특정 지역의 기후와 지리적 특성 덕분에 뛰어난 품질을 가진 농수산물에 국가가 인증을 부여하는 제도예요!",
+        detail: "'보성 녹차', '순창 전통고추장', '이천 쌀', '안동 간고등어'처럼 오랜 전통과 자연환경의 혜택으로 유명해진 지역 특산품은 정부가 품질을 공인하고 보호해 줘요. 이를 통해 가짜 특산물을 방지하고 지역 농어민들의 정당한 소득을 보장해 준답니다.",
+        actionTip: "주말에 마트에 갔을 때 과일이나 쌀 포장지에서 초록색 '지리적 표시 등록 마크'를 찾아보세요!"
+      },
+      {
+        icon: "🚀",
+        category: "우주/기술",
+        title: "우리 기술로 우주를 향해 쏜 '누리호'",
+        summary: "대한민국이 순수 독자 기술로 개발하여 인공위성을 우주 궤도에 쏘아 올린 자랑스러운 우주 발사체(로켓)예요.",
+        detail: "우리나라는 누리호 발사에 성공하면서 세계에서 7번째로 실용 위성을 스스로 쏘아 올릴 수 있는 독자적인 우주 수송 능력을 갖춘 우주 강국이 되었어요. 인공위성은 일기예보, 스마트폰 지도 내비게이션, 해양 관측 등 우리 일상생활에 필수적인 정보를 지구로 보내주고 있답니다.",
+        actionTip: "밤하늘의 별과 인공위성을 바라보며 미래 우주 과학자나 우주 탐험가의 꿈을 키워보는 건 어떨까요?"
+      },
+      {
+        icon: "🤝",
+        category: "세계/인권",
+        title: "세계 모든 어린이의 행복을 지키는 '유엔 아동권리협약'",
+        summary: "전 세계 모든 어린이가 차별 없이 안전하고 건강하게 자랄 수 있도록 보장하는 전 세계적인 약속이에요!",
+        detail: "1989년 유엔(UN)에서 만장일치로 채택된 협약으로, 어린이가 마땅히 누려야 할 4대 기본 권리인 생존할 권리, 위험과 폭력으로부터 보호받을 권리, 교육받고 마음껏 놀 수 있는 발달할 권리, 자신의 생각을 자유롭게 표현하는 참여할 권리를 명시하고 있어요.",
+        actionTip: "나의 권리가 소중한 만큼, 주변 친구들의 생각과 권리도 소중히 배려하고 존중하는 어린이가 되어요!"
+      },
+      {
+        icon: "👶",
+        category: "인구/사회",
+        title: "함께 살아가는 지혜, '저출생·고령화 사회'",
+        summary: "태어나는 아기 수는 줄어들고(저출생), 어르신의 비율은 점점 늘어나는(고령화) 사회 현상이에요.",
+        detail: "대한민국은 전 세계에서 가장 빠르게 고령화 사회로 접어들고 있어요. 일할 수 있는 젊은 세대가 줄어들면 경제가 어려워질 수 있고, 어르신들을 위한 의료와 복지 시설이 더 많이 필요해져요. 아이 키우기 좋은 환경을 만들고 어르신들이 보람차게 사실 수 있도록 온 사회가 함께 고민하고 있습니다.",
+        actionTip: "지하철이나 버스에서 어르신께 자리를 먼저 양보하고, 할머니 할아버지께 다정하게 안부 인사를 건네보세요!"
+      },
+      {
+        icon: "♻️",
+        category: "환경/생활",
+        title: "쓰레기를 보물로! '새활용(업사이클링)'",
+        summary: "단순 재활용(리사이클링)을 넘어, 버려지는 물건에 디자인과 기능을 더해 더 멋진 제품으로 재탄생시키는 일이에요.",
+        detail: "트럭 덮개 천막으로 멋진 방수가방을 만들거나, 버려지는 플라스틱 페트병을 녹여 실을 뽑아 튼튼한 옷과 신발을 만드는 것이 업사이클링이에요. 쓰레기를 줄이고 자원을 아끼는 동시에 기발한 창의성을 뽐낼 수 있는 최고의 친환경 예술이자 산업이랍니다.",
+        actionTip: "다 쓴 양말이나 유리병을 버리기 전에 예쁜 연필꽂이나 인형으로 새롭게 변신시킬 수 있을지 상상해 보세요!"
+      },
+      {
+        icon: "📱",
+        category: "정보/복지",
+        title: "모두가 누리는 디지털 세상, '정보 격차(디지털 디바이드)'",
+        summary: "스마트폰이나 키오스크 같은 디지털 기기를 다루지 못해 일상생활에서 소외되거나 불편을 겪는 현상이에요.",
+        detail: "식당이나 무인 매장에 가면 무인 주문기(키오스크)가 많아요. 젊은 사람들은 쉽게 주문하지만, 기계 사용이 낯선 어르신들은 밥 한 끼 사 먹기조차 힘들 때가 있어요. 누구나 차별 없이 편리한 기술의 혜택을 누릴 수 있도록 쉬운 기기를 만들고 디지털 교육을 제공해야 해요.",
+        actionTip: "패스트푸드점이나 무인 매장에서 키오스크 사용을 어려워하시는 어르신을 뵈면 먼저 친절하게 도와드려요!"
+      },
+      {
+        icon: "🍱",
+        category: "사회/공존",
+        title: "다름이 모여 만드는 아름다움, '문화 다양성'",
+        summary: "서로 다른 인종, 언어, 국적, 종교를 가진 사람들이 편견 없이 어울려 살아가는 다문화 사회의 가치예요.",
+        detail: "우리나라에도 외국인 친구나 다문화 가정 친구들이 많이 살고 있어요. '샐러드 볼'처럼 여러 채소와 과일이 고유의 맛을 잃지 않고 소스와 어우러져 맛있는 샐러드가 되듯, 다양한 문화가 서로의 차이를 인정하고 존중할 때 우리 사회는 더욱 풍요롭고 지혜로워진답니다.",
+        actionTip: "생김새나 피부색, 출신 나라가 다르다고 편견을 갖지 말고, 친구의 문화와 전통을 열린 마음으로 배워보세요!"
+      },
+      {
+        icon: "🏯",
+        category: "역사/문화",
+        title: "전 인류가 함께 지키는 보물, '유네스코 세계유산'",
+        summary: "뛰어난 보편적 가치를 지녀 전 세계가 함께 보호해야 할 인류 공동의 소중한 유산이에요.",
+        detail: "수원 화성, 석굴암·불국사, 창덕궁, 해인사 장경판전, 갯벌 등 대한민국에는 세계가 인정한 훌륭한 세계유산이 많아요. 세계유산은 문화유산, 자연유산, 복합유산으로 나뉘며, 우리 조상들의 뛰어난 과학기술과 예술혼, 그리고 아름다운 자연이 담겨 있어 후손들에게 온전히 물려주어야 해요.",
+        actionTip: "우리나라의 유네스코 세계유산 목록을 인터넷에서 찾아보고, 주말에 가족과 함께 유적지 탐방 계획을 세워보세요!"
+      },
+      {
+        icon: "🚗",
+        category: "교통/미래",
+        title: "운전자가 없어도 척척! '자율주행 자동차'",
+        summary: "인공지능 카메라와 센서가 도로 상황을 스스로 파악해 사람 대신 안전하게 운전해 주는 미래 자동차예요.",
+        detail: "자율주행차는 운전자의 졸음운전이나 부주의로 인한 교통사고를 크게 줄여주고, 운전이 힘든 어르신이나 장애인도 편리하게 이동할 수 있도록 도와줘요. 하지만 혹시라도 사고가 났을 때 법적 책임 문제나 도로 해킹 위험 같은 해결해야 할 과제들도 함께 남아있답니다.",
+        actionTip: "자율주행 버스나 셔틀이 달리는 시범 도로 소식을 뉴스에서 찾아보며 미래 도시 교통의 변화를 상상해 봐요!"
+      },
+      {
+        icon: "🏡",
+        category: "지방자치/정치",
+        title: "우리 마을 문제는 우리가 해결해요, '주민자치'",
+        summary: "내가 사는 고장의 문제를 주민들이 직접 회의하고 투표하여 스스로 해결해 나가는 '풀뿌리 민주주의'예요.",
+        detail: "골목길 가로등이 어둡거나 놀이터 시설이 낡았을 때, 주민자치회나 주민투표를 통해 주민들이 함께 의견을 모으고 지방의회와 구청에 건의해요. 내가 사는 지역에 주인의식을 갖고 참여할 때 우리 동네는 더욱 안전하고 행복한 보금자리가 될 수 있어요.",
+        actionTip: "우리 아파트나 동네 게시판에 붙은 공고문을 읽어보며, 마을에 어떤 일들이 일어나고 있는지 관심을 가져보세요!"
+      },
+      {
+        icon: "🐾",
+        category: "환경/윤리",
+        title: "생명을 대하는 따뜻한 태도, '동물복지(Animal Welfare)'",
+        summary: "인간과 함께 살아가는 동물들이 배고픔이나 고통 없이 본래의 습성을 누리며 살 수 있도록 보장하는 권리예요.",
+        detail: "반려동물을 끝까지 책임지고 사랑해 주는 것뿐만 아니라, 농장에서 자라는 닭이나 돼지도 좁은 철창 대신 햇빛과 흙을 밟으며 자랄 수 있도록 돕는 것이 동물복지예요. 모든 생명은 소중하며, 동물이 건강하고 행복해야 사람의 건강과 지구 생태계도 함께 건강해진답니다.",
+        actionTip: "달걀을 살 때 닭이 자유롭게 뛰놀며 낳은 방사 유정란이나 '동물복지 인증 마크'가 있는지 확인해 보세요!"
+      },
+      {
+        icon: "💱",
+        category: "경제/무역",
+        title: "세계 돈과 우리 돈을 바꾸는 비율, '환율'",
+        summary: "우리나라의 '원화'와 다른 나라의 돈(미국 달러 등)을 서로 맞바꿀 때 적용되는 교환 비율이에요.",
+        detail: "예를 들어 1달러를 사기 위해 1,000원이 필요했다가 1,400원이 되면 '환율이 올랐다(원화 가치 하락)'고 해요. 환율이 오르면 외국에서 사 오는 기름이나 과일, 해외여행 비용이 비싸지지만, 우리나라가 외국에 파는 자동차나 반도체는 수출 경쟁력이 높아지는 등 경제에 큰 영향을 줍니다.",
+        actionTip: "외국 여행을 가거나 해외 직구를 할 때 환율이 어떻게 변하는지 부모님과 함께 경제 뉴스를 확인해 보세요!"
+      },
+      {
+        icon: "🌊",
+        category: "해양/국토",
+        title: "바다 한가운데 세워진 과학 요새, '이어도 종합해양과학기지'",
+        summary: "마라도 남서쪽에 위치한 수중 암초 '이어도'에 세워진 대한민국의 첨단 해양 과학 관측 기지예요.",
+        detail: "옛 제주 사람들에게 '전설의 섬'으로 불리던 이어도는 물속 4.6m 아래에 잠겨 있는 바위섬이에요. 대한민국은 2003년 이곳에 거대한 종합해양과학기지를 세워 태풍의 경로를 가장 먼저 예측하고, 해양 기상과 환경을 24시간 실시간으로 감시하며 소중한 해양 주권을 지키고 있습니다.",
+        actionTip: "태풍이 우리나라로 올라올 때 이어도 해양과학기지가 전해주는 소중한 기상 정보를 뉴스에서 눈여겨보세요!"
+      },
+      {
+        icon: "🐟",
+        category: "환경/지구촌",
+        title: "바다를 위협하는 눈에 보이지 않는 적, '미세플라스틱'",
+        summary: "5mm보다 작은 아주 미세한 플라스틱 조각으로, 바다 생물과 결국 우리 몸속까지 위협하고 있어요.",
+        detail: "바다에 버려진 플라스틱 컵이나 비닐봉지는 햇빛과 파도에 잘게 부서져 미세플라스틱이 돼요. 물고기와 조개가 이를 먹이로 착각해 삼키고, 먹이사슬을 타고 결국 우리 식탁에 오르는 생선에도 축적될 수 있어요. 플라스틱 사용 자체를 줄이는 근본적인 노력이 절실합니다.",
+        actionTip: "음료수를 마실 때 플라스틱 빨대 대신 다회용 빨대를 쓰고, 텀블러를 챙겨 다니는 습관을 들여보세요!"
+      },
+      {
+        icon: "📰",
+        category: "미디어/비판적사고",
+        title: "진짜와 가짜를 똑똑하게 가려내는 '미디어 리터러시'",
+        summary: "수많은 미디어 정보 중에서 거짓이나 왜곡된 내용을 비판적으로 분석하고 올바르게 수용하는 능력이에요.",
+        detail: "유튜브나 SNS에는 사람들의 클릭을 유도하기 위해 자극적인 거짓말을 담은 '가짜 뉴스(Fake News)'가 넘쳐나요. 팩트체크 없이 이를 그대로 믿고 친구들에게 공유하면 억울한 피해자가 생겨요. 뉴스를 볼 때는 누가 작성했는지, 신뢰할 만한 출처인지 꼭 의심해 보는 태도가 필요해요.",
+        actionTip: "어떤 충격적인 소식을 보았을 때 곧바로 믿지 말고, 공식 언론사 뉴스나 백과사전으로 한 번 더 확인해요!"
+      },
+      {
+        icon: "📜",
+        category: "역사/영토",
+        title: "10월 25일은 무슨 날? '독도의 날'과 칙령 제41호",
+        summary: "1900년 10월 25일, 고종 황제가 독도가 대한제국의 영토임을 법률로 만천하에 선포한 것을 기념하는 날이에요.",
+        detail: "대한제국 칙령 제41호는 울릉도를 '울도군'으로 승격시키고, 군수가 다스리는 구역에 '석도(독도)'를 명백히 포함한다고 법적으로 명시했어요. 이는 독도가 우리의 유구한 고유 영토임을 국제법적으로 확고히 증명하는 가장 강력하고 자랑스러운 역사적 기록이랍니다.",
+        actionTip: "10월 25일 독도의 날을 달력에 표시해 두고, 학교 친구들에게 대한제국 칙령 제41호의 의미를 들려주세요!"
+      },
+      {
+        icon: "⛺",
+        category: "세계/인권",
+        title: "지구 온난화로 집을 잃은 사람들, '기후난민'",
+        summary: "해수면 상승, 사막화, 홍수나 가뭄 같은 극단적인 기후 재앙으로 정든 고향을 떠나야 하는 이웃들이에요.",
+        detail: "남태평양의 아름다운 섬나라 투발루는 빙하가 녹아 바닷물이 차오르면서 국토가 물에 잠길 위기에 처해 있어요. 아프리카 사헬 지대는 심각한 가뭄으로 물과 식량이 없어 주민들이 삶의 터전을 잃고 있습니다. 기후위기는 단순한 날씨 문제가 아니라 지구촌 사람들의 생존과 인권의 문제예요.",
+        actionTip: "기후난민을 돕는 유니세프나 국제구호기구의 활동에 관심을 갖고, 에너지 절약으로 온실가스를 함께 줄여요!"
+      },
+      {
+        icon: "🚲",
+        category: "경제/공유",
+        title: "사지 않고 함께 쓰는 똑똑한 소비, '공유경제'",
+        summary: "물건이나 공간, 서비스를 개인이 혼자 소유하지 않고 여러 사람이 필요할 때 빌려 쓰는 협력적 경제 모델이에요.",
+        detail: "서울시의 공공자전거 '따릉이', 필요할 때 몇 시간만 빌려 타는 렌터카, 남는 방을 여행자에게 빌려주는 숙박 공유 서비스가 대표적이에요. 물건을 새로 사느라 드는 돈을 아낄 수 있고, 자원 낭비와 쓰레기 배출을 줄여 환경 보호에도 큰 도움이 된답니다.",
+        actionTip: "도서관에서 책을 빌려 읽거나, 작아진 옷과 장난감을 동생이나 이웃과 나누어 쓰는 것도 멋진 공유경제예요!"
+      },
+      {
+        icon: "♿",
+        category: "복지/인권",
+        title: "모두에게 문턱 없는 세상, '유니버설 디자인(배리어프리)'",
+        summary: "장애인, 노인, 어린이, 임산부 등 모든 사람이 차별과 불편 없이 이용할 수 있도록 배려한 디자인이에요.",
+        detail: "휠체어나 유모차가 편하게 다닐 수 있는 완만한 경사로, 시각장애인을 위한 횡단보도 음향 신호기, 손 힘이 약한 어린이나 노약자도 쉽게 누를 수 있는 넓은 문 손잡이 등이 모두 유니버설 디자인이에요. 약자를 배려하는 디자인은 결국 우리 모두의 삶을 안전하고 편리하게 만들어 줍니다.",
+        actionTip: "학교나 지하철역에서 계단 옆 경사로나 점자 블록을 발견하면 왜 설치되었는지 그 따뜻한 배려를 되새겨봐요!"
+      },
+      {
+        icon: "💬",
+        category: "디지털/인성",
+        title: "얼굴이 안 보여도 예절은 필수! '사이버 불링 예방'",
+        summary: "카카오톡 단체방이나 게임 채팅, SNS에서 특정 친구를 따돌리거나 악플로 상처 주는 사이버 언어폭력을 막아요.",
+        detail: "화면 뒤에 숨어 상대방에게 비난과 욕설을 퍼붓거나 거짓 소문을 퍼뜨리는 행동은 피해 친구에게 씻을 수 없는 큰 상처와 고통을 줘요. 보이지 않는 가상공간일수록 상대방의 감정을 헤아리고, 내가 쓴 글이 다른 사람에게 어떤 영향을 미칠지 깊이 생각하는 네티켓이 필요합니다.",
+        actionTip: "온라인 채팅방에서 힘들어하는 친구가 있다면 따뜻하게 위로해 주고, 비난 댓글 대신 응원의 말을 건네보세요!"
+      },
+      {
+        icon: "🎯",
+        category: "지구촌/미래",
+        title: "더 나은 세상을 위한 17가지 약속, '지속가능발전목표(SDGs)'",
+        summary: "2030년까지 전 세계 모든 나라가 빈곤을 없애고 지구를 지키기 위해 유엔(UN)에서 채택한 공동의 목표예요.",
+        detail: "가난과 굶주림 없애기, 깨끗한 물과 위생, 기후변화 대응, 양질의 교육, 불평등 해소 등 17가지 세부 목표로 이루어져 있어요. 어느 한 사람도 소외되지 않고(Leave No One Behind), 미래 세대가 살아갈 지구 환경을 파괴하지 않으면서 풍요롭게 발전해 나가자는 인류의 약속입니다.",
+        actionTip: "유엔 SDGs 17개 목표 포스터를 찾아보고, 내가 학교와 집에서 지금 당장 실천할 수 있는 목표를 골라보세요!"
+      },
+      {
+        icon: "🕊️",
+        category: "통일/평화",
+        title: "평화의 염원과 생명의 쉼터, '비무장지대(DMZ)'",
+        summary: "6·25 전쟁 휴전 후 남과 북 사이에 설치된 완충 지대로, 70여 년간 사람의 발길이 닿지 않아 생태계의 보물이 되었어요.",
+        detail: "한반도 분단의 아픈 역사를 간직한 DMZ는 역설적으로 수십 년간 자연이 스스로 보존되면서 산양, 저어새, 수달 등 멸종위기 야생동물들의 평화로운 보금자리가 되었어요. 우리는 전쟁의 아픔을 치유하고 남북이 평화롭게 통일을 이루어 DMZ를 평화와 생명의 땅으로 꽃피워야 합니다.",
+        actionTip: "지도에서 휴전선과 DMZ의 위치를 찾아보고, 한반도에 평화가 찾아왔을 때 기차를 타고 유럽까지 달리는 꿈을 꿔보세요!"
+      }
+    ];
+
+    // 💡 [초등 사회 전문] 31일치 93개 시사상식 중 "오늘의 3개 상식" 추출 및 롤링 시스템
+    // =========================================================================
+    function getToday3Affairs() {
+      const all = (window.CURRENT_AFFAIRS_93_LIST && window.CURRENT_AFFAIRS_93_LIST.length >= 93)
+        ? window.CURRENT_AFFAIRS_93_LIST
+        : CURRENT_AFFAIRS_LIST;
+
+      const now = new Date();
+      const day = now.getDate(); // 1 ~ 31
+      // 하루에 3개씩: day 1 -> [0, 1, 2], day 2 -> [3, 4, 5], ..., day 31 -> [90, 91, 92]
+      const startIdx = ((day - 1) * 3) % all.length;
+      let todayList = all.slice(startIdx, startIdx + 3);
+      if (todayList.length < 3) {
+        todayList = todayList.concat(all.slice(0, 3 - todayList.length));
+      }
+      return { list: todayList, day: day, month: now.getMonth() + 1 };
+    }
+
+    let todayAffairsSlotIndex = 0; // 오늘 볼 수 있는 3개 중 현재 위치 (0, 1, 2)
+    let affairsTimerInterval = null;
+    let affairsRemainingSeconds = 300; // 5분 = 300초
+
+    function renderCurrentAffairs() {
+      const { list, day, month } = getToday3Affairs();
+      const item = list[todayAffairsSlotIndex];
+      if (!item) return;
+
+      const container = document.getElementById('home-current-affairs');
+      if (container) {
+        const center = container.querySelector('.ca-center-content');
+        if (center) {
+          center.style.opacity = '0';
+          setTimeout(() => {
+            const iconEl = document.getElementById('ca-icon');
+            const titleEl = document.getElementById('ca-title');
+            const summaryEl = document.getElementById('ca-summary');
+            const catEl = document.getElementById('ca-category-badge');
+            const idxEl = document.getElementById('ca-index-indicator');
+            const mainTagEl = container.querySelector('.ca-main-tag');
+
+            if (mainTagEl) {
+              mainTagEl.innerText = `💡 오늘의 시사 상식 (${month}.${day})`;
+            }
+
+            if (iconEl) iconEl.innerText = item.icon;
+            if (titleEl) titleEl.innerText = item.title;
+            if (summaryEl) summaryEl.innerText = item.summary;
+            if (catEl) catEl.innerText = item.category;
+            // 3개만 표시: 1 / 3, 2 / 3, 3 / 3
+            if (idxEl) idxEl.innerText = `${todayAffairsSlotIndex + 1} / 3`;
+            center.style.opacity = '1';
+          }, 150);
+        }
+      }
+    }
+
+    function updateAffairsProgress() {
+      const line = document.getElementById('ca-progress-line');
+      const timerText = document.getElementById('ca-timer-text');
+      if (line) {
+        const pct = (affairsRemainingSeconds / 300) * 100;
+        line.style.width = `${pct}%`;
+      }
+      if (timerText) {
+        const min = Math.floor(affairsRemainingSeconds / 60);
+        const sec = affairsRemainingSeconds % 60;
+        timerText.innerText = `⏱️ ${min}:${sec < 10 ? '0' : ''}${sec}`;
+      }
+    }
+
+    function startAffairsTimer() {
+      if (affairsTimerInterval) clearInterval(affairsTimerInterval);
+      affairsRemainingSeconds = 300;
+      updateAffairsProgress();
+
+      affairsTimerInterval = setInterval(() => {
+        affairsRemainingSeconds--;
+        updateAffairsProgress();
+        if (affairsRemainingSeconds <= 0) {
+          nextAffairsNews();
+        }
+      }, 1000);
+    }
+
+    // 다음 상식 보기 (오늘 제공되는 3개 안에서만 순환)
+    function nextAffairsNews(e) {
+      if (e) e.stopPropagation();
+      todayAffairsSlotIndex = (todayAffairsSlotIndex + 1) % 3;
+      renderCurrentAffairs();
+      startAffairsTimer();
+    }
+
+    // 이전 상식 보기 (오늘 제공되는 3개 안에서만 순환)
+    function prevAffairsNews(e) {
+      if (e) e.stopPropagation();
+      todayAffairsSlotIndex = (todayAffairsSlotIndex - 1 + 3) % 3;
+      renderCurrentAffairs();
+      startAffairsTimer();
+    }
+
+    function openCurrentAffairsModal() {
+      const { list, day } = getToday3Affairs();
+      const item = list[todayAffairsSlotIndex];
+      if (!item) return;
+
+      const catEl = document.getElementById('ca-modal-category');
+      const iconEl = document.getElementById('ca-modal-icon');
+      const titleEl = document.getElementById('ca-modal-title-text');
+      const summaryEl = document.getElementById('ca-modal-summary');
+      const detailEl = document.getElementById('ca-modal-detail');
+      const actionEl = document.getElementById('ca-modal-action');
+
+      if (catEl) catEl.innerText = `${item.category} · 오늘 상식 (${todayAffairsSlotIndex + 1} / 3)`;
+      if (iconEl) iconEl.innerText = item.icon;
+      if (titleEl) titleEl.innerText = item.title;
+      if (summaryEl) summaryEl.innerText = `💡 핵심 요약: ${item.summary}`;
+      if (detailEl) detailEl.innerText = item.detail;
+      if (actionEl) actionEl.innerText = item.actionTip;
+
+      const modal = document.getElementById('current-affairs-modal');
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function closeCurrentAffairsModal() {
+      const modal = document.getElementById('current-affairs-modal');
+      if (modal) modal.style.display = 'none';
+    }
+
+    // ESC 키 입력 시 열려있는 모달 및 팝업 닫기
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeResultModal();
+        closePhotoModal();
+        closeCurrentAffairsModal();
+        closeShapePopover();
+      }
+    });
+
+    // 🌟 화면 상태 복원 및 초기화 실행 (새로고침 시 현재 보던 화면 100% 복원!)
+    function restoreAndInitScreen() {
+      let savedGrade = '3~4학년군';
+      let savedMode = 'basic';
+      let savedMapIdx = 0;
+      try {
+        savedGrade = localStorage.getItem('social_current_grade') || '3~4학년군';
+        savedMode = localStorage.getItem('social_current_mode') || 'basic';
+        savedMapIdx = parseInt(localStorage.getItem('social_map_index') || '0', 10);
+      } catch (e) {}
+
+      // 1) 학년 버튼 활성화 및 단원 목록 채우기
+      const gradeBtns = document.querySelectorAll('.grade-pill-btn');
+      let targetBtn = gradeBtns[1]; // 기본 3~4학년군
+      if (savedGrade === '1~2학년군') targetBtn = gradeBtns[0];
+      else if (savedGrade === '3~4학년군') targetBtn = gradeBtns[1];
+      else if (savedGrade === '5~6학년군') targetBtn = gradeBtns[2];
+
+      currentGrade = savedGrade;
+      gradeBtns.forEach(b => b.classList.remove('active'));
+      if (targetBtn) targetBtn.classList.add('active');
+
+      const unitSelect = document.getElementById('unit-select');
+      if (unitSelect && UNITS_BY_GRADE[savedGrade]) {
+        unitSelect.innerHTML = '';
+        UNITS_BY_GRADE[savedGrade].forEach(unit => {
+          const opt = document.createElement('option');
+          opt.value = unit;
+          const gradeTag = UNIT_GRADE_TAGS[unit] ? `[${UNIT_GRADE_TAGS[unit]}] ` : '';
+          opt.innerText = `${gradeTag}${unit}`;
+          unitSelect.appendChild(opt);
+        });
+      }
+      renderUnitRoadmap(savedGrade);
+
+      // 2) 지도 퀴즈 인덱스 복원
+      if (!isNaN(savedMapIdx) && savedMapIdx >= 0) {
+        currentMapIndex = savedMapIdx % KOREA_MAP_EXPLORE_DATA.length;
+      }
+
+      // 3) 이전에 보던 모드로 복원 (지도 탐구관 / 심화 서술형 / 기본 퀴즈관)
+      switchMode(savedMode);
+
+      // 4) 대시보드 및 타이머 초기화
+      updateDashboardStats();
+      renderPassportStamps();
+      initEdumateUser();
+      renderCurrentAffairs();
+      startAffairsTimer();
+    }
+
+    restoreAndInitScreen();
+  </script>
+</body>
+</html>

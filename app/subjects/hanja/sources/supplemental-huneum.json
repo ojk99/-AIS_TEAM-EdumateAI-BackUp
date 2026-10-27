@@ -1,0 +1,4193 @@
+[
+  {
+    "character": "歌",
+    "meaning": "노래",
+    "reading": "가",
+    "accepted_huneum": [
+      "노래 가"
+    ]
+  },
+  {
+    "character": "街",
+    "meaning": "거리",
+    "reading": "가",
+    "accepted_huneum": [
+      "거리 가"
+    ]
+  },
+  {
+    "character": "各",
+    "meaning": "각각",
+    "reading": "각",
+    "accepted_huneum": [
+      "각각 각"
+    ]
+  },
+  {
+    "character": "干",
+    "meaning": "방패",
+    "reading": "간",
+    "accepted_huneum": [
+      "방패 간"
+    ]
+  },
+  {
+    "character": "强",
+    "meaning": "강할",
+    "reading": "강",
+    "accepted_huneum": [
+      "강할 강",
+      "나머지 강",
+      "바구미 강"
+    ]
+  },
+  {
+    "character": "個",
+    "meaning": "낱",
+    "reading": "개",
+    "accepted_huneum": [
+      "낱 개",
+      "치우칠 개"
+    ]
+  },
+  {
+    "character": "改",
+    "meaning": "고칠",
+    "reading": "개",
+    "accepted_huneum": [
+      "거듭할 개",
+      "고칠 개",
+      "바꿀 개"
+    ]
+  },
+  {
+    "character": "擧",
+    "meaning": "들",
+    "reading": "거",
+    "accepted_huneum": [
+      "들 거",
+      "받들 거",
+      "움직일 거",
+      "일걸을 거"
+    ]
+  },
+  {
+    "character": "犬",
+    "meaning": "개",
+    "reading": "견",
+    "accepted_huneum": [
+      "개 견",
+      "큰 개 견"
+    ]
+  },
+  {
+    "character": "谷",
+    "meaning": "골짜기",
+    "reading": "곡",
+    "accepted_huneum": [
+      "골짜기 곡"
+    ]
+  },
+  {
+    "character": "骨",
+    "meaning": "뼈",
+    "reading": "골",
+    "accepted_huneum": [
+      "뼈 골"
+    ]
+  },
+  {
+    "character": "久",
+    "meaning": "오랠",
+    "reading": "구",
+    "accepted_huneum": [
+      "오랠 구"
+    ]
+  },
+  {
+    "character": "句",
+    "meaning": "글귀",
+    "reading": "구",
+    "accepted_huneum": [
+      "글귀 구",
+      "글귀 귀",
+      "글귀절 구"
+    ]
+  },
+  {
+    "character": "救",
+    "meaning": "구원할",
+    "reading": "구",
+    "accepted_huneum": [
+      "구원할 구"
+    ]
+  },
+  {
+    "character": "弓",
+    "meaning": "활",
+    "reading": "궁",
+    "accepted_huneum": [
+      "활 궁"
+    ]
+  },
+  {
+    "character": "權",
+    "meaning": "권세",
+    "reading": "권",
+    "accepted_huneum": [
+      "권세 권"
+    ]
+  },
+  {
+    "character": "貴",
+    "meaning": "높을",
+    "reading": "귀",
+    "accepted_huneum": [
+      "귀할 귀",
+      "높을 귀"
+    ]
+  },
+  {
+    "character": "勤",
+    "meaning": "부지런할",
+    "reading": "근",
+    "accepted_huneum": [
+      "부지런할 근"
+    ]
+  },
+  {
+    "character": "根",
+    "meaning": "뿌리",
+    "reading": "근",
+    "accepted_huneum": [
+      "뿌리 근"
+    ]
+  },
+  {
+    "character": "禁",
+    "meaning": "금할",
+    "reading": "금",
+    "accepted_huneum": [
+      "금할 금"
+    ]
+  },
+  {
+    "character": "其",
+    "meaning": "그",
+    "reading": "기",
+    "accepted_huneum": [
+      "그 기"
+    ]
+  },
+  {
+    "character": "起",
+    "meaning": "일어날",
+    "reading": "기",
+    "accepted_huneum": [
+      "일어날 기"
+    ]
+  },
+  {
+    "character": "難",
+    "meaning": "어려울",
+    "reading": "난",
+    "accepted_huneum": [
+      "어려울 난"
+    ]
+  },
+  {
+    "character": "勞",
+    "meaning": "수고할",
+    "reading": "노",
+    "accepted_huneum": [
+      "수고할 노",
+      "일할 노",
+      "일할 로"
+    ]
+  },
+  {
+    "character": "丹",
+    "meaning": "붉을",
+    "reading": "단",
+    "accepted_huneum": [
+      "붉을 단",
+      "붉을 란"
+    ]
+  },
+  {
+    "character": "短",
+    "meaning": "짧을",
+    "reading": "단",
+    "accepted_huneum": [
+      "짧을 단"
+    ]
+  },
+  {
+    "character": "堂",
+    "meaning": "집",
+    "reading": "당",
+    "accepted_huneum": [
+      "집 당"
+    ]
+  },
+  {
+    "character": "代",
+    "meaning": "대신할",
+    "reading": "대",
+    "accepted_huneum": [
+      "대신할 대"
+    ]
+  },
+  {
+    "character": "刀",
+    "meaning": "칼",
+    "reading": "도",
+    "accepted_huneum": [
+      "칼 도"
+    ]
+  },
+  {
+    "character": "獨",
+    "meaning": "홀로",
+    "reading": "독",
+    "accepted_huneum": [
+      "홀로 독"
+    ]
+  },
+  {
+    "character": "讀",
+    "meaning": "읽을",
+    "reading": "독",
+    "accepted_huneum": [
+      "구절 두",
+      "읽을 독",
+      "읽을 두"
+    ]
+  },
+  {
+    "character": "斗",
+    "meaning": "말",
+    "reading": "두",
+    "accepted_huneum": [
+      "말 두"
+    ]
+  },
+  {
+    "character": "豆",
+    "meaning": "콩",
+    "reading": "두",
+    "accepted_huneum": [
+      "콩 두"
+    ]
+  },
+  {
+    "character": "頭",
+    "meaning": "머리",
+    "reading": "두",
+    "accepted_huneum": [
+      "머리 두"
+    ]
+  },
+  {
+    "character": "得",
+    "meaning": "얻을",
+    "reading": "득",
+    "accepted_huneum": [
+      "얻을 득"
+    ]
+  },
+  {
+    "character": "卵",
+    "meaning": "알",
+    "reading": "난",
+    "accepted_huneum": [
+      "알 난",
+      "알 란"
+    ]
+  },
+  {
+    "character": "冷",
+    "meaning": "차가울",
+    "reading": "냉",
+    "accepted_huneum": [
+      "차가울 냉",
+      "찰 냉",
+      "찰 랭"
+    ]
+  },
+  {
+    "character": "良",
+    "meaning": "좋을",
+    "reading": "량",
+    "accepted_huneum": [
+      "남편 량",
+      "어질 량",
+      "좋을 량"
+    ]
+  },
+  {
+    "character": "量",
+    "meaning": "헤아릴",
+    "reading": "량",
+    "accepted_huneum": [
+      "용량 량",
+      "헤아릴 량"
+    ]
+  },
+  {
+    "character": "歷",
+    "meaning": "지낼",
+    "reading": "력",
+    "accepted_huneum": [
+      "겪을 력",
+      "지날 력",
+      "지날 역",
+      "지낼 력"
+    ]
+  },
+  {
+    "character": "連",
+    "meaning": "잇닿을",
+    "reading": "련",
+    "accepted_huneum": [
+      "끌릴 련",
+      "연할 련",
+      "연할 연",
+      "이을 련",
+      "잇닿을 련"
+    ]
+  },
+  {
+    "character": "列",
+    "meaning": "줄",
+    "reading": "렬",
+    "accepted_huneum": [
+      "무리에 들어갈 렬",
+      "벌릴 렬",
+      "벌일 렬",
+      "벌일 열",
+      "베풀 렬",
+      "줄 렬",
+      "항렬 렬"
+    ]
+  },
+  {
+    "character": "留",
+    "meaning": "머무를",
+    "reading": "류",
+    "accepted_huneum": [
+      "그칠 류",
+      "머무를 류",
+      "오랠 류",
+      "횡사할 류"
+    ]
+  },
+  {
+    "character": "陸",
+    "meaning": "뭍",
+    "reading": "륙",
+    "accepted_huneum": [
+      "길 륙",
+      "두터울 륙",
+      "뛸 륙",
+      "뭍 륙",
+      "어긋날 륙"
+    ]
+  },
+  {
+    "character": "滿",
+    "meaning": "찰",
+    "reading": "만",
+    "accepted_huneum": [
+      "찰 만"
+    ]
+  },
+  {
+    "character": "望",
+    "meaning": "바랄",
+    "reading": "망",
+    "accepted_huneum": [
+      "바랄 망"
+    ]
+  },
+  {
+    "character": "賣",
+    "meaning": "팔",
+    "reading": "매",
+    "accepted_huneum": [
+      "팔 매"
+    ]
+  },
+  {
+    "character": "勉",
+    "meaning": "힘쓸",
+    "reading": "면",
+    "accepted_huneum": [
+      "힘쓸 면"
+    ]
+  },
+  {
+    "character": "務",
+    "meaning": "힘쓸",
+    "reading": "무",
+    "accepted_huneum": [
+      "권장할 무",
+      "일 무",
+      "힘쓸 무"
+    ]
+  },
+  {
+    "character": "舞",
+    "meaning": "춤출",
+    "reading": "무",
+    "accepted_huneum": [
+      "춤출 무"
+    ]
+  },
+  {
+    "character": "味",
+    "meaning": "맛",
+    "reading": "미",
+    "accepted_huneum": [
+      "뜻 미",
+      "맛 미"
+    ]
+  },
+  {
+    "character": "米",
+    "meaning": "쌀",
+    "reading": "미",
+    "accepted_huneum": [
+      "쌀 미"
+    ]
+  },
+  {
+    "character": "密",
+    "meaning": "빽빽할",
+    "reading": "밀",
+    "accepted_huneum": [
+      "빽빽할 밀"
+    ]
+  },
+  {
+    "character": "訪",
+    "meaning": "찾을",
+    "reading": "방",
+    "accepted_huneum": [
+      "찾아볼 방",
+      "찾을 방"
+    ]
+  },
+  {
+    "character": "防",
+    "meaning": "막을",
+    "reading": "방",
+    "accepted_huneum": [
+      "둑 방",
+      "막을 방"
+    ]
+  },
+  {
+    "character": "拜",
+    "meaning": "절",
+    "reading": "배",
+    "accepted_huneum": [
+      "절 배"
+    ]
+  },
+  {
+    "character": "變",
+    "meaning": "변할",
+    "reading": "변",
+    "accepted_huneum": [
+      "변할 변"
+    ]
+  },
+  {
+    "character": "飛",
+    "meaning": "날",
+    "reading": "비",
+    "accepted_huneum": [
+      "날 비"
+    ]
+  },
+  {
+    "character": "氷",
+    "meaning": "얼음",
+    "reading": "빙",
+    "accepted_huneum": [
+      "얼음 빙"
+    ]
+  },
+  {
+    "character": "使",
+    "meaning": "하여금",
+    "reading": "사",
+    "accepted_huneum": [
+      "하여금 사"
+    ]
+  },
+  {
+    "character": "寺",
+    "meaning": "절",
+    "reading": "사",
+    "accepted_huneum": [
+      "내관 시",
+      "절 사"
+    ]
+  },
+  {
+    "character": "射",
+    "meaning": "쏠",
+    "reading": "사",
+    "accepted_huneum": [
+      "궁술 사",
+      "쏠 사"
+    ]
+  },
+  {
+    "character": "殺",
+    "meaning": "죽일",
+    "reading": "살",
+    "accepted_huneum": [
+      "감할 쇄",
+      "내릴 쇄",
+      "빠를 쇄",
+      "죽일 살",
+      "죽일 쇄"
+    ]
+  },
+  {
+    "character": "尙",
+    "meaning": "오히려",
+    "reading": "상",
+    "accepted_huneum": [
+      "오히려 상"
+    ]
+  },
+  {
+    "character": "仙",
+    "meaning": "신선",
+    "reading": "선",
+    "accepted_huneum": [
+      "신선 선"
+    ]
+  },
+  {
+    "character": "善",
+    "meaning": "착할",
+    "reading": "선",
+    "accepted_huneum": [
+      "착할 선"
+    ]
+  },
+  {
+    "character": "聲",
+    "meaning": "소리",
+    "reading": "성",
+    "accepted_huneum": [
+      "명예 성",
+      "소리 성",
+      "풍류 성"
+    ]
+  },
+  {
+    "character": "勢",
+    "meaning": "권세",
+    "reading": "세",
+    "accepted_huneum": [
+      "권세 세",
+      "기회 세",
+      "불알 세",
+      "위엄 세"
+    ]
+  },
+  {
+    "character": "速",
+    "meaning": "빠를",
+    "reading": "속",
+    "accepted_huneum": [
+      "더러울 속",
+      "부를 속",
+      "빠를 속",
+      "사슴 발자취 속"
+    ]
+  },
+  {
+    "character": "送",
+    "meaning": "보낼",
+    "reading": "송",
+    "accepted_huneum": [
+      "가질 송",
+      "보낼 송",
+      "줄 송",
+      "활쏘기 능통할 송"
+    ]
+  },
+  {
+    "character": "授",
+    "meaning": "줄",
+    "reading": "수",
+    "accepted_huneum": [
+      "부칠 수",
+      "줄 수"
+    ]
+  },
+  {
+    "character": "勝",
+    "meaning": "이길",
+    "reading": "승",
+    "accepted_huneum": [
+      "가질 승",
+      "경치가 좋을 승",
+      "이길 승"
+    ]
+  },
+  {
+    "character": "施",
+    "meaning": "베풀",
+    "reading": "시",
+    "accepted_huneum": [
+      "공로 시",
+      "더할 시",
+      "버릴 시",
+      "베풀 시",
+      "쓸 시",
+      "안팎 곱사등이 시",
+      "은혜 시",
+      "줄 시"
+    ]
+  },
+  {
+    "character": "視",
+    "meaning": "볼",
+    "reading": "시",
+    "accepted_huneum": [
+      "견줄 시",
+      "대접 시",
+      "본받을 시",
+      "볼 시"
+    ]
+  },
+  {
+    "character": "識",
+    "meaning": "알",
+    "reading": "식",
+    "accepted_huneum": [
+      "알 식",
+      "알 지",
+      "표할 지"
+    ]
+  },
+  {
+    "character": "新",
+    "meaning": "새",
+    "reading": "신",
+    "accepted_huneum": [
+      "고울 신",
+      "새 신",
+      "처음 신"
+    ]
+  },
+  {
+    "character": "氏",
+    "meaning": "성",
+    "reading": "씨",
+    "accepted_huneum": [
+      "성 씨"
+    ]
+  },
+  {
+    "character": "愛",
+    "meaning": "사랑",
+    "reading": "애",
+    "accepted_huneum": [
+      "사랑 애"
+    ]
+  },
+  {
+    "character": "夜",
+    "meaning": "밤",
+    "reading": "야",
+    "accepted_huneum": [
+      "밤 야"
+    ]
+  },
+  {
+    "character": "弱",
+    "meaning": "약할",
+    "reading": "약",
+    "accepted_huneum": [
+      "약할 약",
+      "어릴 약"
+    ]
+  },
+  {
+    "character": "若",
+    "meaning": "같을",
+    "reading": "약",
+    "accepted_huneum": [
+      "같을 약",
+      "땅이름 야",
+      "만약 약",
+      "반야 야",
+      "반야 약",
+      "자네 약"
+    ]
+  },
+  {
+    "character": "漁",
+    "meaning": "물고기 잡을",
+    "reading": "어",
+    "accepted_huneum": [
+      "물고기 잡을 어"
+    ]
+  },
+  {
+    "character": "易",
+    "meaning": "바꿀",
+    "reading": "역",
+    "accepted_huneum": [
+      "게으를 이",
+      "다스릴 이",
+      "바꿀 역",
+      "바꿀 이",
+      "쉬울 이",
+      "편할 이"
+    ]
+  },
+  {
+    "character": "逆",
+    "meaning": "거스를",
+    "reading": "역",
+    "accepted_huneum": [
+      "거스를 역"
+    ]
+  },
+  {
+    "character": "然",
+    "meaning": "그럴",
+    "reading": "연",
+    "accepted_huneum": [
+      "그러나 연",
+      "그러할 연",
+      "그럴 연",
+      "불사를 연",
+      "허락할 연"
+    ]
+  },
+  {
+    "character": "硏",
+    "meaning": "연마할",
+    "reading": "연",
+    "accepted_huneum": [
+      "갈 연",
+      "연마할 연"
+    ]
+  },
+  {
+    "character": "榮",
+    "meaning": "영화로울",
+    "reading": "영",
+    "accepted_huneum": [
+      "꽃다울 영",
+      "영화로울 영",
+      "오동나무 영",
+      "추녀 영"
+    ]
+  },
+  {
+    "character": "藝",
+    "meaning": "재주",
+    "reading": "예",
+    "accepted_huneum": [
+      "가늠할 예",
+      "극진할 예",
+      "글 예",
+      "심을 예",
+      "재주 예"
+    ]
+  },
+  {
+    "character": "烏",
+    "meaning": "까마귀",
+    "reading": "오",
+    "accepted_huneum": [
+      "검을 오",
+      "까마귀 오",
+      "어찌 오",
+      "탄식할 오"
+    ]
+  },
+  {
+    "character": "屋",
+    "meaning": "집",
+    "reading": "옥",
+    "accepted_huneum": [
+      "거북 덮개 옥",
+      "지붕 옥",
+      "집 옥"
+    ]
+  },
+  {
+    "character": "溫",
+    "meaning": "따뜻할",
+    "reading": "온",
+    "accepted_huneum": [
+      "따뜻할 온",
+      "부드러울 온"
+    ]
+  },
+  {
+    "character": "往",
+    "meaning": "갈",
+    "reading": "왕",
+    "accepted_huneum": [
+      "갈 왕",
+      "옛 왕",
+      "이따금 왕"
+    ]
+  },
+  {
+    "character": "浴",
+    "meaning": "목욕할",
+    "reading": "욕",
+    "accepted_huneum": [
+      "깨끗이할 욕",
+      "목욕할 욕",
+      "못 이름 욕"
+    ]
+  },
+  {
+    "character": "勇",
+    "meaning": "날랠",
+    "reading": "용",
+    "accepted_huneum": [
+      "날랠 용",
+      "용맹할 용"
+    ]
+  },
+  {
+    "character": "宇",
+    "meaning": "집",
+    "reading": "우",
+    "accepted_huneum": [
+      "집 우",
+      "처마 기슭 우",
+      "하늘 우"
+    ]
+  },
+  {
+    "character": "雄",
+    "meaning": "수컷",
+    "reading": "웅",
+    "accepted_huneum": [
+      "수컷 웅",
+      "영웅 웅",
+      "웅장할 웅"
+    ]
+  },
+  {
+    "character": "遠",
+    "meaning": "멀",
+    "reading": "원",
+    "accepted_huneum": [
+      "멀 원",
+      "심오할 원"
+    ]
+  },
+  {
+    "character": "願",
+    "meaning": "원할",
+    "reading": "원",
+    "accepted_huneum": [
+      "바랄 원",
+      "생각할 원",
+      "원할 원",
+      "하고자할 원"
+    ]
+  },
+  {
+    "character": "爲",
+    "meaning": "할",
+    "reading": "위",
+    "accepted_huneum": [
+      "다스릴 위",
+      "어미원숭이 위",
+      "이룰 위",
+      "하여금 위",
+      "할 위"
+    ]
+  },
+  {
+    "character": "遺",
+    "meaning": "잃어버릴",
+    "reading": "유",
+    "accepted_huneum": [
+      "끼칠 유",
+      "남을 유",
+      "잃어버릴 유"
+    ]
+  },
+  {
+    "character": "飮",
+    "meaning": "마실",
+    "reading": "음",
+    "accepted_huneum": [
+      "마실 음"
+    ]
+  },
+  {
+    "character": "以",
+    "meaning": "써",
+    "reading": "이",
+    "accepted_huneum": [
+      "거느릴 이",
+      "까닭 이",
+      "써 이",
+      "쓸 이",
+      "함께 이"
+    ]
+  },
+  {
+    "character": "仁",
+    "meaning": "어질",
+    "reading": "인",
+    "accepted_huneum": [
+      "어질 인"
+    ]
+  },
+  {
+    "character": "將",
+    "meaning": "장차",
+    "reading": "장",
+    "accepted_huneum": [
+      "장수 장",
+      "장차 장"
+    ]
+  },
+  {
+    "character": "章",
+    "meaning": "문채",
+    "reading": "장",
+    "accepted_huneum": [
+      "글 장",
+      "문채 장"
+    ]
+  },
+  {
+    "character": "貯",
+    "meaning": "쌓을",
+    "reading": "저",
+    "accepted_huneum": [
+      "감출 저",
+      "둘 저",
+      "쌓을 저"
+    ]
+  },
+  {
+    "character": "店",
+    "meaning": "가게",
+    "reading": "점",
+    "accepted_huneum": [
+      "가게 점",
+      "주막 점"
+    ]
+  },
+  {
+    "character": "第",
+    "meaning": "차례",
+    "reading": "제",
+    "accepted_huneum": [
+      "집 제",
+      "차례 제"
+    ]
+  },
+  {
+    "character": "製",
+    "meaning": "만들",
+    "reading": "제",
+    "accepted_huneum": [
+      "만들 제",
+      "지을 제"
+    ]
+  },
+  {
+    "character": "兆",
+    "meaning": "조짐",
+    "reading": "조",
+    "accepted_huneum": [
+      "조짐 조"
+    ]
+  },
+  {
+    "character": "助",
+    "meaning": "도울",
+    "reading": "조",
+    "accepted_huneum": [
+      "도울 조"
+    ]
+  },
+  {
+    "character": "早",
+    "meaning": "이를",
+    "reading": "조",
+    "accepted_huneum": [
+      "새벽 조",
+      "이를 조"
+    ]
+  },
+  {
+    "character": "造",
+    "meaning": "지을",
+    "reading": "조",
+    "accepted_huneum": [
+      "지을 조"
+    ]
+  },
+  {
+    "character": "存",
+    "meaning": "있을",
+    "reading": "존",
+    "accepted_huneum": [
+      "있을 존"
+    ]
+  },
+  {
+    "character": "卒",
+    "meaning": "군사",
+    "reading": "졸",
+    "accepted_huneum": [
+      "군사 졸"
+    ]
+  },
+  {
+    "character": "罪",
+    "meaning": "허물",
+    "reading": "죄",
+    "accepted_huneum": [
+      "허물 죄"
+    ]
+  },
+  {
+    "character": "宙",
+    "meaning": "집",
+    "reading": "주",
+    "accepted_huneum": [
+      "집 주"
+    ]
+  },
+  {
+    "character": "晝",
+    "meaning": "낮",
+    "reading": "주",
+    "accepted_huneum": [
+      "낮 주"
+    ]
+  },
+  {
+    "character": "走",
+    "meaning": "달릴",
+    "reading": "주",
+    "accepted_huneum": [
+      "달릴 주"
+    ]
+  },
+  {
+    "character": "衆",
+    "meaning": "무리",
+    "reading": "중",
+    "accepted_huneum": [
+      "무리 중"
+    ]
+  },
+  {
+    "character": "增",
+    "meaning": "불을",
+    "reading": "증",
+    "accepted_huneum": [
+      "더할 증",
+      "불을 증"
+    ]
+  },
+  {
+    "character": "支",
+    "meaning": "가지",
+    "reading": "지",
+    "accepted_huneum": [
+      "가를 지",
+      "가지 지",
+      "지탱할 지"
+    ]
+  },
+  {
+    "character": "着",
+    "meaning": "붙을",
+    "reading": "착",
+    "accepted_huneum": [
+      "부딪칠 착",
+      "붙을 착"
+    ]
+  },
+  {
+    "character": "唱",
+    "meaning": "노래",
+    "reading": "창",
+    "accepted_huneum": [
+      "노래 창",
+      "노래부를 창"
+    ]
+  },
+  {
+    "character": "窓",
+    "meaning": "창",
+    "reading": "창",
+    "accepted_huneum": [
+      "창 창"
+    ]
+  },
+  {
+    "character": "責",
+    "meaning": "꾸짖을",
+    "reading": "책",
+    "accepted_huneum": [
+      "꾸짖을 책"
+    ]
+  },
+  {
+    "character": "處",
+    "meaning": "살",
+    "reading": "처",
+    "accepted_huneum": [
+      "곳 처",
+      "살 처"
+    ]
+  },
+  {
+    "character": "最",
+    "meaning": "가장",
+    "reading": "최",
+    "accepted_huneum": [
+      "가장 최",
+      "넉넉할 최",
+      "우뚝할 최"
+    ]
+  },
+  {
+    "character": "追",
+    "meaning": "쫓을",
+    "reading": "추",
+    "accepted_huneum": [
+      "따를 추",
+      "쫓을 추"
+    ]
+  },
+  {
+    "character": "春",
+    "meaning": "봄",
+    "reading": "춘",
+    "accepted_huneum": [
+      "남녀의 정 춘",
+      "봄 춘",
+      "술 춘",
+      "온화할 춘"
+    ]
+  },
+  {
+    "character": "快",
+    "meaning": "기분이 좋을",
+    "reading": "쾌",
+    "accepted_huneum": [
+      "기분이 좋을 쾌",
+      "빠를 쾌",
+      "시원할 쾌",
+      "쾌할 쾌"
+    ]
+  },
+  {
+    "character": "打",
+    "meaning": "때릴",
+    "reading": "타",
+    "accepted_huneum": [
+      "때릴 타",
+      "칠 타"
+    ]
+  },
+  {
+    "character": "退",
+    "meaning": "물러갈",
+    "reading": "퇴",
+    "accepted_huneum": [
+      "겸양할 퇴",
+      "물러갈 퇴",
+      "물리칠 퇴"
+    ]
+  },
+  {
+    "character": "判",
+    "meaning": "판단할",
+    "reading": "판",
+    "accepted_huneum": [
+      "맡을 판",
+      "쪼갤 판",
+      "판단할 판"
+    ]
+  },
+  {
+    "character": "敗",
+    "meaning": "패할",
+    "reading": "패",
+    "accepted_huneum": [
+      "깨어질 패",
+      "무너질 패",
+      "썪을 패",
+      "패할 패",
+      "헐어질 패"
+    ]
+  },
+  {
+    "character": "貝",
+    "meaning": "조개",
+    "reading": "패",
+    "accepted_huneum": [
+      "비단 패",
+      "재물 패",
+      "조개 패"
+    ]
+  },
+  {
+    "character": "皮",
+    "meaning": "가죽",
+    "reading": "피",
+    "accepted_huneum": [
+      "가죽 피",
+      "껍질 피",
+      "성씨 피"
+    ]
+  },
+  {
+    "character": "河",
+    "meaning": "물",
+    "reading": "하",
+    "accepted_huneum": [
+      "물 하"
+    ]
+  },
+  {
+    "character": "限",
+    "meaning": "한정할",
+    "reading": "한",
+    "accepted_huneum": [
+      "한정할 한"
+    ]
+  },
+  {
+    "character": "害",
+    "meaning": "해할",
+    "reading": "해",
+    "accepted_huneum": [
+      "시기할 해",
+      "죽일 해",
+      "해할 해"
+    ]
+  },
+  {
+    "character": "革",
+    "meaning": "가죽",
+    "reading": "혁",
+    "accepted_huneum": [
+      "가죽 혁",
+      "갑주 혁",
+      "고칠 혁"
+    ]
+  },
+  {
+    "character": "協",
+    "meaning": "화합할",
+    "reading": "협",
+    "accepted_huneum": [
+      "도울 협",
+      "맞을 협",
+      "조화할 협",
+      "화합할 협"
+    ]
+  },
+  {
+    "character": "好",
+    "meaning": "좋을",
+    "reading": "호",
+    "accepted_huneum": [
+      "옳을 호",
+      "좋을 호"
+    ]
+  },
+  {
+    "character": "湖",
+    "meaning": "호수",
+    "reading": "호",
+    "accepted_huneum": [
+      "호수 호"
+    ]
+  },
+  {
+    "character": "虎",
+    "meaning": "범",
+    "reading": "호",
+    "accepted_huneum": [
+      "범 호"
+    ]
+  },
+  {
+    "character": "婚",
+    "meaning": "혼인할",
+    "reading": "혼",
+    "accepted_huneum": [
+      "혼인할 혼"
+    ]
+  },
+  {
+    "character": "貨",
+    "meaning": "재화",
+    "reading": "화",
+    "accepted_huneum": [
+      "재물 화",
+      "재화 화"
+    ]
+  },
+  {
+    "character": "患",
+    "meaning": "근심",
+    "reading": "환",
+    "accepted_huneum": [
+      "근심 환"
+    ]
+  },
+  {
+    "character": "皇",
+    "meaning": "임금",
+    "reading": "황",
+    "accepted_huneum": [
+      "임금 황"
+    ]
+  },
+  {
+    "character": "凶",
+    "meaning": "흉할",
+    "reading": "흉",
+    "accepted_huneum": [
+      "흉할 흉"
+    ]
+  },
+  {
+    "character": "佳",
+    "meaning": "아름다울",
+    "reading": "가",
+    "accepted_huneum": [
+      "아름다울 가"
+    ]
+  },
+  {
+    "character": "假",
+    "meaning": "거짓",
+    "reading": "가",
+    "accepted_huneum": [
+      "거짓 가"
+    ]
+  },
+  {
+    "character": "脚",
+    "meaning": "다리",
+    "reading": "각",
+    "accepted_huneum": [
+      "다리 각",
+      "종아리 각"
+    ]
+  },
+  {
+    "character": "看",
+    "meaning": "볼",
+    "reading": "간",
+    "accepted_huneum": [
+      "볼 간"
+    ]
+  },
+  {
+    "character": "渴",
+    "meaning": "목마를",
+    "reading": "갈",
+    "accepted_huneum": [
+      "급할 갈",
+      "목마를 갈"
+    ]
+  },
+  {
+    "character": "敢",
+    "meaning": "감히",
+    "reading": "감",
+    "accepted_huneum": [
+      "감히 감",
+      "구태여 감",
+      "날랠 감",
+      "용맹할 감"
+    ]
+  },
+  {
+    "character": "減",
+    "meaning": "덜",
+    "reading": "감",
+    "accepted_huneum": [
+      "가벼울 감",
+      "감할 감",
+      "덜 감",
+      "무지러질 감",
+      "물이름 감"
+    ]
+  },
+  {
+    "character": "甘",
+    "meaning": "달",
+    "reading": "감",
+    "accepted_huneum": [
+      "달 감",
+      "달게 여길 감"
+    ]
+  },
+  {
+    "character": "甲",
+    "meaning": "갑옷",
+    "reading": "갑",
+    "accepted_huneum": [
+      "갑옷 갑",
+      "대궐 갑",
+      "떡잎 날 갑",
+      "법령 갑",
+      "비롯할 갑",
+      "첫째 천간 갑"
+    ]
+  },
+  {
+    "character": "講",
+    "meaning": "강론할",
+    "reading": "강",
+    "accepted_huneum": [
+      "강구할 강",
+      "강론할 강",
+      "강화할 강",
+      "익힐 강"
+    ]
+  },
+  {
+    "character": "降",
+    "meaning": "내릴",
+    "reading": "강",
+    "accepted_huneum": [
+      "내릴 강",
+      "돌아갈 강",
+      "떨어질 강",
+      "떨어질 항",
+      "항복할 항"
+    ]
+  },
+  {
+    "character": "皆",
+    "meaning": "모두",
+    "reading": "개",
+    "accepted_huneum": [
+      "같을 개",
+      "다 개",
+      "모두 개",
+      "한 가지 개"
+    ]
+  },
+  {
+    "character": "更",
+    "meaning": "고칠",
+    "reading": "경",
+    "accepted_huneum": [
+      "고칠 경",
+      "다시 갱",
+      "다시 경"
+    ]
+  },
+  {
+    "character": "居",
+    "meaning": "살",
+    "reading": "거",
+    "accepted_huneum": [
+      "곳 거",
+      "놓을 거",
+      "살 거",
+      "쌓을 거",
+      "앉을 거"
+    ]
+  },
+  {
+    "character": "巨",
+    "meaning": "클",
+    "reading": "거",
+    "accepted_huneum": [
+      "많을 거",
+      "억 거",
+      "클 거"
+    ]
+  },
+  {
+    "character": "乾",
+    "meaning": "하늘",
+    "reading": "건",
+    "accepted_huneum": [
+      "괘 이름 건",
+      "굳셀 건",
+      "마를 간",
+      "서북쪽 건",
+      "임금 건",
+      "하늘 건"
+    ]
+  },
+  {
+    "character": "堅",
+    "meaning": "굳을",
+    "reading": "견",
+    "accepted_huneum": [
+      "굳셀 견",
+      "굳을 견",
+      "반드시 견"
+    ]
+  },
+  {
+    "character": "潔",
+    "meaning": "맑을",
+    "reading": "결",
+    "accepted_huneum": [
+      "맑을 결",
+      "정결할 결",
+      "조촐할 결"
+    ]
+  },
+  {
+    "character": "庚",
+    "meaning": "일곱째 천간",
+    "reading": "경",
+    "accepted_huneum": [
+      "일곱째 천간 경"
+    ]
+  },
+  {
+    "character": "耕",
+    "meaning": "밭갈",
+    "reading": "경",
+    "accepted_huneum": [
+      "밭갈 경"
+    ]
+  },
+  {
+    "character": "輕",
+    "meaning": "가벼울",
+    "reading": "경",
+    "accepted_huneum": [
+      "가벼울 경"
+    ]
+  },
+  {
+    "character": "驚",
+    "meaning": "놀랄",
+    "reading": "경",
+    "accepted_huneum": [
+      "놀랄 경"
+    ]
+  },
+  {
+    "character": "溪",
+    "meaning": "시내",
+    "reading": "계",
+    "accepted_huneum": [
+      "시내 계"
+    ]
+  },
+  {
+    "character": "癸",
+    "meaning": "열째 천간",
+    "reading": "계",
+    "accepted_huneum": [
+      "열째 천간 계"
+    ]
+  },
+  {
+    "character": "鷄",
+    "meaning": "닭",
+    "reading": "계",
+    "accepted_huneum": [
+      "닭 계"
+    ]
+  },
+  {
+    "character": "苦",
+    "meaning": "쓸",
+    "reading": "고",
+    "accepted_huneum": [
+      "괴로울 고",
+      "쓸 고"
+    ]
+  },
+  {
+    "character": "穀",
+    "meaning": "곡식",
+    "reading": "곡",
+    "accepted_huneum": [
+      "곡식 곡"
+    ]
+  },
+  {
+    "character": "困",
+    "meaning": "괴로울",
+    "reading": "곤",
+    "accepted_huneum": [
+      "곤할 곤",
+      "괴로울 곤"
+    ]
+  },
+  {
+    "character": "坤",
+    "meaning": "땅",
+    "reading": "곤",
+    "accepted_huneum": [
+      "땅 곤"
+    ]
+  },
+  {
+    "character": "關",
+    "meaning": "빗장",
+    "reading": "관",
+    "accepted_huneum": [
+      "빗장 관"
+    ]
+  },
+  {
+    "character": "橋",
+    "meaning": "다리",
+    "reading": "교",
+    "accepted_huneum": [
+      "다리 교"
+    ]
+  },
+  {
+    "character": "舊",
+    "meaning": "옛",
+    "reading": "구",
+    "accepted_huneum": [
+      "옛 구"
+    ]
+  },
+  {
+    "character": "勸",
+    "meaning": "권할",
+    "reading": "권",
+    "accepted_huneum": [
+      "권할 권"
+    ]
+  },
+  {
+    "character": "卷",
+    "meaning": "책",
+    "reading": "권",
+    "accepted_huneum": [
+      "굽을 권",
+      "책 권"
+    ]
+  },
+  {
+    "character": "歸",
+    "meaning": "돌아올",
+    "reading": "귀",
+    "accepted_huneum": [
+      "돌아올 귀"
+    ]
+  },
+  {
+    "character": "均",
+    "meaning": "고를",
+    "reading": "균",
+    "accepted_huneum": [
+      "고를 균"
+    ]
+  },
+  {
+    "character": "極",
+    "meaning": "다할",
+    "reading": "극",
+    "accepted_huneum": [
+      "가운데 극",
+      "다할 극",
+      "지극할 극"
+    ]
+  },
+  {
+    "character": "及",
+    "meaning": "미칠",
+    "reading": "급",
+    "accepted_huneum": [
+      "미칠 급"
+    ]
+  },
+  {
+    "character": "急",
+    "meaning": "급할",
+    "reading": "급",
+    "accepted_huneum": [
+      "급할 급"
+    ]
+  },
+  {
+    "character": "給",
+    "meaning": "줄",
+    "reading": "급",
+    "accepted_huneum": [
+      "넉넉할 급",
+      "줄 급"
+    ]
+  },
+  {
+    "character": "幾",
+    "meaning": "몇",
+    "reading": "기",
+    "accepted_huneum": [
+      "기미 기",
+      "몇 기"
+    ]
+  },
+  {
+    "character": "旣",
+    "meaning": "이미",
+    "reading": "기",
+    "accepted_huneum": [
+      "이미 기"
+    ]
+  },
+  {
+    "character": "暖",
+    "meaning": "따뜻할",
+    "reading": "난",
+    "accepted_huneum": [
+      "따뜻할 난"
+    ]
+  },
+  {
+    "character": "乃",
+    "meaning": "이에",
+    "reading": "내",
+    "accepted_huneum": [
+      "이에 내"
+    ]
+  },
+  {
+    "character": "怒",
+    "meaning": "성낼",
+    "reading": "노",
+    "accepted_huneum": [
+      "성낼 노",
+      "성낼 로",
+      "성냉 로"
+    ]
+  },
+  {
+    "character": "但",
+    "meaning": "다만",
+    "reading": "단",
+    "accepted_huneum": [
+      "다만 단"
+    ]
+  },
+  {
+    "character": "端",
+    "meaning": "끝",
+    "reading": "단",
+    "accepted_huneum": [
+      "끝 단"
+    ]
+  },
+  {
+    "character": "當",
+    "meaning": "마땅할",
+    "reading": "당",
+    "accepted_huneum": [
+      "마땅할 당"
+    ]
+  },
+  {
+    "character": "待",
+    "meaning": "기다릴",
+    "reading": "대",
+    "accepted_huneum": [
+      "기다릴 대"
+    ]
+  },
+  {
+    "character": "徒",
+    "meaning": "무리",
+    "reading": "도",
+    "accepted_huneum": [
+      "무리 도"
+    ]
+  },
+  {
+    "character": "燈",
+    "meaning": "등잔",
+    "reading": "등",
+    "accepted_huneum": [
+      "등잔 등"
+    ]
+  },
+  {
+    "character": "浪",
+    "meaning": "물결",
+    "reading": "랑",
+    "accepted_huneum": [
+      "물결 낭",
+      "물결 랑"
+    ]
+  },
+  {
+    "character": "郞",
+    "meaning": "사나이",
+    "reading": "랑",
+    "accepted_huneum": [
+      "사나이 랑",
+      "사내 랑"
+    ]
+  },
+  {
+    "character": "凉",
+    "meaning": "서늘할",
+    "reading": "량",
+    "accepted_huneum": [
+      "서늘할 량"
+    ]
+  },
+  {
+    "character": "練",
+    "meaning": "익힐",
+    "reading": "련",
+    "accepted_huneum": [
+      "겪을 련",
+      "이길 련",
+      "익힐 련"
+    ]
+  },
+  {
+    "character": "烈",
+    "meaning": "세찰",
+    "reading": "렬",
+    "accepted_huneum": [
+      "매울 렬",
+      "매울 열",
+      "불 활활 붙을 렬",
+      "빛날 렬",
+      "사나울 렬",
+      "세찰 렬",
+      "아름다울 렬",
+      "업적 렬"
+    ]
+  },
+  {
+    "character": "領",
+    "meaning": "옷깃",
+    "reading": "령",
+    "accepted_huneum": [
+      "거느릴 령",
+      "고개 령",
+      "받을 령",
+      "옷깃 령"
+    ]
+  },
+  {
+    "character": "露",
+    "meaning": "이슬",
+    "reading": "로",
+    "accepted_huneum": [
+      "이슬 노",
+      "이슬 로"
+    ]
+  },
+  {
+    "character": "綠",
+    "meaning": "푸를",
+    "reading": "록",
+    "accepted_huneum": [
+      "초록빛 녹",
+      "초록빛 록",
+      "푸를 록"
+    ]
+  },
+  {
+    "character": "柳",
+    "meaning": "버들",
+    "reading": "류",
+    "accepted_huneum": [
+      "버들 류",
+      "별 이름 류"
+    ]
+  },
+  {
+    "character": "倫",
+    "meaning": "인륜",
+    "reading": "륜",
+    "accepted_huneum": [
+      "가릴 륜",
+      "무리 륜",
+      "의리 륜",
+      "인륜 륜",
+      "조리 륜"
+    ]
+  },
+  {
+    "character": "李",
+    "meaning": "오얏",
+    "reading": "리",
+    "accepted_huneum": [
+      "보따리 리",
+      "선비 천거리할 리",
+      "역말 리",
+      "오얏 리"
+    ]
+  },
+  {
+    "character": "莫",
+    "meaning": "없을",
+    "reading": "막",
+    "accepted_huneum": [
+      "말 막",
+      "없을 막"
+    ]
+  },
+  {
+    "character": "晩",
+    "meaning": "저물",
+    "reading": "만",
+    "accepted_huneum": [
+      "늦을 만",
+      "저물 만"
+    ]
+  },
+  {
+    "character": "忘",
+    "meaning": "잊을",
+    "reading": "망",
+    "accepted_huneum": [
+      "잊을 망"
+    ]
+  },
+  {
+    "character": "忙",
+    "meaning": "바쁠",
+    "reading": "망",
+    "accepted_huneum": [
+      "바쁠 망"
+    ]
+  },
+  {
+    "character": "妹",
+    "meaning": "누이",
+    "reading": "매",
+    "accepted_huneum": [
+      "누이 매",
+      "손아랫누이 매"
+    ]
+  },
+  {
+    "character": "買",
+    "meaning": "살",
+    "reading": "매",
+    "accepted_huneum": [
+      "살 매"
+    ]
+  },
+  {
+    "character": "麥",
+    "meaning": "보리",
+    "reading": "맥",
+    "accepted_huneum": [
+      "보리 맥"
+    ]
+  },
+  {
+    "character": "免",
+    "meaning": "면할",
+    "reading": "면",
+    "accepted_huneum": [
+      "면할 면"
+    ]
+  },
+  {
+    "character": "眠",
+    "meaning": "잠잘",
+    "reading": "면",
+    "accepted_huneum": [
+      "잠잘 면"
+    ]
+  },
+  {
+    "character": "鳴",
+    "meaning": "울",
+    "reading": "명",
+    "accepted_huneum": [
+      "새소리 명",
+      "울 명"
+    ]
+  },
+  {
+    "character": "暮",
+    "meaning": "저물",
+    "reading": "모",
+    "accepted_huneum": [
+      "저물 모"
+    ]
+  },
+  {
+    "character": "卯",
+    "meaning": "토끼",
+    "reading": "묘",
+    "accepted_huneum": [
+      "토끼 묘"
+    ]
+  },
+  {
+    "character": "妙",
+    "meaning": "묘할",
+    "reading": "묘",
+    "accepted_huneum": [
+      "묘할 묘"
+    ]
+  },
+  {
+    "character": "戊",
+    "meaning": "다섯째 천간",
+    "reading": "무",
+    "accepted_huneum": [
+      "다섯째 천간 무",
+      "무성할 무"
+    ]
+  },
+  {
+    "character": "茂",
+    "meaning": "우거질",
+    "reading": "무",
+    "accepted_huneum": [
+      "무성할 무",
+      "우거질 무"
+    ]
+  },
+  {
+    "character": "墨",
+    "meaning": "먹",
+    "reading": "묵",
+    "accepted_huneum": [
+      "먹 묵",
+      "형벌 이름 묵"
+    ]
+  },
+  {
+    "character": "勿",
+    "meaning": "말",
+    "reading": "물",
+    "accepted_huneum": [
+      "깃발 물",
+      "말 물",
+      "아닐 물"
+    ]
+  },
+  {
+    "character": "尾",
+    "meaning": "꼬리",
+    "reading": "미",
+    "accepted_huneum": [
+      "꼬리 미",
+      "등 미"
+    ]
+  },
+  {
+    "character": "朴",
+    "meaning": "성",
+    "reading": "박",
+    "accepted_huneum": [
+      "나무껍질 박",
+      "성 박",
+      "질박할 박"
+    ]
+  },
+  {
+    "character": "飯",
+    "meaning": "밥",
+    "reading": "반",
+    "accepted_huneum": [
+      "밥 반"
+    ]
+  },
+  {
+    "character": "房",
+    "meaning": "방",
+    "reading": "방",
+    "accepted_huneum": [
+      "방 방"
+    ]
+  },
+  {
+    "character": "杯",
+    "meaning": "잔",
+    "reading": "배",
+    "accepted_huneum": [
+      "잔 배"
+    ]
+  },
+  {
+    "character": "伐",
+    "meaning": "칠",
+    "reading": "벌",
+    "accepted_huneum": [
+      "칠 벌"
+    ]
+  },
+  {
+    "character": "凡",
+    "meaning": "무릇",
+    "reading": "범",
+    "accepted_huneum": [
+      "무릇 범"
+    ]
+  },
+  {
+    "character": "丙",
+    "meaning": "남녘",
+    "reading": "병",
+    "accepted_huneum": [
+      "남녘 병"
+    ]
+  },
+  {
+    "character": "伏",
+    "meaning": "엎드릴",
+    "reading": "복",
+    "accepted_huneum": [
+      "엎드릴 복"
+    ]
+  },
+  {
+    "character": "逢",
+    "meaning": "만날",
+    "reading": "봉",
+    "accepted_huneum": [
+      "만날 봉"
+    ]
+  },
+  {
+    "character": "否",
+    "meaning": "아닐",
+    "reading": "부",
+    "accepted_huneum": [
+      "아닐 부"
+    ]
+  },
+  {
+    "character": "扶",
+    "meaning": "도울",
+    "reading": "부",
+    "accepted_huneum": [
+      "도울 부",
+      "붙들 부"
+    ]
+  },
+  {
+    "character": "浮",
+    "meaning": "뜰",
+    "reading": "부",
+    "accepted_huneum": [
+      "뜰 부"
+    ]
+  },
+  {
+    "character": "部",
+    "meaning": "떼",
+    "reading": "부",
+    "accepted_huneum": [
+      "거느릴 부",
+      "나눌 부",
+      "떼 부"
+    ]
+  },
+  {
+    "character": "佛",
+    "meaning": "부처",
+    "reading": "불",
+    "accepted_huneum": [
+      "부처 불"
+    ]
+  },
+  {
+    "character": "朋",
+    "meaning": "벗",
+    "reading": "붕",
+    "accepted_huneum": [
+      "벗 붕"
+    ]
+  },
+  {
+    "character": "悲",
+    "meaning": "슬플",
+    "reading": "비",
+    "accepted_huneum": [
+      "슬플 비"
+    ]
+  },
+  {
+    "character": "鼻",
+    "meaning": "코",
+    "reading": "비",
+    "accepted_huneum": [
+      "코 비"
+    ]
+  },
+  {
+    "character": "貧",
+    "meaning": "가난할",
+    "reading": "빈",
+    "accepted_huneum": [
+      "가난할 빈"
+    ]
+  },
+  {
+    "character": "巳",
+    "meaning": "여섯째 지지",
+    "reading": "사",
+    "accepted_huneum": [
+      "뱀 사",
+      "여섯째 지지 사"
+    ]
+  },
+  {
+    "character": "私",
+    "meaning": "사사",
+    "reading": "사",
+    "accepted_huneum": [
+      "사사 사"
+    ]
+  },
+  {
+    "character": "絲",
+    "meaning": "실",
+    "reading": "사",
+    "accepted_huneum": [
+      "실 사"
+    ]
+  },
+  {
+    "character": "舍",
+    "meaning": "집",
+    "reading": "사",
+    "accepted_huneum": [
+      "집 사"
+    ]
+  },
+  {
+    "character": "謝",
+    "meaning": "사례할",
+    "reading": "사",
+    "accepted_huneum": [
+      "사례할 사"
+    ]
+  },
+  {
+    "character": "散",
+    "meaning": "흩을",
+    "reading": "산",
+    "accepted_huneum": [
+      "흩어질 산",
+      "흩을 산"
+    ]
+  },
+  {
+    "character": "傷",
+    "meaning": "상처",
+    "reading": "상",
+    "accepted_huneum": [
+      "상처 상",
+      "상할 상"
+    ]
+  },
+  {
+    "character": "喪",
+    "meaning": "죽을",
+    "reading": "상",
+    "accepted_huneum": [
+      "상사 상",
+      "죽을 상"
+    ]
+  },
+  {
+    "character": "常",
+    "meaning": "항상",
+    "reading": "상",
+    "accepted_huneum": [
+      "항상 상"
+    ]
+  },
+  {
+    "character": "霜",
+    "meaning": "서리",
+    "reading": "상",
+    "accepted_huneum": [
+      "서리 상"
+    ]
+  },
+  {
+    "character": "暑",
+    "meaning": "더울",
+    "reading": "서",
+    "accepted_huneum": [
+      "더울 서"
+    ]
+  },
+  {
+    "character": "惜",
+    "meaning": "아낄",
+    "reading": "석",
+    "accepted_huneum": [
+      "아낄 석"
+    ]
+  },
+  {
+    "character": "昔",
+    "meaning": "옛",
+    "reading": "석",
+    "accepted_huneum": [
+      "옛 석"
+    ]
+  },
+  {
+    "character": "舌",
+    "meaning": "혀",
+    "reading": "설",
+    "accepted_huneum": [
+      "혀 설"
+    ]
+  },
+  {
+    "character": "盛",
+    "meaning": "성할",
+    "reading": "성",
+    "accepted_huneum": [
+      "담을 성",
+      "많을 성",
+      "성할 성",
+      "이룰 성",
+      "정제할 성"
+    ]
+  },
+  {
+    "character": "聖",
+    "meaning": "성인",
+    "reading": "성",
+    "accepted_huneum": [
+      "성인 성",
+      "지극할 성",
+      "착할 성",
+      "통할 성"
+    ]
+  },
+  {
+    "character": "稅",
+    "meaning": "세금",
+    "reading": "세",
+    "accepted_huneum": [
+      "거둘 세",
+      "구실 세",
+      "놓을 세",
+      "세금 세",
+      "쉴 세"
+    ]
+  },
+  {
+    "character": "細",
+    "meaning": "가늘",
+    "reading": "세",
+    "accepted_huneum": [
+      "가늘 세",
+      "작을 세",
+      "좀놈 세"
+    ]
+  },
+  {
+    "character": "笑",
+    "meaning": "웃음",
+    "reading": "소",
+    "accepted_huneum": [
+      "웃음 소"
+    ]
+  },
+  {
+    "character": "續",
+    "meaning": "이을",
+    "reading": "속",
+    "accepted_huneum": [
+      "이을 속"
+    ]
+  },
+  {
+    "character": "松",
+    "meaning": "소나무",
+    "reading": "송",
+    "accepted_huneum": [
+      "땅이름 송",
+      "소나무 송",
+      "솔 송",
+      "향풀 송"
+    ]
+  },
+  {
+    "character": "修",
+    "meaning": "닦을",
+    "reading": "수",
+    "accepted_huneum": [
+      "꾸밀 수",
+      "닦을 수",
+      "옳게할 수",
+      "정리할 수"
+    ]
+  },
+  {
+    "character": "壽",
+    "meaning": "목숨",
+    "reading": "수",
+    "accepted_huneum": [
+      "나이 수",
+      "목숨 수",
+      "장수할 수",
+      "축복할 수"
+    ]
+  },
+  {
+    "character": "愁",
+    "meaning": "근심",
+    "reading": "수",
+    "accepted_huneum": [
+      "근심 수",
+      "염려할 수",
+      "탄식할 수"
+    ]
+  },
+  {
+    "character": "樹",
+    "meaning": "나무",
+    "reading": "수",
+    "accepted_huneum": [
+      "나무 수",
+      "막을 수",
+      "세울 수",
+      "심을 수"
+    ]
+  },
+  {
+    "character": "秀",
+    "meaning": "빼어날",
+    "reading": "수",
+    "accepted_huneum": [
+      "벼 패일 수",
+      "빼어날 수",
+      "아름다울 수",
+      "이삭 수"
+    ]
+  },
+  {
+    "character": "誰",
+    "meaning": "누구",
+    "reading": "수",
+    "accepted_huneum": [
+      "누구 수",
+      "무엇 수"
+    ]
+  },
+  {
+    "character": "雖",
+    "meaning": "비록",
+    "reading": "수",
+    "accepted_huneum": [
+      "벌레이름 수",
+      "비록 수"
+    ]
+  },
+  {
+    "character": "須",
+    "meaning": "수염",
+    "reading": "수",
+    "accepted_huneum": [
+      "기다릴 수",
+      "모름지기 수",
+      "수염 수"
+    ]
+  },
+  {
+    "character": "叔",
+    "meaning": "아재비",
+    "reading": "숙",
+    "accepted_huneum": [
+      "끝 숙",
+      "아재비 숙",
+      "어릴 숙",
+      "주울 숙"
+    ]
+  },
+  {
+    "character": "宿",
+    "meaning": "잘",
+    "reading": "숙",
+    "accepted_huneum": [
+      "머물 숙",
+      "잘 숙",
+      "지킬 숙"
+    ]
+  },
+  {
+    "character": "淑",
+    "meaning": "맑을",
+    "reading": "숙",
+    "accepted_huneum": [
+      "맑을 숙",
+      "사모할 숙",
+      "착할 숙"
+    ]
+  },
+  {
+    "character": "純",
+    "meaning": "순수할",
+    "reading": "순",
+    "accepted_huneum": [
+      "부드러울 순",
+      "순수할 순",
+      "순전할 순",
+      "실 순",
+      "온전할 순"
+    ]
+  },
+  {
+    "character": "戌",
+    "meaning": "개",
+    "reading": "술",
+    "accepted_huneum": [
+      "개 술",
+      "때려 부술 술",
+      "열한째 지지 술"
+    ]
+  },
+  {
+    "character": "崇",
+    "meaning": "높을",
+    "reading": "숭",
+    "accepted_huneum": [
+      "공경할 숭",
+      "높을 숭",
+      "마칠 숭",
+      "산이름 숭"
+    ]
+  },
+  {
+    "character": "拾",
+    "meaning": "주울",
+    "reading": "습",
+    "accepted_huneum": [
+      "거둘 습",
+      "벼슬이름 습",
+      "주울 습",
+      "주울 십",
+      "팔찌 습"
+    ]
+  },
+  {
+    "character": "乘",
+    "meaning": "오를",
+    "reading": "승",
+    "accepted_huneum": [
+      "같은 물건 네 개 승",
+      "곱할 승",
+      "셈하는 단위 승",
+      "오를 승",
+      "탈 승"
+    ]
+  },
+  {
+    "character": "承",
+    "meaning": "받들",
+    "reading": "승",
+    "accepted_huneum": [
+      "도울 승",
+      "받들 승",
+      "이을 승",
+      "차례 승"
+    ]
+  },
+  {
+    "character": "試",
+    "meaning": "시험할",
+    "reading": "시",
+    "accepted_huneum": [
+      "더듬을 시",
+      "비교할 시",
+      "시험할 시"
+    ]
+  },
+  {
+    "character": "申",
+    "meaning": "펼",
+    "reading": "신",
+    "accepted_huneum": [
+      "거듭 신",
+      "기지개켤 신",
+      "아홉째 지지 신",
+      "원숭이 신",
+      "펼 신"
+    ]
+  },
+  {
+    "character": "辛",
+    "meaning": "매울",
+    "reading": "신",
+    "accepted_huneum": [
+      "고생 신",
+      "매울 신",
+      "여덟째 천간 신"
+    ]
+  },
+  {
+    "character": "深",
+    "meaning": "깊을",
+    "reading": "심",
+    "accepted_huneum": [
+      "깊을 심"
+    ]
+  },
+  {
+    "character": "甚",
+    "meaning": "심할",
+    "reading": "심",
+    "accepted_huneum": [
+      "무엇 심",
+      "심할 심"
+    ]
+  },
+  {
+    "character": "我",
+    "meaning": "나",
+    "reading": "아",
+    "accepted_huneum": [
+      "나 아",
+      "자기 아"
+    ]
+  },
+  {
+    "character": "惡",
+    "meaning": "나쁠",
+    "reading": "악",
+    "accepted_huneum": [
+      "나쁠 악",
+      "미워할 오",
+      "부끄러울 오",
+      "악할 악",
+      "악할 오"
+    ]
+  },
+  {
+    "character": "眼",
+    "meaning": "눈",
+    "reading": "안",
+    "accepted_huneum": [
+      "눈 안"
+    ]
+  },
+  {
+    "character": "顔",
+    "meaning": "낯",
+    "reading": "안",
+    "accepted_huneum": [
+      "낯 안",
+      "얼굴 안"
+    ]
+  },
+  {
+    "character": "巖",
+    "meaning": "바위",
+    "reading": "암",
+    "accepted_huneum": [
+      "바위 암",
+      "험할 암"
+    ]
+  },
+  {
+    "character": "暗",
+    "meaning": "어두울",
+    "reading": "암",
+    "accepted_huneum": [
+      "몰래 암",
+      "어두울 암",
+      "어리석을 암"
+    ]
+  },
+  {
+    "character": "仰",
+    "meaning": "우러를",
+    "reading": "앙",
+    "accepted_huneum": [
+      "우러러볼 앙",
+      "우러를 앙"
+    ]
+  },
+  {
+    "character": "哀",
+    "meaning": "슬플",
+    "reading": "애",
+    "accepted_huneum": [
+      "가여울 애",
+      "슬플 애"
+    ]
+  },
+  {
+    "character": "也",
+    "meaning": "단정의 어조사",
+    "reading": "야",
+    "accepted_huneum": [
+      "단정의 어조사 야"
+    ]
+  },
+  {
+    "character": "揚",
+    "meaning": "드높일",
+    "reading": "양",
+    "accepted_huneum": [
+      "드높일 양",
+      "들날릴 양",
+      "칭찬할 양"
+    ]
+  },
+  {
+    "character": "讓",
+    "meaning": "사양할",
+    "reading": "양",
+    "accepted_huneum": [
+      "사양할 양"
+    ]
+  },
+  {
+    "character": "於",
+    "meaning": "방향의 어조사",
+    "reading": "어",
+    "accepted_huneum": [
+      "대신할 어",
+      "방향의 어조사 어"
+    ]
+  },
+  {
+    "character": "億",
+    "meaning": "억",
+    "reading": "억",
+    "accepted_huneum": [
+      "억 억",
+      "이바지할 억",
+      "인민 억",
+      "편안할 억",
+      "헤아릴 억"
+    ]
+  },
+  {
+    "character": "憶",
+    "meaning": "생각",
+    "reading": "억",
+    "accepted_huneum": [
+      "기억할 억",
+      "생각 억"
+    ]
+  },
+  {
+    "character": "嚴",
+    "meaning": "굳셀",
+    "reading": "엄",
+    "accepted_huneum": [
+      "공경할 엄",
+      "굳셀 엄",
+      "엄할 엄"
+    ]
+  },
+  {
+    "character": "余",
+    "meaning": "자기",
+    "reading": "여",
+    "accepted_huneum": [
+      "나 여",
+      "남을 여",
+      "자기 여"
+    ]
+  },
+  {
+    "character": "如",
+    "meaning": "같을",
+    "reading": "여",
+    "accepted_huneum": [
+      "같을 여",
+      "만약 여",
+      "어떠할 여",
+      "이를 여"
+    ]
+  },
+  {
+    "character": "汝",
+    "meaning": "너",
+    "reading": "여",
+    "accepted_huneum": [
+      "너 여",
+      "물 이름 여",
+      "물에 젖을 여"
+    ]
+  },
+  {
+    "character": "與",
+    "meaning": "더불",
+    "reading": "여",
+    "accepted_huneum": [
+      "같을 여",
+      "너울너울할 여",
+      "더불 여",
+      "더불어 여",
+      "미칠 여"
+    ]
+  },
+  {
+    "character": "餘",
+    "meaning": "남을",
+    "reading": "여",
+    "accepted_huneum": [
+      "나라이름 여",
+      "남을 여"
+    ]
+  },
+  {
+    "character": "亦",
+    "meaning": "또",
+    "reading": "역",
+    "accepted_huneum": [
+      "또 역",
+      "모두 역"
+    ]
+  },
+  {
+    "character": "煙",
+    "meaning": "연기",
+    "reading": "연",
+    "accepted_huneum": [
+      "연기 연"
+    ]
+  },
+  {
+    "character": "悅",
+    "meaning": "즐거울",
+    "reading": "열",
+    "accepted_huneum": [
+      "기뻐할 열",
+      "복종할 열",
+      "성씨 열",
+      "즐거울 열"
+    ]
+  },
+  {
+    "character": "炎",
+    "meaning": "불꽃",
+    "reading": "염",
+    "accepted_huneum": [
+      "불꽃 염",
+      "임금의 호 염"
+    ]
+  },
+  {
+    "character": "葉",
+    "meaning": "잎",
+    "reading": "엽",
+    "accepted_huneum": [
+      "고을이름 섭",
+      "성 섭",
+      "성씨 엽",
+      "세대 엽",
+      "잎 엽"
+    ]
+  },
+  {
+    "character": "迎",
+    "meaning": "맞을",
+    "reading": "영",
+    "accepted_huneum": [
+      "맞을 영"
+    ]
+  },
+  {
+    "character": "吾",
+    "meaning": "나",
+    "reading": "오",
+    "accepted_huneum": [
+      "나 오",
+      "아들 오",
+      "자기 오"
+    ]
+  },
+  {
+    "character": "悟",
+    "meaning": "깨우칠",
+    "reading": "오",
+    "accepted_huneum": [
+      "깨달을 오",
+      "깨우칠 오"
+    ]
+  },
+  {
+    "character": "誤",
+    "meaning": "그릇할",
+    "reading": "오",
+    "accepted_huneum": [
+      "그릇할 오"
+    ]
+  },
+  {
+    "character": "瓦",
+    "meaning": "질그릇",
+    "reading": "와",
+    "accepted_huneum": [
+      "기와 와",
+      "질그릇 와"
+    ]
+  },
+  {
+    "character": "臥",
+    "meaning": "누울",
+    "reading": "와",
+    "accepted_huneum": [
+      "누울 와",
+      "쉴 와"
+    ]
+  },
+  {
+    "character": "曰",
+    "meaning": "가로되",
+    "reading": "왈",
+    "accepted_huneum": [
+      "가로되 왈"
+    ]
+  },
+  {
+    "character": "欲",
+    "meaning": "욕심낼",
+    "reading": "욕",
+    "accepted_huneum": [
+      "욕심낼 욕",
+      "하고자할 욕"
+    ]
+  },
+  {
+    "character": "于",
+    "meaning": "어조사",
+    "reading": "우",
+    "accepted_huneum": [
+      "갈 우",
+      "만족할 우",
+      "어조사 우",
+      "여기 우",
+      "탄식의 어조사 우"
+    ]
+  },
+  {
+    "character": "又",
+    "meaning": "또",
+    "reading": "우",
+    "accepted_huneum": [
+      "또 우",
+      "용서할 우"
+    ]
+  },
+  {
+    "character": "尤",
+    "meaning": "더욱",
+    "reading": "우",
+    "accepted_huneum": [
+      "가장 우",
+      "더욱 우",
+      "탓할 우"
+    ]
+  },
+  {
+    "character": "憂",
+    "meaning": "근심",
+    "reading": "우",
+    "accepted_huneum": [
+      "근심 우",
+      "병 우",
+      "상제될 우"
+    ]
+  },
+  {
+    "character": "遇",
+    "meaning": "만날",
+    "reading": "우",
+    "accepted_huneum": [
+      "대접할 우",
+      "뜻밖에 우",
+      "만날 우"
+    ]
+  },
+  {
+    "character": "云",
+    "meaning": "이를",
+    "reading": "운",
+    "accepted_huneum": [
+      "돌아갈 운",
+      "움직일 운",
+      "이를 운"
+    ]
+  },
+  {
+    "character": "圓",
+    "meaning": "둥글",
+    "reading": "원",
+    "accepted_huneum": [
+      "둥글 원",
+      "원만할 원",
+      "화폐의 단위 원"
+    ]
+  },
+  {
+    "character": "怨",
+    "meaning": "원망할",
+    "reading": "원",
+    "accepted_huneum": [
+      "분낼 원",
+      "원망할 원",
+      "원수 원"
+    ]
+  },
+  {
+    "character": "偉",
+    "meaning": "클",
+    "reading": "위",
+    "accepted_huneum": [
+      "기특할 위",
+      "넉넉할 위",
+      "클 위"
+    ]
+  },
+  {
+    "character": "危",
+    "meaning": "위태할",
+    "reading": "위",
+    "accepted_huneum": [
+      "높을 위",
+      "무너질 위",
+      "별 이름 위",
+      "상할 위",
+      "위태할 위"
+    ]
+  },
+  {
+    "character": "威",
+    "meaning": "위엄",
+    "reading": "위",
+    "accepted_huneum": [
+      "두려울 위",
+      "위엄 위"
+    ]
+  },
+  {
+    "character": "唯",
+    "meaning": "오직",
+    "reading": "유",
+    "accepted_huneum": [
+      "오직 유",
+      "허락할 유"
+    ]
+  },
+  {
+    "character": "幼",
+    "meaning": "어릴",
+    "reading": "유",
+    "accepted_huneum": [
+      "사랑할 유",
+      "어릴 유"
+    ]
+  },
+  {
+    "character": "柔",
+    "meaning": "부드러울",
+    "reading": "유",
+    "accepted_huneum": [
+      "복종할 유",
+      "부드러울 유",
+      "순할 유"
+    ]
+  },
+  {
+    "character": "猶",
+    "meaning": "오히려",
+    "reading": "유",
+    "accepted_huneum": [
+      "같을 유",
+      "어미 원숭이 유",
+      "오히려 유"
+    ]
+  },
+  {
+    "character": "遊",
+    "meaning": "놀",
+    "reading": "유",
+    "accepted_huneum": [
+      "놀 유",
+      "벗 사귈 유"
+    ]
+  },
+  {
+    "character": "酉",
+    "meaning": "닭",
+    "reading": "유",
+    "accepted_huneum": [
+      "나아갈 유",
+      "닭 유",
+      "별 유",
+      "열째 지지 유"
+    ]
+  },
+  {
+    "character": "乙",
+    "meaning": "새",
+    "reading": "을",
+    "accepted_huneum": [
+      "굽힐 을",
+      "모모 을",
+      "새 을",
+      "생선의 창자 을",
+      "천간 이름 을"
+    ]
+  },
+  {
+    "character": "吟",
+    "meaning": "읊을",
+    "reading": "음",
+    "accepted_huneum": [
+      "끙끙거릴 음",
+      "노래할 음",
+      "말 더듬을 음",
+      "울 음",
+      "읊을 음",
+      "탄식할 음",
+      "턱 끄덕거릴 음"
+    ]
+  },
+  {
+    "character": "陰",
+    "meaning": "음기",
+    "reading": "음",
+    "accepted_huneum": [
+      "그늘 음",
+      "몰래 음",
+      "부인에게 예 가르칠 음",
+      "세월 음",
+      "음기 음"
+    ]
+  },
+  {
+    "character": "泣",
+    "meaning": "울",
+    "reading": "읍",
+    "accepted_huneum": [
+      "눈물 줄줄 흘릴 읍",
+      "부글부글 끓는 소리 읍",
+      "소리없이울 읍",
+      "울 읍"
+    ]
+  },
+  {
+    "character": "依",
+    "meaning": "의지할",
+    "reading": "의",
+    "accepted_huneum": [
+      "기댈 의",
+      "따를 의",
+      "병풍 의",
+      "비슷할 의",
+      "비유할 의",
+      "의지할 의"
+    ]
+  },
+  {
+    "character": "矣",
+    "meaning": "말 그칠",
+    "reading": "의",
+    "accepted_huneum": [
+      "말 그칠 의",
+      "어조사 의"
+    ]
+  },
+  {
+    "character": "已",
+    "meaning": "이미",
+    "reading": "이",
+    "accepted_huneum": [
+      "그칠 이",
+      "너무 이",
+      "버릴 이",
+      "이미 이"
+    ]
+  },
+  {
+    "character": "異",
+    "meaning": "다를",
+    "reading": "이",
+    "accepted_huneum": [
+      "괴이할 이",
+      "나눌 이",
+      "다를 리",
+      "다를 이"
+    ]
+  },
+  {
+    "character": "而",
+    "meaning": "순접의 어조사",
+    "reading": "이",
+    "accepted_huneum": [
+      "너 이",
+      "말이을 이",
+      "순접의 어조사 이",
+      "이에 이"
+    ]
+  },
+  {
+    "character": "印",
+    "meaning": "도장",
+    "reading": "인",
+    "accepted_huneum": [
+      "도장 인"
+    ]
+  },
+  {
+    "character": "寅",
+    "meaning": "세째지지",
+    "reading": "인",
+    "accepted_huneum": [
+      "범 인",
+      "세째지지 인"
+    ]
+  },
+  {
+    "character": "忍",
+    "meaning": "참을",
+    "reading": "인",
+    "accepted_huneum": [
+      "참을 인"
+    ]
+  },
+  {
+    "character": "認",
+    "meaning": "알",
+    "reading": "인",
+    "accepted_huneum": [
+      "알 인"
+    ]
+  },
+  {
+    "character": "壬",
+    "meaning": "아홉째천간",
+    "reading": "임",
+    "accepted_huneum": [
+      "아홉째천간 임"
+    ]
+  },
+  {
+    "character": "姊",
+    "meaning": "손윗누이",
+    "reading": "자",
+    "accepted_huneum": [
+      "손윗누이 자"
+    ]
+  },
+  {
+    "character": "慈",
+    "meaning": "사랑할",
+    "reading": "자",
+    "accepted_huneum": [
+      "사랑할 자"
+    ]
+  },
+  {
+    "character": "昨",
+    "meaning": "어제",
+    "reading": "작",
+    "accepted_huneum": [
+      "어제 작"
+    ]
+  },
+  {
+    "character": "壯",
+    "meaning": "씩씩할",
+    "reading": "장",
+    "accepted_huneum": [
+      "씩씩할 장",
+      "장할 장"
+    ]
+  },
+  {
+    "character": "哉",
+    "meaning": "어조사",
+    "reading": "재",
+    "accepted_huneum": [
+      "그런가 재",
+      "답다 재",
+      "비로소 재",
+      "어조사 재"
+    ]
+  },
+  {
+    "character": "栽",
+    "meaning": "심을",
+    "reading": "재",
+    "accepted_huneum": [
+      "심을 재"
+    ]
+  },
+  {
+    "character": "低",
+    "meaning": "낮을",
+    "reading": "저",
+    "accepted_huneum": [
+      "값 쌀 저",
+      "낮을 저",
+      "머뭇거릴 저",
+      "소리 약할 저",
+      "숙일 저"
+    ]
+  },
+  {
+    "character": "著",
+    "meaning": "나타날",
+    "reading": "저",
+    "accepted_huneum": [
+      "글 지을 저",
+      "나타날 저",
+      "널리 알려질 저",
+      "분명할 착",
+      "옹저 저"
+    ]
+  },
+  {
+    "character": "敵",
+    "meaning": "대적할",
+    "reading": "적",
+    "accepted_huneum": [
+      "대적할 적",
+      "막을 적",
+      "무리 적",
+      "원수 적"
+    ]
+  },
+  {
+    "character": "赤",
+    "meaning": "붉을",
+    "reading": "적",
+    "accepted_huneum": [
+      "금치 적",
+      "붉을 적"
+    ]
+  },
+  {
+    "character": "適",
+    "meaning": "맞을",
+    "reading": "적",
+    "accepted_huneum": [
+      "깨달을 적",
+      "마침 적",
+      "맞갖을 적",
+      "맞을 적",
+      "시집갈 적",
+      "좇을 적",
+      "주장할 적",
+      "편안할 적"
+    ]
+  },
+  {
+    "character": "錢",
+    "meaning": "돈",
+    "reading": "전",
+    "accepted_huneum": [
+      "가래 전",
+      "돈 전"
+    ]
+  },
+  {
+    "character": "丁",
+    "meaning": "장정",
+    "reading": "정",
+    "accepted_huneum": [
+      "고무래 정",
+      "네째 천간 정",
+      "장정 정"
+    ]
+  },
+  {
+    "character": "井",
+    "meaning": "우물",
+    "reading": "정",
+    "accepted_huneum": [
+      "괘 이름 정",
+      "단정할 정",
+      "우물 정",
+      "저자 정",
+      "천정 정"
+    ]
+  },
+  {
+    "character": "停",
+    "meaning": "머무를",
+    "reading": "정",
+    "accepted_huneum": [
+      "늦어질 정",
+      "머무를 정"
+    ]
+  },
+  {
+    "character": "淨",
+    "meaning": "맑을",
+    "reading": "정",
+    "accepted_huneum": [
+      "맑을 정",
+      "조촐할 정"
+    ]
+  },
+  {
+    "character": "貞",
+    "meaning": "곧을",
+    "reading": "정",
+    "accepted_huneum": [
+      "곧을 정",
+      "굳을 정"
+    ]
+  },
+  {
+    "character": "靜",
+    "meaning": "고요할",
+    "reading": "정",
+    "accepted_huneum": [
+      "고요할 정",
+      "쉴 정",
+      "조용할 정",
+      "편안할 정"
+    ]
+  },
+  {
+    "character": "頂",
+    "meaning": "정수리",
+    "reading": "정",
+    "accepted_huneum": [
+      "관 꼭대기 치장하는 장식 정",
+      "꼭대기 정",
+      "이마 정",
+      "정수리 정"
+    ]
+  },
+  {
+    "character": "祭",
+    "meaning": "제사",
+    "reading": "제",
+    "accepted_huneum": [
+      "제사 제"
+    ]
+  },
+  {
+    "character": "諸",
+    "meaning": "모든",
+    "reading": "제",
+    "accepted_huneum": [
+      "모두 제",
+      "모든 제"
+    ]
+  },
+  {
+    "character": "除",
+    "meaning": "덜",
+    "reading": "제",
+    "accepted_huneum": [
+      "덜 제",
+      "섬돌 제"
+    ]
+  },
+  {
+    "character": "尊",
+    "meaning": "존귀할",
+    "reading": "존",
+    "accepted_huneum": [
+      "높을 존",
+      "존귀할 존"
+    ]
+  },
+  {
+    "character": "從",
+    "meaning": "좇을",
+    "reading": "종",
+    "accepted_huneum": [
+      "좇을 종"
+    ]
+  },
+  {
+    "character": "終",
+    "meaning": "끝낼",
+    "reading": "종",
+    "accepted_huneum": [
+      "끝낼 종",
+      "마칠 종"
+    ]
+  },
+  {
+    "character": "鐘",
+    "meaning": "쇠북",
+    "reading": "종",
+    "accepted_huneum": [
+      "쇠북 종"
+    ]
+  },
+  {
+    "character": "坐",
+    "meaning": "앉을",
+    "reading": "좌",
+    "accepted_huneum": [
+      "앉을 좌"
+    ]
+  },
+  {
+    "character": "朱",
+    "meaning": "붉을",
+    "reading": "주",
+    "accepted_huneum": [
+      "붉을 주"
+    ]
+  },
+  {
+    "character": "酒",
+    "meaning": "술",
+    "reading": "주",
+    "accepted_huneum": [
+      "술 주"
+    ]
+  },
+  {
+    "character": "卽",
+    "meaning": "곧",
+    "reading": "즉",
+    "accepted_huneum": [
+      "곧 즉"
+    ]
+  },
+  {
+    "character": "曾",
+    "meaning": "일찍",
+    "reading": "증",
+    "accepted_huneum": [
+      "일찍 증"
+    ]
+  },
+  {
+    "character": "證",
+    "meaning": "증거",
+    "reading": "증",
+    "accepted_huneum": [
+      "보증할 증",
+      "증거 증"
+    ]
+  },
+  {
+    "character": "之",
+    "meaning": "갈",
+    "reading": "지",
+    "accepted_huneum": [
+      "갈 지"
+    ]
+  },
+  {
+    "character": "只",
+    "meaning": "다만",
+    "reading": "지",
+    "accepted_huneum": [
+      "다만 지"
+    ]
+  },
+  {
+    "character": "持",
+    "meaning": "가질",
+    "reading": "지",
+    "accepted_huneum": [
+      "가질 지"
+    ]
+  },
+  {
+    "character": "枝",
+    "meaning": "가지",
+    "reading": "지",
+    "accepted_huneum": [
+      "가지 지"
+    ]
+  },
+  {
+    "character": "盡",
+    "meaning": "다할",
+    "reading": "진",
+    "accepted_huneum": [
+      "다할 진"
+    ]
+  },
+  {
+    "character": "辰",
+    "meaning": "별",
+    "reading": "진",
+    "accepted_huneum": [
+      "날 신",
+      "날 진",
+      "다섯째지지 진",
+      "별 진"
+    ]
+  },
+  {
+    "character": "執",
+    "meaning": "잡을",
+    "reading": "집",
+    "accepted_huneum": [
+      "잡을 집"
+    ]
+  },
+  {
+    "character": "且",
+    "meaning": "또",
+    "reading": "차",
+    "accepted_huneum": [
+      "또 차"
+    ]
+  },
+  {
+    "character": "借",
+    "meaning": "빌",
+    "reading": "차",
+    "accepted_huneum": [
+      "빌 차",
+      "빌릴 차"
+    ]
+  },
+  {
+    "character": "此",
+    "meaning": "이",
+    "reading": "차",
+    "accepted_huneum": [
+      "이 차"
+    ]
+  },
+  {
+    "character": "昌",
+    "meaning": "창성할",
+    "reading": "창",
+    "accepted_huneum": [
+      "창성할 창"
+    ]
+  },
+  {
+    "character": "採",
+    "meaning": "캘",
+    "reading": "채",
+    "accepted_huneum": [
+      "캘 채"
+    ]
+  },
+  {
+    "character": "菜",
+    "meaning": "나물",
+    "reading": "채",
+    "accepted_huneum": [
+      "나물 채"
+    ]
+  },
+  {
+    "character": "妻",
+    "meaning": "아내",
+    "reading": "처",
+    "accepted_huneum": [
+      "아내 처"
+    ]
+  },
+  {
+    "character": "尺",
+    "meaning": "자",
+    "reading": "척",
+    "accepted_huneum": [
+      "자 척"
+    ]
+  },
+  {
+    "character": "泉",
+    "meaning": "샘",
+    "reading": "천",
+    "accepted_huneum": [
+      "샘 천"
+    ]
+  },
+  {
+    "character": "淺",
+    "meaning": "얕을",
+    "reading": "천",
+    "accepted_huneum": [
+      "얕을 천"
+    ]
+  },
+  {
+    "character": "鐵",
+    "meaning": "쇠",
+    "reading": "철",
+    "accepted_huneum": [
+      "쇠 철"
+    ]
+  },
+  {
+    "character": "晴",
+    "meaning": "갤",
+    "reading": "청",
+    "accepted_huneum": [
+      "갤 청"
+    ]
+  },
+  {
+    "character": "聽",
+    "meaning": "들을",
+    "reading": "청",
+    "accepted_huneum": [
+      "들을 청"
+    ]
+  },
+  {
+    "character": "請",
+    "meaning": "청할",
+    "reading": "청",
+    "accepted_huneum": [
+      "청할 청"
+    ]
+  },
+  {
+    "character": "招",
+    "meaning": "부를",
+    "reading": "초",
+    "accepted_huneum": [
+      "부를 초"
+    ]
+  },
+  {
+    "character": "推",
+    "meaning": "밀",
+    "reading": "추",
+    "accepted_huneum": [
+      "가릴 추",
+      "궁구할 추",
+      "밀 추",
+      "옮길 추",
+      "차례로옮길 추"
+    ]
+  },
+  {
+    "character": "丑",
+    "meaning": "소",
+    "reading": "축",
+    "accepted_huneum": [
+      "북동쪽 축",
+      "사람이름 추",
+      "소 축",
+      "수갑 추",
+      "축시 축"
+    ]
+  },
+  {
+    "character": "吹",
+    "meaning": "불",
+    "reading": "취",
+    "accepted_huneum": [
+      "부를 취",
+      "불 취",
+      "숨쉴 취",
+      "악기 불 취",
+      "충동할 취"
+    ]
+  },
+  {
+    "character": "就",
+    "meaning": "나아갈",
+    "reading": "취",
+    "accepted_huneum": [
+      "가령 취",
+      "곧 취",
+      "나아갈 취",
+      "능할 취",
+      "이룰 취",
+      "저자 취",
+      "좇을 취"
+    ]
+  },
+  {
+    "character": "針",
+    "meaning": "바늘",
+    "reading": "침",
+    "accepted_huneum": [
+      "바느질할 침",
+      "바늘 침",
+      "찌를 침",
+      "침 침"
+    ]
+  },
+  {
+    "character": "他",
+    "meaning": "다를",
+    "reading": "타",
+    "accepted_huneum": [
+      "간사할 타",
+      "다를 타",
+      "저 타"
+    ]
+  },
+  {
+    "character": "脫",
+    "meaning": "벗어날",
+    "reading": "탈",
+    "accepted_huneum": [
+      "간략할 탈",
+      "그르칠 탈",
+      "벗어날 탈",
+      "벗을 탈",
+      "뼈 바를 탈"
+    ]
+  },
+  {
+    "character": "探",
+    "meaning": "찾을",
+    "reading": "탐",
+    "accepted_huneum": [
+      "더듬을 탐",
+      "염탐할 탐",
+      "찾을 탐",
+      "취할 탐"
+    ]
+  },
+  {
+    "character": "泰",
+    "meaning": "클",
+    "reading": "태",
+    "accepted_huneum": [
+      "괘 이름 태",
+      "너그러울 태",
+      "클 태",
+      "통할 태",
+      "편안할 태"
+    ]
+  },
+  {
+    "character": "投",
+    "meaning": "던질",
+    "reading": "투",
+    "accepted_huneum": [
+      "던질 투",
+      "버릴 투",
+      "의탁할 투",
+      "줄 투"
+    ]
+  },
+  {
+    "character": "破",
+    "meaning": "깨뜨릴",
+    "reading": "파",
+    "accepted_huneum": [
+      "갈라질 파",
+      "깨뜨릴 파",
+      "다할 파"
+    ]
+  },
+  {
+    "character": "篇",
+    "meaning": "책",
+    "reading": "편",
+    "accepted_huneum": [
+      "책 편",
+      "편차할 편"
+    ]
+  },
+  {
+    "character": "閉",
+    "meaning": "닫을",
+    "reading": "폐",
+    "accepted_huneum": [
+      "가릴 폐",
+      "닫을 폐",
+      "마칠 폐"
+    ]
+  },
+  {
+    "character": "布",
+    "meaning": "베",
+    "reading": "포",
+    "accepted_huneum": [
+      "돈 포",
+      "벌릴 포",
+      "베 포",
+      "베풀 포",
+      "피륙 포"
+    ]
+  },
+  {
+    "character": "抱",
+    "meaning": "안을",
+    "reading": "포",
+    "accepted_huneum": [
+      "낄 포",
+      "안을 포",
+      "품을 포"
+    ]
+  },
+  {
+    "character": "暴",
+    "meaning": "사나울",
+    "reading": "폭",
+    "accepted_huneum": [
+      "급할 포",
+      "나타날 폭",
+      "드러날 폭",
+      "마를 포",
+      "맨손으로 칠 포",
+      "불끈 일어날 포",
+      "사나울 포",
+      "사나울 폭",
+      "상할 포",
+      "햇빛 쪼일 폭"
+    ]
+  },
+  {
+    "character": "彼",
+    "meaning": "저",
+    "reading": "피",
+    "accepted_huneum": [
+      "저 피"
+    ]
+  },
+  {
+    "character": "匹",
+    "meaning": "짝",
+    "reading": "필",
+    "accepted_huneum": [
+      "둘 필",
+      "무리 필",
+      "벗 필",
+      "짝 필",
+      "한마리 필"
+    ]
+  },
+  {
+    "character": "何",
+    "meaning": "어찌",
+    "reading": "하",
+    "accepted_huneum": [
+      "어찌 하"
+    ]
+  },
+  {
+    "character": "賀",
+    "meaning": "축하할",
+    "reading": "하",
+    "accepted_huneum": [
+      "축하할 하",
+      "하례할 하"
+    ]
+  },
+  {
+    "character": "寒",
+    "meaning": "찰",
+    "reading": "한",
+    "accepted_huneum": [
+      "찰 한"
+    ]
+  },
+  {
+    "character": "恨",
+    "meaning": "한탄할",
+    "reading": "한",
+    "accepted_huneum": [
+      "한될 한",
+      "한탄할 한"
+    ]
+  },
+  {
+    "character": "閑",
+    "meaning": "한가할",
+    "reading": "한",
+    "accepted_huneum": [
+      "한가할 한"
+    ]
+  },
+  {
+    "character": "恒",
+    "meaning": "늘",
+    "reading": "항",
+    "accepted_huneum": [
+      "늘 항",
+      "옛 항",
+      "항상 항"
+    ]
+  },
+  {
+    "character": "亥",
+    "meaning": "돼지",
+    "reading": "해",
+    "accepted_huneum": [
+      "돼지 해",
+      "서북쪽과 북쪽의 사이 방향 해",
+      "열 둘째 지지 해",
+      "음력 시월 해"
+    ]
+  },
+  {
+    "character": "虛",
+    "meaning": "빌",
+    "reading": "허",
+    "accepted_huneum": [
+      "거짓 허",
+      "다할 허",
+      "빌 허",
+      "약할 허",
+      "하늘 허",
+      "헛될 허"
+    ]
+  },
+  {
+    "character": "許",
+    "meaning": "허락할",
+    "reading": "허",
+    "accepted_huneum": [
+      "기약할 허",
+      "나아갈 허",
+      "여럿이 힘쓰는 소리 허",
+      "허락할 허"
+    ]
+  },
+  {
+    "character": "賢",
+    "meaning": "어질",
+    "reading": "현",
+    "accepted_huneum": [
+      "구멍 현",
+      "어질 현",
+      "좋을 현"
+    ]
+  },
+  {
+    "character": "刑",
+    "meaning": "형벌",
+    "reading": "형",
+    "accepted_huneum": [
+      "죽일 형",
+      "형벌 형"
+    ]
+  },
+  {
+    "character": "乎",
+    "meaning": "인가",
+    "reading": "호",
+    "accepted_huneum": [
+      "어조사 호",
+      "인가 호"
+    ]
+  },
+  {
+    "character": "呼",
+    "meaning": "부를",
+    "reading": "호",
+    "accepted_huneum": [
+      "부를 호",
+      "숨 내쉴 호"
+    ]
+  },
+  {
+    "character": "戶",
+    "meaning": "지게",
+    "reading": "호",
+    "accepted_huneum": [
+      "지게 호"
+    ]
+  },
+  {
+    "character": "或",
+    "meaning": "혹",
+    "reading": "혹",
+    "accepted_huneum": [
+      "혹 혹"
+    ]
+  },
+  {
+    "character": "混",
+    "meaning": "섞을",
+    "reading": "혼",
+    "accepted_huneum": [
+      "섞을 혼",
+      "섞일 혼"
+    ]
+  },
+  {
+    "character": "紅",
+    "meaning": "붉을",
+    "reading": "홍",
+    "accepted_huneum": [
+      "붉을 홍"
+    ]
+  },
+  {
+    "character": "華",
+    "meaning": "꽃",
+    "reading": "화",
+    "accepted_huneum": [
+      "꽃 화",
+      "빛날 화"
+    ]
+  },
+  {
+    "character": "歡",
+    "meaning": "기뻐할",
+    "reading": "환",
+    "accepted_huneum": [
+      "기뻐할 환"
+    ]
+  },
+  {
+    "character": "厚",
+    "meaning": "두터울",
+    "reading": "후",
+    "accepted_huneum": [
+      "두터울 후"
+    ]
+  },
+  {
+    "character": "胸",
+    "meaning": "가슴",
+    "reading": "흉",
+    "accepted_huneum": [
+      "가슴 흉"
+    ]
+  },
+  {
+    "character": "黑",
+    "meaning": "검을",
+    "reading": "흑",
+    "accepted_huneum": [
+      "검을 흑"
+    ]
+  },
+  {
+    "character": "喜",
+    "meaning": "기뻐할",
+    "reading": "희",
+    "accepted_huneum": [
+      "기뻐할 희",
+      "기쁠 희"
+    ]
+  }
+]
