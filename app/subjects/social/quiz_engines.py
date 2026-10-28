@@ -44,6 +44,23 @@ def is_answer_leaked(question: str, answer: str, question_type: str = "short_ans
     return False
 
 
+def get_grade_tone_guide(grade_group: str) -> str:
+    """학년군별(1~2학년, 3~4학년, 5~6학년) AI 교사의 맞춤형 톤앤매너 가이드"""
+    g = str(grade_group)
+    if "1~2" in g:
+        return """- [1~2학년 새싹 탐험대 맞춤 톤]:
+  * 문장은 짧고 쉬운 낱말로 구성하며 호흡을 편안하게 유지하세요.
+  * "우리 친구, 함께 알아볼까요? 🌱", "참 잘했어요!"처럼 초등학교 저학년 눈높이에 맞춘 다정하고 따뜻한 칭찬 어투를 사용하세요."""
+    elif "5~6" in g:
+        return """- [5~6학년 주니어 사학자 맞춤 톤]:
+  * 역사적 배경, 인과관계, 사회 제도와 시민의 역할을 논리적으로 탐구하도록 이끌어주세요.
+  * "원인과 까닭을 차근차근 생각해 볼까요? 🏛️", "~하기 때문입니다."처럼 지적이고 성숙한 존댓말을 사용하세요."""
+    else:
+        return """- [3~4학년 고장 나침반 맞춤 톤]:
+  * 우리 고장과 지역 사회의 모습을 탐구하는 호기심과 모험심을 자극해 주세요.
+  * "우리 고장의 숨겨진 비밀을 찾아볼까요? 🧭", "지도 속 이야기를 함께 떠나봐요!"처럼 활기차고 재미있는 탐험가 어투를 사용하세요."""
+
+
 # ==============================================================================
 # 1. [OX 퀴즈 전용 출제 엔진]
 # - 배점: 1점 (기초 개념 확인)
@@ -59,6 +76,7 @@ def generate_ox_quiz(
 ) -> Optional[Dict[str, Any]]:
     """OX 퀴즈 전용 AI 출제 함수 (O와 X가 균형 있게 50:50으로 출제되도록 보장)"""
     target_ox = random.choice(["O", "X"])
+    tone_guide = get_grade_tone_guide(grade_group)
 
     if target_ox == "X":
         ox_condition = """- [정답 절대 지정]: 이번 문제의 정답(answer)은 **반드시 'X'**여야 합니다!
@@ -79,6 +97,7 @@ def generate_ox_quiz(
 [말투 및 언어 절대 수칙]
 - '너희'라는 표현은 절대로 사용하지 마세요! 언제나 '우리' 또는 '여러분'(예: '우리 고장', '우리나라', '우리 학교')이라고 표현하세요.
 - 지문과 해설 모두 100% 다정하고 정중한 존댓말(~해요, ~일까요?, ~입니다)을 사용하세요. 반말이나 명령조는 절대 금지합니다.
+{tone_guide}
 
 [OX 퀴즈 출제 요구 조건]
 - 대상 학년군: {grade_group}
@@ -141,6 +160,7 @@ def generate_multiple_choice_quiz(
     call_ai_fn: Callable[[str, int, float], Optional[str]]
 ) -> Optional[Dict[str, Any]]:
     """객관식(4지선다) 전용 AI 출제 함수"""
+    tone_guide = get_grade_tone_guide(grade_group)
 
     prompt_mc = f"""
 너는 2022 개정 초등학교 사회과 전문 AI 교사야.
@@ -152,6 +172,7 @@ def generate_multiple_choice_quiz(
 [말투 및 언어 절대 수칙]
 - '너희'라는 표현은 절대로 사용하지 마세요! 언제나 '우리' 또는 '여러분'(예: '우리 고장', '우리나라', '우리 학교')이라고 표현하세요.
 - 문제 지문과 보기, 해설까지 100% 다정하고 정중한 존댓말(~일까요?, ~골라 보세요, ~해요, ~입니다)을 사용하세요. 반말 금지!
+{tone_guide}
 
 [객관식 출제 요구 조건]
 - 대상 학년군: {grade_group}
@@ -225,6 +246,7 @@ def generate_short_answer_quiz(
     call_ai_fn: Callable[[str, int, float], Optional[str]]
 ) -> Optional[Dict[str, Any]]:
     """단답형 주관식 전용 AI 출제 함수"""
+    tone_guide = get_grade_tone_guide(grade_group)
 
     prompt_sa = f"""
 너는 2022 개정 초등학교 사회과 전문 AI 교사야.
@@ -236,6 +258,7 @@ def generate_short_answer_quiz(
 [말투 및 언어 절대 수칙]
 - '너희'라는 표현은 절대로 사용하지 마세요! 언제나 '우리' 또는 '여러분'(예: '우리 고장', '우리나라', '우리 학교')이라고 표현하세요.
 - 문제 지문과 해설 모두 100% 다정하고 정중한 존댓말(~은 무엇일까요?, ~은 어디일까요?, ~입니다)을 사용하세요.
+{tone_guide}
 
 [단답형 출제 요구 조건]
 - 대상 학년군: {grade_group}
@@ -298,6 +321,7 @@ def generate_descriptive_quiz(
     call_ai_fn: Callable[[str, int, float], Optional[str]]
 ) -> Optional[Dict[str, Any]]:
     """서술형 탐구 전용 AI 출제 함수"""
+    tone_guide = get_grade_tone_guide(grade_group)
 
     prompt_desc = f"""
 너는 2022 개정 초등학교 사회과 전문 AI 교사야.
@@ -309,6 +333,7 @@ def generate_descriptive_quiz(
 [말투 및 언어 절대 수칙]
 - '너희'라는 표현은 절대로 사용하지 마세요! 언제나 '우리' 또는 '여러분'(예: '우리 고장', '우리나라', '우리 학교')이라고 표현하세요.
 - 지문, 모범답안, 해설 모두 다정하고 정중한 존댓말(~적어 보세요, ~설명해 볼까요?, ~하기 때문입니다)을 사용하세요.
+{tone_guide}
 
 [서술형 출제 요구 조건]
 - 대상 학년군: {grade_group}

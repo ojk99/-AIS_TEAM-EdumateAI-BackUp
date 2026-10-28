@@ -10,6 +10,85 @@
        ========================================================================== */
     @import url('https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap');
 
+    /* ==========================================================================
+       [학년군별 맞춤 테마 CSS 시스템]
+       - 1~2학년: 🌱 새싹 탐험대 (화사한 에메랄드 & 옐로우 파스텔)
+       - 3~4학년: 🧭 고장 나침반 (따뜻하고 시인성 높은 선셋 오렌지 & 크림)
+       - 5~6학년: 🏛️ 주니어 사학자 (지적인 인디고 네이비 & 앰버 골드)
+       ========================================================================== */
+    body.theme-grade-12 {
+      --primary: #10b981;
+      --primary-dark: #059669;
+      --primary-light: #ecfdf5;
+      --secondary: #f59e0b;
+      --secondary-light: #fef3c7;
+    }
+    body.theme-grade-12 .header-bar {
+      background: linear-gradient(135deg, #10b981 0%, #059669 60%, #064e3b 100%) !important;
+      box-shadow: 0 12px 30px rgba(16, 185, 129, 0.28) !important;
+    }
+    body.theme-grade-12 .grade-pill-btn.active {
+      background: #10b981 !important;
+      border-color: #059669 !important;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35) !important;
+    }
+
+    /* 3~4학년군: 🐻 지도 탐험 곰이반 (포근한 앰버 캬라멜 & 캠핑 브라운) */
+    body.theme-grade-34 {
+      --primary: #ea580c;
+      --primary-dark: #c2410c;
+      --primary-light: #fff7ed;
+      --secondary: #d97706;
+      --secondary-light: #fef3c7;
+    }
+    body.theme-grade-34 .header-bar {
+      background: linear-gradient(135deg, #d97706 0%, #b45309 50%, #5D3E2B 100%) !important;
+      box-shadow: 0 12px 30px rgba(180, 83, 9, 0.28) !important;
+    }
+    body.theme-grade-34 .grade-pill-btn.active {
+      background: #ea580c !important;
+      border-color: #c2410c !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 14px rgba(234, 88, 12, 0.35) !important;
+    }
+
+    body.theme-grade-56 {
+      --primary: #4338ca;
+      --primary-dark: #3730a3;
+      --primary-light: #e0e7ff;
+      --secondary: #d97706;
+      --secondary-light: #fef3c7;
+    }
+    body.theme-grade-56 .header-bar {
+      background: linear-gradient(135deg, #4338ca 0%, #312e81 60%, #1e1b4b 100%) !important;
+      box-shadow: 0 12px 30px rgba(67, 56, 202, 0.28) !important;
+    }
+    body.theme-grade-56 .grade-pill-btn.active {
+      background: #4338ca !important;
+      border-color: #3730a3 !important;
+      box-shadow: 0 4px 14px rgba(67, 56, 202, 0.35) !important;
+    }
+
+    .theme-mascot-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.22);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+      backdrop-filter: blur(4px);
+      transition: all 0.35s ease;
+      vertical-align: middle;
+      margin-left: 8px;
+      letter-spacing: -0.2px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
     :root {
       --primary: #0284c7;
       --primary-dark: #0369a1;
@@ -43,8 +122,8 @@
     }
 
     body {
-      background: radial-gradient(circle at 15% 15%, #e0f2fe 0%, #f1f5f9 45%, #fef3c7 100%);
-      color: var(--slate-800);
+      background: radial-gradient(circle at 10% 10%, #fffdf5 0%, #fef9ed 40%, #fbf3e0 100%);
+      color: #3b2c21;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -66,11 +145,11 @@
        1. 상단 글로벌 네비게이션 헤더 (GNB)
        ========================================================================== */
     .header-bar {
-      background: linear-gradient(135deg, #0284c7 0%, #0369a1 60%, #0f172a 100%);
+      background: linear-gradient(135deg, #78553D 0%, #5D3E2B 60%, #422B1E 100%);
       color: #ffffff;
       padding: 18px 28px;
       border-radius: var(--radius-lg);
-      box-shadow: 0 12px 30px rgba(2, 132, 199, 0.25);
+      box-shadow: 0 12px 30px rgba(93, 62, 43, 0.22);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -118,11 +197,13 @@
 
     .brand-text h1 {
       font-family: 'Jua', sans-serif;
-      font-size: 27px;
-      letter-spacing: 0.5px;
+      font-size: 23px;
+      letter-spacing: 0.2px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .badge-official {
@@ -134,15 +215,18 @@
       padding: 3px 8px;
       border-radius: 20px;
       letter-spacing: 0;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .brand-text p {
-      font-size: 13px;
+      font-size: 12.5px;
       opacity: 0.88;
       margin-top: 2px;
       display: flex;
       align-items: center;
       gap: 6px;
+      white-space: nowrap;
     }
 
     /* 상단 스탯 대시보드 뱃지 모음 */
@@ -157,12 +241,14 @@
       background: rgba(255, 255, 255, 0.12);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 8px 18px;
-      border-radius: 16px;
+      padding: 6px 14px;
+      border-radius: 14px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       transition: all 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .stat-pill:hover {
@@ -181,15 +267,17 @@
 
     .stat-pill-label {
       font-size: 11px;
-      opacity: 0.8;
+      opacity: 0.85;
       font-weight: 500;
+      white-space: nowrap;
     }
 
     .stat-pill-val {
       font-family: 'Jua', sans-serif;
-      font-size: 20px;
+      font-size: 17px;
       color: #ffffff;
       line-height: 1.1;
+      white-space: nowrap;
     }
 
     .stat-pill.score-pill .stat-pill-val {
@@ -655,31 +743,31 @@
     }
 
     .grade-pill-btn .pill-emoji {
-      font-size: 20px;
+      font-size: 16px;
       line-height: 1;
     }
 
     .grade-pill-btn .pill-main {
-      font-size: 15.5px;
+      font-size: 14px;
       font-weight: 800;
       letter-spacing: -0.3px;
     }
 
     .grade-pill-btn .pill-sub {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       opacity: 0.85;
       margin-left: 2px;
     }
 
-    /* 필터 드롭다운 영역 */
+    /* 필터 드롭다운 영역 (슬림 1줄 인라인 정렬) */
     .filter-tools {
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 12px;
-      padding-top: 10px;
+      gap: 8px 12px;
+      padding-top: 8px;
       border-top: 1px dashed #e2e8f0;
     }
 
@@ -687,7 +775,7 @@
       display: flex;
       align-items: center;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 10px;
     }
 
     .filter-item {
@@ -700,11 +788,11 @@
     }
 
     .styled-select {
-      padding: 9px 14px;
-      border-radius: 10px;
+      padding: 5px 10px;
+      border-radius: 8px;
       border: 1.5px solid var(--slate-300);
       background: #ffffff;
-      font-size: 13.5px;
+      font-size: 12.5px;
       color: var(--slate-800);
       font-weight: 600;
       outline: none;
@@ -1150,6 +1238,71 @@
     .modal-emoji {
       font-size: 60px;
       margin-bottom: 10px;
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* 🏕️ 모닥불 댄스 리액션 스테이지 및 신나는 댄스 애니메이션 */
+    .campfire-dance-stage {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      font-size: 52px;
+      margin: 4px 0 8px 0;
+      user-select: none;
+    }
+    .campfire-dance-stage .dance-bear {
+      display: inline-block;
+      animation: bearDance 0.7s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+      transform-origin: bottom center;
+    }
+    .campfire-dance-stage .dance-fire {
+      display: inline-block;
+      font-size: 60px;
+      animation: fireGlow 0.5s ease-in-out infinite alternate;
+      transform-origin: bottom center;
+    }
+    .campfire-dance-stage .dance-bunny {
+      display: inline-block;
+      animation: bunnyDance 0.65s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+      transform-origin: bottom center;
+    }
+
+    @keyframes bearDance {
+      0% { transform: translateY(0) rotate(-10deg) scale(1); }
+      50% { transform: translateY(-15px) rotate(8deg) scale(1.12); }
+      100% { transform: translateY(0) rotate(-8deg) scale(1); }
+    }
+    @keyframes bunnyDance {
+      0% { transform: translateY(0) rotate(10deg) scale(1); }
+      50% { transform: translateY(-16px) rotate(-8deg) scale(1.15); }
+      100% { transform: translateY(0) rotate(8deg) scale(1); }
+    }
+    @keyframes fireGlow {
+      0% { transform: scale(0.92); filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.6)); }
+      100% { transform: scale(1.22); filter: drop-shadow(0 0 20px rgba(234, 88, 12, 0.95)); }
+    }
+
+    .campfire-dance-badge {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border: 2px solid #f59e0b;
+      color: #92400e;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 13.5px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      display: inline-block;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+      animation: badgeGlowPulse 1.2s ease-in-out infinite alternate;
+    }
+
+    @keyframes badgeGlowPulse {
+      0% { transform: scale(0.98); box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25); }
+      100% { transform: scale(1.03); box-shadow: 0 6px 18px rgba(234, 88, 12, 0.45); }
     }
 
     .modal-title {
@@ -2240,6 +2393,157 @@
       }
     }
 
+    @media (max-width: 640px) {
+      /* 📱 스마트폰 세로 모드 전용 네이티브 앱 최적화 */
+      body {
+        padding: 6px 8px !important;
+        background: #f1f5f9 !important;
+      }
+      .app-wrapper {
+        gap: 8px !important;
+        max-width: 100% !important;
+      }
+      /* 1. 상단 GNB 헤더를 얇은 모바일 앱 상단바로 초슬림화 */
+      .header-bar {
+        padding: 9px 12px !important;
+        border-radius: 12px !important;
+      }
+      .header-brand img {
+        width: 36px !important;
+        height: 36px !important;
+        border-radius: 10px !important;
+      }
+      .brand-text h1 {
+        font-size: 15px !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 4px !important;
+      }
+      .brand-text p, .badge-official {
+        display: none !important; /* 긴 부가 텍스트를 숨겨 높이 40px 단축 */
+      }
+      .header-stats {
+        display: none !important;
+      }
+
+      /* 2. 오늘의 시사 상식 롤링 배너 슬림화 */
+      .current-affairs-container {
+        margin-bottom: 6px !important;
+      }
+      .current-affairs-bar {
+        padding: 7px 10px !important;
+        border-radius: 10px !important;
+        gap: 8px !important;
+      }
+      .ca-main-tag {
+        font-size: 12px !important;
+      }
+      .ca-summary, .ca-right-controls {
+        display: none !important; /* 요약과 버튼을 숨기고 제목만 노출 */
+      }
+
+      /* 3. 모드 탭 3개를 모바일 세그먼트 버튼으로 납작하게 압축 */
+      .mode-switcher-card {
+        margin-bottom: 6px !important;
+      }
+      .mode-tab-bar {
+        gap: 4px !important;
+      }
+      .mode-tab-btn {
+        padding: 6px 4px !important;
+        border-radius: 10px !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+      }
+      .mode-tab-icon {
+        width: 26px !important;
+        height: 26px !important;
+        font-size: 13px !important;
+      }
+      .mode-tab-info {
+        text-align: center !important;
+      }
+      .mode-tab-info h2 {
+        font-size: 12px !important;
+        justify-content: center !important;
+      }
+      .mode-tab-info p {
+        display: none !important; /* 부가 설명 숨김 */
+      }
+
+      /* 4. 학년군 필터 바 컴팩트화 */
+      .filter-tools {
+        padding: 8px 10px !important;
+        border-radius: 10px !important;
+        gap: 6px !important;
+      }
+
+      /* 5. 퀴즈 카드: 스마트폰 한 화면에 쏙 */
+      .quiz-card {
+        padding: 14px 12px !important;
+        border-radius: 14px !important;
+      }
+      .question-text {
+        font-size: 15px !important;
+        line-height: 1.5 !important;
+      }
+
+      /* 6. 🗺️ 국토 지도 탐구관 스마트폰 세로 모드 1열 정렬 */
+      body.mode-map .map-split-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+      }
+      body.mode-map .map-arena-card {
+        padding: 12px 10px !important;
+      }
+      body.mode-map .korea-map-box {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 8px !important;
+        border-radius: 12px !important;
+        box-sizing: border-box !important;
+      }
+      body.mode-map .satellite-map-frame {
+        width: 100% !important;
+        max-width: 280px !important;
+        height: 240px !important;
+        margin: 0 auto !important;
+      }
+      body.mode-map .culture-photo-card {
+        width: 100% !important;
+        max-width: 280px !important;
+        margin: 8px auto 0 auto !important;
+      }
+      body.mode-map .region-feature-card {
+        padding: 10px 12px !important;
+      }
+      body.mode-map #map-question-text {
+        font-size: 14px !important;
+        padding: 10px 12px !important;
+      }
+      body.mode-map #map-answer-box .mc-cards-grid {
+        grid-template-columns: 1fr !important;
+        gap: 6px !important;
+      }
+      body.mode-map .passport-footer {
+        padding: 6px 10px !important;
+      }
+
+      /* 7. 세로로 끝없이 이어지던 하단 부가 위젯(단원 로드맵, 배지) 컴팩트 정리 */
+      .dashboard-left-col {
+        margin-top: 10px !important;
+      }
+      .dashboard-left-col .card-panel {
+        border-radius: 12px !important;
+        margin-bottom: 8px !important;
+      }
+      .unit-roadmap {
+        max-height: 180px !important;
+        overflow-y: auto !important;
+      }
+    }
+
     /* =========================================================================
        [홈화면 전용] 초등 사회 시사 상식 5분 롤링 배너 스타일
        ========================================================================= */
@@ -2954,11 +3258,12 @@
         <img src="logo.svg" onerror="this.onerror=null; this.src='/social/logo.svg';" alt="EduMate AI 로고" style="width:52px; height:52px; object-fit:contain; border-radius:14px; background:rgba(255,255,255,0.2); padding:4px;" />
         <div class="brand-text">
           <h1>
-            EduMate AI 초등사회 스마트 탐험관
+            <span style="font-size:24px; vertical-align:middle; margin-right:4px;">🐻🎒</span> EduMate 초등사회 고장 탐험대
             <span class="badge-official">2022 개정 교육과정 인증</span>
+            <span class="theme-mascot-badge" id="theme-mascot-badge">🐻 3~4학년: 지도 탐험 곰이반</span>
           </h1>
-          <p>
-            <span>📚 2022 개정 교육과정 AI 맞춤 퀴즈</span>
+          <p style="opacity:0.95;">
+            <span>🗺️ 탐험 대장 곰이와 길잡이 토리가 함께하는 사회 탐험!</span>
             <span>•</span>
             <span>⚡ AI 문맥 정밀 채점 엔진</span>
           </p>
@@ -2966,7 +3271,7 @@
       </a>
       <div class="header-stats">
         <div class="stat-pill">
-          <div class="stat-pill-icon">🎒</div>
+          <div class="stat-pill-icon" id="top-level-icon">🧭</div>
           <div class="stat-pill-info">
             <span class="stat-pill-label">탐험 등급</span>
             <span class="stat-pill-val" id="top-level">Lv.1 꿈나무</span>
@@ -3022,7 +3327,7 @@
         <!-- 위젯 1: 나의 탐험 스테이터스 -->
         <div class="card-panel">
           <div class="panel-header">
-            <div class="panel-title">👤 나의 탐험 스테이터스</div>
+            <div class="panel-title">🎒 나의 탐험 배낭</div>
             <span style="font-size:11px; font-weight:700; color:#0284c7; background:#e0f2fe; padding:3px 8px; border-radius:12px;">실시간 연동</span>
           </div>
           <div class="panel-body">
@@ -3044,6 +3349,9 @@
               </div>
             </div>
 
+            <div style="font-size:12.5px; font-weight:800; color:#78553D; margin:14px 0 8px 2px; display:flex; align-items:center; gap:5px;">
+              <span>🐾 오늘의 탐험 발자국</span>
+            </div>
             <div class="side-metrics">
               <div class="metric-box">
                 <div class="metric-val" id="solved-count">0</div>
@@ -3143,19 +3451,19 @@
           <!-- 학년군 선택 세그먼트 (테두리를 빈틈없이 100% 채우는 3분할 탭) -->
           <div class="grade-segmented">
             <button class="grade-pill-btn" onclick="selectGrade('1~2학년군', this)">
-              <span class="pill-emoji">🎒</span>
+              <span class="pill-emoji">🐰</span>
               <span class="pill-main">1~2학년</span>
-              <span class="pill-sub">(사회기초)</span>
+              <span class="pill-sub">(길잡이 토리반)</span>
             </button>
             <button class="grade-pill-btn active" onclick="selectGrade('3~4학년군', this)">
-              <span class="pill-emoji">🗺️</span>
+              <span class="pill-emoji">🐻</span>
               <span class="pill-main">3~4학년</span>
-              <span class="pill-sub">(우리 지역)</span>
+              <span class="pill-sub">(지도 탐험 곰이반)</span>
             </button>
             <button class="grade-pill-btn" onclick="selectGrade('5~6학년군', this)">
-              <span class="pill-emoji">🌍</span>
+              <span class="pill-emoji">🧭</span>
               <span class="pill-main">5~6학년</span>
-              <span class="pill-sub">(국토·역사)</span>
+              <span class="pill-sub">(역사 나침반 원정대)</span>
             </button>
           </div>
 
@@ -3210,7 +3518,7 @@
               <span class="badge-chip badge-type-chip" id="q-type">유형</span>
               <span class="badge-chip" id="q-source-chip" style="background:#e0f2fe; color:#0284c7; border:1px solid #bae6fd;">🤖 AI 출제</span>
             </div>
-            <div class="quiz-id-tag" id="q-number-tag">Quest #1</div>
+            <div class="quiz-id-tag" id="q-number-tag">🏕️ 탐험 퀘스트 #1</div>
           </div>
 
           <!-- 양방향(AI ↔ 문제은행) 전환 및 복습 모드 안내 배너 -->
@@ -3232,10 +3540,10 @@
           <!-- 액션 버튼 -->
           <div class="quiz-actions">
             <button class="btn-submit-main" onclick="submitAnswer()">
-              ✨ <span>답안 제출하고 AI 채점받기</span>
+              🧭 <span>탐험 수첩에 도장 찍기 (채점)</span>
             </button>
             <button class="btn-skip-next" onclick="nextQuestion()">
-              건너뛰기 ➔
+              다음 캠프로 이동 ➔
             </button>
           </div>
         </div>
@@ -4135,6 +4443,15 @@
     }
 
     // =========================================================================
+    function getExplorerLevelInfo(score) {
+      const s = Number(score) || 0;
+      if (s >= 120) return { lv: 5, title: "Lv.5 원정대장", emoji: "👑", badge: "원정대장" };
+      if (s >= 70) return { lv: 4, title: "Lv.4 고장 수호대장", emoji: "🔥", badge: "수호대장" };
+      if (s >= 35) return { lv: 3, title: "Lv.3 지도 마스터", emoji: "🗺️", badge: "마스터" };
+      if (s >= 15) return { lv: 2, title: "Lv.2 고장 나침반", emoji: "🧭", badge: "나침반" };
+      return { lv: 1, title: "Lv.1 새싹 탐험가", emoji: "⛺", badge: "새싹" };
+    }
+
     // 1. 대시보드 실시간 통계 및 배지 갱신
     // =========================================================================
     function updateDashboardStats() {
@@ -4154,14 +4471,17 @@
           level_info: currentLevelInfo
         });
       } else {
-        const level = Math.floor(totalScore / 30) + 1;
+        const expInfo = getExplorerLevelInfo(totalScore);
         const exp = totalScore % 30;
         const expPercent = Math.min(100, Math.max(10, Math.round((exp / 30) * 100)));
-        const titleStr = `Lv.${level} 사회 탐험가`;
-        document.getElementById('top-level').innerText = titleStr;
-        document.getElementById('exp-level-label').innerText = `Level ${level}`;
+        const topIconEl = document.getElementById('top-level-icon');
+        if (topIconEl) topIconEl.innerText = expInfo.emoji;
+        document.getElementById('top-level').innerText = expInfo.title;
+        document.getElementById('exp-level-label').innerText = `${expInfo.title}`;
         document.getElementById('exp-text').innerText = `${exp} / 30 XP`;
         document.getElementById('exp-bar').style.width = `${expPercent}%`;
+        const avatarEl = document.querySelector(".profile-avatar");
+        if (avatarEl) avatarEl.innerText = expInfo.emoji;
       }
 
       // 4) 연속 스트릭
@@ -4291,8 +4611,24 @@
       }
     }
 
+    function applyGradeTheme(grade) {
+      document.body.classList.remove('theme-grade-12', 'theme-grade-34', 'theme-grade-56');
+      const badge = document.getElementById('theme-mascot-badge');
+      if (grade.includes('1~2')) {
+        document.body.classList.add('theme-grade-12');
+        if (badge) badge.innerHTML = '🐰 1~2학년: 길잡이 토리반';
+      } else if (grade.includes('5~6')) {
+        document.body.classList.add('theme-grade-56');
+        if (badge) badge.innerHTML = '🧭 5~6학년: 역사 나침반 원정대';
+      } else {
+        document.body.classList.add('theme-grade-34');
+        if (badge) badge.innerHTML = '🐻 3~4학년: 지도 탐험 곰이반';
+      }
+    }
+
     function selectGrade(grade, btn) {
       currentGrade = grade;
+      applyGradeTheme(grade);
       try { localStorage.setItem('social_current_grade', grade); } catch (e) {}
       document.querySelectorAll('.grade-pill-btn').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
@@ -4313,9 +4649,7 @@
       const qType = (currentMode === 'advanced') ? 'descriptive' : document.getElementById('type-select').value;
 
       showFallbackBanner("");
-      document.getElementById('q-text').innerText = useAiMode
-        ? ((currentMode === 'advanced') ? "AI가 심화 서술형 탐구 문제를 실시간 생성 중입니다... 🤖" : "AI가 맞춤형 사회 탐험 문제를 실시간 생성 중입니다... 🤖")
-        : "문제은행(question_bank.db)에서 미풀이 문제를 불러오는 중입니다... 🏦";
+      document.getElementById('q-text').innerText = "🗺️ 곰이가 배낭에서 우리 고장 지도를 열심히 펼치고 있어요... 🧭";
       document.getElementById('answer-box').innerHTML = "";
       selectedAnswer = "";
 
@@ -4495,7 +4829,7 @@
     // 5. 프리미엄 문제 카드 화면 렌더링
     // =========================================================================
     function renderQuiz(q) {
-      document.getElementById('q-number-tag').innerText = `Quest #${questIndex}`;
+      document.getElementById('q-number-tag').innerText = `🏕️ 탐험 퀘스트 #${questIndex}`;
       document.getElementById('q-unit').innerText = `단원: ${q.unit_name || '사회'}`;
 
       const diffStars = { '하': '⭐ 기초', '중': '⭐⭐ 발전', '상': '⭐⭐⭐ 심화' };
@@ -4559,12 +4893,14 @@
         if (q.answer) {
           q.answer = cleanOptionText(q.answer);
         }
+        const stickers = ['① 🌱', '② 🧭', '③ 🗺️', '④ 🚩'];
         (q.options || []).forEach((opt, idx) => {
           const cleanedOpt = cleanOptionText(opt);
           const item = document.createElement('div');
           item.className = 'mc-card-option';
+          const badgeIcon = stickers[idx] || `${idx + 1}`;
           item.innerHTML = `
-            <div class="mc-num-badge">${idx + 1}</div>
+            <div class="mc-num-badge" style="font-size:12.5px; font-weight:800; min-width:46px; padding:3px 6px;">${badgeIcon}</div>
             <div style="flex:1;">${cleanedOpt}</div>
           `;
           item.onclick = () => selectMc(cleanedOpt, item);
@@ -4877,18 +5213,28 @@
       const evalScore = (res.raw_score !== undefined) ? res.raw_score : res.score;
       const isCorrect = Boolean(res.is_correct || evalScore === res.max_score);
 
+      let reactionBadge = "";
       if (evalScore === res.max_score) {
-        emoji.innerText = "🏆";
+        emoji.innerHTML = `
+          <div class="campfire-dance-stage">
+            <span class="dance-bear" title="신난 곰이">🐻</span>
+            <span class="dance-fire" title="타오르는 모닥불">🔥</span>
+            <span class="dance-bunny" title="덩실덩실 토리">🐰</span>
+          </div>
+        `;
         title.innerText = isReview ? "복습 성공! 완벽하게 기억하고 있네요!" : "완벽해요! 만점!";
-        title.style.color = "#0284c7";
+        title.style.color = "#b45309";
+        reactionBadge = `<div class="campfire-dance-badge">🏕️ 정답 축하! 곰이와 토리가 신나서 모닥불 댄스를 춰요! 🔥</div>`;
       } else if (evalScore >= 3 || isCorrect) {
-        emoji.innerText = "🌟";
+        emoji.innerHTML = `<span style="display:inline-block; animation:bunnyDance 0.8s ease-in-out infinite alternate; font-size:56px;">🌟</span>`;
         title.innerText = isReview ? "복습 성공! 참 잘했어요!" : `부분 점수 (+${res.score}점) 획득! 참 잘했어요!`;
         title.style.color = "#16a34a";
+        reactionBadge = `<div style="background:#ecfdf5; border:1.5px solid #a7f3d0; color:#065f46; padding:7px 14px; border-radius:12px; font-size:12.5px; font-weight:700; margin-bottom:12px; display:inline-block; box-shadow:0 2px 6px rgba(16,185,129,0.12);">💡 좋은 탐구예요! 토리가 지도의 핵심 단서를 가리키고 있어요! 🧭</div>`;
       } else {
-        emoji.innerText = "🌱";
+        emoji.innerHTML = `<span style="display:inline-block; font-size:54px;">🌱</span>`;
         title.innerText = "조금 아쉬워요! 해설을 확인해 볼까요?";
         title.style.color = "#e11d48";
+        reactionBadge = `<div style="background:#fff1f2; border:1.5px solid #fecdd3; color:#9f1239; padding:7px 14px; border-radius:12px; font-size:12.5px; font-weight:700; margin-bottom:12px; display:inline-block; box-shadow:0 2px 6px rgba(225,29,72,0.1);">🌱 괜찮아요! 곰이와 함께 지도를 다시 천천히 살펴봐요! 🎒</div>`;
       }
 
       if (isReview) {
@@ -4944,7 +5290,7 @@
         `;
       }
 
-      feedback.innerHTML = compareBox + explanationSection + teacherComment;
+      feedback.innerHTML = `<div style="text-align:center;">${reactionBadge}</div>` + compareBox + explanationSection + teacherComment;
 
       // 즐겨찾기 상태 초기화
       const favIcon = document.getElementById('fav-icon');
@@ -5671,12 +6017,18 @@
       }
 
       if (isCorrect) {
-        emoji.innerText = "💮";
+        emoji.innerHTML = `
+          <div class="campfire-dance-stage">
+            <span class="dance-bear" title="신난 곰이">🐻</span>
+            <span class="dance-fire" title="타오르는 모닥불">🔥</span>
+            <span class="dance-bunny" title="덩실덩실 토리">🐰</span>
+          </div>
+        `;
         title.innerText = `[${currentMapQuiz.name}] 탐험 스탬프 획득!`;
         title.style.color = "#d97706";
         scoreEl.innerText = "+3점 (배점: 3점)";
       } else {
-        emoji.innerText = "🧭";
+        emoji.innerHTML = `<span style="display:inline-block; font-size:54px;">🧭</span>`;
         title.innerText = "아쉬워요! 해설을 확인해 볼까요?";
         title.style.color = "#e11d48";
         scoreEl.innerText = "+0점 (배점: 3점)";
@@ -6197,10 +6549,13 @@
         userNickEl.innerHTML = `<span>${user}</span> <span style="font-size:12px; color:${lv.color_hex || '#0284c7'}; font-weight:800;">(${lv.full_title || '알 5티어'})</span>`;
       }
 
+      const expInfo = getExplorerLevelInfo(data.total_score || totalScore);
+      const topIconEl = document.getElementById("top-level-icon");
+      if (topIconEl) topIconEl.innerText = expInfo.emoji;
       const topLevelEl = document.getElementById("top-level");
       if (topLevelEl) {
-        topLevelEl.innerText = lv.full_title || "알 5티어";
-        topLevelEl.style.color = lv.color_hex || "#0284c7";
+        topLevelEl.innerText = expInfo.title;
+        topLevelEl.style.color = "#ffffff";
       }
 
       const totalScoreEl = document.getElementById("total-score");
@@ -6729,6 +7084,7 @@
       else if (savedGrade === '5~6학년군') targetBtn = gradeBtns[2];
 
       currentGrade = savedGrade;
+      applyGradeTheme(currentGrade);
       gradeBtns.forEach(b => b.classList.remove('active'));
       if (targetBtn) targetBtn.classList.add('active');
 
